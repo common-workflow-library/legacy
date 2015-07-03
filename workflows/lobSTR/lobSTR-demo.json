@@ -1,0 +1,19 @@
+{
+    "p1": [{"class": "File", "path": "tmp_1.fq"}],
+    "p2": [{"class": "File", "path": "tmp_2.fq"}],
+    "reference": {
+        "class": "File",
+        "path": "hg19_v3.0.2/lobstr_v3.0.2_hg19_ref/lobSTR_ref.fasta"
+    },
+    "output_prefix": "demo",
+    "rg-sample": "mysample",
+    "rg-lib": "mylib",
+    "strinfo": {
+        "class": "File",
+        "path": "hg19_v3.0.2/lobstr_v3.0.2_hg19_strinfo.tab"
+    },
+    "noise_model": {
+        "class": "File",
+        "path": "models/illumina_v3.pcrfree.stepmodel"
+    }
+}
