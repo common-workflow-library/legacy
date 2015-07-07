@@ -19,8 +19,7 @@ $ ./lobSTR-workflow.cwl lobSTR-demo.json
 Alternately, you may run lobSTR on Curoverse cloud.  This does not require
 downloading the reference data.
 
-1) Install Arvados SDK using "pip install arvados-python-client".  This will
-install the Arvados cwl-runner.
+1) Install Arvados cwl-runner using "pip install arvados-cwl-runner".
 
 2) Sign up for a Curoverse Cloud account at https://cloud.curoverse.com
 

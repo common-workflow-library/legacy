@@ -65,8 +65,8 @@ outputs:
 
 hints:
   - class: DockerRequirement
-    dockerLoad: https://workbench.qr1hi.arvadosapi.com/collections/download/qr1hi-4zz18-zjbmbgf5felkl4q/8g3zdu8nwv9emx21jlw1syovy4tfuzwl6ym26j51307rw8vkv/b2d7226fe5130f01cc3120bfb69a6f9c5afbfec1f175ddb24e8200abf4c7e8ed.tar
-    dockerImageId: b2d7226fe5130f01cc3120bfb69a6f9c5afbfec1f175ddb24e8200abf4c7e8ed
+    dockerLoad: https://workbench.qr1hi.arvadosapi.com/collections/download/qr1hi-4zz18-x2ae13tsx5jqg8d/1nduktd8dpvhdpgsva82lje0i710kgzb6rttks5jldx7s2y7k9/7e0c0ae3bf4e70442f9b8eee816ec23426d9e1169a2925316e5c932745e21613.tar
+    dockerImageId: 7e0c0ae3bf4e70442f9b8eee816ec23426d9e1169a2925316e5c932745e21613
 
 steps:
   - id: "#lobSTR"
