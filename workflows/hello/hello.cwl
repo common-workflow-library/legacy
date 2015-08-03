@@ -1,5 +1,6 @@
 #!/usr/bin/env cwl-runner
 
+
 - id: "#echocmd"
   class: CommandLineTool
   inputs:
@@ -8,6 +9,7 @@
       label: "Message"
       description: "The message to print"
       default: "Hello World"
+      inputBinding: {}
   outputs:
     - id: "#echo-out"
       type: File
@@ -26,12 +28,12 @@
   outputs:
     - id: "#main.output"
       type: File
-      source: "#param.output"
+      source: "#echocmd.echo-out"
   steps :
     - id: "#step0"
       run: {import: "#echocmd"}
       inputs: []
       outputs:
-        - { id: "#main.output" }
+        - { id: "#echocmd.echo-out" }
 
 
