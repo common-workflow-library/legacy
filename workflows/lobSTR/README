@@ -23,10 +23,9 @@ downloading the reference data.
 
 2) Sign up for a Curoverse Cloud account at https://cloud.curoverse.com
 
-3) Navigate to https://cloud.curoverse.com/manage_account and follow the
-instructions under "Current Token" to set ARVADOS_API_TOKEN and
-ARVADOS_API_HOST into your shell session (these are your Curoverse cloud
-credentials).
+3) Navigate to https://cloud.curoverse.com/current_token and follow the
+instructions to set ARVADOS_API_TOKEN and ARVADOS_API_HOST into your shell
+session (these are your Curoverse cloud credentials).
 
 4) You can now run the lobSTR workflow and submit jobs to run on Curoverse
 cloud:
