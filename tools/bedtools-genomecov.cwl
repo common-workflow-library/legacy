@@ -1,9 +1,20 @@
 #!/usr/bin/env cwl-runner
-#bedtools genomecov -bg -split -scale 0.03967752645856 -ibam "$1.bam" -g /wardrobe/indices/STAR/mm10/chrNameLength.txt
-
 class: CommandLineTool
 
-description: "Invoke 'bedtools genomecov' "
+requirements:
+  - import: node-engine-local.cwl
+
+#hints:
+#  - class: DockerRequirement
+#    dockerPull: 
+#    dockerImageId: 
+
+description: |
+  Tool:    bedtools genomecov (aka genomeCoverageBed)
+  Version: v2.24.0
+  Summary: Compute the coverage of a feature file among a genome.
+
+  Usage: bedtools genomecov [OPTIONS] -i <bed/gff/vcf> -g <genome>
 
 inputs:
   - id: "#input"
@@ -11,11 +22,17 @@ inputs:
     description: |
       The input file is in BAM format.
       Note: BAM _must_ be sorted by position
+      Or <bed/gff/vcf>
     inputBinding:
-      prefix: "-ibam"
       secondaryFiles:
-        - ".bai"
-
+        - engine: node-engine-local.cwl
+          script: |
+           {
+            if ((/.*\.bam$/i).test($job.inputs['input'].path))
+               return {"path": $job.inputs['input'].path+".bai", "class": "File"};
+            return [];
+           }
+      
   - id: "#genomeFile"
     type: File
     description:
@@ -35,6 +52,27 @@ inputs:
       position: 1
       prefix: -scale
 
+  - id: "#d"
+    type: boolean
+    description: |
+      Report the depth at each genome position (with one-based coordinates).
+      Default behavior is to report a histogram.
+    default: false
+    inputBinding:
+      position: 1
+      prefix: "-d"
+
+  - id: "#dz"
+    type: boolean
+    description: |
+      Report the depth at each genome position (with zero-based coordinates).
+      Reports only non-zero positions.
+      Default behavior is to report a histogram.
+    default: false
+    inputBinding:
+      position: 1
+      prefix: "-dz"
+
   - id: "#bg"
     type: boolean
     description: |
@@ -44,16 +82,29 @@ inputs:
     inputBinding:
       position: 1
       prefix: "-bg"
-      #valueFrom:
-      #  engine: "cwl:JsonPointer"
-      #  script: |
-      #    {
-      #      if ($job['scale']) {
-      #        return true;
-      #      } else {
-      #        return null;
-      #      }
-      #    }
+      valueFrom:
+        engine: node-engine-local.cwl
+        script: |
+          {
+           if ($job.inputs['scale'] == null) {
+              return null;
+            } else {
+              return true;
+            }
+          }
+
+  - id: "#bga"
+    type: boolean
+    description: |
+      Report depth in BedGraph format, as above (-bg).
+      However with this option, regions with zero 
+      coverage are also reported. This allows one to
+      quickly extract all regions of a genome with 0 
+      coverage by applying: "grep -w 0$" to the output.
+    default: false
+    inputBinding:
+      position: 1
+      prefix: "-bga"
 
   - id: "#split"
     type: boolean
@@ -69,6 +120,45 @@ inputs:
       position: 1
       prefix: "-split"
 
+  - id: "#strand"
+    type: ["null", string]
+    description: |
+      Calculate coverage of intervals from a specific strand.
+      With BED files, requires at least 6 columns (strand is column 6). 
+      - (STRING): can be + or -
+    inputBinding:
+      position: 1
+      prefix: "-strand"
+
+  - id: "#max"
+    type: ["null",int]
+    description: |
+      Combine all positions with a depth >= max into
+      a single bin in the histogram. Irrelevant
+      for -d and -bedGraph
+      - (INTEGER)
+    inputBinding:
+      position: 1
+      prefix: "-max"
+
+  - id: "#m5"
+    type: boolean
+    description: |
+      Calculate coverage of 5" positions (instead of entire interval).
+    default: false
+    inputBinding:
+      position: 1
+      prefix: "-5"
+
+  - id: "#m3"
+    type: boolean
+    description: |
+      Calculate coverage of 3" positions (instead of entire interval).
+    default: false
+    inputBinding:
+      position: 1
+      prefix: "-3"
+
 outputs:
   - id: "#genecoverage"
     type: File
@@ -77,4 +167,14 @@ outputs:
       glob: genomecov.out
 stdout: genomecov.out
 
-baseCommand: ["/usr/local/bin/bedtools", "genomecov"]
+baseCommand: ["bedtools", "genomecov"]
+
+arguments:
+  - valueFrom:
+      engine: node-engine-local.cwl
+      script: |
+        {
+          var param="-i";
+          if ((/.*\.bam$/i).test($job.inputs['input'].path)) param="-ibam";
+          return [param, $job.inputs['input'].path];
+        }
