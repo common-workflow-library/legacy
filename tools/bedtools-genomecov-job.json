@@ -1,0 +1,22 @@
+{
+    "input": {
+        "class": "File",
+        "path": "./test/cF623107-AEBD-29F6-FB96-CA19497D5DC2.bam"
+    },
+    "genomeFile": {
+        "class": "File",
+        "path": "./test/chrNameLength.txt"
+    },
+    "dept":{
+        "#dept":"-bg",
+        "#scale": 11
+    },
+    "allocatedResources": {
+        "cpu": 1,
+        "mem": 1000
+    },
+    "genomecoverage": {
+        "class": "File",
+        "path": "./test/genomecoverage.out"
+    }
+}
