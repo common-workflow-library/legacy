@@ -59,16 +59,16 @@ inputs:
         - engine: node-engine-local.cwl
           script: |
            {
-            if ((/.*\.bam$/i).test($job.inputs['input'].path))
-               return {"path": $job.inputs['input'].path+".bai", "class": "File"};
+            if ((/.*\.bam$/i).test($job['input'].path))
+               return {"path": $job['input'].path+".bai", "class": "File"};
             return [];
            }
       valueFrom:
         engine: node-engine-local.cwl
         script: |
           {
-            var prefix = ((/.*\.bam$/i).test($job.inputs['input'].path))?'-ibam':'-i';
-            return [prefix,$job.inputs['input'].path];
+            var prefix = ((/.*\.bam$/i).test($job['input'].path))?'-ibam':'-i';
+            return [prefix,$job['input'].path];
           }
 
   - id: "#genomeFile"
