@@ -1,11 +1,11 @@
 {
     "input": {
         "class": "File",
-        "path": "./test/cF623107-AEBD-29F6-FB96-CA19497D5DC2.bam"
+        "path": "./test-files/rna.SRR948778.bam"
     },
     "genomeFile": {
         "class": "File",
-        "path": "./test/chrNameLength.txt"
+        "path": "./test-files/mm10-chrNameLength.txt"
     },
     "dept":{
         "#dept":"-bg",
@@ -17,6 +17,6 @@
     },
     "genomecoverage": {
         "class": "File",
-        "path": "./test/genomecoverage.out"
+        "path": "./test-files/genomecoverage.out"
     }
 }

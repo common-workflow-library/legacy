@@ -11,6 +11,7 @@ description: |
 requirements:
   - import: node-engine-local.cwl
   - import: envvar-global.cwl
+  - import: bedtools-docker.cwl
   - class: SchemaDefRequirement
     types:
       - name: "#depts"
@@ -44,9 +45,6 @@ requirements:
             inputBinding:
               position: 4
               prefix: -scale
-hints:
-  - class: DockerRequirement
-    dockerPull: scidap/bedtools2:v2.25.0
 
 inputs:
   - id: "#input"
