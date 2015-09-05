@@ -44,11 +44,9 @@ requirements:
             inputBinding:
               position: 4
               prefix: -scale
-#hints:
-#  - class: DockerRequirement
-#    dockerPull:
-#    dockerImageId:
-
+hints:
+  - class: DockerRequirement
+    dockerPull: scidap/bedtools2:v2.25.0
 
 inputs:
   - id: "#input"
