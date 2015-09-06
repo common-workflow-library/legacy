@@ -147,12 +147,19 @@ inputs:
       position: 4
       prefix: "-3"
 
+  - id: "#genomecoverageout"
+    type: string
+
 outputs:
   - id: "#genomecoverage"
     type: File
     description: "The file containing the genome coverage"
     outputBinding:
-      glob: genomecov.out
-stdout: genomecov.out
+      glob: 
+        engine: cwl:JsonPointer
+        script: /job/genomecoverageout
+stdout: 
+  engine: cwl:JsonPointer
+  script: /job/genomecoverageout
 
 baseCommand: ["bedtools", "genomecov"]
