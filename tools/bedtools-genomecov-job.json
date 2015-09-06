@@ -8,15 +8,11 @@
         "path": "./test-files/mm10-chrNameLength.txt"
     },
     "dept":{
-        "#dept":"-bg",
-        "#scale": 11
+        "#dept":"-bg"
     },
     "allocatedResources": {
         "cpu": 1,
         "mem": 1000
     },
-    "genomecoverage": {
-        "class": "File",
-        "path": "./test-files/genomecoverage.out"
-    }
+    "genomecoverageout": "./test-files/rna.SRR948778.bedGraph"
 }
