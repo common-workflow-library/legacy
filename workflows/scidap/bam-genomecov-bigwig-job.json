@@ -1,0 +1,15 @@
+{
+    "type": "rna",
+    "input": {
+        "class": "File",
+        "path": "./test-files/rna.SRR948778.bam"
+    },
+    "genomeFile": {
+        "class": "File",
+        "path": "./test-files/mm10-chrNameLength.txt"
+    },
+    "dept":{
+        "#dept":"-bg"
+    },
+    "genomecoverageout": "./test-files/rna.SRR948778.bedGraph"
+}
