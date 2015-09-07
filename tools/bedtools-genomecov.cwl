@@ -9,7 +9,7 @@ description: |
   Usage: bedtools genomecov [OPTIONS] -i <bed/gff/vcf> -g <genome>
 
 requirements:
-  - import: node-engine-local.cwl
+  - import: node-engine.cwl
   - import: envvar-global.cwl
   - import: bedtools-docker.cwl
   - class: SchemaDefRequirement
@@ -56,7 +56,7 @@ inputs:
     inputBinding:
       position: 1
       secondaryFiles:
-        - engine: node-engine-local.cwl
+        - engine: node-engine.cwl
           script: |
            {
             if ((/.*\.bam$/i).test($job['input'].path))
@@ -64,7 +64,7 @@ inputs:
             return [];
            }
       valueFrom:
-        engine: node-engine-local.cwl
+        engine: node-engine.cwl
         script: |
           {
             var prefix = ((/.*\.bam$/i).test($job['input'].path))?'-ibam':'-i';
