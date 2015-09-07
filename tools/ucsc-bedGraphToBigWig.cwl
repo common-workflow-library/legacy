@@ -25,7 +25,7 @@ description: |
      -unc - If set, do not use compression.
 
 requirements:
-  - import: node-engine-local.cwl
+  - import: node-engine.cwl
   - import: envvar-global.cwl
   - import: ucsc-bedGraphToBigWig-docker.cwl
 
