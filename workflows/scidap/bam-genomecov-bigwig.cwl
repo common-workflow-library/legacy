@@ -21,7 +21,8 @@ steps:
     inputs:
       - {id: "#genomecov.input", source: "#input"}
       - {id: "#genomecov.genomeFile", source: "#genomeFile"}
-      - {id: "#genomecov.genomecoverageout", source: "#outfile"}
+      - {id: "#genomecov.genomecoverageout", default: "genomecov.bed" }
+      - {id: "#genomecov.dept", default: "{ '#dept': '-bg' }"  }
     outputs:
       - {id: "#genomecov.genomecoverage"}
 
