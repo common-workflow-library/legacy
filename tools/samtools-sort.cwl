@@ -4,6 +4,10 @@ class: CommandLineTool
 
 description: "Invoke 'samtools sort' (samtools 1.19)"
 
+requirements:
+  - class: DockerRequirement
+    dockerPull: "kghosesbg/rabix-test-samtools:latest"
+
 inputs:
   - id: "#compression_level"
     type: ["null", int]
@@ -52,7 +56,4 @@ outputs:
         engine: "cwl:JsonPointer"
         script: "job/output_name"
 
-baseCommand: ["samtools", "sort"]
-
-arguments:
-  - "-f"
+baseCommand: ["samtools", "sort", "-f"]

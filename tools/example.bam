@@ -1,0 +1,8 @@
+--2015-09-15 14:22:11--  https://sbg-main.s3.amazonaws.com/12dddfe7-7e6e-4d83-b5f2-3aefd11d03ba%2Bexample_human_Illumina.sorted.bam?response-content-disposition=attachment%3Bfilename%3Dexample_human_Illumina.sorted.bam&response-content-type=application%2Foctet-stream&AWSAccessKeyId=AKIAI7HL6YBXRKY73MKA&Expires=1442492516&Signature=lfpUQA8BmdJw5SUuQLpBspk9oAA%3D
+Resolving sbg-main.s3.amazonaws.com... 54.231.16.169
+Connecting to sbg-main.s3.amazonaws.com|54.231.16.169|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 21371 (21K) [application/octet-stream]
+12dddfe7-7e6e-4d83-b5f2-3aefd11d03ba+example_human_Illumina.sorted.bam?response-content-disposition=attachment;filename=example_human_Illumina.sorted.bam&response-content-type=application%2Foctet-stream&AWSAccessKeyId=AKIAI7HL6YBXRKY73MKA&Expires=1442492516&Signature=lfpUQA8BmdJw5SUuQLpBspk9oAA=: File name too long
+
+Cannot write to ‘12dddfe7-7e6e-4d83-b5f2-3aefd11d03ba+example_human_Illumina.sorted.bam?response-content-disposition=attachment;filename=example_human_Illumina.sorted.bam&response-content-type=application%2Foctet-stream&AWSAccessKeyId=AKIAI7HL6YBXRKY73MKA&Expires=1442492516&Signature=lfpUQA8BmdJw5SUuQLpBspk9oAA=’ (Success).
