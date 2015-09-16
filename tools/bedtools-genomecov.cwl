@@ -80,9 +80,20 @@ inputs:
       position: 2
       prefix: "-g"
 
-
   - id: "#dept"
     type: ["null","#depts"]
+
+  - id: "#scale"
+    type: ["null",float ]
+    description: |
+      Scale the coverage by a constant factor.
+      Each coverage value is multiplied by this factor before being reported.
+      Useful for normalizing coverage by, e.g., reads per million (RPM).
+      - Default is 1.0; i.e., unscaled.
+      - (FLOAT)
+    inputBinding:
+      position: 4
+      prefix: -scale
 
   - id: "#dz"
     type: boolean
