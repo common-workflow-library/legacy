@@ -1,6 +1,11 @@
 #!/usr/bin/env cwl-runner
 
 class: Workflow
+requirements:
+  - import: ../../engines/node-engine.cwl
+  - import: ../../tools/envvar-global.cwl
+  - import: ../../tools/bedtools-genomecov-types.cwl
+
 inputs:
   - id: "#type"
     type: string
@@ -22,7 +27,7 @@ steps:
       - {id: "#genomecov.input", source: "#input"}
       - {id: "#genomecov.genomeFile", source: "#genomeFile"}
       - {id: "#genomecov.genomecoverageout", default: "genomecov.bed" }
-      - {id: "#genomecov.dept", default: "{ '#dept': '-bg' }"  }
+      - {id: "#genomecov.dept", type: '#depts' ,default: {'#dept': '-bg'} }
     outputs:
       - {id: "#genomecov.genomecoverage"}
 
