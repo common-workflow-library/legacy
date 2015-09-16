@@ -8,6 +8,7 @@
         "class": "File",
         "path": "./test-files/mm10-chrNameLength.txt"
     },
+    "scale": 1,
     "dept":{
         "#dept":"-bg"
     },
