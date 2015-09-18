@@ -9,8 +9,6 @@
         "path": "./test-files/mm10-chrNameLength.txt"
     },
     "scale": 1,
-    "dept":{
-        "#dept":"-bg"
-    },
-    "genomecoverageout": "./test-files/rna.SRR948778.bedGraph"
+    "dept":"-bg",
+    "bigWig": "./test-files/rna.SRR948778.bigwig"
 }

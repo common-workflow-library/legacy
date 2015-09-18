@@ -18,6 +18,9 @@ inputs:
     inputBinding:
       position: 4
 
+  - id: "#output"
+    type: string
+    
   - id: "#key"
     type: 
       type: array
@@ -32,12 +35,16 @@ outputs:
     description: "The sorted file"
     outputBinding:
       glob:
-        engine: node-engine.cwl
-        script: $job.input.path + '.sorted'
+        engine: cwl:JsonPointer
+        script: /job/output
+        #engine: node-engine.cwl
+        #script: $job.input.path + '.sorted'
 
 stdout: 
-  engine: node-engine.cwl
-  script: $job.input.path + '.sorted'
+  engine: cwl:JsonPointer
+  script: /job/output
+  #engine: node-engine.cwl
+  #script: $job.input.path + '.sorted'
 
 baseCommand: ["sort"]
 
