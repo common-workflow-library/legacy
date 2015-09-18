@@ -8,9 +8,7 @@
         "path": "./test-files/mm10-chrNameLength.txt"
     },
     "scale":1,
-    "dept":{
-        "#dept":"-bg"
-    },
+    "dept":"-bg",
     "allocatedResources": {
         "cpu": 1,
         "mem": 1000

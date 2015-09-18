@@ -4,23 +4,28 @@ class: Workflow
 requirements:
   - import: ../../engines/node-engine.cwl
   - import: ../../tools/envvar-global.cwl
-  - import: ../../tools/bedtools-genomecov-types.cwl
+#  - import: ../../tools/bedtools-genomecov-types.cwl
 
 inputs:
   - id: "#type"
     type: string
-  - id: "#scale"
-    type: float
+
   - id: "#input"
     type: File
+
   - id: "#genomeFile"
     type: File
+
+  - id: "#scale"
+    type: float
+
+  - id: "#bigWig"
+    type: string
 
 outputs:
   - id: "#outfile"
     type: File
-    #source: "#bigwig.fileout"
-    source: "#sort.sorted"
+    source: "#bigwig.bigWigOut"
 
 steps:
   - id: "#genomecov"
@@ -29,29 +34,25 @@ steps:
       - {id: "#genomecov.input", source: "#input"}
       - {id: "#genomecov.genomeFile", source: "#genomeFile"}
       - {id: "#genomecov.genomecoverageout", default: "genomecov.bed" }
-      - {id: "#genomecov.dept", type: '#depts' , default: {'#dept': '-bg' } }
+      - {id: "#genomecov.dept", default: '-bg' }
       - {id: "#genomecov.scale", source: "#scale" }
     outputs:
       - {id: "#genomecov.genomecoverage"}
 
   - id: "#sort"
+    run: {import: ../../tools/linux-sort.cwl}
     inputs:
-      - {id: "#sort.input", source: "#genomecov.genomecoverage"}    
+      - {id: "#sort.input", source: "#genomecov.genomecoverage" }
+      - {id: "#sort.output", default: "sorted.file" }
+      - {id: "#sort.key", default: ["1,1","2,2n"] }
     outputs:
       - {id: "#sort.sorted"}
-    run:
-      class: CommandLineTool
-      inputs:
-        - id: "#input"
-          type: File
-          inputBinding:
-            position: 1
-      outputs:
-        - id: "#sorted"
-          type: File
-          description: "The sorted file"
-          outputBinding:
-            glob: "sorted.bed"
-      stdout: "sorted.bed"
-      baseCommand: "sort"
-      arguments: [ "-k1,1", "-k2,2n" ]
+
+  - id: "#bigwig"
+    run: {import: ../../tools/ucsc-bedGraphToBigWig.cwl}
+    inputs:
+      - {id: "#bigwig.input", source: "#sort.sorted"}
+      - {id: "#bigwig.genomeFile", source: "#genomeFile"}
+      - {id: "#bigwig.bigWig", source: "#bigWig"}
+    outputs:
+      - {id: "#bigwig.bigWigOut"}

@@ -12,7 +12,7 @@ requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
   - import: bedtools-docker.cwl
-  - import: bedtools-genomecov-types.cwl
+#  - import: bedtools-genomecov-types.cwl
 
 inputs:
   - id: "#input"
@@ -47,8 +47,15 @@ inputs:
       position: 2
       prefix: "-g"
 
+#  - id: "#dept"
+#    type: ["null","depts"]
   - id: "#dept"
-    type: ["null","#depts"]
+    type:
+      name: "JustDepts"
+      type: enum
+      symbols: ["-bg","-bga","-d"]
+    inputBinding:
+      position: 4
 
   - id: "#scale"
     type: ["null",float ]
