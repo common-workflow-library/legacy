@@ -70,7 +70,7 @@ inputs:
       prefix: -scale
 
   - id: "#dz"
-    type: boolean
+    type: ["null",boolean]
     description: |
       Report the depth at each genome position (with zero-based coordinates).
       Reports only non-zero positions.
@@ -81,7 +81,7 @@ inputs:
       prefix: "-dz"
 
   - id: "#split"
-    type: boolean
+    type: ["null",boolean]
     description: |
       reat "split" BAM or BED12 entries as distinct BED intervals.
       when computing coverage.
@@ -116,7 +116,7 @@ inputs:
       prefix: "-max"
 
   - id: "#m5"
-    type: boolean
+    type: ["null",boolean]
     description: |
       Calculate coverage of 5" positions (instead of entire interval).
     default: false
@@ -125,7 +125,7 @@ inputs:
       prefix: "-5"
 
   - id: "#m3"
-    type: boolean
+    type: ["null",boolean]
     description: |
       Calculate coverage of 3" positions (instead of entire interval).
     default: false
