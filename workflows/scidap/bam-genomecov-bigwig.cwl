@@ -7,9 +7,6 @@ requirements:
 #  - import: ../../tools/bedtools-genomecov-types.cwl
 
 inputs:
-  - id: "#type"
-    type: string
-
   - id: "#input"
     type: File
 
@@ -43,7 +40,6 @@ steps:
     run: {import: ../../tools/linux-sort.cwl}
     inputs:
       - {id: "#sort.input", source: "#genomecov.genomecoverage" }
-      - {id: "#sort.output", default: "sorted.file" }
       - {id: "#sort.key", default: ["1,1","2,2n"] }
     outputs:
       - {id: "#sort.sorted"}
