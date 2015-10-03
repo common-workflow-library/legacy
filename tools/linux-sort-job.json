@@ -3,7 +3,6 @@
         "class": "File",
         "path": "./test-files/rna.SRR948778.bedGraph"
     },
-    "output": "./test-files/rna.SRR948778.s.bedGraph",
     "allocatedResources": {
         "cpu": 1,
         "mem": 1000
