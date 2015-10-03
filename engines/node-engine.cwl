@@ -1,5 +1,5 @@
 class: ExpressionEngineRequirement
 requirements:
   - class: DockerRequirement
-    dockerImageId: commonworkflowlanguage/nodejs-engine
+    dockerPull: commonworkflowlanguage/nodejs-engine
 engineCommand: cwlNodeEngine.js

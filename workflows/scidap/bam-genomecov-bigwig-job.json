@@ -1,5 +1,5 @@
 {
-    "type": "rna",
+    "scidap_working_folder": "/Users/porter/Work/scidap/workflows/workflows/scidap/",
     "input": {
         "class": "File",
         "path": "./test-files/rna.SRR948778.bam"
@@ -10,5 +10,5 @@
     },
     "scale": 1,
     "dept":"-bg",
-    "bigWig": "./test-files/rna.SRR948778.bigwig"
+    "bigWig": "./rna.SRR948778.bigwig"
 }
