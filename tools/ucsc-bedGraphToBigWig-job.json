@@ -1,7 +1,7 @@
 {
     "input": {
         "class": "File",
-        "path": "./test-files/rna.SRR948778.s.bedGraph"
+        "path": "./test-files/rna.SRR948778.bedGraph.sorted"
     },
     "genomeFile": {
         "class": "File",
