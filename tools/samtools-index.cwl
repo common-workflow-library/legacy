@@ -29,7 +29,11 @@ inputs:
       position: 6
       valueFrom:
         engine: node-engine.cwl
-        script: $job['input'].path.split('/').slice(-1)[0]+'.bai'
+        script: |
+          {
+            var ext=$job['bai']?'.bai':$job['csi']?'.csi':'.bai';
+            return $job['input'].path.split('/').slice(-1)[0]+ext;
+          }
 
   - id: "#bai"
     type: boolean
@@ -58,7 +62,11 @@ outputs:
     outputBinding:
       glob:
         engine: node-engine.cwl
-        script: $job['input'].path.split('/').slice(-1)[0]+'.bai'
+        script: |
+          {
+            var ext=$job['bai']?'.bai':$job['csi']?'.csi':'.bai';
+            return $job['input'].path.split('/').slice(-1)[0]+ext;
+          }
 
 baseCommand: ["samtools", "index"]
 
@@ -67,4 +75,3 @@ arguments:
       engine: node-engine.cwl
       script: |
         $job['bai']?'-b':$job['csi']?'-c':[]
-
