@@ -4,4 +4,4 @@
 
 cd "${BASEDIR}/${DIST_DIR}/${TEST_DIR}"
 
-./run_test.sh CWLTOOL=../reference 
+./run_test.sh CWLTOOL=../reference RABIX=/usr/local/bin/rabix
