@@ -75,7 +75,6 @@ inputs:
       Report the depth at each genome position (with zero-based coordinates).
       Reports only non-zero positions.
       Default behavior is to report a histogram.
-    default: false
     inputBinding:
       position: 4
       prefix: "-dz"
@@ -89,7 +88,6 @@ inputs:
       to infer the blocks for computing coverage.
       For BED12 files, this uses the BlockCount, BlockStarts, and BlockEnds
       fields (i.e., columns 10,11,12).
-    default: false
     inputBinding:
       position: 4
       prefix: "-split"
@@ -119,7 +117,6 @@ inputs:
     type: ["null",boolean]
     description: |
       Calculate coverage of 5" positions (instead of entire interval).
-    default: false
     inputBinding:
       position: 4
       prefix: "-5"
@@ -128,7 +125,6 @@ inputs:
     type: ["null",boolean]
     description: |
       Calculate coverage of 3" positions (instead of entire interval).
-    default: false
     inputBinding:
       position: 4
       prefix: "-3"
