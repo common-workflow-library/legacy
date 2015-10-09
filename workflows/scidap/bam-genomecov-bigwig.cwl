@@ -32,6 +32,7 @@ steps:
       - {id: "#genomecov.genomeFile", source: "#genomeFile"}
       - {id: "#genomecov.genomecoverageout", default: "genomecov.bed" }
       - {id: "#genomecov.dept", default: '-bg' }
+      - {id: "#genomecov.split", default: true }
       - {id: "#genomecov.scale", source: "#scale" }
     outputs:
       - {id: "#genomecov.genomecoverage"}
