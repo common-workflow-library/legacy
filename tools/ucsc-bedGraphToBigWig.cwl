@@ -19,31 +19,52 @@ description: |
   twoBitInfo on the assembly .2bit file.
   The input bedGraph file must be sorted, use the unix sort command:
     sort -k1,1 -k2,2n unsorted.bedGraph > sorted.bedGraph
-  options:
-     -blockSize=N - Number of items to bundle in r-tree.  Default 256
-     -itemsPerSlot=N - Number of data points bundled at lowest level. Default 1024
-     -unc - If set, do not use compression.
 
 requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
-  - import: ucsc-bedGraphToBigWig-docker.cwl
+  - import: ucsc-userapps-docker.cwl
 
 inputs:
   - id: "#input"
     type: File
     inputBinding:
-      position: 1
+      position: 2
 
   - id: "#genomeFile"
     type: File
     inputBinding:
-      position: 2
+      position: 3
 
   - id: "#bigWig"
     type: string
     inputBinding:
-      position: 3
+      position: 4
+
+  - id: "#unc"
+    type: ["null",boolean]
+    description: "If set, do not use compression."
+    inputBinding:
+      position: 1
+      prefix: "-unc"
+
+  - id: "#itemsPerSlot"
+    type: ["null",int]
+    description: |
+      -itemsPerSlot=N - Number of data points bundled at lowest level. Default 1024
+    inputBinding:
+      separate: false
+      position: 1
+      prefix: "-itemsPerSlot="
+
+  - id: "#blockSize"
+    type: ["null",int]
+    description: |
+      -blockSize=N - Number of items to bundle in r-tree.  Default 256
+    inputBinding:
+      separate: false
+      position: 1
+      prefix: "-blockSize="
 
 outputs:
   - id: "#bigWigOut"

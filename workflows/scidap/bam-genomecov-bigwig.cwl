@@ -2,7 +2,7 @@
 
 class: Workflow
 requirements:
-  - import: ../../engines/node-engine.cwl
+  - import: node-engine.cwl
   - import: ../../tools/envvar-global.cwl
 #  - import: ../../tools/bedtools-genomecov-types.cwl
 
