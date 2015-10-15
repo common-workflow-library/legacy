@@ -1,0 +1,13 @@
+{
+    "input": {
+        "class": "File",
+        "path": "./test-files/rna.SRR948778.bam"
+    },
+    "genomeFile": {
+        "class": "File",
+        "path": "./test-files/mm10-chrNameLength.txt"
+    },
+    "scale": 1,
+    "dept":"-bg",
+    "bigWig": "./rna.SRR948778.bigwig"
+}
