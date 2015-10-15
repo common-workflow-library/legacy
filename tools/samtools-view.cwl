@@ -180,7 +180,7 @@ inputs:
   - id: "#readswithoutbits"
     type: ["null",int]
     description: |
-      only include reads with all bits set in INT set in FLAG [0]
+      only include reads with none of the bits set in INT set in FLAG [0]
     inputBinding:
       position: 1
       prefix: "-F"
