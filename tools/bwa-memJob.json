@@ -1,0 +1,35 @@
+{
+    "input": {
+        "class": "int",
+        "value": 4,
+    },
+    "input": {
+        "class": "int",
+        "value": 19,
+    }, 
+	"input": {
+        "class": "string",
+        "value": "@RG\\tID:${sample}_${lane}\\tPL:$PLATFORM\\tPU:1\\tLB:${sample_info[sample].library}\\tSM:${sample}",
+    },  
+    "input": {
+        "class": "File",
+        "path": "./test-files/reference.fa",
+    },   
+    "input": {
+        "class": "File",
+        "path": "./test-files/input1.fq",
+    },  
+     "input": {
+        "class": "File",
+        "path": "./test-files/input2.fq",
+    },     
+    "allocatedResources": {
+        "cpu": 2,
+        "mem": 1000
+    },
+    "key": [ 	
+        "1,1",
+        "2,2n"
+    ]
+    #I dont know the function of the key? Do you think we need it for this job file? 
+}
