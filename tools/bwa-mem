@@ -73,5 +73,7 @@ outputs:
       glob:
         engine: cwl:JsonPointer
         script: /job/output_samefile.sam
-
+stdout:
+  engine: cwl:JsonPointer
+  script: /job/output_name
 baseCommand: ["bwa","mem"]
