@@ -1,19 +1,19 @@
 {
-    "p1": [{"class": "File", "path": "8fce8d374fdb7e780c0017a33ce57398+128/tmp_1.fq"}],
-    "p2": [{"class": "File", "path": "8fce8d374fdb7e780c0017a33ce57398+128/tmp_2.fq"}],
+    "p1": [{"class": "File", "path": "keep:8fce8d374fdb7e780c0017a33ce57398+128/tmp_1.fq"}],
+    "p2": [{"class": "File", "path": "keep:8fce8d374fdb7e780c0017a33ce57398+128/tmp_2.fq"}],
     "reference": {
         "class": "File",
-        "path": "d341a6f1db391a780d694e240e95e475+3805/lobstr_v3.0.2_hg19_ref/lobSTR_ref.fasta"
+        "path": "keep:d341a6f1db391a780d694e240e95e475+3805/lobstr_v3.0.2_hg19_ref/lobSTR_ref.fasta"
     },
     "output_prefix": "demo",
     "rg-sample": "mysample",
     "rg-lib": "mylib",
     "strinfo": {
         "class": "File",
-        "path": "d341a6f1db391a780d694e240e95e475+3805/lobstr_v3.0.2_hg19_strinfo.tab"
+        "path": "keep:d341a6f1db391a780d694e240e95e475+3805/lobstr_v3.0.2_hg19_strinfo.tab"
     },
     "noise_model": {
         "class": "File",
-        "path": "513a1bdbbc2ac2165a0b84e37ab91e31+10812/models/illumina_v3.pcrfree.stepmodel"
+        "path": "keep:513a1bdbbc2ac2165a0b84e37ab91e31+10812/models/illumina_v3.pcrfree.stepmodel"
     }
 }
