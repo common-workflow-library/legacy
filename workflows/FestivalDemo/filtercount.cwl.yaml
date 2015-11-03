@@ -2,6 +2,8 @@
 class: Workflow
 requirements:
   - class: ScatterFeatureRequirement
+  - class: DockerRequirement
+    dockerPull: "debian:8"
 inputs:
   - id: "#pattern"
     type: string
