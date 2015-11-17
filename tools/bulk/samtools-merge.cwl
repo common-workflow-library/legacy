@@ -40,8 +40,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      attach RG tag (inferred from file names)
+    description: "      attach RG tag (inferred from file names)\n"
     inputBinding:
       position: 1
       prefix: '-r'
@@ -49,8 +48,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      uncompressed BAM output
+    description: "      uncompressed BAM output\n"
     inputBinding:
       position: 1
       prefix: '-u'
@@ -58,8 +56,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      overwrite the output BAM if exist
+    description: "      overwrite the output BAM if exist\n"
     inputBinding:
       position: 1
       prefix: '-f'
@@ -67,8 +64,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      compress level 1
+    description: "      compress level 1\n"
     inputBinding:
       position: 1
       prefix: '-1'
@@ -104,8 +100,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      combine RG tags with colliding IDs rather than amending them
+    description: "      combine RG tags with colliding IDs rather than amending them\n"
     inputBinding:
       position: 1
       prefix: '-c'
@@ -113,8 +108,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      combine PG tags with colliding IDs rather than amending them
+    description: "      combine PG tags with colliding IDs rather than amending them\n"
     inputBinding:
       position: 1
       prefix: '-p'

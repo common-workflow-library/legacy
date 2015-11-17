@@ -35,8 +35,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      treat PE reads as SE in rmdup (force -s)
+    description: "   treat PE reads as SE in rmdup (force -s)\n"
     inputBinding:
       position: 1
       prefix: '-S'
