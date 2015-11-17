@@ -102,6 +102,20 @@ inputs:
       position: 4
       prefix: "-strand"
 
+  - id: "#pairchip"
+    type: ["null", boolean]
+    description: "pair-end chip seq experiment"
+    inputBinding:
+      position: 4
+      prefix: "-pc"
+
+  - id: "#fragmentsize"
+    type: ["null", int]
+    description: "fixed fragment size"
+    inputBinding:
+      position: 4
+      prefix: "-fs"
+
   - id: "#max"
     type: ["null",int]
     description: |
