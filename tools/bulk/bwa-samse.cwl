@@ -8,63 +8,49 @@ class: CommandLineTool
 requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
-  - import: samtools-docker.cwl
+  - import: bwa-docker.cwl
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#inbam'
+  - id: '#infq'
     type: File
-    description: '<in.bam>'
+    description: '<in.fq>'
     inputBinding:
-      position: 8
+      position: 7
+  - id: '#insai'
+    type: File
+    description: '<in.sai>'
+    inputBinding:
+      position: 6
+  - id: '#prefix'
+    type: File
+    description: '<prefix>'
+    inputBinding:
+      position: 5
+  - id: '#r'
+    type:
+      - 'null'
+      - boolean
+    description: RG_line
+    inputBinding:
+      position: 4
+      prefix: '-r'
   - id: '#f'
     type:
       - 'null'
-      - boolean
-    description: ref
-    inputBinding:
-      position: 7
-      prefix: '-f'
-  - id: '#2'
-    type:
-      - 'null'
-      - boolean
-    description: em2
-    inputBinding:
-      position: 6
-      prefix: '-2'
-  - id: '#1'
-    type:
-      - 'null'
-      - boolean
-    description: em1
-    inputBinding:
-      position: 5
-      prefix: '-1'
-  - id: '#0'
-    type:
-      - 'null'
-      - boolean
-    description: em0
-    inputBinding:
-      position: 4
-      prefix: '-0'
-  - id: '#i'
-    type:
-      - 'null'
-      - boolean
-    description: inPen
+      - File
+    description: out.sam
     inputBinding:
       position: 3
-      prefix: '-i'
-  - id: '#Q'
+      prefix: '-f'
+  - id: '#n'
     type:
       - 'null'
       - boolean
-    description: minQ
+    description: max_occ
     inputBinding:
       position: 2
-      prefix: '-Q'
+      prefix: '-n'
 outputs:
   - id: '#stdoutfile'
     type: File
@@ -76,7 +62,7 @@ stdout:
   engine: 'cwl:JsonPointer'
   script: /job/stdoutfile
 baseCommand:
-  - samtools
-  - targetcut
-description: 'Usage: samtools targetcut [-Q minQ] [-i inPen] [-0 em0] [-1 em1] [-2 em2] [-f ref] <in.bam>'
+  - bwa
+  - samse
+description: 'Usage: bwa samse [-n max_occ] [-f out.sam] [-r RG_line] <prefix> <in.sai> <in.fq>'
 
