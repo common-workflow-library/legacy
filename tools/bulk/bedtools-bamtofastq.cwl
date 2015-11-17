@@ -14,17 +14,20 @@ inputs:
     type: string
   - id: '#fq'
     type: boolean
-    description: |
-      <FQ>
+    description: '<FQ>'
+    inputBinding:
+      position: 4
+      prefix: '-fq'
+  - id: '#BAM'
+    type: File
+    description: '<BAM>'
     inputBinding:
       position: 3
-      prefix: '-fq'
   - id: '#i'
-    type: File
-    description: |
-      <BAM>
+    type: boolean
+    description: ''
     inputBinding:
-      position: 2
+      position: 1
       prefix: '-i'
   - id: '#fq2'
     type:
@@ -60,7 +63,6 @@ baseCommand:
   - bedtools
   - bamtofastq
 description: |
-
   Tool:    bedtools bamtofastq (aka bamToFastq)
   Version: v2.25.0
   Summary: Convert BAM alignments to FASTQ files. 
@@ -79,5 +81,4 @@ description: |
   	for paired-end data, you can just write both to /dev/stdout:
 
   	bedtools bamtofastq -i x.bam -fq /dev/stdout -fq2 /dev/stdout > x.ilv.fq
-
 

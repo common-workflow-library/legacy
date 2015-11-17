@@ -14,8 +14,7 @@ inputs:
     type: string
   - id: '#i'
     type: File
-    description: |
-      <bam>
+    description: '<bam>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -76,6 +75,7 @@ inputs:
       - Default for BED is to use mapping quality.
       - Default for BEDPE is to use the minimum of
       the two mapping qualities for the pair.
+      - When -ed is used with -bedpe, the total edit
       distance from the two mates is reported.
     inputBinding:
       position: 1
@@ -124,7 +124,6 @@ baseCommand:
   - bedtools
   - bamtobed
 description: |
-
   Tool:    bedtools bamtobed (aka bamToBed)
   Version: v2.25.0
   Summary: Converts BAM alignments to BED6 or BEDPE format.
@@ -163,5 +162,4 @@ description: |
   		Default is (255,0,0).
 
   	-cigar	Add the CIGAR string to the BED entry as a 7th column.
-
 

@@ -12,20 +12,6 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#b'
-    type: File
-    description: |
-      <bed>
-    inputBinding:
-      position: 3
-      prefix: '-b'
-  - id: '#g'
-    type: boolean
-    description: |
-      <genome>
-    inputBinding:
-      position: 2
-      prefix: '-g'
   - id: '#g'
     type:
       - 'null'
@@ -57,6 +43,7 @@ inputs:
       <window_size>
       Divide each input interval (either a chromosome or a BED interval)
       to fixed-sized windows (i.e. same number of nucleotide in each window).
+      Can be combined with -s <step_size>
     inputBinding:
       position: 1
       prefix: '-w'
@@ -99,6 +86,7 @@ inputs:
       "-i src" - use the source interval's name.
       "-i winnum" - use the window number as the ID (e.g. 1,2,3,4...).
       "-i srcwinnum" - use the source interval's name with the window number.
+      See below for usage examples.
     inputBinding:
       position: 1
       prefix: '-i'
@@ -116,7 +104,6 @@ baseCommand:
   - bedtools
   - makewindows
 description: |
-
   Tool: bedtools makewindows
   Version: v2.25.0
   Summary: Makes adjacent or sliding windows across a genome or BED file.
@@ -270,6 +257,4 @@ description: |
    chr5        100334  100668  CCC_2
    chr5        100668  101000  CCC_3
    ...
-
-
 

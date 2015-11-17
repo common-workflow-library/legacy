@@ -14,15 +14,13 @@ inputs:
     type: string
   - id: '#g'
     type: boolean
-    description: |
-      <genome>
+    description: '<genome>'
     inputBinding:
       position: 3
       prefix: '-g'
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -69,7 +67,6 @@ baseCommand:
   - bedtools
   - bedtobam
 description: |
-
   Tool:    bedtools bedtobam (aka bedToBam)
   Version: v2.25.0
   Summary: Converts feature records to BAM format.
@@ -87,5 +84,4 @@ description: |
 
   Notes: 
   	(1)  BED files must be at least BED4 to create BAM (needs name field).
-
 

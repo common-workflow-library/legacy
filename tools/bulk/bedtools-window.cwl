@@ -14,15 +14,13 @@ inputs:
     type: string
   - id: '#b'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 3
       prefix: '-b'
   - id: '#a'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-a'
@@ -179,7 +177,6 @@ baseCommand:
   - bedtools
   - window
 description: |
-
   Tool:    bedtools window (aka windowBed)
   Version: v2.25.0
   Summary: Examines a "window" around each feature in A and
@@ -235,5 +232,4 @@ description: |
   		- Similar to "grep -v."
 
   	-header	Print the header from the A file prior to results.
-
 

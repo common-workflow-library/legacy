@@ -14,8 +14,7 @@ inputs:
     type: string
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf/bam>
+    description: '<bed/gff/vcf/bam>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -76,7 +75,6 @@ baseCommand:
   - bedtools
   - spacing
 description: |
-
   Tool:    bedtools spacing
   Version: v2.25.0
   Summary: Report (last col.) the gap lengths between intervals in a file.
@@ -117,5 +115,4 @@ description: |
   	-iobuf	Specify amount of memory to use for input buffer.
   		Takes an integer argument. Optional suffixes K/M/G supported.
   		Note: currently has no effect with compressed files.
-
 

@@ -12,10 +12,19 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
+  - id: '#outhtml'
+    type: File
+    description: out.html
+    inputBinding:
+      position: 4
+  - id: '#'
+    type: boolean
+    description: '>'
+    inputBinding:
+      position: 3
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -45,6 +54,7 @@ inputs:
       Example:
       By default, the links created will point to human (hg18) UCSC browser.
       If you have a local mirror, you can override this behavior by supplying
+      the -base, -org, and -db options.
       For example, if the URL of your local mirror for mouse MM9 is called:
       http://mymirror.myuniversity.edu, then you would use the following:
     inputBinding:
@@ -91,7 +101,6 @@ baseCommand:
   - bedtools
   - links
 description: |
-
   Tool:    bedtools links (aka linksBed)
   Version: v2.25.0
   Summary: Creates HTML links to an UCSC Genome Browser from a feature file.

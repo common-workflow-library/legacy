@@ -14,8 +14,7 @@ inputs:
     type: string
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -56,7 +55,6 @@ baseCommand:
   - bedtools
   - cluster
 description: |
-
   Tool:    bedtools cluster
   Version: v2.25.0
   Summary: Clusters overlapping/nearby BED/GFF/VCF intervals.
@@ -72,5 +70,4 @@ description: |
   		to be merged.
   		- Def. 0. That is, overlapping & book-ended features are merged.
   		- (INTEGER)
-
 

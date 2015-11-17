@@ -25,25 +25,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Specify the column (1-based) that should be summarized.
-      - Required.
-      Examples:
-      $ cat test.txt
-      chr1	10	20	1,2,3	10,20,30
-      chr1	40	50	4,5,6	40,50,60
-      chr1	10	20	1,2,3	10
-      chr1	10	20	1,2,3	20
-      chr1	10	20	1,2,3	30
-      chr1	40	50	4,5,6	40
-      chr1	40	50	4,5,6	50
-      chr1	40	50	4,5,6	60
-      chr1	10	20	1	10
-      chr1	10	20	2	20
-      chr1	10	20	3	30
-      chr1	40	50	4	40
-      chr1	40	50	5	50
-      chr1	40	50	6	60
+    description: "\tSpecify the column (1-based) that should be summarized.\n- Required.\n"
     inputBinding:
       position: 1
       prefix: '-c'
@@ -61,7 +43,6 @@ baseCommand:
   - bedtools
   - expand
 description: |
-
   Tool:    bedtools expand 
   Version: v2.25.0
   Summary: Replicate lines in a file based on columns of comma-separated values.

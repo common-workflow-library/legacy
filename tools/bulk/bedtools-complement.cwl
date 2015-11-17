@@ -14,15 +14,13 @@ inputs:
     type: string
   - id: '#g'
     type: boolean
-    description: |
-      <genome>
+    description: '<genome>'
     inputBinding:
       position: 3
       prefix: '-g'
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -40,7 +38,6 @@ baseCommand:
   - bedtools
   - complement
 description: |
-
   Tool:    bedtools complement (aka complementBed)
   Version: v2.25.0
   Summary: Returns the base pair complement of a feature file.
@@ -63,5 +60,4 @@ description: |
 
   	mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -e \
   	"select chrom, size from hg19.chromInfo"  > hg19.genome
-
 
