@@ -14,15 +14,13 @@ inputs:
     type: string
   - id: '#b'
     type: File
-    description: |
-      <BEDPE>
+    description: '<BEDPE>'
     inputBinding:
       position: 3
       prefix: '-b'
   - id: '#a'
     type: File
-    description: |
-      <BEDPE>
+    description: '<BEDPE>'
     inputBinding:
       position: 2
       prefix: '-a'
@@ -41,7 +39,7 @@ inputs:
       - 'null'
       - boolean
     description: |
-      Approach to reporting overlaps between A and B.
+      	Approach to reporting overlaps between A and B.
       neither	Report overlaps if neither end of A overlaps B.
       either	Report overlaps if either ends of A overlap B.
       both	Report overlaps if both ends of A overlap B.
@@ -55,7 +53,7 @@ inputs:
       - 'null'
       - boolean
     description: |
-      The amount of slop (in b.p.). to be added to each footprint of A.
+      	The amount of slop (in b.p.). to be added to each footprint of A.
       *Note*: Slop is subtracted from start1 and start2
       and added to end1 and end2.
       - Default = 0.
@@ -109,7 +107,6 @@ baseCommand:
   - bedtools
   - pairtopair
 description: |
-
   Tool:    bedtools pairtopair (aka pairToPair)
   Version: v2.25.0
   Summary: Report overlaps between two paired-end BED files (BEDPE).
@@ -146,5 +143,4 @@ description: |
   		- By default, same names are allowed.
 
   Refer to the BEDTools manual for BEDPE format.
-
 

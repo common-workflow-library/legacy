@@ -12,24 +12,15 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#b'
-    type: int
-    description: |
-      <int>
-    inputBinding:
-      position: 4
-      prefix: '-b'
   - id: '#g'
     type: boolean
-    description: |
-      <genome>
+    description: '<genome>'
     inputBinding:
       position: 3
       prefix: '-g'
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -71,6 +62,7 @@ inputs:
       - boolean
     description: |
       Define -l and -r based on strand.
+      E.g. if used, -l 500 for a negative-stranded feature,
       it will start the flank 500 bp downstream.  Default = false.
     inputBinding:
       position: 1
@@ -81,6 +73,7 @@ inputs:
       - boolean
     description: |
       Define -l and -r as a fraction of the feature's length.
+      E.g. if used on a 1000bp feature, -l 0.50,
       will add 500 bp "upstream".  Default = false.
     inputBinding:
       position: 1
@@ -108,7 +101,6 @@ baseCommand:
   - bedtools
   - flank
 description: |
-
   Tool:    bedtools flank (aka flankBed)
   Version: v2.25.0
   Summary: Creates flanking interval(s) for each BED/GFF/VCF feature.
@@ -160,5 +152,4 @@ description: |
 
   	mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -e \
   	"select chrom, size from hg19.chromInfo"  > hg19.genome
-
 

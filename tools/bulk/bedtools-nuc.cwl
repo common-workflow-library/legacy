@@ -12,20 +12,6 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#bed'
-    type: File
-    description: |
-      <bed/gff/vcf>
-    inputBinding:
-      position: 3
-      prefix: '-bed'
-  - id: '#fi'
-    type: boolean
-    description: |
-      <fasta>
-    inputBinding:
-      position: 2
-      prefix: '-fi'
   - id: '#fi'
     type:
       - 'null'
@@ -99,7 +85,9 @@ inputs:
       7) Number of Ns observed
       8) Number of other bases observed
       9) The length of the explored sequence/interval.
+      10) The seq. extracted from the FASTA file. (opt., if -seq is used)
       11) The number of times a user's pattern was observed.
+      (opt., if -pattern is used.)
     inputBinding:
       position: 1
       prefix: '-fullHeader'
@@ -117,7 +105,6 @@ baseCommand:
   - bedtools
   - nuc
 description: |
-
   Tool:    bedtools nuc (aka nucBed)
   Version: v2.25.0
   Summary: Profiles the nucleotide content of intervals in a fasta file.
@@ -155,5 +142,4 @@ description: |
   	    10) The seq. extracted from the FASTA file. (opt., if -seq is used)
   	    11) The number of times a user's pattern was observed.
   	        (opt., if -pattern is used.)
-
 

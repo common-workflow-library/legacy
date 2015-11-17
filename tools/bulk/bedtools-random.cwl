@@ -14,8 +14,7 @@ inputs:
     type: string
   - id: '#g'
     type: boolean
-    description: |
-      <genome>
+    description: '<genome>'
     inputBinding:
       position: 2
       prefix: '-g'
@@ -66,7 +65,6 @@ baseCommand:
   - bedtools
   - random
 description: |
-
   Tool:    bedtools random (aka randomBed)
   Version: v2.25.0
   Summary: Generate random intervals among a genome.
@@ -102,5 +100,4 @@ description: |
 
   	mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -e \
   	"select chrom, size from hg19.chromInfo"  > hg19.genome
-
 

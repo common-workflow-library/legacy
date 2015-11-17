@@ -12,24 +12,20 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#g'
+  - id: '#file'
     type: File
-    description: |
-      <genome file>
+    description: 'file>'
     inputBinding:
-      position: 4
-      prefix: '-g'
+      position: 5
   - id: '#b'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 3
       prefix: '-b'
   - id: '#a'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-a'
@@ -93,6 +89,7 @@ inputs:
       - boolean
     description: |
       Require that the fraction overlap be reciprocal for A AND B.
+      - In other words, if -f is 0.90 and -r is used, this requires
       that B overlap 90% of A and A _also_ overlaps 90% of B.
     inputBinding:
       position: 1
@@ -103,7 +100,9 @@ inputs:
       - boolean
     description: |
       Require that the minimum fraction be satisfied for A OR B.
+      - In other words, if -e is used with -f 0.90 and -F 0.10 this requires
       that either 90% of A is covered OR 10% of  B is covered.
+      Without -e, both fractions would have to be satisfied.
     inputBinding:
       position: 1
       prefix: '-e'
@@ -122,6 +121,7 @@ inputs:
       - boolean
     description: |
       Provide a genome file to enforce consistent chromosome sort order
+      across input files. Only applies when used with -sorted option.
     inputBinding:
       position: 1
       prefix: '-g'
@@ -194,7 +194,6 @@ baseCommand:
   - bedtools
   - fisher
 description: |
-
   Tool:    bedtools fisher (aka fisher)
   Version: v2.25.0
   Summary: Calculate Fisher statistic b/w two feature files.
@@ -255,5 +254,4 @@ description: |
 
   Notes: 
   	(1) Input files must be sorted by chrom, then start position.
-
 

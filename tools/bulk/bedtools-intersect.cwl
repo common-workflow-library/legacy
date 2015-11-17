@@ -14,15 +14,13 @@ inputs:
     type: string
   - id: '#b'
     type: File
-    description: |
-      <bed/gff/vcf/bam>
+    description: '<bed/gff/vcf/bam>'
     inputBinding:
       position: 3
       prefix: '-b'
   - id: '#a'
     type: File
-    description: |
-      <bed/gff/vcf/bam>
+    description: '<bed/gff/vcf/bam>'
     inputBinding:
       position: 2
       prefix: '-a'
@@ -41,6 +39,7 @@ inputs:
       - boolean
     description: |
       Write the original entry in B for each overlap.
+      - Useful for knowing _what_ A overlaps. Restricted by -f and -r.
     inputBinding:
       position: 1
       prefix: '-wb'
@@ -62,6 +61,7 @@ inputs:
     description: |
       Write the original A and B entries plus the number of base
       pairs of overlap between the two features.
+      - Overlaps restricted by -f and -r.
       Only A features with overlap are reported.
     inputBinding:
       position: 1
@@ -73,6 +73,7 @@ inputs:
     description: |
       Write the original A and B entries plus the number of base
       pairs of overlap between the two features.
+      - Overlapping features restricted by -f and -r.
       However, A features w/o overlap are also reported
       with a NULL B feature and overlap = 0.
     inputBinding:
@@ -85,6 +86,7 @@ inputs:
     description: |
       Write the original A entry _once_ if _any_ overlaps found in B.
       - In other words, just report the fact >=1 hit was found.
+      - Overlaps restricted by -f and -r.
     inputBinding:
       position: 1
       prefix: '-u'
@@ -95,6 +97,7 @@ inputs:
     description: |
       For each entry in A, report the number of overlaps with B.
       - Reports 0 for A entries that have no overlap with B.
+      - Overlaps restricted by -f and -r.
     inputBinding:
       position: 1
       prefix: '-c'
@@ -104,6 +107,7 @@ inputs:
       - boolean
     description: |
       Only report those entries in A that have _no overlaps_ with B.
+      - Similar to "grep -v" (an homage).
     inputBinding:
       position: 1
       prefix: '-v'
@@ -166,6 +170,7 @@ inputs:
       - boolean
     description: |
       Require that the fraction overlap be reciprocal for A AND B.
+      - In other words, if -f is 0.90 and -r is used, this requires
       that B overlap 90% of A and A _also_ overlaps 90% of B.
     inputBinding:
       position: 1
@@ -176,7 +181,9 @@ inputs:
       - boolean
     description: |
       Require that the minimum fraction be satisfied for A OR B.
+      - In other words, if -e is used with -f 0.90 and -F 0.10 this requires
       that either 90% of A is covered OR 10% of  B is covered.
+      Without -e, both fractions would have to be satisfied.
     inputBinding:
       position: 1
       prefix: '-e'
@@ -195,6 +202,7 @@ inputs:
       - boolean
     description: |
       Provide a genome file to enforce consistent chromosome sort order
+      across input files. Only applies when used with -sorted option.
     inputBinding:
       position: 1
       prefix: '-g'
@@ -306,7 +314,6 @@ baseCommand:
   - bedtools
   - intersect
 description: |
-
   Tool:    bedtools intersect (aka intersectBed)
   Version: v2.25.0
   Summary: Report overlaps between two feature files.
@@ -412,5 +419,4 @@ description: |
   	(1) When a BAM file is used for the A file, the alignment is retained if overlaps exist,
   	and exlcuded if an overlap cannot be found.  If multiple overlaps exist, they are not
   	reported, as we are only testing for one or more overlaps.
-
 

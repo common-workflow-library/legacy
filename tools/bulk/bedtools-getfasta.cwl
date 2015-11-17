@@ -12,27 +12,6 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#fo'
-    type: boolean
-    description: |
-      <fasta>
-    inputBinding:
-      position: 4
-      prefix: '-fo'
-  - id: '#bed'
-    type: File
-    description: |
-      <bed/gff/vcf>
-    inputBinding:
-      position: 3
-      prefix: '-bed'
-  - id: '#fi'
-    type: boolean
-    description: |
-      <fasta>
-    inputBinding:
-      position: 2
-      prefix: '-fi'
   - id: '#fi'
     type:
       - 'null'
@@ -124,7 +103,6 @@ baseCommand:
   - bedtools
   - getfasta
 description: |
-
   Tool:    bedtools getfasta (aka fastaFromBed)
   Version: v2.25.0
   Summary: Extract DNA sequences into a fasta file based on feature coordinates.
@@ -146,5 +124,4 @@ description: |
 
   	-fullHeader	Use full fasta header.
   		- By default, only the word before the first space or tab is used.
-
 

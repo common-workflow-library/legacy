@@ -14,15 +14,13 @@ inputs:
     type: string
   - id: '#b'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 3
       prefix: '-b'
   - id: '#a'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-a'
@@ -43,6 +41,7 @@ inputs:
       - boolean
     description: |
       Like -d, report the closest feature in B, and its distance to A
+      as an extra column. Unlike -d, use negative distances to report
       upstream features.
       The options for defining which orientation is "upstream" are:
       - "ref"   Report distance with respect to the reference genome.
@@ -72,6 +71,7 @@ inputs:
       - boolean
     description: |
       Ignore features in B that are upstream of features in A.
+      This option requires -D and follows its orientation
       rules for determining what is "upstream".
     inputBinding:
       position: 1
@@ -82,6 +82,7 @@ inputs:
       - boolean
     description: |
       Ignore features in B that are downstream of features in A.
+      This option requires -D and follows its orientation
       rules for determining what is "downstream".
     inputBinding:
       position: 1
@@ -92,6 +93,7 @@ inputs:
       - boolean
     description: |
       Choose first from features in B that are upstream of features in A.
+      This option requires -D and follows its orientation
       rules for determining what is "upstream".
     inputBinding:
       position: 1
@@ -102,6 +104,7 @@ inputs:
       - boolean
     description: |
       Choose first from features in B that are downstream of features in A.
+      This option requires -D and follows its orientation
       rules for determining what is "downstream".
     inputBinding:
       position: 1
@@ -200,6 +203,7 @@ inputs:
       - boolean
     description: |
       Require that the fraction overlap be reciprocal for A AND B.
+      - In other words, if -f is 0.90 and -r is used, this requires
       that B overlap 90% of A and A _also_ overlaps 90% of B.
     inputBinding:
       position: 1
@@ -210,7 +214,9 @@ inputs:
       - boolean
     description: |
       Require that the minimum fraction be satisfied for A OR B.
+      - In other words, if -e is used with -f 0.90 and -F 0.10 this requires
       that either 90% of A is covered OR 10% of  B is covered.
+      Without -e, both fractions would have to be satisfied.
     inputBinding:
       position: 1
       prefix: '-e'
@@ -229,6 +235,7 @@ inputs:
       - boolean
     description: |
       Provide a genome file to enforce consistent chromosome sort order
+      across input files. Only applies when used with -sorted option.
     inputBinding:
       position: 1
       prefix: '-g'
@@ -331,7 +338,6 @@ baseCommand:
   - bedtools
   - closest
 description: |
-
   Tool:    bedtools closest (aka closestBed)
   Version: v2.25.0
   Summary: For each feature in A, finds the closest 
@@ -455,5 +461,4 @@ description: |
   	Reports "none" for chrom and "-1" for all other fields when a feature
   	is not found in B on the same chromosome as the feature in A.
   	E.g. none	-1	-1
-
 

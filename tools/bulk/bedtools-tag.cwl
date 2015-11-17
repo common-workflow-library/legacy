@@ -12,10 +12,36 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
+  - id: '#LABn'
+    type: boolean
+    description: LABn
+    inputBinding:
+      position: 8
+  - id: '#labels'
+    type: boolean
+    description: LAB1
+    inputBinding:
+      position: 6
+      prefix: '-labels'
+  - id: '#FILEn'
+    type: boolean
+    description: FILEn
+    inputBinding:
+      position: 5
+  - id: '#'
+    type: boolean
+    description: ..
+    inputBinding:
+      position: 4
+  - id: '#files'
+    type: File
+    description: FILE1
+    inputBinding:
+      position: 3
+      prefix: '-files'
   - id: '#i'
     type: File
-    description: |
-      <BAM>
+    description: '<BAM>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -70,6 +96,7 @@ inputs:
       - boolean
     description: |
       Use the name field from the annotation files to populate tags.
+      By default, the -labels values are used.
     inputBinding:
       position: 1
       prefix: '-names'
@@ -79,6 +106,7 @@ inputs:
       - boolean
     description: |
       Use the score field from the annotation files to populate tags.
+      By default, the -labels values are used.
     inputBinding:
       position: 1
       prefix: '-scores'
@@ -89,6 +117,8 @@ inputs:
     description: >
       Use the full interval (including name, score, and strand) to populate
       tags.
+
+      Requires the -labels option to identify from which file the interval came.
     inputBinding:
       position: 1
       prefix: '-intervals'
@@ -106,7 +136,6 @@ baseCommand:
   - bedtools
   - tag
 description: |
-
   Tool:    bedtools tag (aka tagBam)
   Version: v2.25.0
   Summary: Annotates a BAM file based on overlaps with multiple BED/GFF/VCF files
@@ -136,5 +165,4 @@ description: |
 
   	-intervals	Use the full interval (including name, score, and strand) to populate tags.
   			Requires the -labels option to identify from which file the interval came.
-
 

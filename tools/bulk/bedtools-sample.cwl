@@ -14,8 +14,7 @@ inputs:
     type: string
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf/bam>
+    description: '<bed/gff/vcf/bam>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -128,7 +127,6 @@ baseCommand:
   - bedtools
   - sample
 description: |
-
   Tool:    bedtools sample (aka sampleFile)
   Version: v2.25.0
   Summary: Take sample of input file(s) using reservoir sampling algorithm.
@@ -171,5 +169,5 @@ description: |
   		Takes an integer argument. Optional suffixes K/M/G supported.
   		Note: currently has no effect with compressed files.
 
-  Notes: 
+  Notes:
 

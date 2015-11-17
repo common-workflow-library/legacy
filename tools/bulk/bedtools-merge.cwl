@@ -14,8 +14,7 @@ inputs:
     type: string
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -91,6 +90,7 @@ inputs:
       multiple columns, that operation will be applied to all columns.
       Otherwise, the number of columns must match the the number of operations,
       and will be applied in respective order.
+      E.g., "-c 5,4,6 -o sum,mean,count" will give the sum of column 5,
       the mean of column 4, and the count of column 6.
       The order of output columns will match the ordering given in the command.
     inputBinding:
@@ -102,6 +102,7 @@ inputs:
       - boolean
     description: |
       Specify a custom delimiter for the collapse operations.
+      - Example: -delim "|"
       - Default: ",".
     inputBinding:
       position: 1
@@ -172,7 +173,6 @@ baseCommand:
   - bedtools
   - merge
 description: |
-
   Tool:    bedtools merge (aka mergeBed)
   Version: v2.25.0
   Summary: Merges overlapping BED/GFF/VCF entries into a single interval.
@@ -248,5 +248,4 @@ description: |
 
   Notes: 
   	(1) The input file (-i) file must be sorted by chrom, then start.
-
 
