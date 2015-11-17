@@ -30,8 +30,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      output quality in the OQ tag if present
+    description: "       output quality in the OQ tag if present\n"
     inputBinding:
       position: 1
       prefix: '-O'

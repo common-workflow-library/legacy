@@ -28,8 +28,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Generate BAI-format index for BAM files [default]
+    description: "      Generate BAI-format index for BAM files [default]\n"
     inputBinding:
       position: 1
       prefix: '-b'
@@ -37,8 +36,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Generate CSI-format index for BAM files
+    description: "      Generate CSI-format index for BAM files\n"
     inputBinding:
       position: 1
       prefix: '-c'

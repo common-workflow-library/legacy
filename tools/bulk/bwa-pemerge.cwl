@@ -8,63 +8,66 @@ class: CommandLineTool
 requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
-  - import: samtools-docker.cwl
+  - import: bwa-docker.cwl
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#outprefix'
-    type: File
-    description: '<out.prefix>'
-    inputBinding:
-      position: 6
-  - id: '#inbam'
-    type: File
-    description: '<in.bam>'
-    inputBinding:
-      position: 5
-  - id: '#c'
+  - id: '#[read2fq]'
     type:
       - 'null'
-      - boolean
-    description: cLevel
+      - File
+    description: '[read2.fq]'
     inputBinding:
       position: 4
-      prefix: '-c'
-  - id: '#O'
+  - id: '#read1fq'
+    type: File
+    description: '<read1.fq>'
+    inputBinding:
+      position: 3
+  - id: '#m'
     type:
       - 'null'
       - boolean
     description: |
-      output to stdout
+      output merged reads only
     inputBinding:
       position: 1
-      prefix: '-O'
+      prefix: '-m'
   - id: '#u'
     type:
       - 'null'
       - boolean
-    description: "     uncompressed BAM output\n"
+    description: "      output unmerged reads only\n"
     inputBinding:
       position: 1
       prefix: '-u'
-  - id: '#l'
+  - id: '#t'
     type:
       - 'null'
       - int
     description: |
-      INT  compression level [1]
+      INT   number of threads [1]
     inputBinding:
       position: 1
-      prefix: '-l'
-  - id: '#n'
+      prefix: '-t'
+  - id: '#T'
     type:
       - 'null'
       - int
     description: |
-      INT  number of temporary files [64]
+      INT   minimum end overlap [10]
     inputBinding:
       position: 1
-      prefix: '-n'
+      prefix: '-T'
+  - id: '#Q'
+    type:
+      - 'null'
+      - int
+    description: |
+      INT   max sum of errors [70]
+    inputBinding:
+      position: 1
+      prefix: '-Q'
 outputs:
   - id: '#stdoutfile'
     type: File
@@ -76,13 +79,14 @@ stdout:
   engine: 'cwl:JsonPointer'
   script: /job/stdoutfile
 baseCommand:
-  - samtools
-  - bamshuf
+  - bwa
+  - pemerge
 description: |-
-  Usage:   samtools bamshuf [-Ou] [-n nFiles] [-c cLevel] <in.bam> <out.prefix>
+  Usage:   bwa pemerge [-mu] <read1.fq> [read2.fq]
 
-  Options: -O      output to stdout
-           -u      uncompressed BAM output
-           -l INT  compression level [1]
-           -n INT  number of temporary files [64]
+  Options: -m       output merged reads only
+           -u       output unmerged reads only
+           -t INT   number of threads [1]
+           -T INT   minimum end overlap [10]
+           -Q INT   max sum of errors [70]
 

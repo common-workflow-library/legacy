@@ -8,63 +8,50 @@ class: CommandLineTool
 requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
-  - import: samtools-docker.cwl
+  - import: bwa-docker.cwl
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#outprefix'
-    type: File
-    description: '<out.prefix>'
-    inputBinding:
-      position: 6
-  - id: '#inbam'
-    type: File
-    description: '<in.bam>'
-    inputBinding:
-      position: 5
-  - id: '#c'
+  - id: '#[idxbase]'
     type:
       - 'null'
       - boolean
-    description: cLevel
+    description: '[idxbase]'
     inputBinding:
       position: 4
-      prefix: '-c'
-  - id: '#O'
+  - id: '#[-d-l]'
+    type:
+      - 'null'
+      - boolean
+    description: '[-d|-l]'
+    inputBinding:
+      position: 2
+  - id: '#d'
     type:
       - 'null'
       - boolean
     description: |
-      output to stdout
+      destroy all indices in shared memory
     inputBinding:
       position: 1
-      prefix: '-O'
-  - id: '#u'
-    type:
-      - 'null'
-      - boolean
-    description: "     uncompressed BAM output\n"
-    inputBinding:
-      position: 1
-      prefix: '-u'
+      prefix: '-d'
   - id: '#l'
     type:
       - 'null'
-      - int
-    description: |
-      INT  compression level [1]
+      - boolean
+    description: "      list names of indices in shared memory\n"
     inputBinding:
       position: 1
       prefix: '-l'
-  - id: '#n'
+  - id: '#f'
     type:
       - 'null'
-      - int
+      - File
     description: |
-      INT  number of temporary files [64]
+      FILE  temporary file to reduce peak memory
     inputBinding:
       position: 1
-      prefix: '-n'
+      prefix: '-f'
 outputs:
   - id: '#stdoutfile'
     type: File
@@ -76,13 +63,12 @@ stdout:
   engine: 'cwl:JsonPointer'
   script: /job/stdoutfile
 baseCommand:
-  - samtools
-  - bamshuf
+  - bwa
+  - shm
 description: |-
-  Usage:   samtools bamshuf [-Ou] [-n nFiles] [-c cLevel] <in.bam> <out.prefix>
+  Usage: bwa shm [-d|-l] [-f tmpFile] [idxbase]
 
-  Options: -O      output to stdout
-           -u      uncompressed BAM output
-           -l INT  compression level [1]
-           -n INT  number of temporary files [64]
+  Options: -d       destroy all indices in shared memory
+           -l       list names of indices in shared memory
+           -f FILE  temporary file to reduce peak memory
 
