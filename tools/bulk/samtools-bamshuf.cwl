@@ -23,10 +23,12 @@ inputs:
     inputBinding:
       position: 5
   - id: '#c'
-    type: boolean
-    description: ''
+    type:
+      - 'null'
+      - boolean
+    description: cLevel
     inputBinding:
-      position: 1
+      position: 4
       prefix: '-c'
   - id: '#O'
     type:
@@ -41,8 +43,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      uncompressed BAM output
+    description: "     uncompressed BAM output\n"
     inputBinding:
       position: 1
       prefix: '-u'
