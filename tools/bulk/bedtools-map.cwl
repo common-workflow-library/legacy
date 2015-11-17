@@ -14,15 +14,13 @@ inputs:
     type: string
   - id: '#b'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 3
       prefix: '-b'
   - id: '#a'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-a'
@@ -62,6 +60,7 @@ inputs:
       multiple columns, that operation will be applied to all columns.
       Otherwise, the number of columns must match the the number of operations,
       and will be applied in respective order.
+      E.g., "-c 5,4,6 -o sum,mean,count" will give the sum of column 5,
       the mean of column 4, and the count of column 6.
       The order of output columns will match the ordering given in the command.
     inputBinding:
@@ -73,6 +72,7 @@ inputs:
       - boolean
     description: |
       Specify a custom delimiter for the collapse operations.
+      - Example: -delim "|"
       - Default: ",".
     inputBinding:
       position: 1
@@ -136,6 +136,7 @@ inputs:
       - boolean
     description: |
       Require that the fraction overlap be reciprocal for A AND B.
+      - In other words, if -f is 0.90 and -r is used, this requires
       that B overlap 90% of A and A _also_ overlaps 90% of B.
     inputBinding:
       position: 1
@@ -146,7 +147,9 @@ inputs:
       - boolean
     description: |
       Require that the minimum fraction be satisfied for A OR B.
+      - In other words, if -e is used with -f 0.90 and -F 0.10 this requires
       that either 90% of A is covered OR 10% of  B is covered.
+      Without -e, both fractions would have to be satisfied.
     inputBinding:
       position: 1
       prefix: '-e'
@@ -165,6 +168,7 @@ inputs:
       - boolean
     description: |
       Provide a genome file to enforce consistent chromosome sort order
+      across input files. Only applies when used with -sorted option.
     inputBinding:
       position: 1
       prefix: '-g'
@@ -237,7 +241,6 @@ baseCommand:
   - bedtools
   - map
 description: |
-
   Tool:    bedtools map (aka mapBed)
   Version: v2.25.0
   Summary: Apply a function to a column from B intervals that overlap A.
@@ -331,5 +334,4 @@ description: |
 
   Notes: 
   	(1) Both input files must be sorted by chrom, then start.
-
 

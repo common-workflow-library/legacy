@@ -14,8 +14,7 @@ inputs:
     type: string
   - id: '#i'
     type: boolean
-    description: |
-      <bed12>
+    description: '<bed12>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -42,7 +41,6 @@ baseCommand:
   - bedtools
   - bed12tobed6
 description: |
-
   Tool:    bedtools bed12tobed6 (aka bed12ToBed6)
   Version: v2.25.0
   Summary: Splits BED12 features into discrete BED6 features.
@@ -51,5 +49,4 @@ description: |
 
   Options: 
   	-n	Force the score to be the (1-based) block number from the BED12.
-
 

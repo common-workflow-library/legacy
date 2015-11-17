@@ -16,8 +16,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Input file. Assumes "stdin" if omitted.
+    description: "\tInput file. Assumes \"stdin\" if omitted.\n"
     inputBinding:
       position: 1
       prefix: '-i'
@@ -65,6 +64,7 @@ inputs:
       multiple columns, that operation will be applied to all columns.
       Otherwise, the number of columns must match the the number of operations,
       and will be applied in respective order.
+      E.g., "-c 5,4,6 -o sum,mean,count" will give the sum of column 5,
       the mean of column 4, and the count of column 6.
       The order of output columns will match the ordering given in the command.
     inputBinding:
@@ -74,9 +74,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Print all columns from input file.  The first line in the group is used.
-      Default: print only grouped columns.
+    description: "\tPrint all columns from input file.  The first line in the group is used.\nDefault: print only grouped columns.\n"
     inputBinding:
       position: 1
       prefix: '-full'
@@ -106,8 +104,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      same as '-inheader -outheader'
+    description: "\tsame as '-inheader -outheader'\n"
     inputBinding:
       position: 1
       prefix: '-header'
@@ -135,16 +132,8 @@ inputs:
       - boolean
     description: |
       Specify a custom delimiter for the collapse operations.
+      - Example: -delim "|"
       - Default: ",".
-      Examples:
-      $ cat ex1.out
-      chr1 10  20  A   chr1    15  25  B.1 1000    ATAT
-      chr1 10  20  A   chr1    25  35  B.2 10000   CGCG
-      chr1 10  20  A   11000
-      chr1 10  20  A   11000   10000
-      chr1 10  20  A   B.1,B.2,    5500
-      chr1 10  20  A   B.1,B.2,    5500
-      chr1 10  20  A   ATATCGCG
     inputBinding:
       position: 1
       prefix: '-delim'
@@ -162,7 +151,6 @@ baseCommand:
   - bedtools
   - groupby
 description: |
-
   Tool:    bedtools groupby 
   Version: v2.25.0
   Summary: Summarizes a dataset column based upon
@@ -251,5 +239,4 @@ description: |
   Notes: 
   	(1)  The input file/stream should be sorted/grouped by the -grp. columns
   	(2)  If -i is unspecified, input is assumed to come from stdin.
-
 

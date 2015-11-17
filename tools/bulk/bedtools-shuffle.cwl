@@ -14,15 +14,13 @@ inputs:
     type: string
   - id: '#g'
     type: boolean
-    description: |
-      <genome>
+    description: '<genome>'
     inputBinding:
       position: 3
       prefix: '-g'
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -43,6 +41,7 @@ inputs:
     description: |
       Instead of randomly placing features in a genome, the -incl
       options defines a BED/GFF/VCF file of coordinates in which
+      features in -i should be randomly placed (e.g. genes.bed).
     inputBinding:
       position: 1
       prefix: '-incl'
@@ -53,6 +52,7 @@ inputs:
     description: |
       Keep features in -i on the same chromosome.
       - By default, the chrom and position are randomly chosen.
+      - NOTE: Forces use of -chromFirst (see below).
     inputBinding:
       position: 1
       prefix: '-chrom'
@@ -74,7 +74,9 @@ inputs:
     description: |
       Maximum overlap (as a fraction of the -i feature) with an -excl
       feature that is tolerated before searching for a new,
+      randomized locus. For example, -f 0.10 allows up to 10%
       of a randomized feature to overlap with a given feature
+      in the -excl file. **Cannot be used with -incl file.**
       - Default is 1E-9 (i.e., 1bp).
       - FLOAT (e.g. 0.50)
     inputBinding:
@@ -85,7 +87,6 @@ inputs:
       - 'null'
       - boolean
     description: |
-
       Instead of choosing a position randomly among the entire
       genome (the default), first choose a chrom randomly, and then
       choose a random start coordinate on that chrom.  This leads
@@ -108,8 +109,8 @@ inputs:
       - 'null'
       - boolean
     description: |
-
       Max. number of attempts to find a home for a shuffled interval
+      in the presence of -incl or -excl.
       Default = 1000.
     inputBinding:
       position: 1
@@ -119,7 +120,6 @@ inputs:
       - 'null'
       - boolean
     description: |
-
       Don't allow shuffled intervals to overlap.
     inputBinding:
       position: 1
@@ -129,7 +129,6 @@ inputs:
       - 'null'
       - boolean
     description: |
-
       Allow shuffled intervals to be relocated to a position
       in which the entire original interval cannot fit w/o exceeding
       the end of the chromosome.  In this case, the end coordinate of the
@@ -153,7 +152,6 @@ baseCommand:
   - bedtools
   - shuffle
 description: |
-
   Tool:    bedtools shuffle (aka shuffleBed)
   Version: v2.25.0
   Summary: Randomly permute the locations of a feature file among a genome.
@@ -221,5 +219,4 @@ description: |
 
   	mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -e \
   	"select chrom, size from hg19.chromInfo"  > hg19.genome
-
 

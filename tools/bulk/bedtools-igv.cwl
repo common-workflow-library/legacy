@@ -14,8 +14,7 @@ inputs:
     type: string
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -99,7 +98,6 @@ baseCommand:
   - bedtools
   - igv
 description: |
-
   Tool:    bedtools igv (aka bedToIgv)
   Version: v2.25.0
   Summary: Creates a batch script to create IGV images 
@@ -137,5 +135,4 @@ description: |
   	(1)  The resulting script is meant to be run from within IGV.
   	(2)  Unless you use the -sess option, it is assumed that prior to 
   		running the script, you've loaded the proper genome and tracks.
-
 

@@ -14,15 +14,13 @@ inputs:
     type: string
   - id: '#b'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 3
       prefix: '-b'
   - id: '#a'
     type: File
-    description: |
-      <bedpe>
+    description: '<bedpe>'
     inputBinding:
       position: 2
       prefix: '-a'
@@ -66,6 +64,7 @@ inputs:
       Use BAM total edit distance (NM tag) for BEDPE score.
       - Default for BEDPE is to use the minimum of
       of the two mapping qualities for the pair.
+      - When -ed is used the total edit distance
       from the two mates is reported as the score.
     inputBinding:
       position: 1
@@ -87,6 +86,7 @@ inputs:
     description: |
       Require same strandedness when finding overlaps.
       Default is to ignore stand.
+      Not applicable with -type inspan or -type outspan.
     inputBinding:
       position: 1
       prefix: '-s'
@@ -97,6 +97,7 @@ inputs:
     description: |
       Require different strandedness when finding overlaps.
       Default is to ignore stand.
+      Not applicable with -type inspan or -type outspan.
     inputBinding:
       position: 1
       prefix: '-S'
@@ -105,7 +106,7 @@ inputs:
       - 'null'
       - boolean
     description: |
-      Approach to reporting overlaps between BEDPE and BED.
+      	Approach to reporting overlaps between BEDPE and BED.
       either	Report overlaps if either end of A overlaps B.
       - Default.
       neither	Report A if neither end of A overlaps B.
@@ -139,7 +140,6 @@ baseCommand:
   - bedtools
   - pairtobed
 description: |
-
   Tool:    bedtools pairtobed (aka pairToBed)
   Version: v2.25.0
   Summary: Report overlaps between a BEDPE file and a BED/GFF/VCF file.
@@ -197,5 +197,4 @@ description: |
   				- Note: If chrom1 <> chrom2, entry is ignored.
 
   Refer to the BEDTools manual for BEDPE format.
-
 

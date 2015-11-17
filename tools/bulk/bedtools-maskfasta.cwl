@@ -12,27 +12,6 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#bed'
-    type: File
-    description: |
-      <bed/gff/vcf>
-    inputBinding:
-      position: 4
-      prefix: '-bed'
-  - id: '#fo'
-    type: boolean
-    description: |
-      <fasta>
-    inputBinding:
-      position: 3
-      prefix: '-fo'
-  - id: '#fi'
-    type: boolean
-    description: |
-      <fasta>
-    inputBinding:
-      position: 2
-      prefix: '-fi'
   - id: '#fi'
     type:
       - 'null'
@@ -94,7 +73,6 @@ baseCommand:
   - bedtools
   - maskfasta
 description: |
-
   Tool:    bedtools maskfasta (aka maskFastaFromBed)
   Version: v2.25.0
   Summary: Mask a fasta file based on feature coordinates.
@@ -109,5 +87,4 @@ description: |
   		mask with lower-case bases.
   	-mc	Replace masking character.  That is, instead of masking
   		with Ns, use another character.
-
 

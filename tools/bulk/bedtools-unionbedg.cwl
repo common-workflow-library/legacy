@@ -12,13 +12,32 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
+  - id: '#FILEn'
+    type: boolean
+    description: FILEn
+    inputBinding:
+      position: 5
+  - id: '#'
+    type: boolean
+    description: ..
+    inputBinding:
+      position: 4
+  - id: '#FILE2'
+    type: File
+    description: FILE2
+    inputBinding:
+      position: 3
+  - id: '#i'
+    type: File
+    description: FILE1
+    inputBinding:
+      position: 2
+      prefix: '-i'
   - id: '#header'
     type:
       - 'null'
       - boolean
-    description: |
-      Print a header line.
-      (chrom/start/end + names of each file).
+    description: "\tPrint a header line.\n(chrom/start/end + names of each file).\n"
     inputBinding:
       position: 1
       prefix: '-header'
@@ -26,9 +45,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      A list of names (one/file) to describe each file in -i.
-      These names will be printed in the header line.
+    description: "\tA list of names (one/file) to describe each file in -i.\nThese names will be printed in the header line.\n"
     inputBinding:
       position: 1
       prefix: '-names'
@@ -36,18 +53,16 @@ inputs:
     type:
       - 'null'
       - string
-    description: |
-      Use genome file to calculate empty regions.
-      - STRING.
+    description: "\tUse genome file to calculate empty regions.\n- STRING.\n"
     inputBinding:
       position: 1
       prefix: '-g'
   - id: '#empty'
     type:
       - 'null'
-      - boolean
+      - File
     description: |
-      Report empty regions (i.e., start/end intervals w/o
+      	Report empty regions (i.e., start/end intervals w/o
       values in all files).
       - Requires the '-g FILE' parameter.
     inputBinding:
@@ -61,6 +76,15 @@ inputs:
     inputBinding:
       position: 1
       prefix: '-filler'
+  - id: '#examples'
+    type:
+      - 'null'
+      - boolean
+    description: |
+      Show detailed usage examples.
+    inputBinding:
+      position: 1
+      prefix: '-examples'
 outputs:
   - id: '#stdoutfile'
     type: File
@@ -75,7 +99,6 @@ baseCommand:
   - bedtools
   - unionbedg
 description: |
-
   Tool:    bedtools unionbedg (aka unionBedGraphs)
   Version: v2.25.0
   Summary: Combines multiple BedGraph files into a single file,
@@ -103,5 +126,4 @@ description: |
   			- Default is '0', but you can use 'N/A' or any text.
 
   	-examples	Show detailed usage examples.
-
 
