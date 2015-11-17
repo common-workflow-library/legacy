@@ -16,6 +16,15 @@ inputs:
   - id: "#scale"
     type: float
 
+  - id: "#pairchip"
+    type: ["null",boolean]
+
+  - id: "#fragmentsize"
+    type: ["null",int]
+
+  - id: "#strand"
+    type: ["null",string]
+
   - id: "#bigWig"
     type: string
 
@@ -33,7 +42,10 @@ steps:
       - {id: "#genomecov.genomecoverageout", default: "genomecov.bed" }
       - {id: "#genomecov.dept", default: '-bg' }
       - {id: "#genomecov.split", default: true }
+      - {id: "#genomecov.pairchip", source: "#pairchip" }
+      - {id: "#genomecov.fragmentsize", source: "#fragmentsize" }
       - {id: "#genomecov.scale", source: "#scale" }
+      - {id: "#genomecov.strand", source: "#strand" }
     outputs:
       - {id: "#genomecov.genomecoverage"}
 
