@@ -14,15 +14,13 @@ inputs:
     type: string
   - id: '#b'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 3
       prefix: '-b'
   - id: '#a'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-a'
@@ -33,6 +31,7 @@ inputs:
     description: |
       Remove entire feature if any overlap.  That is, by default,
       only subtract the portion of A that overlaps B. Here, if
+      any overlap is found (or -f amount), the entire feature is removed.
     inputBinding:
       position: 1
       prefix: '-A'
@@ -52,6 +51,7 @@ inputs:
       - boolean
     description: |
       Write the original entry in B for each overlap.
+      - Useful for knowing _what_ A overlaps. Restricted by -f and -r.
     inputBinding:
       position: 1
       prefix: '-wb'
@@ -62,6 +62,7 @@ inputs:
     description: |
       Write the original A and B entries plus the number of base
       pairs of overlap between the two features.
+      - Overlaps restricted by -f and -r.
       Only A features with overlap are reported.
     inputBinding:
       position: 1
@@ -116,6 +117,7 @@ inputs:
       - boolean
     description: |
       Require that the fraction overlap be reciprocal for A AND B.
+      - In other words, if -f is 0.90 and -r is used, this requires
       that B overlap 90% of A and A _also_ overlaps 90% of B.
     inputBinding:
       position: 1
@@ -126,7 +128,9 @@ inputs:
       - boolean
     description: |
       Require that the minimum fraction be satisfied for A OR B.
+      - In other words, if -e is used with -f 0.90 and -F 0.10 this requires
       that either 90% of A is covered OR 10% of  B is covered.
+      Without -e, both fractions would have to be satisfied.
     inputBinding:
       position: 1
       prefix: '-e'
@@ -145,6 +149,7 @@ inputs:
       - boolean
     description: |
       Provide a genome file to enforce consistent chromosome sort order
+      across input files. Only applies when used with -sorted option.
     inputBinding:
       position: 1
       prefix: '-g'
@@ -226,7 +231,6 @@ baseCommand:
   - bedtools
   - subtract
 description: |
-
   Tool:    bedtools subtract (aka subtractBed)
   Version: v2.25.0
   Summary: Removes the portion(s) of an interval that is overlapped
@@ -299,5 +303,4 @@ description: |
   	-iobuf	Specify amount of memory to use for input buffer.
   		Takes an integer argument. Optional suffixes K/M/G supported.
   		Note: currently has no effect with compressed files.
-
 

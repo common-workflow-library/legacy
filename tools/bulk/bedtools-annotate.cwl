@@ -12,10 +12,20 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
+  - id: '#FILE2FILEn'
+    type: File
+    description: FILE2..FILEn
+    inputBinding:
+      position: 4
+  - id: '#files'
+    type: File
+    description: FILE1
+    inputBinding:
+      position: 3
+      prefix: '-files'
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -35,6 +45,7 @@ inputs:
       - boolean
     description: |
       Report the count of features in each file that overlap -i.
+      - Default is to report the fraction of -i covered by each file.
     inputBinding:
       position: 1
       prefix: '-counts'
@@ -44,6 +55,7 @@ inputs:
       - boolean
     description: |
       Report the counts followed by the % coverage.
+      - Default is to report the fraction of -i covered by each file.
     inputBinding:
       position: 1
       prefix: '-both'
@@ -83,7 +95,6 @@ baseCommand:
   - bedtools
   - annotate
 description: |
-
   Tool:    bedtools annotate (aka annotateBed)
   Version: v2.25.0
   Summary: Annotates the depth & breadth of coverage of features from mult. files
@@ -108,5 +119,4 @@ description: |
   	-S	Require different strandedness.  That is, only count overlaps
   		on the _opposite_ strand.
   		- By default, overlaps are counted without respect to strand.
-
 

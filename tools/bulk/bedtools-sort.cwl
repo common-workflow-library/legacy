@@ -14,8 +14,7 @@ inputs:
     type: string
   - id: '#i'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: '<bed/gff/vcf>'
     inputBinding:
       position: 2
       prefix: '-i'
@@ -23,8 +22,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Sort by feature size in ascending order.
+    description: "\t\tSort by feature size in ascending order.\n"
     inputBinding:
       position: 1
       prefix: '-sizeA'
@@ -32,8 +30,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Sort by feature size in descending order.
+    description: "\t\tSort by feature size in descending order.\n"
     inputBinding:
       position: 1
       prefix: '-sizeD'
@@ -41,8 +38,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Sort by chrom (asc), then feature size (asc).
+    description: "\tSort by chrom (asc), then feature size (asc).\n"
     inputBinding:
       position: 1
       prefix: '-chrThenSizeA'
@@ -50,8 +46,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Sort by chrom (asc), then feature size (desc).
+    description: "\tSort by chrom (asc), then feature size (desc).\n"
     inputBinding:
       position: 1
       prefix: '-chrThenSizeD'
@@ -59,8 +54,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Sort by chrom (asc), then score (asc).
+    description: "\tSort by chrom (asc), then score (asc).\n"
     inputBinding:
       position: 1
       prefix: '-chrThenScoreA'
@@ -68,8 +62,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Sort by chrom (asc), then score (desc).
+    description: "\tSort by chrom (asc), then score (desc).\n"
     inputBinding:
       position: 1
       prefix: '-chrThenScoreD'
@@ -104,7 +97,6 @@ baseCommand:
   - bedtools
   - sort
 description: |
-
   Tool:    bedtools sort (aka sortBed)
   Version: v2.25.0
   Summary: Sorts a feature file in various and useful ways.
@@ -120,5 +112,4 @@ description: |
   	-chrThenScoreD		Sort by chrom (asc), then score (desc).
   	-faidx (names.txt)	Sort according to the chromosomes declared in "names.txt"
   	-header	Print the header from the A file prior to results.
-
 

@@ -12,13 +12,83 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#i'
-    type: File
-    description: |
-      <bed>
+  - id: '#s'
+    type: boolean
+    description: ''
     inputBinding:
-      position: 2
+      position: 1
+      prefix: '-s'
+  - id: '#e'
+    type: boolean
+    description: ''
+    inputBinding:
+      position: 1
+      prefix: '-e'
+  - id: '#l'
+    type: boolean
+    description: ''
+    inputBinding:
+      position: 1
+      prefix: '-l'
+  - id: '#f'
+    type: boolean
+    description: ''
+    inputBinding:
+      position: 1
+      prefix: '-f'
+  - id: '#i'
+    type:
+      - 'null'
+      - File
+    description: "--input (file)\tBED input file (req'd).\n"
+    inputBinding:
+      position: 1
       prefix: '-i'
+  - id: '#n'
+    type:
+      - 'null'
+      - int
+    description: "--number (int)\tNumber of files to create (req'd).\n"
+    inputBinding:
+      position: 1
+      prefix: '-n'
+  - id: '#p'
+    type:
+      - 'null'
+      - string
+    description: "--prefix (string)\tOutput BED file prefix.\n"
+    inputBinding:
+      position: 1
+      prefix: '-p'
+  - id: '#a'
+    type:
+      - 'null'
+      - string
+    description: |
+      --algorithm (string) Algorithm used to split data.
+      * size (default): uses a heuristic algorithm to group the items
+      so all files contain the ~ same number of bases
+      * simple : route records such that each split file has
+      approximately equal records (like Unix split).
+    inputBinding:
+      position: 1
+      prefix: '-a'
+  - id: '#h'
+    type:
+      - 'null'
+      - boolean
+    description: "--help\t\tPrint help (this screen).\n"
+    inputBinding:
+      position: 1
+      prefix: '-h'
+  - id: '#v'
+    type:
+      - 'null'
+      - boolean
+    description: "--version\t\tPrint version.\nNote: This programs stores the input BED records in memory.\n"
+    inputBinding:
+      position: 1
+      prefix: '-v'
 outputs:
   - id: '#stdoutfile'
     type: File
@@ -33,6 +103,8 @@ baseCommand:
   - bedtools
   - split
 description: |
+  Error: num_chunks==0.
+
 
   Tool:    bedtools split
   Version: v2.25.0
@@ -55,5 +127,4 @@ description: |
 
 
   Note: This programs stores the input BED records in memory.
-
 

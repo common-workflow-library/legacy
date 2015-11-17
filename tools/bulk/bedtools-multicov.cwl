@@ -12,13 +12,21 @@ requirements:
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#bed'
+  - id: '#alnnbam'
     type: File
-    description: |
-      <bed/gff/vcf>
+    description: aln.n.bam
     inputBinding:
-      position: 2
-      prefix: '-bed'
+      position: 5
+  - id: '#'
+    type: boolean
+    description: ...
+    inputBinding:
+      position: 4
+  - id: '#aln2bam'
+    type: File
+    description: aln.2.bam
+    inputBinding:
+      position: 3
   - id: '#bams'
     type:
       - 'null'
@@ -85,6 +93,7 @@ inputs:
       - boolean
     description: |
       Require that the fraction overlap be reciprocal for each A and B.
+      - In other words, if -f is 0.90 and -r is used, this requires
       that B overlap 90% of A and A _also_ overlaps 90% of B.
     inputBinding:
       position: 1
@@ -122,6 +131,7 @@ inputs:
       - boolean
     description: |
       Only count proper pairs.  Default counts all alignments with
+      MAPQ > -q argument, regardless of the BAM FLAG field.
     inputBinding:
       position: 1
       prefix: '-p'
@@ -139,7 +149,6 @@ baseCommand:
   - bedtools
   - multicov
 description: |
-
   Tool:    bedtools multicov (aka multiBamCov)
   Version: v2.25.0
   Summary: Counts sequence coverage for multiple bams at specific loci.
@@ -177,5 +186,4 @@ description: |
 
   	-p	Only count proper pairs.  Default counts all alignments with
   		MAPQ > -q argument, regardless of the BAM FLAG field.
-
 
