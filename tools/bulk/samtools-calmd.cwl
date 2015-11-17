@@ -35,8 +35,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      uncompressed BAM output (for piping)
+    description: "      uncompressed BAM output (for piping)\n"
     inputBinding:
       position: 1
       prefix: '-u'
@@ -44,8 +43,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      compressed BAM output
+    description: "      compressed BAM output\n"
     inputBinding:
       position: 1
       prefix: '-b'
@@ -53,8 +51,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      the input is SAM with header
+    description: "      the input is SAM with header\n"
     inputBinding:
       position: 1
       prefix: '-S'
@@ -62,8 +59,7 @@ inputs:
     type:
       - 'null'
       - string
-    description: |
-      modify the quality string
+    description: "      modify the quality string\n"
     inputBinding:
       position: 1
       prefix: '-A'
@@ -71,8 +67,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      compute the BQ tag (without -A) or cap baseQ by BAQ (with -A)
+    description: "      compute the BQ tag (without -A) or cap baseQ by BAQ (with -A)\n"
     inputBinding:
       position: 1
       prefix: '-r'
@@ -80,8 +75,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      extended BAQ for better sensitivity but lower specificity
+    description: "      extended BAQ for better sensitivity but lower specificity\n"
     inputBinding:
       position: 1
       prefix: '-E'

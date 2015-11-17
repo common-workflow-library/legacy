@@ -8,43 +8,30 @@ class: CommandLineTool
 requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
-  - import: samtools-docker.cwl
+  - import: bwa-docker.cwl
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#[]'
+  - id: '#[outprefix]'
+    type:
+      - 'null'
+      - File
+    description: '[<out.prefix>]'
+    inputBinding:
+      position: 4
+  - id: '#infasta'
+    type: File
+    description: '<in.fasta>'
+    inputBinding:
+      position: 3
+  - id: '#f'
     type:
       - 'null'
       - boolean
-    description: '[...]'
+    description: ''
     inputBinding:
-      position: 6
-  - id: '#in2bam'
-    type: File
-    description: '<in2.bam>'
-    inputBinding:
-      position: 5
-  - id: '#in1bam'
-    type: File
-    description: '<in1.bam>'
-    inputBinding:
-      position: 4
-  - id: '#o'
-    type:
-      - 'null'
-      - File
-    description: out.bam
-    inputBinding:
-      position: 3
-      prefix: '-o'
-  - id: '#h'
-    type:
-      - 'null'
-      - File
-    description: header.sam
-    inputBinding:
-      position: 2
-      prefix: '-h'
+      position: 1
+      prefix: '-f'
 outputs:
   - id: '#stdoutfile'
     type: File
@@ -56,7 +43,7 @@ stdout:
   engine: 'cwl:JsonPointer'
   script: /job/stdoutfile
 baseCommand:
-  - samtools
-  - cat
-description: 'Usage: samtools cat [-h header.sam] [-o out.bam] <in1.bam> <in2.bam> [...]'
+  - bwa
+  - fa2pac
+description: 'Usage: bwa fa2pac [-f] <in.fasta> [<out.prefix>]'
 
