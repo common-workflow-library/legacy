@@ -49,7 +49,7 @@ inputs:
       - 'null'
       - string
     description: |
-      verbose output
+                   verbose output
       Format string expansions:
       %%     %
       %*     basename

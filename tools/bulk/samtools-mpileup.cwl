@@ -67,6 +67,15 @@ inputs:
     inputBinding:
       position: 1
       prefix: '-C'
+  - id: '#d'
+    type:
+      - 'null'
+      - int
+    description: >
+      --max-depth INT     max per-BAM depth; avoids excessive memory usage [250]
+    inputBinding:
+      position: 1
+      prefix: '-d'
   - id: '#E'
     type:
       - 'null'

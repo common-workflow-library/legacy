@@ -46,8 +46,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Sort by read name
+    description: "        Sort by read name\n"
     inputBinding:
       position: 1
       prefix: '-n'
@@ -76,6 +75,7 @@ inputs:
     description: |
       PREFIX  Write temporary files to PREFIX.nnnn.bam       -T is required)
       -@ INT     Set number of sorting and compression threads [1]
+      Legacy usage: samtools sort [options...] <in.bam> <out.prefix>
     inputBinding:
       position: 1
       prefix: '-T'
@@ -83,8 +83,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Use <out.prefix> as full final filename rather than prefix
+    description: "        Use <out.prefix> as full final filename rather than prefix\n"
     inputBinding:
       position: 1
       prefix: '-f'
@@ -92,9 +91,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      Write final output to stdout rather than <out.prefix>.bam
-      -l,m,n,@   Similar to corresponding options above
+    description: "        Write final output to stdout rather than <out.prefix>.bam\n-l,m,n,@   Similar to corresponding options above\n"
     inputBinding:
       position: 1
       prefix: '-o'

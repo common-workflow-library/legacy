@@ -8,63 +8,65 @@ class: CommandLineTool
 requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
-  - import: samtools-docker.cwl
+  - import: bwa-docker.cwl
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#outprefix'
+  - id: '#infq'
     type: File
-    description: '<out.prefix>'
+    description: '<in.fq>'
     inputBinding:
-      position: 6
-  - id: '#inbam'
-    type: File
-    description: '<in.bam>'
+      position: 3
+  - id: '#idxbase'
+    type: boolean
+    description: '<idxbase>'
     inputBinding:
-      position: 5
-  - id: '#c'
-    type:
-      - 'null'
-      - boolean
-    description: cLevel
-    inputBinding:
-      position: 4
-      prefix: '-c'
-  - id: '#O'
-    type:
-      - 'null'
-      - boolean
-    description: |
-      output to stdout
-    inputBinding:
-      position: 1
-      prefix: '-O'
-  - id: '#u'
-    type:
-      - 'null'
-      - boolean
-    description: "     uncompressed BAM output\n"
-    inputBinding:
-      position: 1
-      prefix: '-u'
+      position: 2
   - id: '#l'
     type:
       - 'null'
       - int
     description: |
-      INT  compression level [1]
+      INT    min SMEM length to output [17]
     inputBinding:
       position: 1
       prefix: '-l'
-  - id: '#n'
+  - id: '#w'
     type:
       - 'null'
       - int
     description: |
-      INT  number of temporary files [64]
+      INT    max interval size to find coordiantes [20]
     inputBinding:
       position: 1
-      prefix: '-n'
+      prefix: '-w'
+  - id: '#i'
+    type:
+      - 'null'
+      - int
+    description: |
+      INT    min SMEM interval size [1]
+    inputBinding:
+      position: 1
+      prefix: '-i'
+  - id: '#l'
+    type:
+      - 'null'
+      - int
+    description: |
+      INT    max MEM length [2147483647]
+    inputBinding:
+      position: 1
+      prefix: '-l'
+  - id: '#I'
+    type:
+      - 'null'
+      - int
+    description: |
+      INT    stop if MEM is longer than -l with a size less than INT [0]
+    inputBinding:
+      position: 1
+      prefix: '-I'
 outputs:
   - id: '#stdoutfile'
     type: File
@@ -76,13 +78,14 @@ stdout:
   engine: 'cwl:JsonPointer'
   script: /job/stdoutfile
 baseCommand:
-  - samtools
-  - bamshuf
+  - bwa
+  - fastmap
 description: |-
-  Usage:   samtools bamshuf [-Ou] [-n nFiles] [-c cLevel] <in.bam> <out.prefix>
+  Usage:   bwa fastmap [options] <idxbase> <in.fq>
 
-  Options: -O      output to stdout
-           -u      uncompressed BAM output
-           -l INT  compression level [1]
-           -n INT  number of temporary files [64]
+  Options: -l INT    min SMEM length to output [17]
+           -w INT    max interval size to find coordiantes [20]
+           -i INT    min SMEM interval size [1]
+           -l INT    max MEM length [2147483647]
+           -I INT    stop if MEM is longer than -l with a size less than INT [0]
 

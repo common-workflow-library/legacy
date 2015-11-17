@@ -8,43 +8,25 @@ class: CommandLineTool
 requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
-  - import: samtools-docker.cwl
+  - import: bwa-docker.cwl
 inputs:
   - id: '#stdoutfile'
     type: string
-  - id: '#[]'
-    type:
-      - 'null'
-      - boolean
-    description: '[...]'
-    inputBinding:
-      position: 6
-  - id: '#in2bam'
+  - id: '#outbwt'
     type: File
-    description: '<in2.bam>'
-    inputBinding:
-      position: 5
-  - id: '#in1bam'
-    type: File
-    description: '<in1.bam>'
+    description: '<out.bwt>'
     inputBinding:
       position: 4
-  - id: '#o'
-    type:
-      - 'null'
-      - File
-    description: out.bam
+  - id: '#inpac'
+    type: File
+    description: '<in.pac>'
     inputBinding:
       position: 3
-      prefix: '-o'
-  - id: '#h'
-    type:
-      - 'null'
-      - File
-    description: header.sam
+  - id: '#bwtgen'
+    type: boolean
+    description: bwtgen
     inputBinding:
       position: 2
-      prefix: '-h'
 outputs:
   - id: '#stdoutfile'
     type: File
@@ -56,7 +38,7 @@ stdout:
   engine: 'cwl:JsonPointer'
   script: /job/stdoutfile
 baseCommand:
-  - samtools
-  - cat
-description: 'Usage: samtools cat [-h header.sam] [-o out.bam] <in1.bam> <in2.bam> [...]'
+  - bwa
+  - pac2bwtgen
+description: 'Usage: bwtgen <in.pac> <out.bwt>'
 
