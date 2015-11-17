@@ -18,40 +18,52 @@ inputs:
     inputBinding:
       position: 8
   - id: '#f'
-    type: boolean
-    description: ''
+    type:
+      - 'null'
+      - boolean
+    description: ref
     inputBinding:
-      position: 1
+      position: 7
       prefix: '-f'
   - id: '#2'
-    type: boolean
-    description: ''
+    type:
+      - 'null'
+      - boolean
+    description: em2
     inputBinding:
-      position: 1
+      position: 6
       prefix: '-2'
   - id: '#1'
-    type: boolean
-    description: ''
+    type:
+      - 'null'
+      - boolean
+    description: em1
     inputBinding:
-      position: 1
+      position: 5
       prefix: '-1'
   - id: '#0'
-    type: boolean
-    description: ''
+    type:
+      - 'null'
+      - boolean
+    description: em0
     inputBinding:
-      position: 1
+      position: 4
       prefix: '-0'
   - id: '#i'
-    type: boolean
-    description: ''
+    type:
+      - 'null'
+      - boolean
+    description: inPen
     inputBinding:
-      position: 1
+      position: 3
       prefix: '-i'
   - id: '#Q'
-    type: boolean
-    description: ''
+    type:
+      - 'null'
+      - boolean
+    description: minQ
     inputBinding:
-      position: 1
+      position: 2
       prefix: '-Q'
 outputs:
   - id: '#stdoutfile'

@@ -30,16 +30,20 @@ inputs:
     inputBinding:
       position: 4
   - id: '#o'
-    type: boolean
-    description: ''
+    type:
+      - 'null'
+      - File
+    description: out.bam
     inputBinding:
-      position: 1
+      position: 3
       prefix: '-o'
   - id: '#h'
-    type: boolean
-    description: ''
+    type:
+      - 'null'
+      - File
+    description: header.sam
     inputBinding:
-      position: 1
+      position: 2
       prefix: '-h'
 outputs:
   - id: '#stdoutfile'

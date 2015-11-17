@@ -30,8 +30,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      output CRAM (requires -T)
+    description: "      output CRAM (requires -T)\n"
     inputBinding:
       position: 1
       prefix: '-C'
@@ -39,8 +38,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      use fast BAM compression (implies -b)
+    description: "      use fast BAM compression (implies -b)\n"
     inputBinding:
       position: 1
       prefix: '-1'
@@ -48,8 +46,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      uncompressed BAM output (implies -b)
+    description: "      uncompressed BAM output (implies -b)\n"
     inputBinding:
       position: 1
       prefix: '-u'
@@ -57,8 +54,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      include header in SAM output
+    description: "      include header in SAM output\n"
     inputBinding:
       position: 1
       prefix: '-h'
@@ -66,8 +62,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      print SAM header only (no alignments)
+    description: "      print SAM header only (no alignments)\n"
     inputBinding:
       position: 1
       prefix: '-H'
@@ -75,8 +70,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      print only the count of matching records
+    description: "      print only the count of matching records\n"
     inputBinding:
       position: 1
       prefix: '-c'
@@ -203,8 +197,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      collapse the backward CIGAR operation
+    description: "      collapse the backward CIGAR operation\n"
     inputBinding:
       position: 1
       prefix: '-B'
@@ -224,8 +217,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      ignored (input format is auto-detected)
+    description: "      ignored (input format is auto-detected)\n"
     inputBinding:
       position: 1
       prefix: '-S'

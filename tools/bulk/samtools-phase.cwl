@@ -66,8 +66,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      do not attempt to fix chimeras
+    description: "       do not attempt to fix chimeras\n"
     inputBinding:
       position: 1
       prefix: '-F'
@@ -75,8 +74,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: |
-      drop reads with ambiguous phase
+    description: "       drop reads with ambiguous phase\n"
     inputBinding:
       position: 1
       prefix: '-A'
