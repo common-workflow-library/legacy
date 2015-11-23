@@ -1,0 +1,16 @@
+{ 
+
+     "inputBam_realign": {
+        "class": "File",
+        "path": "markDups.bam"
+    },
+    "reference": {
+        "class": "File",
+        "path": "hg19.fa",
+    },  
+    "jar_file": {
+        "class": "File",
+        "path": "GenomeAnalysisTK-2.8.jar",
+    },
+    "outputfile_realignTarget": "realignTargetCreator_output.intervals" 
+}
