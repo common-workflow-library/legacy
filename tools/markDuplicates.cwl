@@ -69,15 +69,13 @@ inputs:
       prefix: "METRICS_FILE="
 
   - id: "#readSorted"
-    type: string
-    default: 'null'
+    type: ["null", string]
     inputBinding:
       position: 8
       prefix: "ASSUME_SORTED="
 
   - id: "#removeDuplicates"
-    type: string
-    default: 'null'
+    type: ["null", string]
     inputBinding:
       position: 6
       prefix: "REMOVE_DUPLICATES="
@@ -97,22 +95,19 @@ inputs:
       prefix: "SORTING_COLLECTION_SIZE_RATIO="
       
   - id: "#barcodeTag"
-    type: string
-    default: 'null'
+    type: ["null", string]
     inputBinding:
       position: 11
       prefix: "BARCODE_TAG="
       
   - id: "#readOneBarcodeTag"
-    type: string
-    default: 'null'
+    type: ["null", string]
     inputBinding:
       position: 12
       prefix: "READ_ONE_BARCODE_TAG="
       
   - id: "#readTwoBarcodeTag"
-    type: string
-    default: 'null'
+    type: ["null", string]
     inputBinding:
       position: 13
       prefix: "READ_TWO_BARCODE_TAG="
@@ -125,15 +120,13 @@ inputs:
       prefix: "PROGRAM_RECORD_ID="
       
   - id: "#groupVersion"
-    type: string
-    default: 'null'
+    type: ["null", string]
     inputBinding:
       position: 15
       prefix: "PROGRAM_GROUP_VERSION="
       
   - id: "#groupCommandLine"
-    type: string
-    default: 'null'
+    type: ["null", string]
     inputBinding:
       position: 16
       prefix: "PROGRAM_GROUP_COMMAND_LINE="
@@ -146,8 +139,7 @@ inputs:
       prefix: "PROGRAM_GROUP_NAME="
       
   - id: "#comment"
-    type: string
-    default: 'null'
+    type: ["null", string]
     inputBinding:
       position: 18
       prefix: "COMMENT="
