@@ -8,19 +8,20 @@
 
 class: CommandLineTool
 
-description: This is a tool wrapper for GATK tool called realignerTargetCreator. It accepts 3 input files and produces a file containing list of target intervals to pass to the IndelRealigner.
-Usage: java -jar GenomeAnalysisTK.jar -T RealignerTargetCreator -R reference.fasta -I inout.bam --known indels.vcf -o forIndelRealigner.intervals 
-Options: -T tool Tool name to be executed
-         -R File Reference sequence in fasta format
-         -I File  bam file produced from sam to bam conversion step
-         --known File set of known indels   
+description: |
+  This is a tool wrapper for GATK tool called realignerTargetCreator. It accepts 3 input files and produces a file containing list of target intervals to pass to the IndelRealigner.
+  Usage: java -jar GenomeAnalysisTK.jar -T RealignerTargetCreator -R reference.fasta -I inout.bam --known indels.vcf -o forIndelRealigner.intervals 
+  Options: 
+    -T tool Tool name to be executed
+    -R File Reference sequence in fasta format
+    -I File  bam file produced from sam to bam conversion step
+    --known File set of known indels   
     
 requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
 
 inputs:
-
   - id: "#java_arg"
     type: string
     default: "-Xmx4g"
@@ -31,7 +32,6 @@ inputs:
     type: File
     inputBinding: { position: 2, prefix: "-jar" }
     description: GATK jar file
-
      
   - id: "#RealignerTarget"
     type: string
@@ -60,7 +60,6 @@ inputs:
     inputBinding:
       position: 5 
       prefix: "-I"
-    
     
   - id: "#dbSNP"
     type: string
