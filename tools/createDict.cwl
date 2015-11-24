@@ -61,8 +61,11 @@ inputs:
       prefix: "OUTPUT="
       
 outputs:
-  - id: "#createDict_output"
+  - id: "#markDups_output"
     type: File
-    outputBinding: {glob: "referenceDict.sam"}
+    outputBinding: 
+      glob:
+        engine: cwl:JsonPointer
+        script: /job/outputFileName
       
 baseCommand: ["java"]
