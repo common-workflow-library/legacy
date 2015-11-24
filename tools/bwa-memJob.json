@@ -1,0 +1,30 @@
+{
+    "threads": {
+        "class": "int",
+        "value": 4,
+    },
+    "seedlength": {
+        "class": "int",
+        "value": 19,
+    }, 
+	"readGroupHeader": {
+        "class": "string",
+        "value": "@RG\\tID:${sample}_${lane}\\tPL:$PLATFORM\\tPU:1\\tLB:${sample_info[sample].library}\\tSM:${sample}",
+    },  
+    "reference": {
+        "class": "File",
+        "path": "./test-files/reference.fa",
+    },   
+    "forwardReadFile": {
+        "class": "File",
+        "path": "./test-files/input1.fq",
+    },  
+     "reverseReadFile": {
+        "class": "File",
+        "path": "./test-files/input2.fq",
+    },     
+    "allocatedResources": {
+        "cpu": 2,
+        "mem": 1000
+    },
+}
