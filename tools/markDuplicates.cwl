@@ -160,7 +160,10 @@ inputs:
       
 outputs:
   - id: "#markDups_output"
-    type: "File"
-    outputBinding: { "glob": "markDups.bam" }
+    type: File
+    outputBinding: 
+      glob:
+        engine: cwl:JsonPointer
+        script: /job/outputFileName_markDups
     
 baseCommand: ["java"]
