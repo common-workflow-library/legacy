@@ -138,7 +138,7 @@ inputs:
       position: 16
       prefix: "PROGRAM_GROUP_COMMAND_LINE="
       
-  - id: "#groupName"
+  - id: "#groupCommandName"
     type: string
     default: 'MarkDuplicates'
     inputBinding:
