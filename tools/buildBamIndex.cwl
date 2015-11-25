@@ -47,8 +47,11 @@ inputs:
       prefix: "INPUT="
       
 outputs:
-  - id: "#BuildBamIndex_output"
+  - id: "#markDups_output"
     type: File
-    outputBinding: {glob: "markDups.bam.bai"}
+    outputBinding: 
+      glob:
+        engine: cwl:JsonPointer
+        script: /job/outputFileName_BuildBamIndex
       
 baseCommand: ["java"]
