@@ -55,11 +55,13 @@ inputs:
     inputBinding:
       position: 6
       prefix: "INPUT="
-      
-      
+
 outputs:
   - id: "#mergeSam_output"
     type: File
-    outputBinding: {glob: "mergedSam.sam"}
+    outputBinding: 
+      glob:
+        engine: cwl:JsonPointer
+        script: /job/outputFileName_mergedSam
       
 baseCommand: ["java"]
