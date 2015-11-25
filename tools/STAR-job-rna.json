@@ -1,0 +1,6 @@
+{
+  "readFilesIn": [{"class": "File", "path": "./test-files/SRR1031972.s.fastq"}],
+  "genomeDir": {"class": "File", "path": "./dm3/"},
+  "outFileNamePrefix":"SRR1031972.",
+  "runThreadN": 4
+}
