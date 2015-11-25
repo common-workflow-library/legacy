@@ -56,6 +56,9 @@ inputs:
 outputs:
   - id: "#sortSam_output"
     type: File
-    outputBinding: {glob: "sortedSam.bam"}
+    outputBinding: 
+      glob:
+        engine: cwl:JsonPointer
+        script: /job/outputFileName_sortSam
       
 baseCommand: ["java"]
