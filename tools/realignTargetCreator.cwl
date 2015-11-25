@@ -60,30 +60,13 @@ inputs:
     inputBinding:
       position: 5 
       prefix: "-I"
-    
-  - id: "#dbSNP"
-    type: string
-    default: "dbsnp_138.vcf"
-    description: list of known variant files in vcf format
-    inputBinding:
-      position: 6
-      prefix: "--known"
-
-  - id: "#indelsMills"
-    type: string
-    default: "../data//GATK-complete-workflow/Ref_datasets/Mills_and_1000G_gold_st.vcf"
-    description: list of known variant files in vcf format
-    inputBinding:
-      position: 7
-      prefix: "--known"
-    
-  - id: "#indels1000G"
-    type: string
-    default: "../data//GATK-complete-workflow/Ref_datasets/1000G_phase1.indels.hg19.vcf"
-    description: list of known variant files in vcf format
-    inputBinding:
-      position: 8
-      prefix: "--known"
+      
+  - id: "#known"  
+    type:
+      type: array
+      items: File
+      inputBinding: { prefix: "--known" }
+    inputBinding: { position: 6, prefix: "-known" }
 
   - id: "#outputfile_realignTarget"
     type: string
@@ -93,8 +76,10 @@ inputs:
       prefix: "-o"
         
 outputs:
-  - id: "#realignTargetCreator_output"
-    type: "File"
-    outputBinding: { glob: "realignTargetCreator_output.intervals" }
+    type: File
+    outputBinding: 
+      glob:
+        engine: cwl:JsonPointer
+        script: /job/outputfile_realignTarget
 
 baseCommand: ["java"]
