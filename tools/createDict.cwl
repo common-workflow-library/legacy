@@ -61,7 +61,7 @@ inputs:
       prefix: "OUTPUT="
       
 outputs:
-  - id: "#markDups_output"
+  - id: "#createDict_output"
     type: File
     outputBinding: 
       glob:
