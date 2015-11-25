@@ -66,7 +66,7 @@ inputs:
       type: array
       items: File
       inputBinding: { prefix: "--known" }
-    inputBinding: { position: 6, prefix: "--known" }
+    inputBinding: { position: 6}
 
   - id: "#outputfile_realignTarget"
     type: string
