@@ -66,7 +66,7 @@ inputs:
       type: array
       items: File
       inputBinding: { prefix: "--known" }
-    inputBinding: { position: 6, prefix: "-known" }
+    inputBinding: { position: 6, prefix: "--known" }
 
   - id: "#outputfile_realignTarget"
     type: string
@@ -76,6 +76,7 @@ inputs:
       prefix: "-o"
         
 outputs:
+  - id: "#output_realignTarget"
     type: File
     outputBinding: 
       glob:
