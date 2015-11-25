@@ -1,48 +1,141 @@
 #!/usr/bin/env cwl-runner
-#
-# Auto generated CWL please use with caution
-# Author: Andrey.Kartashov@cchmc.org (http://orcid.org/0000-0001-9102-5681) / Cincinnati Children’s Hospital Medical Center
-# Developed for CWL consortium http://commonwl.org/
+# "@base": "https://w3id.org/cwl/cwl#"
 
+"@context":
+  "foaf": "http://xmlns.com/foaf/0.1/"
+  "doap": "http://usefulinc.com/ns/doap"
+  "adms": "http://purl.org/adms/"
+  "admssw": "http://purl.org/adms/sw/"
+
+adms:Asset:
+  admssw:SoftwareProject:
+    doap:name: "STAR"
+    doap:description: >
+      Aligns RNA-seq reads to a reference genome using uncompressed suffix arrays.
+      STAR has a potential for accurately aligning long (several kilobases) reads that are
+      emerging from the third-generation sequencing technologies.
+    doap:homepage: "https://github.com/alexdobin/STAR"
+    doap:repository:
+      - doap:GitRepository:
+        doap:location: "https://github.com/alexdobin/STAR.git"
+    doap:release:
+      - doap:revision: "2.5.0a"
+    doap:license: "GPL"
+    doap:category: "commandline tool"
+    doap:programming-language: "C++"
+    foaf:Organization:
+      - foaf:name: "Cold Spring Harbor Laboratory, Cold Spring Harbor, NY, USA"
+      - foaf:name: "2Pacific Biosciences, Menlo Park, CA, USA"
+    foaf:publications:
+      - foaf:title: "(Dobin et al., 2013) STAR: ultrafast universal RNA-seq aligner. Bioinformatics."
+        foaf:homepage: "http://www.ncbi.nlm.nih.gov/pubmed/23104886"
+    doap:developer:
+      - foaf:Person:
+        foaf:name: "Alexander Dobin"
+        foaf:mbox: "mailto:dobin at cshl.edu"
+        foaf:fundedBy: "This work was funded by NHGRI (NIH) grant U54HG004557"
+  adms:AssetDistribution:
+    doap:name: "STAR.cwl"
+    doap:description: "Developed for CWL consortium http://commonwl.org/"
+    doap:specification: "http://common-workflow-language.github.io/draft-3/"
+    doap:release: "cwl:draft-3.dev2"
+    doap:homepage: "http://commonwl.org/"
+    doap:location: "https://github.com/common-workflow-language/workflows/blob/master/tools/STAR.cwl"
+    doap:repository:
+      - doap:GitRepository:
+        doap:location: "https://github.com/common-workflow-language/workflows"
+    doap:maintainer:
+      foaf:Person:
+        foaf:openid: "http://orcid.org/0000-0001-9102-5681"
+        foaf:name: "Andrey Kartashov"
+        foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
+        foaf:organization: "Cincinnati Children's Hospital Medical Center"
+
+cwlVersion: "cwl:draft-3.dev2"
 class: CommandLineTool
+
 requirements:
-  - import: node-engine.cwl
-  - import: envvar-global.cwl
+  - "@import": envvar-global.cwl
+  - class: InlineJavascriptRequirement
   - class: DockerRequirement
     dockerPull: scidap/star:v2.5.0a
+
 inputs:
-  - id: '#stdoutfile'
-    type: string
+
+  - id: '#readFilesIn'
+    type:
+      - 'null'
+      - type: array
+        items: File
+    description: |
+      string(s): paths to files that contain input read1 (and, if needed,  read2)
+    inputBinding:
+      position: 1
+      itemSeparator: ' '
+      prefix: '--readFilesIn'
+
+  - id: '#genomeFastaFiles'
+    type:
+      - 'null'
+      - type: array
+        items: File
+    description: |
+      string(s): path(s) to the fasta files with genomic sequences for genome
+      generation, separated by spaces. Only used if runMode==genomeGenerate.
+      These files should be plain text FASTA files, they *cannot* be zipped.
+    inputBinding:
+      position: 1
+      itemSeparator: ' '
+      prefix: '--genomeFastaFiles'
+
+  - id: '#genomeDir'
+    type:
+      - File
+      - string
+    description: |
+      string: path to the directory where genome files are stored (if
+      runMode!=generateGenome) or will be generated (if runMode==generateGenome)
+    inputBinding:
+      position: 1
+      prefix: '--genomeDir'
+
+  - id: '#readFilesCommand'
+    type:
+      - 'null'
+      - string
+    description: |
+      string(s): command line to execute for each of the input file. This command should generate FASTA or FASTQ text and send it to stdout
+      For example: zcat - to uncompress .gz files, bzcat - to uncompress .bz2 files, etc.
+    inputBinding:
+      position: 1
+      prefix: '--readFilesCommand'
 
   - id: '#parametersFiles'
     type:
       - 'null'
       - string
-    description: >
-      -
-
+    description: |
       string: name of a user-defined parameters file, "-": none. Can only be
       defined on the command line.
     inputBinding:
       position: 1
       prefix: '--parametersFiles'
+
   - id: '#sysShell'
     type:
       - 'null'
       - string
     description: |
-      -
       string: path to the shell binary, preferrably bash, e.g. /bin/bash.
       - ... the default shell is executed, typically /bin/sh. This was reported to fail on some Ubuntu systems - then you need to specify path to bash.
     inputBinding:
       position: 1
       prefix: '--sysShell'
+
   - id: '#runMode'
-    type:
-      - 'null'
-      - string
+    type: string
+    default: "alignReads"
     description: |
-      alignReads
       string: type of the run:
       alignReads             ... map reads
       genomeGenerate         ... generate genome files
@@ -50,6 +143,7 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--runMode'
+
   - id: '#runThreadN'
     type:
       - 'null'
@@ -60,6 +154,7 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--runThreadN'
+
   - id: '#runDirPerm'
     type:
       - 'null'
@@ -72,6 +167,7 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--runDirPerm'
+
   - id: '#runRNGseed'
     type:
       - 'null'
@@ -82,18 +178,7 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--runRNGseed'
-  - id: '#genomeDir'
-    type:
-      - 'null'
-      - string
-    description: >
-      ./GenomeDir/
 
-      string: path to the directory where genome files are stored (if
-      runMode!=generateGenome) or will be generated (if runMode==generateGenome)
-    inputBinding:
-      position: 1
-      prefix: '--genomeDir'
   - id: '#genomeLoad'
     type:
       - 'null'
@@ -109,26 +194,12 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--genomeLoad'
-  - id: '#genomeFastaFiles'
-    type:
-      - 'null'
-      - string
-    description: >
-      -
 
-      string(s): path(s) to the fasta files with genomic sequences for genome
-      generation, separated by spaces. Only used if runMode==genomeGenerate.
-      These files should be plain text FASTA files, they *cannot* be zipped.
-    inputBinding:
-      position: 1
-      prefix: '--genomeFastaFiles'
   - id: '#genomeChrBinNbits'
     type:
       - 'null'
       - int
-    description: >
-      18
-
+    description: |
       int: =log2(chrBin), where chrBin is the size of the bins for genome
       storage: each chromosome will occupy an integer number of bins
     inputBinding:
@@ -138,9 +209,7 @@ inputs:
     type:
       - 'null'
       - int
-    description: >
-      14
-
+    description: |
       int: length (bases) of the SA pre-indexing string. Typically between 10 and
       15. Longer strings will use much more memory, but allow faster searches.
     inputBinding:
@@ -150,9 +219,7 @@ inputs:
     type:
       - 'null'
       - int
-    description: >
-      1
-
+    description: |
       int>0: suffux array sparsity, i.e. distance between indices: use bigger
       numbers to decrease needed RAM at the cost of mapping speed reduction
     inputBinding:
@@ -171,23 +238,22 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--sjdbFileChrStartEnd'
+
   - id: '#sjdbGTFfile'
     type:
       - 'null'
-      - string
+      - File
     description: |
-      -
       string: path to the GTF file with annotations
     inputBinding:
       position: 1
       prefix: '--sjdbGTFfile'
+
   - id: '#sjdbGTFchrPrefix'
     type:
       - 'null'
       - string
-    description: >
-      -
-
+    description: |
       string: prefix for chromosome names in a GTF file (e.g. 'chr' for using
       ENSMEBL annotations with UCSC geneomes)
     inputBinding:
@@ -197,9 +263,8 @@ inputs:
     type:
       - 'null'
       - string
-    description: >
+    description: |
       exon
-
       string: feature type in GTF file to be used as exons for building
       transcripts
     inputBinding:
@@ -209,9 +274,8 @@ inputs:
     type:
       - 'null'
       - string
-    description: >
+    description: |
       transcript_id
-
       string: tag name to be used as exons' transcript-parents (default
       "transcript_id" works for GTF files)
     inputBinding:
@@ -263,41 +327,18 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--sjdbInsertSave'
+
   - id: '#inputBAMfile'
     type:
       - 'null'
-      - string
-    description: >
-      -
-
+      - File
+    description: |
       string: path to BAM input file, to be used with --runMode
       inputAlignmentsFromBAM
     inputBinding:
       position: 1
       prefix: '--inputBAMfile'
-  - id: '#readFilesIn'
-    type:
-      - 'null'
-      - string
-    description: >
-      Read1 Read2
 
-      string(s): paths to files that contain input read1 (and, if
-      needed,  read2)
-    inputBinding:
-      position: 1
-      prefix: '--readFilesIn'
-  - id: '#readFilesCommand'
-    type:
-      - 'null'
-      - string
-    description: |
-      -
-      string(s): command line to execute for each of the input file. This command should generate FASTA or FASTQ text and send it to stdout
-      For example: zcat - to uncompress .gz files, bzcat - to uncompress .bz2 files, etc.
-    inputBinding:
-      position: 1
-      prefix: '--readFilesCommand'
   - id: '#readMapNumber'
     type:
       - 'null'
@@ -313,9 +354,7 @@ inputs:
     type:
       - 'null'
       - string
-    description: >
-      NotEqual
-
+    description: |
       string: Equal/NotEqual - lengths of names,sequences,qualities for both
       mates are the same  / not the same. NotEqual is safe in all situations.
     inputBinding:
@@ -325,9 +364,8 @@ inputs:
     type:
       - 'null'
       - string
-    description: >
+    description: |
       /
-
       string(s): character(s) separating the part of the read names that will be
       trimmed in output (read name after space is always trimmed)
     inputBinding:
@@ -337,9 +375,7 @@ inputs:
     type:
       - 'null'
       - int
-    description: >
-      0
-
+    description: |
       int(s): number(s) of bases to clip from 3p of each mate. If one value is
       given, it will be assumed the same for both mates.
     inputBinding:
@@ -349,9 +385,7 @@ inputs:
     type:
       - 'null'
       - int
-    description: >
-      0
-
+    description: |
       int(s): number(s) of bases to clip from 5p of each mate. If one value is
       given, it will be assumed the same for both mates.
     inputBinding:
@@ -361,9 +395,7 @@ inputs:
     type:
       - 'null'
       - string
-    description: >
-      -
-
+    description: |
       string(s): adapter sequences to clip from 3p of each mate.  If one value is
       given, it will be assumed the same for both mates.
     inputBinding:
@@ -372,10 +404,8 @@ inputs:
   - id: '#clip3pAdapterMMp'
     type:
       - 'null'
-      - boolean
-    description: >
-      0.1
-
+      - float
+    description: |
       double(s): max proportion of mismatches for 3p adpater clipping for each
       mate.  If one value is given, it will be assumed the same for both mates.
     inputBinding:
@@ -385,9 +415,7 @@ inputs:
     type:
       - 'null'
       - int
-    description: >
-      0
-
+    description: |
       int(s): number of bases to clip from 3p of each mate after the adapter
       clipping. If one value is given, it will be assumed the same for both
       mates.
@@ -451,9 +479,7 @@ inputs:
     type:
       - 'null'
       - int
-    description: >
-      0
-
+    description: |
       int>=0: maximum available RAM for sorting BAM. If =0, it will be set to the
       genome index size. 0 value can only be used with --genomeLoad
       NoSharedMemory option.
@@ -477,29 +503,27 @@ inputs:
     type:
       - 'null'
       - string
-    description: >
-      ./
-
+    description: |
       string: output files name prefix (including full or relative path). Can
       only be defined on the command line.
     inputBinding:
       position: 1
       prefix: '--outFileNamePrefix'
+
   - id: '#outTmpDir'
     type:
-      - 'null'
+      - "null"
       - string
     description: |
-      -
       string: path to a directory that will be used as temporary by STAR. All contents of this directory will be removed!
       - the temp directory will default to outFileNamePrefix_STARtmp
     inputBinding:
       position: 1
       prefix: '--outTmpDir'
+
   - id: '#outStd'
-    type:
-      - 'null'
-      - string
+    type: string
+    default: "Log"
     description: |
       Log
       string: which output will be directed to stdout (standard out)
@@ -511,6 +535,7 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--outStd'
+
   - id: '#outReadsUnmapped'
     type:
       - 'null'
@@ -527,11 +552,8 @@ inputs:
     type:
       - 'null'
       - int
-    description: >
-      0
-
-      int: add this number to the quality score (e.g. to convert from Illumina to
-      Sanger, use -31)
+    description: |
+      int: add this number to the quality score (e.g. to convert from Illumina to Sanger, use -31)
     inputBinding:
       position: 1
       prefix: '--outQSconversionAdd'
@@ -547,12 +569,13 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--outMultimapperOrder'
+
   - id: '#outSAMtype'
     type:
-      - 'null'
-      - boolean
+      type: array
+      items: string
+    default: ["BAM","SortedByCoordinate"]
     description: |
-      SAM
       strings: type of SAM/BAM output
       1st word:
       BAM  ... output BAM without sorting
@@ -564,12 +587,11 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--outSAMtype'
+
   - id: '#outSAMmode'
-    type:
-      - 'null'
-      - string
+    type: string
+    default: "Full"
     description: |
-      Full
       string: mode of SAM output
       None ... no SAM output
       Full ... full SAM output
@@ -577,6 +599,7 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--outSAMmode'
+
   - id: '#outSAMstrandField'
     type:
       - 'null'
@@ -677,9 +700,7 @@ inputs:
     type:
       - 'null'
       - int
-    description: >
-      0
-
+    description: |
       int: 0 to 65535: sam FLAG will be bitwise OR'd with this value, i.e.
       FLAG=FLAG | outSAMflagOR. This is applied after all flags have been set by
       STAR, and after outSAMflagAND. Can be used to set specific bits that are
@@ -765,42 +786,32 @@ inputs:
 
       int: max number of multiple alignments for a read that will be output to
       the SAM/BAM files.
+      -1 ... all alignments (up to --outFilterMultimapNmax) will be output
     inputBinding:
       position: 1
       prefix: '--outSAMmultNmax'
-  - id: '#1'
-    type:
-      - 'null'
-      - boolean
-    description: |
-      ... all alignments (up to --outFilterMultimapNmax) will be output
-    inputBinding:
-      position: 1
-      prefix: '-1'
-  - id: '#outBAMcompression'
-    type:
-      - 'null'
-      - int
-    description: >
-      1
 
+  - id: '#outBAMcompression'
+    type: int
+    default: 10
+    description: |
       int: -1 to 10  BAM compression level, -1=default compression (6?), 0=no
       compression, 10=maximum compression
     inputBinding:
       position: 1
       prefix: '--outBAMcompression'
+
   - id: '#outBAMsortingThreadN'
     type:
       - 'null'
       - int
-    description: >
-      0
-
+    description: |
       int: >=0: number of threads for BAM sorting. 0 will default to
       min(6,--runThreadN).
     inputBinding:
       position: 1
       prefix: '--outBAMsortingThreadN'
+
   - id: '#bamRemoveDuplicatesType'
     type:
       - 'null'
@@ -813,18 +824,18 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--bamRemoveDuplicatesType'
+
   - id: '#bamRemoveDuplicatesMate2basesN'
     type:
       - 'null'
       - int
-    description: >
-      0
-
+    description: |
       int>0: number of bases from the 5' of mate 2 to use in collapsing (e.g. for
       RAMPAGE)
     inputBinding:
       position: 1
       prefix: '--bamRemoveDuplicatesMate2basesN'
+
   - id: '#outWigType'
     type:
       - 'null'
@@ -858,9 +869,7 @@ inputs:
     type:
       - 'null'
       - string
-    description: >
-      -
-
+    description: |
       string: prefix matching reference names to include in the output wiggle
       file, e.g. "chr", default "-" - include all references
     inputBinding:
@@ -1498,9 +1507,7 @@ inputs:
     type:
       - 'null'
       - int
-    description: >
-      10
-
+    description: |
       int>=0: minimum difference (separation) between the best chimeric score and
       the next one
     inputBinding:
@@ -1561,13 +1568,12 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--quantMode'
+
   - id: '#quantTranscriptomeBAMcompression'
     type:
       - 'null'
       - int
-    description: >
-      1       1
-
+    description: |
       int: -1 to 10  transcriptome BAM compression level, -1=default compression
       (6?), 0=no compression, 10=maximum compression
     inputBinding:
@@ -1601,26 +1607,83 @@ inputs:
     type:
       - 'null'
       - int
-    description: >
-      -1
-
+    description: |
       int: number of reads to process for the 1st step. Use very large number (or
       default -1) to map all reads in the first step.
     inputBinding:
       position: 1
       prefix: '--twopass1readsN'
 outputs:
-  - id: '#stdoutfile'
-    type: File
+  - id: "#indices"
+    type: ["null",File]
     outputBinding:
-      glob:
-        engine: 'cwl:JsonPointer'
-        script: /job/stdoutfile
-stdout:
-  engine: 'cwl:JsonPointer'
-  script: /job/stdoutfile
-baseCommand:
-  - ./STAR
+      glob: |
+          ${
+            if (inputs.runMode == "genomeGenerate")
+              return inputs.genomeDir+"/Genome";
+            return [];
+          }
+      secondaryFiles: |
+         ${
+            if (inputs.runMode != "genomeGenerate")
+              return [];
+
+            var p=inputs.genomeDir;
+            return [
+              {"path": p+"/SA", "class":"File"},
+              {"path": p+"/SAindex", "class":"File"},
+              {"path": p+"/chrNameLength.txt", "class":"File"}
+            ];
+         }
+
+  - id: "#aligned"
+    type: ["null",File]
+    outputBinding:
+      glob: |
+          ${
+            if (inputs.runMode == "genomeGenerate")
+              return [];
+
+            var p = inputs.outFileNamePrefix?inputs.outFileNamePrefix:"";
+            if (inputs.outSAMtype.indexOf("SAM") > -1) {
+                return p+"Aligned.out.sam";
+            } else {
+             if ( inputs.outSAMtype.indexOf("SortedByCoordinate") > -1 )
+                return p+"Aligned.sortedByCoord.out.bam";
+              else
+                return p+"Aligned.out.bam";
+            }
+          }
+      secondaryFiles: |
+         ${
+            var p=inputs.outFileNamePrefix?inputs.outFileNamePrefix:"";
+            return [
+              {"path": p+"Log.final.out", "class":"File"},
+              {"path": p+"SJ.out.tab", "class":"File"},
+              {"path": p+"Log.out", "class":"File"}
+            ];
+         }
+
+  - id: "#mappingstats"
+    type: ["null", string]
+    outputBinding:
+      loadContents: true
+      glob: |
+          ${
+            if (inputs.runMode == "genomeGenerate")
+              return [];
+            var p = inputs.outFileNamePrefix?inputs.outFileNamePrefix:"";
+            return p+"Log.final.out";
+          }
+      outputEval: |
+          ${
+            var s = self[0].contents.replace(/[ ]+.*?:\n|[ ]{2,}|\n$/g,"").
+                split(/\n{1,2}/g).map(function(v){var s=v.split(/\|\t/g); var o={}; o[s[0]]=s[1]; return o;})
+            return JSON.stringify(s);
+          }
+
+baseCommand: ["STAR"]
+
 description: |
   --versionSTAR             020201
       int>0: STAR release numeric ID. Please do not change this value!
