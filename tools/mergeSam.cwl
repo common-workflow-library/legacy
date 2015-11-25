@@ -43,18 +43,13 @@ inputs:
     inputBinding:
       position: 4
       prefix: "OUTPUT="
-      
+
   - id: "#inputFileName_mergedSam"
-    type: File
-    inputBinding:
-      position: 5
-      prefix: "INPUT="
-      
-  - id: "#inputFileName2_mergedSam"
-    type: File
-    inputBinding:
-      position: 6
-      prefix: "INPUT="
+    type:
+      type: array
+      items: File
+      inputBinding: { prefix: "INPUT=" } 
+    inputBinding: { position: 5}
 
 outputs:
   - id: "#mergeSam_output"
