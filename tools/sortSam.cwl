@@ -51,7 +51,7 @@ inputs:
     default: "coordinate"
     inputBinding:
       position: 6
-      prefix: "SO="
+      prefix: "SORT_ORDER="
       
 outputs:
   - id: "#sortSam_output"
