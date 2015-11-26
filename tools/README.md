@@ -148,11 +148,29 @@ Final process status is success
 }%                               
 ```
 
+Indexing .bam file
+------------------
+
+To index the .bam file ```cwltool --basedir ./ --outdir ./test-files ./samtools-index.cwl ./jobs/samtools-index-job.json```
+
+Result:
+```json
+{
+    "sorted": {
+        "path": "././test-files/SRR1031972.Aligned.sortedByCoord.out.bam.bai", 
+        "size": 40528, 
+        "class": "File", 
+        "checksum": "sha1$83738ffada23f654ba1f471973c7dccceb14cffc"
+    }
+}
+```
+
 Genome coverage
 ---------------
 
-To align reads run ```cwltool --basedir ./ ./bedtools-genomecov.cwl ./jobs/bedtools-genomecov-job.json```
+To create a genome coverage file .bedGraph ```cwltool --basedir ./ ./bedtools-genomecov.cwl ./jobs/bedtools-genomecov-job.json```
 
+Result:
 ```json
 {
     "genomecoverage": {

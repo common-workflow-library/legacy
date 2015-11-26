@@ -1,8 +1,0 @@
-{
-    "input": {
-        "class": "File",
-        "path": "./test-files/rna.SRR948778.bam"
-    },
-    "bai": true,
-    "csi": false
-}
