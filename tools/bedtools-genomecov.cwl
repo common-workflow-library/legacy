@@ -5,7 +5,7 @@
   "doap": "http://usefulinc.com/ns/doap"
   "adms": "http://purl.org/adms/"
   "admssw": "http://purl.org/adms/sw/"
-  
+
 adms:Asset:
   admssw:SoftwareProject:
     doap:name: "bedtools"
