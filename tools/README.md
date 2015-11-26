@@ -3,14 +3,12 @@ Sample CWL Command Line Tools.
 # Testing CWLs
 
 Test directory includes:
-* dm3_chr4.fa - chr4 of Drosophila genome
-* dm3_chr4.gtf - chr4 RefSeq annotation file
-* SRR1031972.fastq - the reduced file it has reads from chr4 only, RNA-Seq data
+* dm3_chr4.fa - Chromosome 4 of Drosophila genome
+* dm3_chr4.gtf - Chromosome 4 RefSeq annotation file
+* SRR1031972.fastq - The reduced raw reads file ( reads from Chromosome 4 only, RNA-Seq data)
 
 To test tools they have to be executed in particular order to produce input for the next one. Make ```./workflow/tools``` your current working directory 
-and run you will run```cwtool --basedir ./ ./TOOL.cwl ./jobs/TOOL-job.json```.
-
-For example, 
+and you will run command like this ```cwtool --basedir ./ ./TOOL.cwl ./jobs/TOOL-job.json```.
 
 ## Tools
 
@@ -148,4 +146,20 @@ Final process status is success
     }, 
     "mappingstats": "[{\"Started job on \":\"Nov 26 19:27:58\"},{\"Started mapping on \":\"Nov 26 19:28:08\"},{\"Finished on \":\"Nov 26 19:29:36\"},{\"Mapping speed, Million of reads per hour \":\"8.55\"},{\"Number of input reads \":\"209081\"},{\"Average input read length \":\"40\"},{\"Uniquely mapped reads number \":\"64313\"},{\"Uniquely mapped reads % \":\"30.76%\"},{\"Average mapped length \":\"38.19\"},{\"Number of splices: Total \":\"14213\"},{\"Number of splices: Annotated (sjdb) \":\"1640\"},{\"Number of splices: GT/AG \":\"12072\"},{\"Number of splices: GC/AG \":\"299\"},{\"Number of splices: AT/AC \":\"3\"},{\"Number of splices: Non-canonical \":\"1839\"},{\"Mismatch rate per base, % \":\"1.86%\"},{\"Deletion rate per base \":\"0.00%\"},{\"Deletion average length \":\"1.25\"},{\"Insertion rate per base \":\"0.00%\"},{\"Insertion average length \":\"1.03\"},{\"Number of reads mapped to multiple loci \":\"144768\"},{\"% of reads mapped to multiple loci \":\"69.24%\"},{\"Number of reads mapped to too many loci \":\"0\"},{\"% of reads mapped to too many loci \":\"0.00%\"},{\"% of reads unmapped: too many mismatches \":\"0.00%\"},{\"% of reads unmapped: too short \":\"0.00%\"},{\"% of reads unmapped: other \":\"0.00%\"}]"
 }%                               
+```
+
+Genome coverage
+---------------
+
+To align reads run ```cwltool --basedir ./ ./bedtools-genomecov.cwl ./jobs/bedtools-genomecov-job.json```
+
+```json
+{
+    "genomecoverage": {
+        "path": "./workflows/tools/./test-files/SRR1031972.bedGraph", 
+        "size": 1423143, 
+        "class": "File", 
+        "checksum": "sha1$dd87be96fc201734c2e5017f86e056b4bb0b2b3f"
+    }
+}      
 ```
