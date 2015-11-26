@@ -643,7 +643,6 @@ inputs:
       - 'null'
       - string
     description: |
-      None
       string: output of unmapped reads in the SAM format
       None   ... no output
       Within ... output unmapped reads within the main SAM file (i.e. Aligned.out.sam)
@@ -1618,23 +1617,31 @@ outputs:
     type: ["null",File]
     outputBinding:
       glob: |
-          ${
-            if (inputs.runMode == "genomeGenerate")
-              return inputs.genomeDir+"/Genome";
+        ${
+          if (inputs.runMode != "genomeGenerate")
             return [];
-          }
+          return inputs.genomeDir+"/Genome";
+        }
       secondaryFiles: |
-         ${
-            if (inputs.runMode != "genomeGenerate")
-              return [];
-
-            var p=inputs.genomeDir;
-            return [
-              {"path": p+"/SA", "class":"File"},
-              {"path": p+"/SAindex", "class":"File"},
-              {"path": p+"/chrNameLength.txt", "class":"File"}
-            ];
-         }
+        ${
+          var p=inputs.genomeDir;
+          return [
+            {"path": p+"/SA", "class":"File"},
+            {"path": p+"/SAindex", "class":"File"},
+            {"path": p+"/chrNameLength.txt", "class":"File"},
+            {"path": p+"/chrLength.txt", "class":"File"},
+            {"path": p+"/chrStart.txt", "class":"File"},
+            {"path": p+"/geneInfo.tab", "class":"File"},
+            {"path": p+"/sjdbList.fromGTF.out.tab", "class":"File"},
+            {"path": p+"/chrName.txt", "class":"File"},
+            {"path": p+"/exonGeTrInfo.tab", "class":"File"},
+            {"path": p+"/genomeParameters.txt", "class":"File"},
+            {"path": p+"/sjdbList.out.tab", "class":"File"},
+            {"path": p+"/exonInfo.tab", "class":"File"},
+            {"path": p+"/sjdbInfo.txt", "class":"File"},
+            {"path": p+"/transcriptInfo.tab", "class":"File"}
+          ];
+        }
 
   - id: "#aligned"
     type: ["null",File]
@@ -1672,11 +1679,15 @@ outputs:
           ${
             if (inputs.runMode == "genomeGenerate")
               return [];
+
             var p = inputs.outFileNamePrefix?inputs.outFileNamePrefix:"";
             return p+"Log.final.out";
           }
       outputEval: |
           ${
+            if (inputs.runMode == "genomeGenerate")
+              return "";
+
             var s = self[0].contents.replace(/[ ]+.*?:\n|[ ]{2,}|\n$/g,"").
                 split(/\n{1,2}/g).map(function(v){var s=v.split(/\|\t/g); var o={}; o[s[0]]=s[1]; return o;})
             return JSON.stringify(s);
