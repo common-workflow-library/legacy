@@ -1,0 +1,10 @@
+{
+    "input": {
+        "class": "File",
+        "path": "../test-files/SRR1031972.bedGraph"
+    },
+    "key": [
+        "1,1",
+        "2,2n"
+    ]
+}
