@@ -168,7 +168,7 @@ Result:
 Genome coverage
 ---------------
 
-To create a genome coverage file .bedGraph ```cwltool --basedir ./ ./bedtools-genomecov.cwl ./jobs/bedtools-genomecov-job.json```
+To create a genome coverage .bedGraph file ```cwltool --basedir ./ ./bedtools-genomecov.cwl ./jobs/bedtools-genomecov-job.json```
 
 Result:
 ```json
@@ -180,4 +180,21 @@ Result:
         "checksum": "sha1$dd87be96fc201734c2e5017f86e056b4bb0b2b3f"
     }
 }      
+```
+
+Sort bedGraph
+-------------
+
+To sort the .bedGraph file  by first and second column ```cwltool --basedir ./  --outdir ./test-files ./linux-sort.cwl ./jobs/linux-sort-job.json```
+
+Result:
+```json
+{
+    "sorted": {
+        "path": "././test-files/SRR1031972.bedGraph.sorted", 
+        "size": 1423143, 
+        "class": "File", 
+        "checksum": "sha1$dd87be96fc201734c2e5017f86e056b4bb0b2b3f"
+    }
+}
 ```
