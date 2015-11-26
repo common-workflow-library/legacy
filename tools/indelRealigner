@@ -1,4 +1,7 @@
 #!/usr/bin/env cwl-runner
+#
+# Authors: farahk@student.unimelb.edu.au and skanwal@student.unimelb.edu.au UNIVERSITY OF MELBOURNE
+# Developed for CWL consortium http://commonwl.org/
 class: CommandLineTool
 
 description: |
