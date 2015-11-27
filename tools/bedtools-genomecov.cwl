@@ -1,6 +1,7 @@
 #!/usr/bin/env cwl-runner
 
 "@context":
+  "cwl": "https://w3id.org/cwl/cwl#"
   "foaf": "http://xmlns.com/foaf/0.1/"
   "doap": "http://usefulinc.com/ns/doap"
   "adms": "http://purl.org/adms/"
@@ -30,7 +31,7 @@ adms:Asset:
       - foaf:title: "(Quinlan and Hall, 2010) BEDTools: a flexible suite of utilities for comparing genomic features. Bioinformatics."
         foaf:homepage: "http://www.ncbi.nlm.nih.gov/pubmed/20110278"
     doap:maintainer:
-      - foaf:Person:
+      foaf:Person:
         foaf:name: "Aaron R. Quinlan"
         foaf:mbox: "aaronquinlan at gmail.com"
   adms:AssetDistribution:
