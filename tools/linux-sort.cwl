@@ -1,5 +1,12 @@
 #!/usr/bin/env cwl-runner
 
+"@context":
+  "cwl": "https://w3id.org/cwl/cwl#"
+  "foaf": "http://xmlns.com/foaf/0.1/"
+  "doap": "http://usefulinc.com/ns/doap"
+  "adms": "http://purl.org/adms/"
+  "admssw": "http://purl.org/adms/sw/"
+
 adms:Asset:
   admssw:SoftwareProject:
     doap:name: "sort"
@@ -9,15 +16,13 @@ adms:Asset:
       - doap:revision: "5.93"
     doap:license: "GPL"
     doap:category: "commandline tool"
-    - doap:developer:
-      foaf:Person:
-      foaf:name: "Mike Haertel"
-    - doap:developer:
-      foaf:Person:
-      foaf:name: "Paul Eggert"
-    - doap:developer:
-      foaf:Person:
-      foaf:mbox: "bug-coreutils@gnu.org"
+    doap:developer:
+      - foaf:Person:
+        foaf:name: "Mike Haertel"
+      - foaf:Person:
+        foaf:name: "Paul Eggert"
+      - foaf:Person:
+        foaf:mbox: "bug-coreutils@gnu.org"
   adms:AssetDistribution:
     doap:name: "linux-sort.cwl"
     doap:description: "Developed for CWL consortium http://commonwl.org/"
@@ -79,7 +84,7 @@ outputs:
     outputBinding:
       glob: $(inputs.output)
 
-stdout:
+stdout: $(inputs.output)
 baseCommand: ["sort"]
 #$(inputs.input.path.split('/').slice(-1)[0] + '.sorted')
 
