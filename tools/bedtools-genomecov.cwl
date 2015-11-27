@@ -1,5 +1,58 @@
 #!/usr/bin/env cwl-runner
 
+"@context":
+  "cwl": "https://w3id.org/cwl/cwl#"
+  "foaf": "http://xmlns.com/foaf/0.1/"
+  "doap": "http://usefulinc.com/ns/doap"
+  "adms": "http://purl.org/adms/"
+  "admssw": "http://purl.org/adms/sw/"
+
+adms:Asset:
+  admssw:SoftwareProject:
+    doap:name: "bedtools"
+    doap:description: >
+      A software suite for the comparison, manipulation and annotation of genomic features in browser extensible data (BED) and general feature format (GFF) format.
+      BEDTools also supports the comparison of sequence alignments in BAM format to both BED and GFF features.
+      The tools are extremely efficient and allow the user to compare large datasets (e.g. next-generation sequencing data) with both public and custom genome annotation tracks.
+      BEDTools can be combined with one another as well as with standard UNIX commands, thus facilitating routine genomics tasks as well as pipelines that can quickly answer intricate questions of large genomic datasets.
+    doap:homepage: "http://bedtools.readthedocs.org"
+    doap:release:
+      - doap:revision: "2.25.0"
+    doap:license: "GPLv2"
+    doap:category: "commandline tool"
+    doap:programming-language: "C++"
+    doap:repository:
+      - doap:GitRepository:
+        doap:location: "https://github.com/arq5x/bedtools2"
+    foaf:Organization:
+      - foaf:name: "Department of Biochemistry and Molecular Genetics, University of Virginia School of Medicine"
+      - foaf:name: "Center for Public Health Genomics, University of Virginia, Charlottesville, VA 22908, USA"
+    foaf:publications:
+      - foaf:title: "(Quinlan and Hall, 2010) BEDTools: a flexible suite of utilities for comparing genomic features. Bioinformatics."
+        foaf:homepage: "http://www.ncbi.nlm.nih.gov/pubmed/20110278"
+    doap:maintainer:
+      foaf:Person:
+        foaf:name: "Aaron R. Quinlan"
+        foaf:mbox: "aaronquinlan at gmail.com"
+  adms:AssetDistribution:
+    doap:name: "bedtools-genomecov.cwl"
+    doap:description: "Developed for CWL consortium http://commonwl.org/"
+    doap:specification: "http://common-workflow-language.github.io/draft-3/"
+    doap:release: "cwl:draft-3.dev2"
+    doap:homepage: "http://commonwl.org/"
+    doap:location: "https://github.com/common-workflow-language/workflows/blob/master/tools/bedtools-genomecov.cwl"
+    doap:repository:
+      - doap:GitRepository:
+        doap:location: "https://github.com/common-workflow-language/workflows"
+    doap:maintainer:
+      foaf:Person:
+        foaf:openid: "http://orcid.org/0000-0001-9102-5681"
+        foaf:name: "Andrey Kartashov"
+        foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
+        foaf:organization: "Cincinnati Children's Hospital Medical Center"
+
+cwlVersion: "cwl:draft-3.dev2"
+
 class: CommandLineTool
 
 description: |
@@ -9,10 +62,10 @@ description: |
   Usage: bedtools genomecov [OPTIONS] -i <bed/gff/vcf> -g <genome>
 
 requirements:
-  - import: node-engine.cwl
-  - import: envvar-global.cwl
-  - import: bedtools-docker.cwl
-#  - import: bedtools-genomecov-types.cwl
+  - "@import": envvar-global.cwl
+  - "@import": bedtools-docker.cwl
+  - class: InlineJavascriptRequirement
+
 
 inputs:
   - id: "#input"
@@ -23,21 +76,17 @@ inputs:
       or <bed/gff/vcf>
     inputBinding:
       position: 1
-      secondaryFiles:
-        - engine: node-engine.cwl
-          script: |
-           {
-            if ((/.*\.bam$/i).test($job['input'].path))
-               return {"path": $job['input'].path+".bai", "class": "File"};
+      valueFrom: |
+          ${
+            var prefix = ((/.*\.bam$/i).test(inputs.input.path))?'-ibam':'-i';
+            return [prefix,inputs.input.path];
+          }
+      secondaryFiles: |
+           ${
+            if ((/.*\.bam$/i).test(inputs.input.path))
+               return {"path": inputs.input.path+".bai", "class": "File"};
             return [];
            }
-      valueFrom:
-        engine: node-engine.cwl
-        script: |
-          {
-            var prefix = ((/.*\.bam$/i).test($job['input'].path))?'-ibam':'-i';
-            return [prefix,$job['input'].path];
-          }
 
   - id: "#genomeFile"
     type: File
@@ -47,8 +96,6 @@ inputs:
       position: 2
       prefix: "-g"
 
-#  - id: "#dept"
-#    type: ["null","depts"]
   - id: "#dept"
     type:
       name: "JustDepts"
@@ -151,11 +198,8 @@ outputs:
     type: File
     description: "The file containing the genome coverage"
     outputBinding:
-      glob: 
-        engine: cwl:JsonPointer
-        script: /job/genomecoverageout
-stdout: 
-  engine: cwl:JsonPointer
-  script: /job/genomecoverageout
+      glob: $(inputs.genomecoverageout)
+
+stdout: $(inputs.genomecoverageout)
 
 baseCommand: ["bedtools", "genomecov"]

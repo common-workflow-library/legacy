@@ -1,3 +1,11 @@
 .vagrant
 .DS_Store
 /docker
+*.bam
+*.bai
+*.fa
+*.fastq
+*.bz2
+*.gz
+*.gtf
+
