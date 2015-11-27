@@ -23,17 +23,18 @@ adms:Asset:
     doap:license: "GPL"
     doap:category: "commandline tool"
     doap:programming-language: "C++"
-    foaf:Organization:
-      - foaf:name: "Cold Spring Harbor Laboratory, Cold Spring Harbor, NY, USA"
-      - foaf:name: "2Pacific Biosciences, Menlo Park, CA, USA"
+    - foaf:Organization:
+      foaf:name: "Cold Spring Harbor Laboratory, Cold Spring Harbor, NY, USA"
+    - foaf:Organization:
+      foaf:name: "2Pacific Biosciences, Menlo Park, CA, USA"
     foaf:publications:
       - foaf:title: "(Dobin et al., 2013) STAR: ultrafast universal RNA-seq aligner. Bioinformatics."
         foaf:homepage: "http://www.ncbi.nlm.nih.gov/pubmed/23104886"
     doap:developer:
-      - foaf:Person:
-        foaf:name: "Alexander Dobin"
-        foaf:mbox: "mailto:dobin at cshl.edu"
-        foaf:fundedBy: "This work was funded by NHGRI (NIH) grant U54HG004557"
+      foaf:Person:
+      foaf:name: "Alexander Dobin"
+      foaf:mbox: "mailto:dobin at cshl.edu"
+      foaf:fundedBy: "This work was funded by NHGRI (NIH) grant U54HG004557"
   adms:AssetDistribution:
     doap:name: "STAR.cwl"
     doap:description: "Developed for CWL consortium http://commonwl.org/"
