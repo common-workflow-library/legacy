@@ -9,13 +9,15 @@ adms:Asset:
       - doap:revision: "5.93"
     doap:license: "GPL"
     doap:category: "commandline tool"
-    doap:developer:
-      - foaf:Person:
-        foaf:name: "Mike Haertel"
-      - foaf:Person:
-        foaf:name: "Paul Eggert"
-      - foaf:Person:
-        foaf:mbox: "bug-coreutils@gnu.org"
+    - doap:developer:
+      foaf:Person:
+      foaf:name: "Mike Haertel"
+    - doap:developer:
+      foaf:Person:
+      foaf:name: "Paul Eggert"
+    - doap:developer:
+      foaf:Person:
+      foaf:mbox: "bug-coreutils@gnu.org"
   adms:AssetDistribution:
     doap:name: "linux-sort.cwl"
     doap:description: "Developed for CWL consortium http://commonwl.org/"
@@ -49,9 +51,14 @@ requirements:
 
 inputs:
   - id: "#input"
-    type: File
+    type:
+      type: array
+      items: File
     inputBinding:
       position: 4
+
+  - id: "#output"
+    type: string
 
   - id: "#key"
     type: 
@@ -61,7 +68,6 @@ inputs:
         prefix: "-k"
     inputBinding:
       position: 1
-
     description: |
       -k, --key=POS1[,POS2]
       start a key at POS1, end it at POS2 (origin 1)
@@ -71,14 +77,9 @@ outputs:
     type: File
     description: "The sorted file"
     outputBinding:
-      glob: $(inputs.input.path.split('/').slice(-1)[0] + '.sorted')
+      glob: $(inputs.output)
 
-stdout: $(inputs.input.path.split('/').slice(-1)[0] + '.sorted')
-
+stdout:
 baseCommand: ["sort"]
-
-#arguments:
-#  - valueFrom:
-#      engine: node-engine.cwl
-#      script: $job['key'].map(function(i) {return "-k"+i;})
+#$(inputs.input.path.split('/').slice(-1)[0] + '.sorted')
 
