@@ -198,3 +198,22 @@ Result:
     }
 }
 ```
+
+bedGraph to bigWig
+------------------
+
+To produce final .bigWig file ```cwltool --basedir ./ ./ucsc-bedGraphToBigWig.cwl ./jobs/ucsc-bedGraphToBigWig-job.json```
+
+Result:
+
+```json
+{
+    "bigWigOut": {
+        "path": "./workflows/tools/./test-files/SRR1031972.bigWig", 
+        "size": 500098, 
+        "class": "File", 
+        "checksum": "sha1$5a0332a2fce2303f135439d377f8b7420878a7b5"
+    }
+}
+```
+
