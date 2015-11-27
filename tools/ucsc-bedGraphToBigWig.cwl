@@ -1,5 +1,55 @@
 #!/usr/bin/env cwl-runner
 
+"@context":
+  "cwl": "https://w3id.org/cwl/cwl#"
+  "foaf": "http://xmlns.com/foaf/0.1/"
+  "doap": "http://usefulinc.com/ns/doap"
+  "adms": "http://purl.org/adms/"
+  "admssw": "http://purl.org/adms/sw/"
+
+adms:Asset:
+  admssw:SoftwareProject:
+    doap:name: "UCSC userApps"
+    doap:description: |
+      UCSC genome browser 'kent' bioinformatic utilities
+      These are only the command line bioinformatic utilities
+      from the kent source tree.
+    doap:homepage: "http://genome.ucsc.edu/goldenPath/help/bigWig.html"
+    admsw:downloadUrl: "http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/"
+    admsw:accessUrl: "http://hgdownload.cse.ucsc.edu/admin/exe/userApps.v325.src.tgz"
+    doap:release:
+      - doap:revision: "v325"
+    doap:license: "GPL"
+    doap:category: "commandline tool"
+    doap:programming-language: "C"
+    foaf:Organization:
+      - foaf:name: "CIRM Stem Cell Genomics Data Management Center"
+    foaf:publications:
+      - foaf:title: "(Kent et al., 2010) BigWig and BigBed: enabling browsing of large distributed datasets. Bioinformatics."
+        foaf:homepage: "http://www.ncbi.nlm.nih.gov/pubmed/20639541"
+    doap:developer:
+      - foaf:Person:
+        foaf:name: "Jim Kent"
+        foaf:mbox: "mailto:kent@soe.ucsc.edu"
+  adms:AssetDistribution:
+    doap:name: "STAR.cwl"
+    doap:description: "Developed for CWL consortium http://commonwl.org/"
+    doap:specification: "http://common-workflow-language.github.io/draft-3/"
+    doap:release: "cwl:draft-3.dev2"
+    doap:homepage: "http://commonwl.org/"
+    doap:location: "https://github.com/common-workflow-language/workflows/blob/master/tools/STAR.cwl"
+    doap:repository:
+      - doap:GitRepository:
+        doap:location: "https://github.com/common-workflow-language/workflows"
+    doap:maintainer:
+      foaf:Person:
+        foaf:openid: "http://orcid.org/0000-0001-9102-5681"
+        foaf:name: "Andrey Kartashov"
+        foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
+        foaf:organization: "Cincinnati Children's Hospital Medical Center"
+
+cwlVersion: "cwl:draft-3.dev2"
+
 class: CommandLineTool
 
 description: |
@@ -21,9 +71,9 @@ description: |
     sort -k1,1 -k2,2n unsorted.bedGraph > sorted.bedGraph
 
 requirements:
-  - import: node-engine.cwl
-  - import: envvar-global.cwl
-  - import: ucsc-userapps-docker.cwl
+  - class: InlineJavascriptRequirement
+  - "@import": envvar-global.cwl
+  - "@import": ucsc-userapps-docker.cwl
 
 inputs:
   - id: "#input"
@@ -70,8 +120,6 @@ outputs:
   - id: "#bigWigOut"
     type: File
     outputBinding:
-      glob: 
-        engine: cwl:JsonPointer
-        script: /job/bigWig
+      glob: $(inputs.bigWig)
 
 baseCommand: ["bedGraphToBigWig"]
