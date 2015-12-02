@@ -19,7 +19,12 @@ requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
   - import: gatk-docker.cwl
-
+  
+arguments:
+  - valueFrom: "/home/biodocker/bin/gatk/target/GenomeAnalysisTK.jar"
+    position: 2
+    prefix: "-jar"
+    
 inputs:
 
   - id: "#java_arg"
@@ -27,12 +32,6 @@ inputs:
     default: "-Xmx4g"
     inputBinding: 
       position: 1
-
-  - id: "#jar_file"
-    type: string
-    inputBinding: { position: 2, prefix: "-jar" }
-    description: GATK jar file
-
      
   - id: "#BaseRecalibrator"
     type: string
