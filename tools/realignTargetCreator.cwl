@@ -29,7 +29,7 @@ inputs:
       position: 1
 
   - id: "#jar_file"
-    type: File
+    type: string
     inputBinding: { position: 2, prefix: "-jar" }
     description: GATK jar file
      
@@ -53,6 +53,8 @@ inputs:
         - ".rpac"
         - ".rsa"
         - ".sa"
+        - ".fai"
+        - "^.dict"
 
   - id: "#inputBam_realign"
     type: File
@@ -60,7 +62,9 @@ inputs:
     inputBinding:
       position: 5 
       prefix: "-I"
-      
+      secondaryFiles:
+        - ".bai"
+        
   - id: "#known"  
     type:
       type: array
