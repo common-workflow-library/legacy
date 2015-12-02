@@ -17,6 +17,7 @@ description: |
 requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
+  - import: gatk-docker.cwl
 
 inputs:
 
