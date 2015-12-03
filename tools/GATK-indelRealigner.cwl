@@ -1,4 +1,11 @@
 #!/usr/bin/env cwl-runner
+#
+# To use it as stand alone tool - example: "cwltool realignerTargerCreator.cwl realignerTargerCreator.json"
+# Still testing to make it work as a part of the workflow
+#
+# Authors: farahk@student.unimelb.edu.au and skanwal@student.unimelb.edu.au UNIVERSITY OF MELBOURNE
+# Developed for CWL consortium http://commonwl.org/
+
 class: CommandLineTool
 
 description: |
