@@ -28,6 +28,7 @@ description: |
                    the --barcode flag is specified.
   
 requirements:
+  - import: node-engine.cwl
 
 inputs:
   - id: "#subcommand"
@@ -79,22 +80,33 @@ inputs:
 
   - id: "#outdir"
     type: string
-    inputBinding:
-      prefix: "--outdir"
-
-  - id: "#pipeline_log"
-    type: string
+    default:"outdir"
     inputBinding:
       prefix: "--outdir"
 
   - id: "#error_log"
     type: string
-    inputBinding:
-      prefix: "--outdir"
+    default: "Pipeline.err"
 
+  - id: "#pipeline_log"
+    type: string
+    default: "Pipeline.log"
 
 outputs:
   - id: "#outputs"
-    type: 
+    type: File
+    outputBinding:
+      glob:
+        engine: "node-engine.cwl"
+        script: >
+        $job.outname + '_quality-pass.fastq'
+
+stdout:
+  engine: cwl:JsonPointer
+  script: /job/pipeline_log
+
+# stderr:
+#   engine: cwl:JsonPointer
+#   script: /job/error_log
 
 # _primers-pass.fastq
