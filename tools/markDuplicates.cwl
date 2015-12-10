@@ -151,6 +151,13 @@ inputs:
       position: 19
       prefix: "READ_NAME_REGEX="
       
+  - id: "#createIndex"
+    type: ["null", string]
+    default: 'true'
+    inputBinding:
+      position: 21
+      prefix: "CREATE_INDEX="
+      
   - id: "#pixelDistance"
     type: int
     default: 100
