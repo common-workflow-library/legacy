@@ -65,9 +65,3 @@ outputs:
       prefix: "-o"
 
 baseCommand: ["samtools"]
-
-arguments:
-  - valueFrom: $(inputs.bai?'-b':inputs.csi?'-c':[])
-    position: 1
-  - valueFrom: $(new_ext())
-    position: 3
