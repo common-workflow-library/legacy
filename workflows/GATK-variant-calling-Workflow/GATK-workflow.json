@@ -1,0 +1,38 @@
+
+{  
+     "reference": {
+        "class": "File",
+        "path": "./test-data/hg19.fa"
+    },
+     "FwdReadFile": {
+        "class": "File",
+        "path": "./test-data/510000101_L001_R1_Test.fastq"
+    }, 
+     "RevReadFile": {
+        "class": "File",
+        "path": "./test-data/510000101_L001_R2_Test.fastq"
+    }, 
+    "dbsnp": {
+        "class": "File",
+        "path": "./test-data/dbsnp_138.vcf", 
+    }, 
+    "known": [{"class": "File", "path": "./test-data/dbsnp_138.vcf"}, {"class": "File", "path": "./test-data/Mills_and_1000G_gold_st.vcf"}, {"class": "File", "path": "./test-data/1000G_phase1.indels.hg19.vcf"}  ],
+    "outputfile_realignTarget": "realignTargetCreator_output.intervals",
+    "outputFileName_markDups": "markDups.bam",
+    "metricsFile": "metricsFile-markDups", 
+    "readSorted": 'true',
+    "removeDuplicates": 'true',
+    "createIndex": 'true',
+    "tmpdir": "./tmpMarkDups", 
+    "outputFileName_mergedSam": "mergedSam.sam",
+    "outputFileName_sortSam": "sortedSam.bam",
+    "output_name": "bwa-mem_Output.sam",
+    "outputFileName": "hg19.dict",
+    "outputFileName_fixMate": "fixMate.bam",
+    "outputfile_indelRealigner": "indelRealigner.bam",
+    "outputfile_BaseRecalibrator": "baseRecalibrator.table",
+    "outputfile_printReads": "printReads.bam",
+    "outputfile_HaplotypeCaller": "haplotypeCaller.vcf",
+
+
+}
