@@ -1,10 +1,16 @@
 #!/usr/bin/env cwl-runner
 
-"@context":
-  "foaf": "http://xmlns.com/foaf/0.1/"
-  "doap": "http://usefulinc.com/ns/doap"
-  "adms": "http://purl.org/adms/"
-  "admssw": "http://purl.org/adms/sw/"
+$namespaces:
+  - foaf: "http://xmlns.com/foaf/0.1/"
+  - doap: "http://usefulinc.com/ns/doap"
+  - adms: "http://purl.org/adms/"
+  - admssw: "http://purl.org/adms/sw/"
+
+$schemas:
+  - https://joinup.ec.europa.eu/svn/adms_foss/adms_sw_v1.00/adms_sw_v1.00.rdf
+  - http://xmlns.com/foaf/spec/20140114.rdf
+  - http://usefulinc.com/ns/doap#
+  - http://www.w3.org/ns/adms
 
 adms:Asset:
   admssw:SoftwareProject:
