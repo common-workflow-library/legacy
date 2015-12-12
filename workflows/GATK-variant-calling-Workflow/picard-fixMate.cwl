@@ -50,7 +50,7 @@ inputs:
       
   - id: "#createIndex"
     type: ["null", string]
-    default: 'true'
+    default: "true"
     inputBinding:
       position: 5
       prefix: "CREATE_INDEX="
@@ -63,18 +63,21 @@ inputs:
       
   - id: "#readSorted"
     type: ["null", string]
+    default: "true"
     inputBinding:
       position: 7
       prefix: "ASSUME_SORTED="
       
   - id: "#mateCigar"
     type: ["null", string]
+    default: "true"
     inputBinding:
       position: 8
       prefix: "ADD_MATE_CIGAR="
       
   - id: "#ignoreMissingMates"
     type: ["null", string]
+    default: "true"
     inputBinding:
       position: 9
       prefix: "IGNORE_MISSING_MATES="
