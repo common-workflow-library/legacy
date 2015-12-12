@@ -5,7 +5,7 @@ Following pre-processinf steps are required:
 2. To create hg19.fa.fai, run: samtools faidx hg19.fa
 
 Please note that wrappers for both tools (bwa index and samtools faidx) are present in CWL/workflows/tools repo and can be used for the above purpose if bwa and samtools are not installed on the local system. 
-The purpose of keeping these two stepsfor preprocessing instead of including in workflow is that these files can be reused again and again as hg19.fa does not change if input files change. 
+The purpose of keeping these two steps for preprocessing instead of including in workflow is that these files can be reused again and again as hg19.fa does not change if input files change. 
 
 To run locally, you may install the reference implementation of CWL:
 
