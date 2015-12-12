@@ -55,13 +55,13 @@ inputs:
   - id: "#IndelRealigner"
     type: string
     default: "IndelRealigner"
-    inputBinding: { position: 3, prefix: "-T" }
+    inputBinding: { position: 4, prefix: "-T" }
     description: tool used for this step from GATK jar
      
   - id: "#reference"
     type: File
     inputBinding:
-      position: 4
+      position: 5
       prefix: "-R"
       secondaryFiles:
         - ".amb"
@@ -76,7 +76,7 @@ inputs:
     type: File
     description: bam file produced after markDups execution
     inputBinding:
-      position: 5 
+      position: 6
       prefix: "-I"
       secondaryFiles:
         - "^.bai"
@@ -87,13 +87,13 @@ inputs:
       items: File
       inputBinding: { prefix: "-known" }
     inputBinding: 
-      position: 6
+      position: 7
       
   - id: "#intervals"
     type: File
     description: list of intervals created by realignerTargetCreataor
     inputBinding:
-      position: 7
+      position: 8
       prefix: "-targetIntervals"
       
   - id: "#outputfile_indelRealigner"
