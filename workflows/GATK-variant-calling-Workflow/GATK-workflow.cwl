@@ -155,7 +155,6 @@ steps:
       - { id: "#bwa-mem.FwdReadFile", source: "#FwdReadFile" }
       - { id: "#bwa-mem.RevReadFile", source: "#RevReadFile" }
       - { id: "#bwa-mem.output_name", source: "#output_name" }
-      
     outputs:
       - { id: "#bwa-mem.readfileSam_output" }
   
@@ -173,9 +172,7 @@ steps:
     run: { import: mergeSam.cwl }
     inputs:
       - { id: "#mergeSam.outputFileName_mergedSam", source: "#outputFileName_mergedSam" }
-      - { id: "#mergeSam.inputFileName_mergedSam", source: ["#bwa-mem.readfileSam_output", "#create-dict.createDict_output" ]}
-      - { id: "#mergeSam.tmpdir", source: "#tmpdir" } 
-      
+      - { id: "#mergeSam.inputFileName_mergedSam", source: ["#bwa-mem.readfileSam_output", "#create-dict.createDict_output" ]}      
     outputs:
       - { id: "#mergeSam.mergeSam_output" }
 
