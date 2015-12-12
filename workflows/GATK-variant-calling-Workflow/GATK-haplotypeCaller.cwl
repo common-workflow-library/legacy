@@ -100,18 +100,11 @@ inputs:
       position: 8
       prefix: "-stand_emit_conf"
       
-  - id: "#targetIntervalList"
-    type: File
-    description: target bed file if any
-    inputBinding:
-      position: 9 
-      prefix: "-L"
-      
   - id: "#outputfile_HaplotypeCaller"
     type: string
     description: name of the output file from HaplotypeCaller
     inputBinding:
-      position: 10
+      position: 9
       prefix: "-o"
     
 outputs:
@@ -123,4 +116,3 @@ outputs:
         script: /job/outputfile_HaplotypeCaller
 
 baseCommand: ["java"]
-
