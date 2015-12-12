@@ -2,6 +2,7 @@
 #
 # Authors: farahk@student.unimelb.edu.au and skanwal@student.unimelb.edu.au UNIVERSITY OF MELBOURNE
 # Developed for CWL consortium http://commonwl.org/
+#The tool works with docker from broadinstitute/picard and works without -jar and java args making the command simple. 
 
 class: CommandLineTool
 
@@ -27,12 +28,12 @@ inputs:
     type: string
     default: "CreateSequenceDictionary"
     inputBinding:
-      position: 2
+      position: 1
         
   - id: "#reference"
     type: File
     inputBinding:
-      position: 3
+      position: 2
       prefix: "REFERENCE="
       secondaryFiles:
         - ".amb"
@@ -40,11 +41,39 @@ inputs:
         - ".bwt"
         - ".pac"
         - ".sa"
-        
+  - id: "#genomeAssembly"
+    type: string
+    inputBinding: 3
+    prefix: "GENOME_ASSEMBLY="
+  
+  - id: "#id"
+    type: string
+    inputBinding: 
+      position: 4
+      prefix: "URI="
+      
+  - id: "#species"
+    type: string
+    inputBinding:
+      position: 5
+      prefix: "SPECIES="
+  
+  - id: "#truncateNames"
+    type: boolean
+    inputBinding:
+      position: 6
+      prefix: "TRUNCATE_NAMES_AT_WHITESPACE="
+      
+  - id: "#numSequences"
+    type: int
+    inputBinding:
+      position: 6
+      prefix: "NUM_SEQUENCES="
+
   - id: "#outputFileName"
     type: string
     inputBinding:
-      position: 4
+      position: 7
       prefix: "OUTPUT="
       
 outputs:
