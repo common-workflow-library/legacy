@@ -20,58 +20,50 @@ description: |
     PROGRAM_GROUP_VERSION  STR Value of VN tag of PG record to be created. If not specified, the version will be detected automatically. Default value null
     PROGRAM_GROUP_COMMAND_LINE STR Value of CL tag of PG record to be created. If not supplied the command line will be detected automatically. Default value null
     PROGRAM_GROUP_NAME STR Value of PN tag of PG record to be created. Default value MarkDuplicates. This option can be set to 'null' to clear the default value
-    COMMENT STR Comment(s) to include in the output file's header. Default value null. This option may be specified 0 or more times
+    COMMENT STR Comment(s) to include in the output files header. Default value null. This option may be specified 0 or more times
     REMOVE_DUPLICATES BOOLEAN If true do not write duplicates to the output file instead of writing them with appropriate flags set. Default value false. This option can be set to 'null' to clear the default value. Possible values {true, false}
     ASSUME_SORTED BOOLEAN If true, assume that the input file is coordinate sorted even if the header says otherwise. Default value false. This option can be set to 'null' to clear the default value. Possible values {true, false}
     DUPLICATE_SCORING_STRATEGY SCORINGSTRATEGY The scoring strategy for choosing the non-duplicate among candidates. Default value SUM_OF_BASE_QUALITIES. This option can be set to 'null' to clear the default value. Possible values {SUM_OF_BASE_QUALITIES, TOTAL_MAPPED_REFERENCE_LENGTH}
     READ_NAME_REGEX STR Regular expression that can be used to parse read names in the incoming SAM file. Read names are parsed to extract three variables tile/region, x coordinate and y coordinate. These values are used to estimate the rate of optical duplication in order to give a more accurate estimated library size. Set this option to null to disable optical duplicate detection. The regular expression should contain three capture groups for the three variables, in order. It must match the entire read name. Note that if the default regex is specified, a regex match is not actually done, but instead the read name is split on colon character. For 5 element names, the 3rd, 4th and 5th elements are assumed to be tile, x and y values. For 7 element names (CASAVA 1.8), the 5th, 6th, and 7th elements are assumed to be tile, x and y values. Default value [a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*. This option can be set to 'null' to clear the default value
     OPTICAL_DUPLICATE_PIXEL_DISTANCE INT The maximum offset between two duplicte clusters in order to consider them optical duplicates. This should usually be set to some fairly small number (e.g. 5-10 pixels) unless using later versions of the Illumina pipeline that multiply pixel values by 10, in which case 50-100 is more normal. Default value 100. This option can be set to 'null' to clear the default value
-    CREATE_INDEX BOOLEAN CREATE_INDEX (Boolean)	Whether to create a BAM index when writing a coordinate-sorted BAM file. Default value false. This option can be set to 'null' to clear the default value. Possible values {true, false}
+
 requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
-  
+  - import: picard-docker.cwl
+
 inputs:
-  - id: "#java_arg"
-    type: string
-    default: "-Xmx2g"
-    inputBinding:
-      position: 1
-      
-  - id: "#jar_file"
-    type: File
-    inputBinding:
-      position: 2
-      prefix: "-jar"
 
   - id: "#MarkDuplicates"
     type: string
     default: "MarkDuplicates"
     inputBinding:
-      position: 3
+      position: 1
 
   - id: "#inputFileName_markDups"
     type: File
     inputBinding:
-      position: 4
+      position: 2
       prefix: "INPUT="
+      secondaryFiles:
+        - "^.bai"
  
   - id: "#outputFileName_markDups"
     type: string
     inputBinding:
-      position: 5
+      position: 3
       prefix: "OUTPUT="
 
   - id: "#metricsFile"
     type: string
     inputBinding:
-      position: 7
+      position: 4
       prefix: "METRICS_FILE="
 
   - id: "#readSorted"
     type: ["null", string]
     inputBinding:
-      position: 8
+      position: 5
       prefix: "ASSUME_SORTED="
 
   - id: "#removeDuplicates"
@@ -84,86 +76,92 @@ inputs:
     type: int
     default: 8000
     inputBinding:
-      position: 9
+      position: 7
       prefix: "MAX_FILE_HANDLES_FOR_READ_ENDS_MAP="
       
   - id: "#sortRatio"
     type: double
     default: 0.25
     inputBinding:
-      position: 10
+      position: 8
       prefix: "SORTING_COLLECTION_SIZE_RATIO="
       
   - id: "#barcodeTag"
     type: ["null", string]
     inputBinding:
-      position: 11
+      position: 9
       prefix: "BARCODE_TAG="
       
   - id: "#readOneBarcodeTag"
     type: ["null", string]
     inputBinding:
-      position: 12
+      position: 10
       prefix: "READ_ONE_BARCODE_TAG="
       
   - id: "#readTwoBarcodeTag"
     type: ["null", string]
     inputBinding:
-      position: 13
+      position: 11
       prefix: "READ_TWO_BARCODE_TAG="
       
   - id: "#recordId"
     type: string
     default: 'MarkDuplicates'
     inputBinding:
-      position: 14
+      position: 12
       prefix: "PROGRAM_RECORD_ID="
       
   - id: "#groupVersion"
     type: ["null", string]
     inputBinding:
-      position: 15
+      position: 13
       prefix: "PROGRAM_GROUP_VERSION="
       
   - id: "#groupCommandLine"
     type: ["null", string]
     inputBinding:
-      position: 16
+      position: 14
       prefix: "PROGRAM_GROUP_COMMAND_LINE="
       
   - id: "#groupCommandName"
     type: string
     default: 'MarkDuplicates'
     inputBinding:
-      position: 17
+      position: 15
       prefix: "PROGRAM_GROUP_NAME="
       
   - id: "#comment"
     type: ["null", string]
     inputBinding:
-      position: 18
+      position: 16
       prefix: "COMMENT="
       
   - id: "#regularExpression"
     type: string
     default: '[a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*'
     inputBinding:
-      position: 19
+      position: 17
       prefix: "READ_NAME_REGEX="
-      
-  - id: "#createIndex"
-    type: ["null", string]
-    default: 'true'
-    inputBinding:
-      position: 21
-      prefix: "CREATE_INDEX="
       
   - id: "#pixelDistance"
     type: int
     default: 100
     inputBinding:
-      position: 20
+      position: 18
       prefix: "OPTICAL_DUPLICATE_PIXEL_DISTANCE="
+      
+  - id: "#createIndex"
+    type: ["null", string]
+    default: 'true'
+    inputBinding:
+      position: 19
+      prefix: "CREATE_INDEX="
+
+  - id: "#tmpdir"
+    type: string
+    inputBinding:
+      position: 19
+      prefix: "TMP_DIR="
       
 outputs:
   - id: "#markDups_output"
@@ -173,4 +171,4 @@ outputs:
         engine: cwl:JsonPointer
         script: /job/outputFileName_markDups
     
-baseCommand: ["java"]
+baseCommand: []
