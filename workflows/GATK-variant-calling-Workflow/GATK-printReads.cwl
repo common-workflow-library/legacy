@@ -111,4 +111,3 @@ outputs:
         script: /job/outputfile_printReads
 
 baseCommand: ["java"]
-
