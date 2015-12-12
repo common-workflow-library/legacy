@@ -66,5 +66,3 @@ outputs:
         script: /job/outputFileName_sortSam
       
 baseCommand: []
-      
-
