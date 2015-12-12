@@ -57,7 +57,7 @@ stdout:
    "output.vcf"
 
 outputs:
-  - id: "#sorted"
+  - id: "#processed"
     type: File
     description: "The resulting VCF file"
     streamable: true
