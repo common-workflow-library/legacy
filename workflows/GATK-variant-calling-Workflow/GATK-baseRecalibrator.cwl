@@ -100,4 +100,3 @@ outputs:
         script: /job/outputfile_BaseRecalibrator
 
 baseCommand: ["java"]
-
