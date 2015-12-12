@@ -68,6 +68,7 @@ inputs:
 
   - id: "#removeDuplicates"
     type: ["null", string]
+    default: false
     inputBinding:
       position: 6
       prefix: "REMOVE_DUPLICATES="
@@ -88,18 +89,21 @@ inputs:
       
   - id: "#barcodeTag"
     type: ["null", string]
+    default: null
     inputBinding:
       position: 9
       prefix: "BARCODE_TAG="
       
   - id: "#readOneBarcodeTag"
     type: ["null", string]
+    default: null
     inputBinding:
       position: 10
       prefix: "READ_ONE_BARCODE_TAG="
       
   - id: "#readTwoBarcodeTag"
     type: ["null", string]
+    default: null
     inputBinding:
       position: 11
       prefix: "READ_TWO_BARCODE_TAG="
@@ -113,12 +117,14 @@ inputs:
       
   - id: "#groupVersion"
     type: ["null", string]
+    default: null
     inputBinding:
       position: 13
       prefix: "PROGRAM_GROUP_VERSION="
       
   - id: "#groupCommandLine"
     type: ["null", string]
+    default: null
     inputBinding:
       position: 14
       prefix: "PROGRAM_GROUP_COMMAND_LINE="
@@ -132,6 +138,7 @@ inputs:
       
   - id: "#comment"
     type: ["null", string]
+    default: "null"
     inputBinding:
       position: 16
       prefix: "COMMENT="
@@ -160,7 +167,7 @@ inputs:
   - id: "#tmpdir"
     type: string
     inputBinding:
-      position: 19
+      position: 20
       prefix: "TMP_DIR="
       
 outputs:
