@@ -41,40 +41,47 @@ inputs:
         - ".bwt"
         - ".pac"
         - ".sa"
+        
+  - id: "#outputFileName"
+    type: string
+    inputBinding:
+      position: 3
+      prefix: "OUTPUT="
+
   - id: "#genomeAssembly"
     type: string
-    inputBinding: 3
-    prefix: "GENOME_ASSEMBLY="
-  
-  - id: "#id"
-    type: string
-    inputBinding: 
+    default: "null"
+    inputBinding:
       position: 4
-      prefix: "URI="
-      
-  - id: "#species"
+      prefix: "GENOME_ASSEMBLY="
+
+  - id: "#uri"
     type: string
+    default: "null"
     inputBinding:
       position: 5
-      prefix: "SPECIES="
-  
-  - id: "#truncateNames"
-    type: boolean
+      prefix: "URI="
+
+  - id: "#species"
+    type: string
+    default: "null"
     inputBinding:
       position: 6
+      prefix: "SPECIES="  
+
+  - id: "#truncateName"
+    type: ["null", string]
+    default: "true"
+    inputBinding:
+      position: 7
       prefix: "TRUNCATE_NAMES_AT_WHITESPACE="
       
   - id: "#numSequences"
     type: int
+    default: 2147483647
     inputBinding:
-      position: 6
+      position: 8
       prefix: "NUM_SEQUENCES="
-
-  - id: "#outputFileName"
-    type: string
-    inputBinding:
-      position: 7
-      prefix: "OUTPUT="
       
 outputs:
   - id: "#createDict_output"
@@ -85,12 +92,6 @@ outputs:
         script: /job/outputFileName
       
 baseCommand: []
-        
-
-      
-
-      
-
       
       
 
