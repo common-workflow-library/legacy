@@ -15,15 +15,19 @@ inputs:
     type: File
     description: |
       "Input vcf file."
+    streamable: true
     inputBinding:
       prefix: "-i"
 
+stdout:
+  "output.bedpe"
 
 outputs:
-  - id: "#output"
+  - id: "#bedpe"
     type: File
     description: "The bedpe file"
+    streamable: true
     outputBinding:
-      prefix: "-o"
+      glob: "output.bedpe"
 
-baseCommand: ["samtools"]
+baseCommand: ["vcftobedpe"]
