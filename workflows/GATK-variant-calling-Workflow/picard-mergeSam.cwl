@@ -31,6 +31,7 @@ inputs:
   - id: "#outputFileName_mergedSam"
     type: string
     inputBinding:
+      position: 2
       prefix: "OUTPUT="
 
   - id: "#inputFileName_mergedSam"
@@ -38,37 +39,35 @@ inputs:
       type: array
       items: File
       inputBinding: { prefix: "INPUT=" } 
-
-  - id: "#sortorder"
-    type: string
-    default: "coordinate"
-    inputBinding:
-      prefix: "SORT_ORDER="
+    inputBinding: { position: 3}
 
   - id: "#readSorted"
-    type: ["null", string]
+    type: ["null", boolean]
+    default: false
     inputBinding:
+      position: 5
       prefix: "ASSUME_SORTED="
 
   - id: "#mergeSequenceDictionaries"
-    type: ["null", string]
+    type: ["null", boolean]
+    default: false
     inputBinding:
+      position: 6
       prefix: "MERGE_SEQUENCE_DICTIONARIES="
       
   - id: "#useThreading"
-    type: ["null", string]
+    type: ["null", boolean]
+    default: false
     inputBinding:
+      position: 7
       prefix: "USE_THREADING="
-      
+
   - id: "#comment"
     type: string
+    default: "null"
     inputBinding:
+      position: 8
       prefix: "COMMENT="
-
-  - id: "#tmpdir"
-    type: string
-    inputBinding:
-      prefix: "TMP_DIR="
 
 outputs:
   - id: "#mergeSam_output"
