@@ -10,4 +10,8 @@ The purpose of keeping these two stepsfor preprocessing instead of including in 
 To run locally, you may install the reference implementation of CWL:
 
 1. Install the reference implementation of cwl-runner with  "pip install cwl-runner".
-2. 
+2. Download "test-data" from "https://www.dropbox.com/sh/0bpamtulxgdcf11/AACM8bpbT87BKudkEv8VGOXwa?dl=0" and save the directory in working directory. This test data contains 3 known variant files, sample forward read and reverse read file for NA12878 and compressed hg19.fa.zip and enough to run the given workflow. 
+3. Create a temporary directory named "tmpdir" in current working directory for further processing.
+4. Run the demo available with the following command: 
+   cwltool --tmpdir-prefix=$(pwd)/tmpdir --tmp-outdir-prefix=$(pwd)/tmpdir ./GATK-workflow.cwl ./GATK-workflow.json
+
