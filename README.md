@@ -1,8 +1,5 @@
 # CWL Tools & Workflows
 
-![CWL Logo](https://cloud.githubusercontent.com/assets/1330696/11716362/045022ce-9f52-11e5-827d-504773212449.jpg =100x100)
-
-
 [![Build Status](https://travis-ci.org/common-workflow-language/workflows.svg?branch=master)](https://travis-ci.org/common-workflow-language/workflows)
 
 
@@ -22,13 +19,15 @@ Please consider these recommendations before pull request:
 * If a tool has subcommands, like samtools or bwa use tool name dash subcommand name. For example, ```bwa-mem.cwl``` or ```samtools-index.cwl```
 * Place CWL files into tools directory
 * For each tool create job file and test file and place them into test directory
-  * Filename for the job file has to have the same basename plus *-job.json* (bwa-mem-job.json, samtools-index-job.json)
-  * Filename for the test file has to have the same basename plus *-test.yaml* (bwa-mem-test.yaml, samtools-index-test.yaml)
+  * Filename for the job file has to have the same basename plus *-job.json* (```bwa-mem-job.json```, ```samtools-index-job.json```)
+  * Filename for the test file has to have the same basename plus *-test.yaml* (```bwa-mem-test.yaml```, ```samtools-index-test.yaml```)
 
 Incomplete descriptions are welcome as long as they are usable.
 General encouragement to share early & often
 
 ## Testing CWLs
+
+Before pull request you can check your CWL files 
 
 Test directory includes:
 * dm3_chr4.fa - Chromosome 4 of Drosophila genome
