@@ -135,7 +135,7 @@ requirements:
   - $import: envvar-global.cwl
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerImageId: scidap/star:v2.5.0b
+    #dockerImageId: scidap/star:v2.5.0b #not yet ready
     dockerPull: scidap/star:v2.5.0b
     dockerFile: |
       #################################################################

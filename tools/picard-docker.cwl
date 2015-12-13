@@ -1,6 +1,6 @@
 class: DockerRequirement
 dockerPull: scidap/picard:v1.141
-dockerImageId: scidap/picard:v1.141
+#dockerImageId: scidap/picard:v1.141 #not yet ready
 dockerFile: |
   #################################################################
   # Dockerfile
