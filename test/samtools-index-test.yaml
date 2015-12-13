@@ -9,7 +9,7 @@
   doc: General test of command line generation
   outdir: "test-files/"
   output: {
-              "sorted": {
+              "index": {
                   "path": "test-files/SRR1031972.Aligned.sortedByCoord.out.bam.bai",
                   "size": 2592,
                   "class": "File",

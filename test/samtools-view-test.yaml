@@ -1,0 +1,13 @@
+- args: [
+    "samtools",
+    "view",
+    "-@",
+    "4",
+    "-b",
+    "-o",
+    "./test-files/SRR1031972.sorted.bam",
+    "./test-files/SRR1031972.Aligned.sortedByCoord.out.bam"
+  ]
+  job:  samtools-view-job.json
+  tool: ../tools/samtools-view.cwl
+  doc: General test of command line generation

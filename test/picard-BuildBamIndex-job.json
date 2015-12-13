@@ -1,8 +1,6 @@
 {
-    "input": {
+    "INPUT": {
         "class": "File",
         "path": "test-files/SRR1031972.Aligned.sortedByCoord.out.bam"
-    },
-    "output_name": "SRR1031972.rmdup.bam",
-    "single_end": true
+    }
 }

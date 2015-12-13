@@ -1,0 +1,10 @@
+- args: [
+    "alea",
+    "phaseVCF",
+    "./test-files/haps/",
+    "./test-files/alea",
+    "./test-files/hg19/strain.SNP.Indels.vcf"
+  ]
+  job:  alea-phaseVCF-job.json
+  tool: ../tools/alea-phaseVCF.cwl
+  doc: General test of command line generation
