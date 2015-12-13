@@ -1,5 +1,5 @@
 class: DockerRequirement
-dockerImageId: scidap/ucsc-userapps:v325
+#dockerImageId: scidap/ucsc-userapps:v325 #not yet ready
 dockerPull: scidap/ucsc-userapps:v325
 dockerFile: |
   #################################################################
