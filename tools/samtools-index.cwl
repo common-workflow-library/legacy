@@ -166,44 +166,44 @@ doap:maintainer:
     foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
 
 requirements:
-  - $import: envvar-global.cwl
-  - $import: samtools-docker.cwl
-  - class: InlineJavascriptRequirement
-    expressionLib:
-    - "var new_ext = function() { var ext=inputs.bai?'.bai':inputs.csi?'.csi':'.bai'; return inputs.input.path.split('/').slice(-1)[0]+ext; };"
+- $import: envvar-global.cwl
+- $import: samtools-docker.cwl
+- class: InlineJavascriptRequirement
+  expressionLib:
+  - "var new_ext = function() { var ext=inputs.bai?'.bai':inputs.csi?'.csi':'.bai'; return inputs.input.path.split('/').slice(-1)[0]+ext; };"
 
 inputs:
-  - id: "#input"
-    type: File
-    description: |
-      Input bam file.
-    inputBinding:
-      position: 2
+- id: "#input"
+  type: File
+  description: |
+    Input bam file.
+  inputBinding:
+    position: 2
 
-  - id: "#bai"
-    type: boolean
-    default: false
-    description: |
-      Generate BAI-format index for BAM files [default]
+- id: "#bai"
+  type: boolean
+  default: false
+  description: |
+    Generate BAI-format index for BAM files [default]
 
-  - id: "#csi"
-    type: boolean
-    default: false
-    description: |
-      Generate CSI-format index for BAM files
+- id: "#csi"
+  type: boolean
+  default: false
+  description: |
+    Generate CSI-format index for BAM files
 
-  - id: "#interval"
-    type: ["null", int]
-    description: |
-      Set minimum interval size for CSI indices to 2^INT [14]
-    inputBinding:
-      position: 1
-      prefix: "-m"
+- id: "#interval"
+  type: ["null", int]
+  description: |
+    Set minimum interval size for CSI indices to 2^INT [14]
+  inputBinding:
+    position: 1
+    prefix: "-m"
 
 outputs:
-  - id: "#sorted"
+  - id: "#index"
     type: File
-    description: "The sorted file"
+    description: "The index file"
     outputBinding:
       glob: $(new_ext())
 
