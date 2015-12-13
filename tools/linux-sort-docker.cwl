@@ -1,3 +1,3 @@
 class: DockerRequirement
-dockerPull: ubuntu:15.04
+dockerPull: ubuntu:15.10
 
