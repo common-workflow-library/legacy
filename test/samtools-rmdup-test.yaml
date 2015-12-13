@@ -1,0 +1,9 @@
+- args: [
+    "samtools",
+    "rmdup",
+    "./test-files/SRR1031972.Aligned.sortedByCoord.out.bam",
+    "SRR1031972.rmdup.bam"
+  ]
+  job:  samtools-rmdup-job.json
+  tool: ../tools/samtools-rmdup.cwl
+  doc: General test of command line generation
