@@ -1,0 +1,7 @@
+{
+  "reference": {
+    "path": "test-files/dm3_chr4.fa",
+    "class": "File"
+  },
+  "output_filename": "./test-files/dm3_chr4.dict"
+}
