@@ -1,6 +1,6 @@
 class: DockerRequirement
 dockerPull: scidap/alea:v1.2.2
-dockerImageId: scidap/alea:v1.2.2
+#dockerImageId: scidap/alea:v1.2.2 #not yet ready
 dockerFile: |
   #################################################################
   # Dockerfile
