@@ -1,0 +1,17 @@
+{
+  "reference": {
+    "path": "test-files/mouse/mm10.fa",
+    "class": "File"
+  },
+  "phased": {
+    "path": "test-files/mouse/mgp.v3.snps.rsIDdbSNPv137.vcf.gz",
+    "class": "File"
+  },
+  "phasedindels": {
+    "path": "test-files/mouse/mgp.v3.indels.rsIDdbSNPv137.vcf.gz",
+    "class": "File"
+  },
+  "outputDir": "./test-files/alea",
+  "strain1": "129S1_SvImJ",
+  "strain2": "CAST_EiJ"
+}

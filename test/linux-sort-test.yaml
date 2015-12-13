@@ -1,0 +1,9 @@
+- args: [
+    "sort",
+    "-k", "1,1",
+    "-k", "2,2n",
+    "./test-files/SRR1031972.bedGraph" ]
+  stdout: ./test-files/SRR1031972.bedGraph.sorted
+  job:  linux-sort-job.json
+  tool: ../tools/linux-sort.cwl
+  doc: General test of command line generation

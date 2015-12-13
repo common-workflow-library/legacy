@@ -1,0 +1,10 @@
+- args: ["bedtools", "genomecov",
+    "-ibam", "./test-files/SRR1031972.Aligned.sortedByCoord.out.bam",
+    "-g", "./test-files/dm3/chrNameLength.txt",
+    "-bg",
+    "-scale", "1",
+    "-split"]
+  stdout: test-files/SRR1031972.bedGraph
+  job:  bedtools-genomecov-job.json
+  tool: ../tools/bedtools-genomecov.cwl
+  doc: General test of command line generation

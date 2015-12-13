@@ -1,7 +1,0 @@
-{
-  "readFilesIn": [{"class": "File", "path": "../test-files/SRR1031972.fastq"}],
-  "genomeDir": {"class": "File", "path": "../test-files/dm3/"},
-  "outFileNamePrefix":"./test-files/SRR1031972.",
-  "outSAMunmapped1": "Within",
-  "runThreadN": 4
-}

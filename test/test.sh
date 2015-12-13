@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ev
+set -e
 
 # run a conformance test for all files in the tools/
 o_pwd=$(pwd)

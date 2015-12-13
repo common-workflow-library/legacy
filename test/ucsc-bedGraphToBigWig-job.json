@@ -1,0 +1,11 @@
+{
+    "input": {
+        "class": "File",
+        "path": "test-files/SRR1031972.bedGraph.sorted"
+    },
+    "genomeFile": {
+        "class": "File",
+        "path": "test-files/dm3/chrNameLength.txt"
+    },
+    "bigWig": "test-files/SRR1031972.bigWig"
+}

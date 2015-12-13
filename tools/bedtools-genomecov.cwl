@@ -1,71 +1,147 @@
 #!/usr/bin/env cwl-runner
 
-"@context":
-  "cwl": "https://w3id.org/cwl/cwl#"
-  "foaf": "http://xmlns.com/foaf/0.1/"
-  "doap": "http://usefulinc.com/ns/doap"
-  "adms": "http://purl.org/adms/"
-  "admssw": "http://purl.org/adms/sw/"
+$namespaces:
+  dct: http://purl.org/dc/terms/
+  foaf: http://xmlns.com/foaf/0.1/
+  doap: http://usefulinc.com/ns/doap#
+  adms: http://www.w3.org/ns/adms#
+  dcat: http://www.w3.org/ns/dcat#
 
-adms:Asset:
-  admssw:SoftwareProject:
-    doap:name: "bedtools"
-    doap:description: >
-      A software suite for the comparison, manipulation and annotation of genomic features in browser extensible data (BED) and general feature format (GFF) format.
-      BEDTools also supports the comparison of sequence alignments in BAM format to both BED and GFF features.
-      The tools are extremely efficient and allow the user to compare large datasets (e.g. next-generation sequencing data) with both public and custom genome annotation tracks.
-      BEDTools can be combined with one another as well as with standard UNIX commands, thus facilitating routine genomics tasks as well as pipelines that can quickly answer intricate questions of large genomic datasets.
-    doap:homepage: "http://bedtools.readthedocs.org"
-    doap:release:
-      - doap:revision: "2.25.0"
-    doap:license: "GPLv2"
-    doap:category: "commandline tool"
-    doap:programming-language: "C++"
-    doap:repository:
-      - doap:GitRepository:
-        doap:location: "https://github.com/arq5x/bedtools2"
-    foaf:Organization:
-      - foaf:name: "Department of Biochemistry and Molecular Genetics, University of Virginia School of Medicine"
-      - foaf:name: "Center for Public Health Genomics, University of Virginia, Charlottesville, VA 22908, USA"
-    foaf:publications:
-      - foaf:title: "(Quinlan and Hall, 2010) BEDTools: a flexible suite of utilities for comparing genomic features. Bioinformatics."
-        foaf:homepage: "http://www.ncbi.nlm.nih.gov/pubmed/20110278"
-    doap:maintainer:
-      foaf:Person:
-        foaf:name: "Aaron R. Quinlan"
-        foaf:mbox: "aaronquinlan at gmail.com"
-  adms:AssetDistribution:
-    doap:name: "bedtools-genomecov.cwl"
-    doap:description: "Developed for CWL consortium http://commonwl.org/"
-    doap:specification: "http://common-workflow-language.github.io/draft-3/"
-    doap:release: "cwl:draft-3.dev2"
-    doap:homepage: "http://commonwl.org/"
-    doap:location: "https://github.com/common-workflow-language/workflows/blob/master/tools/bedtools-genomecov.cwl"
-    doap:repository:
-      - doap:GitRepository:
-        doap:location: "https://github.com/common-workflow-language/workflows"
-    doap:maintainer:
-      foaf:Person:
-        foaf:openid: "http://orcid.org/0000-0001-9102-5681"
-        foaf:name: "Andrey Kartashov"
-        foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
-        foaf:organization: "Cincinnati Children's Hospital Medical Center"
+$schemas:
+- http://dublincore.org/2012/06/14/dcterms.rdf
+- http://xmlns.com/foaf/spec/20140114.rdf
+- http://usefulinc.com/ns/doap#
+- http://www.w3.org/ns/adms#
+- http://www.w3.org/ns/dcat.rdf
 
-cwlVersion: "cwl:draft-3.dev2"
+cwlVersion: "cwl:draft-3.dev3"
 
 class: CommandLineTool
 
+adms:includedAsset:
+  doap:name: "bedtools"
+  doap:description: |
+    A software suite for the comparison, manipulation and annotation of genomic features in browser extensible data (BED) and general feature format (GFF) format.
+    BEDTools also supports the comparison of sequence alignments in BAM format to both BED and GFF features.
+    The tools are extremely efficient and allow the user to compare large datasets (e.g. next-generation sequencing data) with both public and custom genome annotation tracks.
+    BEDTools can be combined with one another as well as with standard UNIX commands, thus facilitating routine genomics tasks as well as pipelines that can quickly answer intricate questions of large genomic datasets.
+  doap:homepage: "http://bedtools.readthedocs.org"
+  doap:repository:
+  - class: doap:GitRepository
+    doap:location: "https://github.com/arq5x/bedtools2"
+  doap:release:
+  - class: doap:Version
+    doap:revision: "2.25.0"
+  doap:license: "GPLv2"
+  doap:category: "commandline tool"
+  doap:programming-language: "C++"
+  foaf:publications:
+  - id: urn:pmid:20110278
+    foaf:title: "Aaron R. Quinlan, Ira M. Hall (2010) BEDTools: a flexible suite of utilities for comparing genomic features. Bioinformatics, 26(6) 841-842, http://dx.doi.org/10.1093/bioinformatics/btq033"
+    foaf:homepage: "http://bioinformatics.oxfordjournals.org/content/26/6/841"
+  doap:maintainer:
+  - class: foaf:Person
+    foaf:name: "Aaron R. Quinlan"
+    foaf:mbox: "aaronquinlan at gmail.com"
+    dct:isPartOf:
+    - class: foaf:Organization
+      foaf:name: "Department of Biochemistry and Molecular Genetics, University of Virginia School of Medicine"
+    - class: foaf:Organization
+      foaf:name: "Center for Public Health Genomics, University of Virginia, Charlottesville, VA 22908, USA"
+
 description: |
-  Tool:    bedtools genomecov (aka genomeCoverageBed)
-  Sources: https://github.com/arq5x/bedtools2
-  Summary: Compute the coverage of a feature file among a genome.
-  Usage: bedtools genomecov [OPTIONS] -i <bed/gff/vcf> -g <genome>
+  bedtools-genomecov.cwl is developed for CWL consortium
+
+  Original tool usage:
+      Tool:    bedtools genomecov (aka genomeCoverageBed)
+      Sources: https://github.com/arq5x/bedtools2
+      Summary: Compute the coverage of a feature file among a genome.
+      Usage: bedtools genomecov [OPTIONS] -i <bed/gff/vcf> -g <genome>
+
+doap:name: "bedtools-genomecov.cwl"
+dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/bedtools-genomecov.cwl"
+
+dct:isPartOf:
+  doap:name: "CWL Workflows"
+  doap:homepage: "http://commonwl.org/"
+  doap:license: "Apache2"
+
+  doap:implements:
+  - class: doap:Specification
+    doap:homepage: "http://common-workflow-language.github.io/draft-3/"
+
+  doap:repository:
+  - class: doap:GitRepository
+    doap:location: "https://github.com/common-workflow-language/workflows"
+
+  dct:creator:
+  - class: foaf:Organization
+    foaf:name: "Curoverse"
+    foaf:member:
+    - class: foaf:Person
+      id: "http://orcid.org/0000-0003-3566-7705"
+      foaf:name: "Peter Amstutz"
+      foaf:mbox: "mailto:peter.amstutz@curoverse.com"
+  - class: foaf:Organization
+    foaf:name: "Seven Bridges Genomics"
+    foaf:member:
+    - class: foaf:Person
+      id: "mailto:nebojsa.tijanic@sbgenomics.com"
+      foaf:name: "Nebojša Tijanić"
+      foaf:mbox: "mailto:nebojsa.tijanic@sbgenomics.com"
+
+  dct:contributor:
+  - class: foaf:Organization
+    foaf:name: "Seven Bridges Genomics"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Luka Stojanovic"
+      foaf:mbox: "mailto:luka.stojanovic@sbgenomics.com"
+  - class: foaf:Organization
+    foaf:name: "Galaxy Project, Pennsylvania State University"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "John Chilton"
+      foaf:mbox: "mailto:jmchilton@gmail.com"
+  - class: foaf:Organization
+    foaf:name: "University of California, Davis"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Michael R. Crusoe"
+      foaf:mbox: "mailto:crusoe@ucdavis.edu"
+  - class: foaf:Organization
+    foaf:name: "Institut Pasteur"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Hervé Ménager"
+      foaf:mbox: "mailto:herve.menager@gmail.com"
+  - class: foaf:Organization
+    foaf:name: "BioDatomics"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Maxim Mikheev"
+      foaf:mbox: "mailto:mikhmv@biodatomics.com"
+  - class: foaf:Organization
+    foaf:name: "University of Manchester"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Stian Soiland-Reyes"
+      foaf:mbox: "mailto:soiland-reyes@cs.manchester.ac.uk"
+
+doap:maintainer:
+- class: foaf:Organization
+  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
+  foaf:member:
+  - class: foaf:Person
+    id: "http://orcid.org/0000-0001-9102-5681"
+    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
+    foaf:name: "Andrey Kartashov"
+    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
 
 requirements:
-  - "@import": envvar-global.cwl
-  - "@import": bedtools-docker.cwl
+  - $import: envvar-global.cwl
+  - $import: bedtools-docker.cwl
   - class: InlineJavascriptRequirement
-
 
 inputs:
   - id: "#input"

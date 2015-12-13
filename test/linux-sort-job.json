@@ -1,6 +1,6 @@
 {
     "input": [{
-        "path": "../test-files/SRR1031972.bedGraph",
+        "path": "test-files/SRR1031972.bedGraph",
         "class": "File"
     }],
     "output": "./test-files/SRR1031972.bedGraph.sorted",

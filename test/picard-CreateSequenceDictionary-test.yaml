@@ -1,0 +1,16 @@
+- args: [
+    "java", "-Xmx4g",
+    "-jar", "/usr/local/bin/picard.jar",
+    "CreateSequenceDictionary",
+    "OUTPUT=./test-files/dm3_chr4.dict",
+    "REFERENCE=./test-files/dm3_chr4.fa"
+  ]
+  job:  picard-CreateSequenceDictionary-job.json
+  tool: ../tools/picard-CreateSequenceDictionary.cwl
+  doc: General test of command line generation, and real one
+  output: {
+        "path": "test-files/dm3_chr4.dict",
+        "size": 131,
+        "class": "File",
+        "checksum": "sha1$4127f43b774ac27efd354ccfbb1f7dd94e2fa847"
+  }
