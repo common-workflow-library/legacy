@@ -1,0 +1,11 @@
+{
+  "hapsDir": {
+    "path": "test-files/haps/",
+    "class": "File"
+  },
+  "unphased": {
+    "path": "test-files/hg19/strain.SNP.Indels.vcf",
+    "class": "File"
+  },
+  "outputPrefix": "./test-files/alea"
+}
