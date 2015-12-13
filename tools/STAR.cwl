@@ -168,13 +168,13 @@ requirements:
       ENV URL "https://github.com/alexdobin/STAR/archive/${VERSION}.tar.gz"
 
       RUN wget -q -O - $URL | tar -zxv && \
-      cd ${NAME}-${VERSION}/source && \
-      make -j 4 && \
-      cd .. && \
-      cp ./bin/Linux_x86_64_static/STAR /usr/local/bin/ && \
-      cd .. && \
-      strip /usr/local/bin/${NAME}; true && \
-      rm -rf ./${NAME}-${VERSION}/
+          cd ${NAME}-${VERSION}/source && \
+          make -j 4 && \
+          cd .. && \
+          cp ./bin/Linux_x86_64_static/STAR /usr/local/bin/ && \
+          cd .. && \
+          strip /usr/local/bin/${NAME}; true && \
+          rm -rf ./${NAME}-${VERSION}/
 
 inputs:
 
