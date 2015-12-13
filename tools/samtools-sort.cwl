@@ -226,7 +226,7 @@ inputs:
     position: 1
 
 outputs:
-- id: "output_file"
+- id: "sorted"
   type: File
   outputBinding:
     glob: $(inputs.output_name)
