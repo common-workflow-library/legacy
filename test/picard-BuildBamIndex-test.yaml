@@ -1,0 +1,13 @@
+- args: [
+        "java",
+        "-Xmx4g",
+        "-jar",
+        "/usr/local/bin/picard.jar",
+        "BuildBamIndex",
+        "INPUT=./test-files/SRR1031972.Aligned.sortedByCoord.out.bam",
+        "OUTPUT=SRR1031972.Aligned.sortedByCoord.out.bam.bai"
+        ]
+  job:  picard-BuildBamIndex-job.json
+  tool: ../tools/picard-BuildBamIndex.cwl
+  doc: General test of command line generation
+  outdir: "test-files/"

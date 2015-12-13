@@ -24,7 +24,7 @@ adms:includedAsset:
     A set of Java command line tools for manipulating high-throughput sequencing data (HTS) data and formats.
     Picard is implemented using the HTSJDK Java library HTSJDK, supporting accessing of common file formats,
     such as SAM and VCF, used for high-throughput sequencing data.
-    http://broadinstitute.github.io/picard/command-line-overview.html#CreateSequenceDictionary
+    http://broadinstitute.github.io/picard/command-line-overview.html#BuildBamIndex
   doap:homepage: "http://broadinstitute.github.io/picard/"
   doap:repository:
   - class: doap:GitRepository
@@ -40,11 +40,11 @@ adms:includedAsset:
     foaf:name: "Broad Institute"
 
 description: |
-  picard-CreateSequenceDictionary.cwl is developed for CWL consortium
-  Read fasta or fasta.gz containing reference sequences, and write as a SAM or BAM file with only sequence dictionary.
+  picard-BuildBamIndex.cwl is developed for CWL consortium
+    Generates a BAM index (.bai) file.
 
-doap:name: "picard-CreateSequenceDictionary.cwl"
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/picard-CreateSequenceDictionary.cwl"
+doap:name: "picard-BuildBamIndex.cwl"
+dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/picard-BuildBamIndex.cwl"
 
 dct:isPartOf:
   doap:name: "CWL Workflows"
@@ -113,6 +113,17 @@ dct:isPartOf:
       foaf:name: "Stian Soiland-Reyes"
       foaf:mbox: "mailto:soiland-reyes@cs.manchester.ac.uk"
 
+dct:creator:
+- class: foaf:Organization
+  foaf:name: "UNIVERSITY OF MELBOURNE"
+  foaf:member:
+  - class: foaf:Person
+    id: "farahk@student.unimelb.edu.au"
+    foaf:mbox: "mailto:farahk@student.unimelb.edu.au"
+  - class: foaf:Person
+    id: "skanwal@student.unimelb.edu.au"
+    foaf:mbox: "mailto:skanwal@student.unimelb.edu.au"
+
 doap:maintainer:
 - class: foaf:Organization
   foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
@@ -129,90 +140,40 @@ requirements:
 - class: InlineJavascriptRequirement
 
 inputs:
-- id: "reference"
-  type: File
-  description: |
-    Input reference fasta or fasta.gz
-  inputBinding:
-    prefix: "REFERENCE="
-    separate: false
-    position: 4
 
-- id: "output_filename"
+- id: "java_arg"
   type: string
-  description: |
-    Output SAM or BAM file containing only the sequence dictionary
+  default: "-Xmx4g"
   inputBinding:
-    prefix: "OUTPUT="
-    separate: false
-    position: 4
+    position: 1
 
-- id: "GENOME_ASSEMBLY"
-  type: ["null",string]
-  description: |
-    Put into AS field of sequence dictionary entry if supplied
-  inputBinding:
-    prefix: "GENOME_ASSEMBLY="
-    separate: false
-    position: 4
-
-- id: "URI"
-  type: ["null",string]
-  description: |
-    Put into UR field of sequence dictionary entry.
-    If not supplied, input reference file is used
-  inputBinding:
-    prefix: "URI="
-    separate: false
-    position: 4
-
-- id: "SPECIES"
-  type: ["null",string]
-  description: |
-    Put into SP field of sequence dictionary entry
-  inputBinding:
-    prefix: "SPECIES="
-    separate: false
-    position: 4
-
-- id: "TRUNCATE_NAMES_AT_WHITESPACE"
-  type: ["null",boolean]
-  description: |
-    Make sequence name the first word from the > line in the fasta file.  By default the
-    entire contents of the > line is used, excluding leading and trailing whitespace.
-    Default value: true. This option can be set to 'null' to clear the default value.
-    Possible values: {true, false}
-  inputBinding:
-    prefix: "TRUNCATE_NAMES_AT_WHITESPACE="
-    separate: false
-    position: 4
-
-- id: "NUM_SEQUENCES"
-  type: ["null",int]
-  description: |
-    Stop after writing this many sequences.  For testing.
-    Default value: 2147483647.
-  inputBinding:
-    prefix: "NUM_SEQUENCES="
-    separate: false
-    position: 4
-
-outputs:
-- id: "#output"
+- id: "INPUT"
   type: File
   description: >
-    Output SAM or BAM file containing only the sequence dictionary Required.
-  outputBinding:
-    glob: $(inputs.output_filename)
+   INPUT String A BAM file or URL to process. Must be sorted in coordinate order.
+  inputBinding:
+    position: 4
+    separate: false
+    prefix: "INPUT="
+
+outputs:
+  - id: "index"
+    type: File
+    outputBinding: 
+      glob: $(inputs.OUTPUT)
 
 baseCommand: ["java"]
 
 arguments:
-- valueFrom: "-Xmx4g"
-  position: 1
 - valueFrom: "/usr/local/bin/picard.jar"
   position: 2
   prefix: "-jar"
-- valueFrom: "CreateSequenceDictionary"
+- valueFrom: "BuildBamIndex"
   position: 3
-
+- valueFrom: $(inputs.INPUT.path.split('/').slice(-1)[0]+".bai")
+  position: 5
+  separate: false
+  prefix: "OUTPUT="
+#  description: >
+#    OUTPUT File The BAM index file. Defaults to x.bai if INPUT is x.bam, otherwise INPUT.bai.
+#    If INPUT is a URL and OUTPUT is unspecified, defaults to a file in the current directory.
