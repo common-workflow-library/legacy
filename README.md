@@ -1,7 +1,5 @@
 # CWL Tools & Workflows
 
-![CWL Logo](https://cloud.githubusercontent.com/assets/1330696/11716362/045022ce-9f52-11e5-827d-504773212449.jpg =100x100)
-
 
 [![Build Status](https://travis-ci.org/common-workflow-language/workflows.svg?branch=master)](https://travis-ci.org/common-workflow-language/workflows)
 
