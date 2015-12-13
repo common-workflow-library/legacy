@@ -1,64 +1,180 @@
 #!/usr/bin/env cwl-runner
 
-"@context":
-  "cwl": "https://w3id.org/cwl/cwl#"
-  "foaf": "http://xmlns.com/foaf/0.1/"
-  "doap": "http://usefulinc.com/ns/doap"
-  "adms": "http://purl.org/adms/"
-  "admssw": "http://purl.org/adms/sw/"
+$namespaces:
+  dct: http://purl.org/dc/terms/
+  foaf: http://xmlns.com/foaf/0.1/
+  doap: http://usefulinc.com/ns/doap#
+  adms: http://www.w3.org/ns/adms#
+  dcat: http://www.w3.org/ns/dcat#
 
-adms:Asset:
-  admssw:SoftwareProject:
-    doap:name: "STAR"
-    doap:description: >
-      Aligns RNA-seq reads to a reference genome using uncompressed suffix arrays.
-      STAR has a potential for accurately aligning long (several kilobases) reads that are
-      emerging from the third-generation sequencing technologies.
-    doap:homepage: "https://github.com/alexdobin/STAR"
-    doap:repository:
-      - doap:GitRepository:
-        doap:location: "https://github.com/alexdobin/STAR.git"
-    doap:release:
-      - doap:revision: "2.5.0a"
-    doap:license: "GPL"
-    doap:category: "commandline tool"
-    doap:programming-language: "C++"
-    foaf:Organization:
-      - foaf:name: "Cold Spring Harbor Laboratory, Cold Spring Harbor, NY, USA"
-      - foaf:name: "2Pacific Biosciences, Menlo Park, CA, USA"
-    foaf:publications:
-      - foaf:title: "(Dobin et al., 2013) STAR: ultrafast universal RNA-seq aligner. Bioinformatics."
-        foaf:homepage: "http://www.ncbi.nlm.nih.gov/pubmed/23104886"
-    doap:developer:
-      foaf:Person:
-        foaf:name: "Alexander Dobin"
-        foaf:mbox: "mailto:dobin at cshl.edu"
-        foaf:fundedBy: "This work was funded by NHGRI (NIH) grant U54HG004557"
-  adms:AssetDistribution:
-    doap:name: "STAR.cwl"
-    doap:description: "Developed for CWL consortium http://commonwl.org/"
-    doap:specification: "http://common-workflow-language.github.io/draft-3/"
-    doap:release: "cwl:draft-3.dev2"
-    doap:homepage: "http://commonwl.org/"
-    doap:location: "https://github.com/common-workflow-language/workflows/blob/master/tools/STAR.cwl"
-    doap:repository:
-      - doap:GitRepository:
-        doap:location: "https://github.com/common-workflow-language/workflows"
-    doap:maintainer:
-      foaf:Person:
-        foaf:openid: "http://orcid.org/0000-0001-9102-5681"
-        foaf:name: "Andrey Kartashov"
-        foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
-        foaf:organization: "Cincinnati Children's Hospital Medical Center"
+$schemas:
+- http://dublincore.org/2012/06/14/dcterms.rdf
+- http://xmlns.com/foaf/spec/20140114.rdf
+- http://usefulinc.com/ns/doap#
+- http://www.w3.org/ns/adms#
+- http://www.w3.org/ns/dcat.rdf
 
-cwlVersion: "cwl:draft-3.dev2"
+cwlVersion: "cwl:draft-3.dev3"
+
 class: CommandLineTool
 
+adms:includedAsset:
+  doap:name: "STAR"
+  doap:description: >
+    Aligns RNA-seq reads to a reference genome using uncompressed suffix arrays.
+    STAR has a potential for accurately aligning long (several kilobases) reads that are
+    emerging from the third-generation sequencing technologies.
+  doap:homepage: "https://github.com/alexdobin/STAR"
+  doap:repository:
+  - class: doap:GitRepository
+    doap:location: "https://github.com/alexdobin/STAR.git"
+  doap:release:
+  - class: doap:Version
+    doap:revision: "2.5.0b"
+  doap:license: "GPL"
+  doap:category: "commandline tool"
+  doap:programming-language: "C++"
+  foaf:publications:
+  - id: urn:pmid:23104886
+    foaf:title: "Dobin, A., Davis, C. A., Schlesinger, F., Drenkow, J., Zaleski, C., Jha, S., Gingeras, T. R. (2013). STAR: ultrafast universal RNA-seq aligner. Bioinformatics, 29(1), 15–21. http://doi.org/10.1093/bioinformatics/bts635"
+    foaf:homepage: "http://bioinformatics.oxfordjournals.org/content/29/1/15.full"
+  doap:developer:
+  - class: foaf:Organization
+    foaf:name: "Cold Spring Harbor Laboratory, Cold Spring Harbor, NY, USA"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Alexander Dobin"
+      foaf:mbox: "mailto:dobin at cshl.edu"
+      foaf:fundedBy: "NHGRI (NIH) grant U54HG004557"
+
+description: |
+  STAR.cwl is developed for CWL consortium
+
+doap:name: "STAR.cwl"
+dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/STAR.cwl"
+
+dct:isPartOf:
+  doap:name: "CWL Workflows"
+  doap:homepage: "http://commonwl.org/"
+  doap:license: "Apache2"
+
+  doap:implements:
+  - class: doap:Specification
+    doap:homepage: "http://common-workflow-language.github.io/draft-3/"
+
+  doap:repository:
+  - class: doap:GitRepository
+    doap:location: "https://github.com/common-workflow-language/workflows"
+
+  dct:creator:
+  - class: foaf:Organization
+    foaf:name: "Curoverse"
+    foaf:member:
+    - class: foaf:Person
+      id: "http://orcid.org/0000-0003-3566-7705"
+      foaf:name: "Peter Amstutz"
+      foaf:mbox: "mailto:peter.amstutz@curoverse.com"
+  - class: foaf:Organization
+    foaf:name: "Seven Bridges Genomics"
+    foaf:member:
+    - class: foaf:Person
+      id: "mailto:nebojsa.tijanic@sbgenomics.com"
+      foaf:name: "Nebojša Tijanić"
+      foaf:mbox: "mailto:nebojsa.tijanic@sbgenomics.com"
+
+  dct:contributor:
+  - class: foaf:Organization
+    foaf:name: "Seven Bridges Genomics"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Luka Stojanovic"
+      foaf:mbox: "mailto:luka.stojanovic@sbgenomics.com"
+  - class: foaf:Organization
+    foaf:name: "Galaxy Project, Pennsylvania State University"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "John Chilton"
+      foaf:mbox: "mailto:jmchilton@gmail.com"
+  - class: foaf:Organization
+    foaf:name: "University of California, Davis"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Michael R. Crusoe"
+      foaf:mbox: "mailto:crusoe@ucdavis.edu"
+  - class: foaf:Organization
+    foaf:name: "Institut Pasteur"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Hervé Ménager"
+      foaf:mbox: "mailto:herve.menager@gmail.com"
+  - class: foaf:Organization
+    foaf:name: "BioDatomics"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Maxim Mikheev"
+      foaf:mbox: "mailto:mikhmv@biodatomics.com"
+  - class: foaf:Organization
+    foaf:name: "University of Manchester"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Stian Soiland-Reyes"
+      foaf:mbox: "mailto:soiland-reyes@cs.manchester.ac.uk"
+
+doap:maintainer:
+- class: foaf:Organization
+  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
+  foaf:member:
+  - class: foaf:Person
+    id: "http://orcid.org/0000-0001-9102-5681"
+    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
+    foaf:name: "Andrey Kartashov"
+    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
+
+
 requirements:
-  - "@import": envvar-global.cwl
+  - $import: envvar-global.cwl
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: scidap/star:v2.5.0a
+    dockerImageId: scidap/star:v2.5.0b
+    dockerPull: scidap/star:v2.5.0b
+    dockerFile: |
+      #################################################################
+      # Dockerfile
+      #
+      # Software:         STAR
+      # Software Version: 2.5.0b
+      # Description:      STAR image for SciDAP
+      # Website:          https://github.com/alexdobin/STAR, http://scidap.com/
+      # Provides:         STAR
+      # Base Image:       scidap/scidap:v0.0.1
+      # Build Cmd:        docker build --rm -t scidap/star:v2.5.0b .
+      # Pull Cmd:         docker pull scidap/star:v2.5.0b
+      # Run Cmd:          docker run --rm scidap/star:v2.5.0b STAR
+      #################################################################
+
+      ### Base Image
+      FROM scidap/scidap:v0.0.1
+      MAINTAINER Andrey V Kartashov "porter@porter.st"
+      ENV DEBIAN_FRONTEND noninteractive
+
+      ################## BEGIN INSTALLATION ######################
+
+      WORKDIR /tmp
+
+      ### Install STAR
+
+      ENV VERSION 2.5.0b
+      ENV NAME STAR
+      ENV URL "https://github.com/alexdobin/STAR/archive/${VERSION}.tar.gz"
+
+      RUN wget -q -O - $URL | tar -zxv && \
+      cd ${NAME}-${VERSION}/source && \
+      make -j 4 && \
+      cd .. && \
+      cp ./bin/Linux_x86_64_static/STAR /usr/local/bin/ && \
+      cd .. && \
+      strip /usr/local/bin/${NAME}; true && \
+      rm -rf ./${NAME}-${VERSION}/
 
 inputs:
 
@@ -1694,535 +1810,3 @@ outputs:
           }
 
 baseCommand: ["STAR"]
-
-description: |
-  --versionSTAR             020201
-      int>0: STAR release numeric ID. Please do not change this value!
-  --versionGenome           020101 020200
-      int>0: oldest value of the Genome version compatible with this STAR release. Please do not change this value!
-
-  --parametersFiles          -
-      string: name of a user-defined parameters file, "-": none. Can only be defined on the command line.
-
-  --sysShell            -
-      string: path to the shell binary, preferrably bash, e.g. /bin/bash. 
-                      - ... the default shell is executed, typically /bin/sh. This was reported to fail on some Ubuntu systems - then you need to specify path to bash.
-
-
-  --runMode                         alignReads
-      string: type of the run:    
-                                  alignReads             ... map reads
-                                  genomeGenerate         ... generate genome files
-                                  inputAlignmentsFromBAM ... input alignments from BAM. Presently only works with --outWigType and --bamRemoveDuplicates.
-
-  --runThreadN                      1
-      int: number of threads to run STAR
-
-  --runDirPerm                      User_RWX
-      string: permissions for the directories created at the run-time. 
-                                  User_RWX ... user-read/write/execute
-                                  All_RWX  ... all-read/write/execute (same as chmod 777)
-
-  --runRNGseed                      777
-      int: random number generator seed.
-
-
-  --genomeDir                   ./GenomeDir/
-      string: path to the directory where genome files are stored (if runMode!=generateGenome) or will be generated (if runMode==generateGenome)
-
-  --genomeLoad                NoSharedMemory
-      string: mode of shared memory usage for the genome files
-                            LoadAndKeep     ... load genome into shared and keep it in memory after run
-                            LoadAndRemove   ... load genome into shared but remove it after run
-                            LoadAndExit     ... load genome into shared memory and exit, keeping the genome in memory for future runs
-                            Remove          ... do not map anything, just remove loaded genome from memory
-                            NoSharedMemory  ... do not use shared memory, each job will have its own private copy of the genome
-
-
-
-
-  --genomeFastaFiles            -
-      string(s): path(s) to the fasta files with genomic sequences for genome generation, separated by spaces. Only used if runMode==genomeGenerate. These files should be plain text FASTA files, they *cannot* be zipped.
-
-  --genomeChrBinNbits           18
-      int: =log2(chrBin), where chrBin is the size of the bins for genome storage: each chromosome will occupy an integer number of bins
-
-  --genomeSAindexNbases         14
-      int: length (bases) of the SA pre-indexing string. Typically between 10 and 15. Longer strings will use much more memory, but allow faster searches.
-
-  --genomeSAsparseD             1
-      int>0: suffux array sparsity, i.e. distance between indices: use bigger numbers to decrease needed RAM at the cost of mapping speed reduction
-
-  --sjdbFileChrStartEnd                     -
-      string(s): path to the files with genomic coordinates (chr <tab> start <tab> end <tab> strand) for the splice junction introns. Multiple files can be supplied wand will be concatenated.
-
-  --sjdbGTFfile                             -
-      string: path to the GTF file with annotations
-
-  --sjdbGTFchrPrefix                        -
-      string: prefix for chromosome names in a GTF file (e.g. 'chr' for using ENSMEBL annotations with UCSC geneomes)
-
-  --sjdbGTFfeatureExon                      exon
-      string: feature type in GTF file to be used as exons for building transcripts
-
-  --sjdbGTFtagExonParentTranscript          transcript_id
-      string: tag name to be used as exons' transcript-parents (default "transcript_id" works for GTF files)
-
-  --sjdbGTFtagExonParentGene                gene_id
-      string: tag name to be used as exons' gene-parents (default "gene_id" works for GTF files)
-
-  --sjdbOverhang                            100
-      int>0: length of the donor/acceptor sequence on each side of the junctions, ideally = (mate_length - 1)
-
-  --sjdbScore                               2
-      int: extra alignment score for alignmets that cross database junctions
-
-  --sjdbInsertSave                          Basic
-      string: which files to save when sjdb junctions are inserted on the fly at the mapping step
-  					Basic ... only small junction / transcript files
-  					All   ... all files including big Genome, SA and SAindex - this will create a complete genome directory
-
-  --inputBAMfile                -
-      string: path to BAM input file, to be used with --runMode inputAlignmentsFromBAM
-
-
-  --readFilesIn                 Read1 Read2
-      string(s): paths to files that contain input read1 (and, if needed,  read2)
-
-  --readFilesCommand             -
-      string(s): command line to execute for each of the input file. This command should generate FASTA or FASTQ text and send it to stdout
-                 For example: zcat - to uncompress .gz files, bzcat - to uncompress .bz2 files, etc.
-
-  --readMapNumber               -1
-      int: number of reads to map from the beginning of the file
-                              -1: map all reads
-
-  --readMatesLengthsIn          NotEqual
-      string: Equal/NotEqual - lengths of names,sequences,qualities for both mates are the same  / not the same. NotEqual is safe in all situations.
-
-  --readNameSeparator           /
-      string(s): character(s) separating the part of the read names that will be trimmed in output (read name after space is always trimmed)
-
-  --clip3pNbases                 0
-      int(s): number(s) of bases to clip from 3p of each mate. If one value is given, it will be assumed the same for both mates.
-
-  --clip5pNbases                 0
-      int(s): number(s) of bases to clip from 5p of each mate. If one value is given, it will be assumed the same for both mates.
-
-  --clip3pAdapterSeq            -
-      string(s): adapter sequences to clip from 3p of each mate.  If one value is given, it will be assumed the same for both mates.
-
-  --clip3pAdapterMMp            0.1
-      double(s): max proportion of mismatches for 3p adpater clipping for each mate.  If one value is given, it will be assumed the same for both mates.
-
-  --clip3pAfterAdapterNbases    0
-      int(s): number of bases to clip from 3p of each mate after the adapter clipping. If one value is given, it will be assumed the same for both mates.
-
-
-
-  --limitGenomeGenerateRAM               31000000000
-      int>0: maximum available RAM (bytes) for genome generation
-
-  --limitIObufferSize                    150000000
-      int>0: max available buffers size (bytes) for input/output, per thread
-
-  --limitOutSAMoneReadBytes              100000
-      int>0: max size of the SAM record for one read. Recommended value: >(2*(LengthMate1+LengthMate2+100)*outFilterMultimapNmax
-
-  --limitOutSJoneRead                    1000
-      int>0: max number of junctions for one read (including all multi-mappers)
-
-  --limitOutSJcollapsed                  1000000
-      int>0: max number of collapsed junctions
-
-  --limitBAMsortRAM                         0
-      int>=0: maximum available RAM for sorting BAM. If =0, it will be set to the genome index size. 0 value can only be used with --genomeLoad NoSharedMemory option.
-
-  --limitSjdbInsertNsj                     1000000
-      int>=0: maximum number of junction to be inserted to the genome on the fly at the mapping stage, including those from annotations and those detected in the 1st step of the 2-pass run
-
-
-  --outFileNamePrefix               ./
-      string: output files name prefix (including full or relative path). Can only be defined on the command line.
-
-  --outTmpDir                       -
-      string: path to a directory that will be used as temporary by STAR. All contents of this directory will be removed!
-              - the temp directory will default to outFileNamePrefix_STARtmp
-
-  --outStd                          Log
-      string: which output will be directed to stdout (standard out)
-                                  Log                    ... log messages
-                                  SAM                    ... alignments in SAM format (which normally are output to Aligned.out.sam file), normal standard output will go into Log.std.out
-                                  BAM_Unsorted           ... alignments in BAM format, unsorted. Requires --outSAMtype BAM Unsorted
-                                  BAM_SortedByCoordinate ... alignments in BAM format, unsorted. Requires --outSAMtype BAM SortedByCoordinate
-                                  BAM_Quant              ... alignments to transcriptome in BAM format, unsorted. Requires --quantMode TranscriptomeSAM
-
-  --outReadsUnmapped                None
-     string: output of unmapped reads (besides SAM)
-                                  None    ... no output
-                                  Fastx   ... output in separate fasta/fastq files, Unmapped.out.mate1/2
-
-  --outQSconversionAdd              0
-     int: add this number to the quality score (e.g. to convert from Illumina to Sanger, use -31)
-
-  --outMultimapperOrder             Old_2.4
-      string: order of multimapping alignments in the output files
-                                  Old_2.4             ... quasi-random order used before 2.5.0
-                                  Random              ... random order of alignments for each multi-mapper. Read mates (pairs) are always adjacent, all alignment for each read stay together. This option will become default in the future releases.
-
-  --outSAMtype                      SAM
-      strings: type of SAM/BAM output
-                                  1st word: 
-                                  BAM  ... output BAM without sorting
-                                  SAM  ... output SAM without sorting
-                                  None ... no SAM/BAM output
-                                  2nd, 3rd: 
-                                  Unsorted           ... standard unsorted
-                                  SortedByCoordinate ... sorted by coordinate. This option will allocate extra memory for sorting which can be specified by --limitBAMsortRAM.
-
-  --outSAMmode                      Full
-      string: mode of SAM output  
-                                  None ... no SAM output
-                                  Full ... full SAM output
-                                  NoQS ... full SAM but without quality scores
-
-  --outSAMstrandField                               None
-      string: Cufflinks-like strand field flag
-                                  None        ... not used
-                                  intronMotif ... strand derived from the intron motif. Reads with inconsistent and/or non-canonical introns are filtered out.
-
-  --outSAMattributes                Standard
-      string: a string of desired SAM attributes, in the order desired for the output SAM
-                                  NH HI AS nM NM MD jM jI XS ... any combination in any order
-                                  Standard   ... NH HI AS nM 
-                                  All        ... NH HI AS nM NM MD jM jI
-                                  None       ... no attributes
-
-  --outSAMattrIHstart               1
-      int>=0:                     start value for the IH attribute. 0 may be required by some downstream software, such as Cufflinks or StringTie.
-
-  --outSAMunmapped                  None
-      string: output of unmapped reads in the SAM format
-                                  None   ... no output
-                                  Within ... output unmapped reads within the main SAM file (i.e. Aligned.out.sam)
-
-  --outSAMorder                     Paired
-      string: type of sorting for the SAM output
-                                  Paired: one mate after the other for all paired alignments
-                                  PairedKeepInputOrder: one mate after the other for all paired alignments, the order is kept the same as in the input FASTQ files
-
-  --outSAMprimaryFlag		OneBestScore
-      string: which alignments are considered primary - all others will be marked with 0x100 bit in the FLAG
-                                  OneBestScore ... only one alignment with the best score is primary
-                                  AllBestScore ... all alignments with the best score are primary
-
-  --outSAMreadID			Standard
-      string: read ID record type
-                                  Standard ... first word (until space) from the FASTx read ID line, removing /1,/2 from the end
-                                  Number   ... read number (index) in the FASTx file
-
-  --outSAMmapqUnique        255
-      int: 0 to 255: the MAPQ value for unique mappers
-
-  --outSAMflagOR           0
-      int: 0 to 65535: sam FLAG will be bitwise OR'd with this value, i.e. FLAG=FLAG | outSAMflagOR. This is applied after all flags have been set by STAR, and after outSAMflagAND. Can be used to set specific bits that are not set otherwise.
-
-  --outSAMflagAND           65535
-      int: 0 to 65535: sam FLAG will be bitwise AND'd with this value, i.e. FLAG=FLAG & outSAMflagOR. This is applied after all flags have been set by STAR, but before outSAMflagOR. Can be used to unset specific bits that are not set otherwise.
-
-  --outSAMattrRGline        -
-      string(s): SAM/BAM read group line. The first word contains the read group identifier and must start with "ID:", e.g. --outSAMattrRGline ID:xxx CN:yy "DS:z z z". 
-              xxx will be added as RG tag to each output alignment. Any spaces in the tag values have to be double quoted.
-              Comma separated RG lines correspons to different (comma separated) input files in --readFilesIn. Commas have to be surrounded by spaces, e.g.
-              --outSAMattrRGline ID:xxx , ID:zzz "DS:z z" , ID:yyy DS:yyyy
-
-  --outSAMheaderHD          -
-      strings: @HD (header) line of the SAM header
-
-  --outSAMheaderPG          -
-      strings: extra @PG (software) line of the SAM header (in addition to STAR)
-
-  --outSAMheaderCommentFile -
-      string: path to the file with @CO (comment) lines of the SAM header
-
-  --outSAMfilter            None
-      string(s): filter the output into main SAM/BAM files
-                          KeepOnlyAddedReferences ... only keep the reads for which all alignments are to the extra reference sequences added with --genomeFastaFiles at the mapping stage.
-
-  --outSAMmultNmax          -1
-      int: max number of multiple alignments for a read that will be output to the SAM/BAM files.
-                          -1 ... all alignments (up to --outFilterMultimapNmax) will be output
-
-  --outBAMcompression       1
-      int: -1 to 10  BAM compression level, -1=default compression (6?), 0=no compression, 10=maximum compression
-
-  --outBAMsortingThreadN    0
-      int: >=0: number of threads for BAM sorting. 0 will default to min(6,--runThreadN).
-
-
-  --bamRemoveDuplicatesType  -
-      string: mark duplicates in the BAM file, for now only works with sorted BAM feeded with inputBAMfile
-                          -               ... no duplicate removal/marking
-                          UniqueIdentical ... mark all multimappers, and duplicate unique mappers. The coordinates, FLAG, CIGAR must be identical
-
-  --bamRemoveDuplicatesMate2basesN   0
-      int>0: number of bases from the 5' of mate 2 to use in collapsing (e.g. for RAMPAGE)
-
-  --outWigType          None
-      string(s): type of signal output, e.g. "bedGraph" OR "bedGraph read1_5p". Requires sorted BAM: --outSAMtype BAM SortedByCoordinate .
-                      1st word:
-                      None       ... no signal output
-                      bedGraph   ... bedGraph format 
-                      wiggle     ... wiggle format
-                      2nd word:
-                      read1_5p   ... signal from only 5' of the 1st read, useful for CAGE/RAMPAGE etc
-                      read2      ... signal from only 2nd read
-                      
-  --outWigStrand        Stranded
-      string: strandedness of wiggle/bedGraph output
-                      Stranded   ...  separate strands, str1 and str2
-                      Unstranded ...  collapsed strands
-
-  --outWigReferencesPrefix    -
-      string: prefix matching reference names to include in the output wiggle file, e.g. "chr", default "-" - include all references
-   
-  --outWigNorm              RPM
-      string: type of normalization for the signal
-                          RPM    ... reads per million of mapped reads
-                          None   ... no normalization, "raw" counts
-
-  --outFilterType                   Normal
-      string: type of filtering
-                                  Normal  ... standard filtering using only current alignment
-                                  BySJout ... keep only those reads that contain junctions that passed filtering into SJ.out.tab
-
-  --outFilterMultimapScoreRange     1
-      int: the score range below the maximum score for multimapping alignments
-
-  --outFilterMultimapNmax           10
-      int: read alignments will be output only if the read maps fewer than this value, otherwise no alignments will be output
-
-  --outFilterMismatchNmax           10
-      int: alignment will be output only if it has fewer mismatches than this value
-
-  --outFilterMismatchNoverLmax      0.3
-      int: alignment will be output only if its ratio of mismatches to *mapped* length is less than this value
-
-  --outFilterMismatchNoverReadLmax  1
-      int: alignment will be output only if its ratio of mismatches to *read* length is less than this value
-
-
-  --outFilterScoreMin               0
-      int: alignment will be output only if its score is higher than this value
-
-  --outFilterScoreMinOverLread      0.66
-          float: outFilterScoreMin normalized to read length (sum of mates' lengths for paired-end reads)
-
-  --outFilterMatchNmin              0
-      int: alignment will be output only if the number of matched bases is higher than this value
-
-  --outFilterMatchNminOverLread     0.66
-      float: outFilterMatchNmin normalized to read length (sum of mates' lengths for paired-end reads)
-
-  --outFilterIntronMotifs           None
-      string: filter alignment using their motifs
-  				None                           ... no filtering
-  				RemoveNoncanonical             ... filter out alignments that contain non-canonical junctions
-  				RemoveNoncanonicalUnannotated  ... filter out alignments that contain non-canonical unannotated junctions when using annotated splice junctions database. The annotated non-canonical junctions will be kept.
-
-
-
-  --outSJfilterReads                All
-      string: which reads to consider for collapsed splice junctions output
-                  All: all reads, unique- and multi-mappers
-                  Unique: uniquely mapping reads only
-
-  --outSJfilterOverhangMin          30  12  12  12
-      4 integers:    minimum overhang length for splice junctions on both sides for: (1) non-canonical motifs, (2) GT/AG and CT/AC motif, (3) GC/AG and CT/GC motif, (4) AT/AC and GT/AT motif. -1 means no output for that motif
-                                  does not apply to annotated junctions
-
-  --outSJfilterCountUniqueMin       3   1   1   1 
-      4 integers: minimum uniquely mapping read count per junction for: (1) non-canonical motifs, (2) GT/AG and CT/AC motif, (3) GC/AG and CT/GC motif, (4) AT/AC and GT/AT motif. -1 means no output for that motif
-                                  Junctions are output if one of outSJfilterCountUniqueMin OR outSJfilterCountTotalMin conditions are satisfied
-                                  does not apply to annotated junctions
-
-  --outSJfilterCountTotalMin     3   1   1   1 
-      4 integers: minimum total (multi-mapping+unique) read count per junction for: (1) non-canonical motifs, (2) GT/AG and CT/AC motif, (3) GC/AG and CT/GC motif, (4) AT/AC and GT/AT motif. -1 means no output for that motif
-                                  Junctions are output if one of outSJfilterCountUniqueMin OR outSJfilterCountTotalMin conditions are satisfied
-                                  does not apply to annotated junctions
-
-  --outSJfilterDistToOtherSJmin     10  0   5   10
-      4 integers>=0: minimum allowed distance to other junctions' donor/acceptor
-                                  does not apply to annotated junctions
-
-  --outSJfilterIntronMaxVsReadN        50000 100000 200000
-      N integers>=0: maximum gap allowed for junctions supported by 1,2,3,,,N reads 
-                                  i.e. by default junctions supported by 1 read can have gaps <=50000b, by 2 reads: <=100000b, by 3 reads: <=200000. by >=4 reads any gap <=alignIntronMax
-                                  does not apply to annotated junctions
-
-  --scoreGap                     0
-      int: splice junction penalty (independent on intron motif)
-
-  --scoreGapNoncan               -8
-      int: non-canonical junction penalty (in addition to scoreGap)
-
-  --scoreGapGCAG                 -4
-      GC/AG and CT/GC junction penalty (in addition to scoreGap)
-
-  --scoreGapATAC                 -8
-      AT/AC  and GT/AT junction penalty  (in addition to scoreGap)
-
-  --scoreGenomicLengthLog2scale   -0.25
-      extra score logarithmically scaled with genomic length of the alignment: scoreGenomicLengthLog2scale*log2(genomicLength)
-
-  --scoreDelOpen                 -2
-      deletion open penalty
-
-  --scoreDelBase                 -2
-      deletion extension penalty per base (in addition to scoreDelOpen)
-
-  --scoreInsOpen                 -2
-      insertion open penalty
-
-  --scoreInsBase                 -2
-      insertion extension penalty per base (in addition to scoreInsOpen)
-
-  --scoreStitchSJshift           1
-      maximum score reduction while searching for SJ boundaries inthe stitching step
-
-
-
-  --seedSearchStartLmax             50
-      int>0: defines the search start point through the read - the read is split into pieces no longer than this value
-
-  --seedSearchStartLmaxOverLread    1.0
-      float: seedSearchStartLmax normalized to read length (sum of mates' lengths for paired-end reads)
-
-  --seedSearchLmax       0
-      int>=0: defines the maximum length of the seeds, if =0 max seed lengthis infinite
-
-  --seedMultimapNmax      10000
-      int>0: only pieces that map fewer than this value are utilized in the stitching procedure
-
-  --seedPerReadNmax       1000
-      int>0: max number of seeds per read
-
-  --seedPerWindowNmax     50
-      int>0: max number of seeds per window
-
-  --seedNoneLociPerWindow    10 
-      int>0: max number of one seed loci per window
-
-  --alignIntronMin              21
-      minimum intron size: genomic gap is considered intron if its length>=alignIntronMin, otherwise it is considered Deletion
-
-  --alignIntronMax              0
-      maximum intron size, if 0, max intron size will be determined by (2^winBinNbits)*winAnchorDistNbins
-
-  --alignMatesGapMax            0
-      maximum gap between two mates, if 0, max intron gap will be determined by (2^winBinNbits)*winAnchorDistNbins
-
-  --alignSJoverhangMin          5
-      int>0: minimum overhang (i.e. block size) for spliced alignments
-
-  --alignSJstitchMismatchNmax   0 -1 0 0
-      4*int>=0: maximum number of mismatches for stitching of the splice junctions (-1: no limit). 
-                              (1) non-canonical motifs, (2) GT/AG and CT/AC motif, (3) GC/AG and CT/GC motif, (4) AT/AC and GT/AT motif.
-
-  --alignSJDBoverhangMin        3
-      int>0: minimum overhang (i.e. block size) for annotated (sjdb) spliced alignments
-
-  --alignSplicedMateMapLmin     0
-      int>0: minimum mapped length for a read mate that is spliced
-
-  --alignSplicedMateMapLminOverLmate 0.66
-      float>0: alignSplicedMateMapLmin normalized to mate length
-     
-  --alignWindowsPerReadNmax     10000
-      int>0: max number of windows per read
-
-  --alignTranscriptsPerWindowNmax       100
-      int>0: max number of transcripts per window           
-
-  --alignTranscriptsPerReadNmax               10000
-      int>0: max number of different alignments per read to consider
-
-  --alignEndsType           Local
-      string: type of read ends alignment
-                          Local           ... standard local alignment with soft-clipping allowed
-                          EndToEnd        ... force end-to-end read alignment, do not soft-clip
-                          Extend5pOfRead1 ... fully extend only the 5p of the read1, all other ends: local alignment
-
-  --alignSoftClipAtReferenceEnds Yes
-      string: allow the soft-clipping of the alignments past the end of the chromosomes
-                          Yes ... allow
-                          No  ... prohibit, useful for compatibility with Cufflinks
-
-
-  --winAnchorMultimapNmax           50
-      int>0: max number of loci anchors are allowed to map to
-
-  --winBinNbits                     16
-      int>0: =log2(winBin), where winBin is the size of the bin for the windows/clustering, each window will occupy an integer number of bins. 
-
-  --winAnchorDistNbins              9
-      int>0: max number of bins between two anchors that allows aggregation of anchors into one window
-
-  --winFlankNbins               4
-      int>0: log2(winFlank), where win Flank is the size of the left and right flanking regions for each window
-
-
-
-  --chimOutType                 SeparateSAMold
-      string: type of chimeric output
-                              SeparateSAMold  ... output old SAM into separate Chimeric.out.sam file
-                              WithinBAM       ... output into main aligned BAM files (Aligned.*.bam)
-
-  --chimSegmentMin              0
-      int>=0: minimum length of chimeric segment length, if ==0, no chimeric output
-
-  --chimScoreMin                0
-      int>=0: minimum total (summed) score of the chimeric segments
-
-  --chimScoreDropMax            20
-      int>=0: max drop (difference) of chimeric score (the sum of scores of all chimeric segements) from the read length
-
-  --chimScoreSeparation         10
-      int>=0: minimum difference (separation) between the best chimeric score and the next one
-
-  --chimScoreJunctionNonGTAG    -1
-      int: penalty for a non-GT/AG chimeric junction
-
-  --chimJunctionOverhangMin     20
-      int>=0: minimum overhang for a chimeric junction
-
-  --chimSegmentReadGapMax       0
-      int>=0: maximum gap in the read sequence between chimeric segments
-
-  --chimFilter                  banGenomicN
-      string(s): different filters for chimeric alignments
-                              None ... no filtering
-                              banGenomicN ... Ns are not allowed in the genome sequence around the chimeric junction
-
-  --quantMode                   -
-      string(s): types of quantification requested
-                              -                ... none
-                              TranscriptomeSAM ... output SAM/BAM alignments to transcriptome into a separate file
-                              GeneCounts       ... count reads per gene
-
-  --quantTranscriptomeBAMcompression    1       1
-      int: -1 to 10  transcriptome BAM compression level, -1=default compression (6?), 0=no compression, 10=maximum compression
-
-  --quantTranscriptomeBan       IndelSoftclipSingleend
-      string: prohibit various alignment type
-                              IndelSoftclipSingleend  ... prohibit indels, soft clipping and single-end alignments - compatible with RSEM
-                              Singleend               ... prohibit single-end alignments
-
-  --twopassMode                 None
-      string: 2-pass mapping mode.
-                              None        ... 1-pass mapping
-                              Basic       ... basic 2-pass mapping, with all 1st pass junctions inserted into the genome indices on the fly
-
-  --twopass1readsN              -1
-      int: number of reads to process for the 1st step. Use very large number (or default -1) to map all reads in the first step.
-
