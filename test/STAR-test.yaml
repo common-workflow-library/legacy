@@ -1,0 +1,125 @@
+- args: 
+    ["STAR", "--genomeDir", ./test-files/dm3/,
+    "--genomeFastaFiles", ./test-files/dm3_chr4.fa,
+    "--outBAMcompression", "10",
+    "--outSAMmode", "Full",
+    "--outSAMtype", "BAM", "SortedByCoordinate",
+    "--outStd", "Log",
+    "--runMode", "genomeGenerate",
+    "--runThreadN", "1",
+    "--sjdbGTFfile", ./test-files/dm3_chr4.gtf,
+    "--sjdbOverhang", "100"]
+  job:  STAR-genomeGenerate-job.json
+  output: {
+               "aligned": null,
+               "indices": {
+                   "checksum": "sha1$761906d19ceb10a0e2677afdfb756c4f1ca925a1",
+                   "class": "File",
+                   "path": "test-files/dm3//Genome",
+                   "secondaryFiles": [
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//SA"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//SAindex"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//chrNameLength.txt"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//chrLength.txt"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//chrStart.txt"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//geneInfo.tab"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//sjdbList.fromGTF.out.tab"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//chrName.txt"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//exonGeTrInfo.tab"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//genomeParameters.txt"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//sjdbList.out.tab"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//exonInfo.tab"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//sjdbInfo.txt"
+                       },
+                       {
+                           "class": "File",
+                           "path": "test-files/dm3//transcriptInfo.tab"
+                       }
+                   ],
+                   "size": 1753563
+               },
+               "mappingstats": null
+           }
+  outdir: ./
+  tool: ../tools/STAR.cwl
+  doc: General test of command line generation
+
+- args:
+    ["STAR",
+    "--genomeDir",  ./test-files/dm3/,
+    "--outBAMcompression", "10",
+    "--outFileNamePrefix", "./test-files/SRR1031972.",
+    "--outSAMmode", "Full",
+    "--outSAMtype", "BAM", "SortedByCoordinate",
+    "--outStd", "Log",
+    "--readFilesIn", ./test-files/SRR1031972.fastq,
+    "--runMode", "alignReads",
+    "--runThreadN", "1"]
+  job:  STAR-alignReads-job.json
+  tool: ../tools/STAR.cwl
+  doc: General test of command line generation
+  outdir: ./
+  ignore_keys: ["mappingstats","aligned"]
+  output: {
+              "indices": null,
+              "aligned": {
+                  "path": "test-files/SRR1031972.Aligned.sortedByCoord.out.bam",
+                  "size": 507740,
+                  "secondaryFiles": [
+                      {
+                          "path": "test-files/SRR1031972.Log.final.out",
+                          "class": "File"
+                      },
+                      {
+                          "path": "test-files/SRR1031972.SJ.out.tab",
+                          "class": "File"
+                      },
+                      {
+                          "path": "test-files/SRR1031972.Log.out",
+                          "class": "File"
+                      }
+                  ],
+                  "class": "File",
+                  "checksum": "sha1$9ac2fca236ccd3946a55d5b8d3ee687e77d23741"
+              },
+              "mappingstats": "[{\"Started job on \":\"Dec 02 07:29:03\"},{\"Started mapping on \":\"Dec 02 07:29:13\"},{\"Finished on \":\"Dec 02 07:29:24\"},{\"Mapping speed, Million of reads per hour \":\"3.81\"},{\"Number of input reads \":\"11633\"},{\"Average input read length \":\"40\"},{\"Uniquely mapped reads number \":\"2718\"},{\"Uniquely mapped reads % \":\"23.36%\"},{\"Average mapped length \":\"39.23\"},{\"Number of splices: Total \":\"4618\"},{\"Number of splices: Annotated (sjdb) \":\"54\"},{\"Number of splices: GT/AG \":\"3615\"},{\"Number of splices: GC/AG \":\"149\"},{\"Number of splices: AT/AC \":\"1\"},{\"Number of splices: Non-canonical \":\"853\"},{\"Mismatch rate per base, % \":\"4.78%\"},{\"Deletion rate per base \":\"0.00%\"},{\"Deletion average length \":\"1.00\"},{\"Insertion rate per base \":\"0.00%\"},{\"Insertion average length \":\"0.00\"},{\"Number of reads mapped to multiple loci \":\"8915\"},{\"% of reads mapped to multiple loci \":\"76.64%\"},{\"Number of reads mapped to too many loci \":\"0\"},{\"% of reads mapped to too many loci \":\"0.00%\"},{\"% of reads unmapped: too many mismatches \":\"0.00%\"},{\"% of reads unmapped: too short \":\"0.00%\"},{\"% of reads unmapped: other \":\"0.00%\"},{\"Number of chimeric reads \":\"0\"},{\"% of chimeric reads \":\"0.00%\"}]"
+          }
+
