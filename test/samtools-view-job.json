@@ -3,6 +3,7 @@
         "class": "File",
         "path": "test-files/SRR1031972.Aligned.sortedByCoord.out.bam"
     },
-    "output_name": "SRR1031972.rmdup.bam",
-    "single_end": true
+    "isbam": true,
+    "threads": 4,
+    "output_name": "./test-files/SRR1031972.sorted.bam"
 }

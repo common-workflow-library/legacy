@@ -13,18 +13,17 @@ terms and conditions of the Apache License version 2.0 (see LICENSE.txt).
 
 ## Pull request
 
-Please consider these recommendations before pull request:
+Please follow these recommendations before pull request:
 
-* One file per tool or per logical part of the tool like with subcommands
-* CWL’s filename is the same as tool’s name (```STAR.cwl```)  if possible and no conflicts
-* If a tool has subcommands, like samtools or bwa use tool name dash subcommand name. For example, ```bwa-mem.cwl``` or ```samtools-index.cwl```
-* Place CWL files into tools directory
-* For each tool create job file and test file and place them into test directory
- * Filename for the job file has to have the same basename plus *-job.json* (bwa-mem-job.json, samtools-index-job.json)
- * Filename for the test file has to have the same basename plus *-test.yaml* (bwa-mem-test.yaml, samtools-index-test.yaml)
-* Please, use docker for the tool your are describing
-  * If the tool has subcommands and you will have the same code in all files. Please, move it into separate file (```samtools-docker.cwl```) and include it
-  * If you are a maintainer of the image, it is good to provide content of Dockerfile in class DockerRequirement (dockerFile)
+* One file per tool or per logical part of the tool (those with subcommands)
+* CWL tool description filename should have the same name as the tool (Tool’s name *STAR* CWL tool description filename ```STAR.cwl```) if possible (no conflicts with existing files) and placed into *tools* directory
+* If a tool has subcommands, like [samtools]( http://www.htslib.org/doc/samtools.html) or [bwa]( https://github.com/lh3/bwa/blob/master/README.md), use tool’s name dash subcommand name. For example, ```bwa-mem.cwl``` or ```samtools-index.cwl```
+* Each CWL tool description should be provided with job and test files and placed into *test* directory
+ * Job’s filename has to be suffixed CWL file basename plus *-job.json* (bwa-mem-job.json, samtools-index-job.json)
+ * Test’s filename has to be suffixed CWL file basename plus *-test.yaml* (bwa-mem-test.yaml, samtools-index-test.yaml)
+* Use docker for the tool your are describing
+  * If the tool has subcommands and you are going to use the same Docker image, move the DockerRequirement class into separate file (```samtools-docker.cwl```) and *$import* it
+  * If you are a maintainer of the Docker image, it is good to provide content of Dockerfile in class DockerRequirement (dockerFile)
 
 Incomplete descriptions are welcome as long as they are usable.
 General encouragement to share early & often

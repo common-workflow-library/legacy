@@ -151,7 +151,7 @@ inputs:
       position: 2
 
   - id: "#unphased"
-    type: boolean
+    type: File
     description: |
       path to the vcf file containing unphased SNPs and Indels
     inputBinding:
@@ -169,6 +169,6 @@ outputs:
     type: File
     description: "Creates the file outputPrefix.vcf.gz"
     outputBinding:
-      glob: $(inputs.outputPrefix)
+      glob: $(inputs.outputPrefix+".vcf.gz")
 
 baseCommand: ["alea", "phaseVCF"]

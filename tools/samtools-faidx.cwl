@@ -172,40 +172,40 @@ doap:maintainer:
     foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
 
 requirements:
-  - $import: envvar-global.cwl
-  - $import: samtools-docker.cwl
-  - class: InlineJavascriptRequirement
-  - class: CreateFileRequirement
-    fileDef:
-      - filename: $(inputs.input.path.split('/').slice(-1)[0])
-        fileContent: $(inputs.input)
+- $import: envvar-global.cwl
+- $import: samtools-docker.cwl
+- class: InlineJavascriptRequirement
+- class: CreateFileRequirement
+  fileDef:
+  - filename: $(inputs.input.path.split('/').slice(-1)[0])
+    fileContent: $(inputs.input)
 
 inputs:
-  - id: '#input'
-    type: File
-    description: '<file.fa|file.fa.gz>'
+- id: '#input'
+  type: File
+  description: '<file.fa|file.fa.gz>'
 
-  - id: '#filename'
-    type: ["null",string]
-    default: ""
-    inputBinding:
-      position: 1
-      valueFrom: $(inputs.input.path.split('/').slice(-1)[0])
+- id: '#filename'
+  type: ["null",string]
+  default: ""
+  inputBinding:
+    position: 1
+    valueFrom: $(inputs.input.path.split('/').slice(-1)[0])
 
-  - id: '#region'
-    type: ["null",string]
-    inputBinding:
-      position: 2
+- id: '#region'
+  type: ["null",string]
+  inputBinding:
+    position: 2
 
 outputs:
-  - id: "#index_result"
-    type: File
-    outputBinding:
-      glob: $(inputs.input.path.split('/').slice(-1)[0]+'.fai')
+- id: "#index"
+  type: File
+  outputBinding:
+    glob: $(inputs.input.path.split('/').slice(-1)[0]+'.fai')
 
 baseCommand:
-  - samtools
-  - faidx
+- samtools
+- faidx
 
 description: 'Usage:   samtools faidx <file.fa|file.fa.gz> [<reg> [...]]'
 
