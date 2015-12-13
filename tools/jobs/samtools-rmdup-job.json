@@ -1,8 +1,0 @@
-{
-    "input": {
-        "class": "File",
-        "path": "./test-files/dna.SRR096326.bam"
-    },
-    "output_name": "dna.SRR096326.rmdup.bam",
-    "single_end": true
-}
