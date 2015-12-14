@@ -19,28 +19,32 @@ cwlVersion: "cwl:draft-3.dev3"
 class: CommandLineTool
 
 adms:includedAsset:
-  doap:name: "sort"
+  doap:name: "picard"
   doap:description: >
-    sort - sort lines of text files
+    A set of Java command line tools for manipulating high-throughput sequencing data (HTS) data and formats.
+    Picard is implemented using the HTSJDK Java library HTSJDK, supporting accessing of common file formats,
+    such as SAM and VCF, used for high-throughput sequencing data.
+    http://broadinstitute.github.io/picard/command-line-overview.html#BuildBamIndex
+  doap:homepage: "http://broadinstitute.github.io/picard/"
+  doap:repository:
+  - class: doap:GitRepository
+    doap:location: "https://github.com/broadinstitute/picard.git"
   doap:release:
   - class: doap:Version
-    doap:revision: "5.93"
-  doap:license: "GPL"
+    doap:revision: "1.141"
+  doap:license: "MIT, Apache2"
   doap:category: "commandline tool"
-  doap:programming-language: "C"
+  doap:programming-language: "JAVA"
   doap:developer:
-  - class: foaf:Person
-    foaf:name: "Mike Haertel"
-  - class: foaf:Person
-    foaf:name: "Paul Eggert"
-  doap:mailing-list:
-    foaf:mbox: "bug-coreutils@gnu.org"
+  - class: foaf:Organization
+    foaf:name: "Broad Institute"
 
 description: |
-  linux-sort.cwl is developed for CWL consortium
+  picard-BuildBamIndex.cwl is developed for CWL consortium
+    Generates a BAM index (.bai) file.
 
-doap:name: "linux-sort.cwl"
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/linux-sort.cwl"
+doap:name: "picard-BuildBamIndex.cwl"
+dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/picard-BuildBamIndex.cwl"
 
 dct:isPartOf:
   doap:name: "CWL Workflows"
@@ -109,6 +113,17 @@ dct:isPartOf:
       foaf:name: "Stian Soiland-Reyes"
       foaf:mbox: "mailto:soiland-reyes@cs.manchester.ac.uk"
 
+dct:creator:
+- class: foaf:Organization
+  foaf:name: "UNIVERSITY OF MELBOURNE"
+  foaf:member:
+  - class: foaf:Person
+    id: "farahk@student.unimelb.edu.au"
+    foaf:mbox: "mailto:farahk@student.unimelb.edu.au"
+  - class: foaf:Person
+    id: "skanwal@student.unimelb.edu.au"
+    foaf:mbox: "mailto:skanwal@student.unimelb.edu.au"
+
 doap:maintainer:
 - class: foaf:Organization
   foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
@@ -120,42 +135,45 @@ doap:maintainer:
     foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
 
 requirements:
-  - $import: envvar-global.cwl
-  - $import: linux-sort-docker.cwl
-  - class: InlineJavascriptRequirement
+- $import: envvar-global.cwl
+- $import: picard-docker.cwl
+- class: InlineJavascriptRequirement
 
 inputs:
-  - id: "#input"
-    type:
-      type: array
-      items: File
-    inputBinding:
-      position: 4
 
-  - id: "#output"
-    type: string
+- id: "java_arg"
+  type: string
+  default: "-Xmx4g"
+  inputBinding:
+    position: 1
 
-  - id: "#key"
-    type: 
-      type: array
-      items: string
-      inputBinding:
-        prefix: "-k"
-    inputBinding:
-      position: 1
-    description: |
-      -k, --key=POS1[,POS2]
-      start a key at POS1, end it at POS2 (origin 1)
+- id: "INPUT"
+  type: File
+  description: >
+   INPUT String A BAM file or URL to process. Must be sorted in coordinate order.
+  inputBinding:
+    position: 4
+    separate: false
+    prefix: "INPUT="
 
 outputs:
-  - id: "#sorted"
+  - id: "index"
     type: File
-    description: "The sorted file"
-    outputBinding:
-      glob: $(inputs.output)
+    outputBinding: 
+      glob: $(inputs.OUTPUT)
 
-stdout: $(inputs.output)
+baseCommand: ["java"]
 
-baseCommand: ["sort"]
-
-
+arguments:
+- valueFrom: "/usr/local/bin/picard.jar"
+  position: 2
+  prefix: "-jar"
+- valueFrom: "BuildBamIndex"
+  position: 3
+- valueFrom: $(inputs.INPUT.path.split('/').slice(-1)[0]+".bai")
+  position: 5
+  separate: false
+  prefix: "OUTPUT="
+#  description: >
+#    OUTPUT File The BAM index file. Defaults to x.bai if INPUT is x.bam, otherwise INPUT.bai.
+#    If INPUT is a URL and OUTPUT is unspecified, defaults to a file in the current directory.

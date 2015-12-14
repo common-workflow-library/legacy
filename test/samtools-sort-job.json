@@ -1,0 +1,10 @@
+{
+    "input": {
+        "class": "File",
+        "path": "test-files/SRR1031972.Aligned.sortedByCoord.out.bam"
+    },
+    "compression_level": 9,
+    "memory": "1G",
+    "threads": 4,
+    "output_name": "./test-files/SRR1031972.sorted.bam"
+}

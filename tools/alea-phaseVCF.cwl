@@ -19,28 +19,46 @@ cwlVersion: "cwl:draft-3.dev3"
 class: CommandLineTool
 
 adms:includedAsset:
-  doap:name: "sort"
+  doap:name: "alea"
   doap:description: >
-    sort - sort lines of text files
+    ALEA is a computational toolbox for allele-specific (AS) epigenomics analysis, which incorporates allelic variation data within existing
+    resources, allowing for the identification of significant associations between epigenetic modifications and specific allelic variants
+    in human and mouse cells. ALEA provides a customizable pipeline of command line tools for AS analysis of next-generation sequencing data
+    (ChIP-seq, RNA-seq, etc.) that takes the raw sequencing data and produces separate allelic tracks ready to be viewed on genome browsers.
+    ALEA takes advantage of the available genomic resources for human (The 1000 Genomes Project Consortium) and mouse (The Mouse Genome Project)
+    to reconstruct diploid in silico genomes for human samples or hybrid mouse samples under study. Then, for each accompanying ChIP-seq or
+    RNA-seq dataset, ALEA generates two wig files from short reads aligned differentially to each haplotype.
+    This pipeline has been validated using human and hybrid mouse ChIP-seq and RNA-seq data (See Test Data section).
+  doap:homepage: "http://www.bcgsc.ca/platform/bioinfo/software/alea"
+  dcat:downloadURL: "ftp://ftp.bcgsc.ca/supplementary/ALEA/files/alea.1.2.2.tar.gz"
   doap:release:
   - class: doap:Version
-    doap:revision: "5.93"
-  doap:license: "GPL"
+    doap:revision: "1.2.2"
+  doap:license: "AFL"
   doap:category: "commandline tool"
-  doap:programming-language: "C"
+  doap:programming-language: "JAVA"
+  foaf:publications:
+  - id: urn:pmid:24371156
+    foaf:title: >
+      Hamid Younesy, Torsten Moller, Alireza Heravi-Moussavi, Jeffrey B. Cheng,
+      Joseph F. Costello, Matthew C. Lorincz, Mohammad M. Karimi, Steven J. M. Jones
+      ALEA: a toolbox for allele-specific epigenomics analysis Bioinformatics (2014) 30 (8): 1172-1174.
+      doi: 10.1093/bioinformatics/btt744
+    foaf:homepage: "http://bioinformatics.oxfordjournals.org/content/30/8/1172.long"
   doap:developer:
-  - class: foaf:Person
-    foaf:name: "Mike Haertel"
-  - class: foaf:Person
-    foaf:name: "Paul Eggert"
-  doap:mailing-list:
-    foaf:mbox: "bug-coreutils@gnu.org"
+  - class: foaf:Organization
+    foaf:name: "Canada's Michael Smith Genome Sciences Centre, BC Cancer Agency, Vancouver, British Columbia, V5Z 4S6, Canada"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Mohammad Karimi"
+      foaf:mbox: "mailto:mkarimi@bcgsc.ca"
+      foaf:homepage: "http://www.bcgsc.ca/author/mkarimi"
 
 description: |
-  linux-sort.cwl is developed for CWL consortium
+  alea-phaseVCF.cwl is developed for CWL consortium
 
-doap:name: "linux-sort.cwl"
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/linux-sort.cwl"
+doap:name: "alea-phaseVCF.cwl"
+dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/alea-phaseVCF.cwl"
 
 dct:isPartOf:
   doap:name: "CWL Workflows"
@@ -121,41 +139,36 @@ doap:maintainer:
 
 requirements:
   - $import: envvar-global.cwl
-  - $import: linux-sort-docker.cwl
+  - $import: alea-docker.cwl
   - class: InlineJavascriptRequirement
 
 inputs:
-  - id: "#input"
-    type:
-      type: array
-      items: File
-    inputBinding:
-      position: 4
-
-  - id: "#output"
-    type: string
-
-  - id: "#key"
-    type: 
-      type: array
-      items: string
-      inputBinding:
-        prefix: "-k"
-    inputBinding:
-      position: 1
+  - id: "#hapsDir"
+    type: File
     description: |
-      -k, --key=POS1[,POS2]
-      start a key at POS1, end it at POS2 (origin 1)
+      path to the directory containing the .haps files
+    inputBinding:
+      position: 2
+
+  - id: "#unphased"
+    type: File
+    description: |
+      path to the vcf file containing unphased SNPs and Indels
+    inputBinding:
+      position: 3
+
+  - id: "#outputPrefix"
+    type: string
+    description: |
+      output file prefix including the path but not the extension
+    inputBinding:
+      position: 3
 
 outputs:
-  - id: "#sorted"
+  - id: "#phasevcf"
     type: File
-    description: "The sorted file"
+    description: "Creates the file outputPrefix.vcf.gz"
     outputBinding:
-      glob: $(inputs.output)
+      glob: $(inputs.outputPrefix+".vcf.gz")
 
-stdout: $(inputs.output)
-
-baseCommand: ["sort"]
-
-
+baseCommand: ["alea", "phaseVCF"]

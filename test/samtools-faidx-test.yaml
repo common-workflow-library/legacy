@@ -1,0 +1,13 @@
+- args: [
+    "samtools",
+    "faidx",
+    "dm3_chr4.fa" ]
+  createfiles: {
+      "dm3_chr4.fa": {
+          "class": "File",
+          "path": "test-files/dm3_chr4.fa"
+      }
+    }
+  job:  samtools-faidx-job.json
+  tool: ../tools/samtools-faidx.cwl
+  doc: General test of command line generation

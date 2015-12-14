@@ -1,0 +1,18 @@
+- args: [
+    "samtools",
+    "index",
+    "-b",
+    "./test-files/SRR1031972.Aligned.sortedByCoord.out.bam",
+    "SRR1031972.Aligned.sortedByCoord.out.bam.bai"]
+  job:  samtools-index-job.json
+  tool: ../tools/samtools-index.cwl
+  doc: General test of command line generation
+  outdir: "test-files/"
+  output: {
+              "index": {
+                  "path": "test-files/SRR1031972.Aligned.sortedByCoord.out.bam.bai",
+                  "size": 2592,
+                  "class": "File",
+                  "checksum": "sha1$3e4065d4476d00f50c67b2939a0525bd5ed59168"
+              }
+          }

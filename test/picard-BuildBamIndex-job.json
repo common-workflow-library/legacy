@@ -1,0 +1,6 @@
+{
+    "INPUT": {
+        "class": "File",
+        "path": "test-files/SRR1031972.Aligned.sortedByCoord.out.bam"
+    }
+}

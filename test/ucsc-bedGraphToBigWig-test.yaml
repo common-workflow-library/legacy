@@ -1,0 +1,18 @@
+- args: [
+            "bedGraphToBigWig",
+            "./test-files/SRR1031972.bedGraph.sorted",
+            "./test-files/dm3/chrNameLength.txt",
+            "test-files/SRR1031972.bigWig"
+        ]
+  job:  ucsc-bedGraphToBigWig-job.json
+  tool: ../tools/ucsc-bedGraphToBigWig.cwl
+  doc: General test of command line generation
+  outdir: ./
+  output: {
+              "genomecoverage": {
+                  "path": "test-files/SRR1031972.bedGraph",
+                  "size": 129508,
+                  "class": "File",
+                  "checksum": "sha1$f35256c00dce787a03dd5b972944b99e60b04e1f"
+              }
+          }

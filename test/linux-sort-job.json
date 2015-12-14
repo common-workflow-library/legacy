@@ -1,0 +1,11 @@
+{
+    "input": [{
+        "path": "test-files/SRR1031972.bedGraph",
+        "class": "File"
+    }],
+    "output": "./test-files/SRR1031972.bedGraph.sorted",
+    "key": [
+        "1,1",
+        "2,2n"
+    ]
+}
