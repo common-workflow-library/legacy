@@ -1,28 +1,151 @@
 #!/usr/bin/env cwl-runner
 
+$namespaces:
+  dct: http://purl.org/dc/terms/
+  foaf: http://xmlns.com/foaf/0.1/
+  doap: http://usefulinc.com/ns/doap#
+  adms: http://www.w3.org/ns/adms#
+  dcat: http://www.w3.org/ns/dcat#
+
+$schemas:
+- http://dublincore.org/2012/06/14/dcterms.rdf
+- http://xmlns.com/foaf/spec/20140114.rdf
+- http://usefulinc.com/ns/doap#
+- http://www.w3.org/ns/adms#
+- http://www.w3.org/ns/dcat.rdf
+
+cwlVersion: "cwl:draft-3.dev3"
+
 class: CommandLineTool
 
-description: |
-  liftOver - Move annotations from one assembly to another
-  usage:
-     liftOver oldFile map.chain newFile unMapped
-  oldFile and newFile are in bed format by default, but can be in GFF and
-  maybe eventually others with the appropriate flags below.
-  The map.chain file has the old genome as the target and the new genome
-  as the query.
+adms:includedAsset:
+  doap:name: "UCSC userApps"
+  doap:description: |
+    UCSC genome browser 'kent' bioinformatic utilities
+    These are only the command line bioinformatic utilities
+    from the kent source tree.
+    liftOver - Move annotations from one assembly to another
+  doap:homepage: "https://genome.ucsc.edu/util.html"
+  dcat:downloadURL: "http://hgdownload.cse.ucsc.edu/admin/exe/userApps.v325.src.tgz"
+  doap:release:
+  - class: doap:Version
+    doap:revision: "v325"
+  doap:license: "GPL"
+  doap:category: "commandline tool"
+  doap:programming-language: "C"
+  foaf:publications:
+  - id: urn:pmid:20639541
+    foaf:title: "(Kent et al., 2010) BigWig and BigBed: enabling browsing of large distributed datasets. Bioinformatics."
+    foaf:homepage: "http://www.ncbi.nlm.nih.gov/pubmed/20639541"
+  doap:developer:
+  - class: foaf:Organization
+    foaf:name: "CIRM Stem Cell Genomics Data Management Center"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Jim Kent"
+      foaf:mbox: "mailto:kent@soe.ucsc.edu"
 
-  ***********************************************************************
-  WARNING: liftOver was only designed to work between different
-           assemblies of the same organism. It may not do what you want
-           if you are lifting between different organisms. If there has
-           been a rearrangement in one of the species, the size of the
-           region being mapped may change dramatically after mapping.
-  ***********************************************************************
+description: |
+  ucsc-liftOver.cwl is developed for CWL consortium
+    usage:
+       liftOver oldFile map.chain newFile unMapped
+    oldFile and newFile are in bed format by default, but can be in GFF and
+    maybe eventually others with the appropriate flags below.
+    The map.chain file has the old genome as the target and the new genome
+    as the query.
+
+    ***********************************************************************
+    WARNING: liftOver was only designed to work between different
+             assemblies of the same organism. It may not do what you want
+             if you are lifting between different organisms. If there has
+             been a rearrangement in one of the species, the size of the
+             region being mapped may change dramatically after mapping.
+    ***********************************************************************
+
+doap:name: "ucsc-liftOver.cwl"
+dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/ucsc-liftOver.cwl"
+
+dct:isPartOf:
+  doap:name: "CWL Workflows"
+  doap:homepage: "http://commonwl.org/"
+  doap:license: "Apache2"
+
+  doap:implements:
+  - class: doap:Specification
+    doap:homepage: "http://common-workflow-language.github.io/draft-3/"
+
+  doap:repository:
+  - class: doap:GitRepository
+    doap:location: "https://github.com/common-workflow-language/workflows"
+
+  dct:creator:
+  - class: foaf:Organization
+    foaf:name: "Curoverse"
+    foaf:member:
+    - class: foaf:Person
+      id: "http://orcid.org/0000-0003-3566-7705"
+      foaf:name: "Peter Amstutz"
+      foaf:mbox: "mailto:peter.amstutz@curoverse.com"
+  - class: foaf:Organization
+    foaf:name: "Seven Bridges Genomics"
+    foaf:member:
+    - class: foaf:Person
+      id: "mailto:nebojsa.tijanic@sbgenomics.com"
+      foaf:name: "Nebojša Tijanić"
+      foaf:mbox: "mailto:nebojsa.tijanic@sbgenomics.com"
+
+  dct:contributor:
+  - class: foaf:Organization
+    foaf:name: "Seven Bridges Genomics"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Luka Stojanovic"
+      foaf:mbox: "mailto:luka.stojanovic@sbgenomics.com"
+  - class: foaf:Organization
+    foaf:name: "Galaxy Project, Pennsylvania State University"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "John Chilton"
+      foaf:mbox: "mailto:jmchilton@gmail.com"
+  - class: foaf:Organization
+    foaf:name: "University of California, Davis"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Michael R. Crusoe"
+      foaf:mbox: "mailto:crusoe@ucdavis.edu"
+  - class: foaf:Organization
+    foaf:name: "Institut Pasteur"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Hervé Ménager"
+      foaf:mbox: "mailto:herve.menager@gmail.com"
+  - class: foaf:Organization
+    foaf:name: "BioDatomics"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Maxim Mikheev"
+      foaf:mbox: "mailto:mikhmv@biodatomics.com"
+  - class: foaf:Organization
+    foaf:name: "University of Manchester"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Stian Soiland-Reyes"
+      foaf:mbox: "mailto:soiland-reyes@cs.manchester.ac.uk"
+
+doap:maintainer:
+- class: foaf:Organization
+  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
+  foaf:member:
+  - class: foaf:Person
+    id: "http://orcid.org/0000-0001-9102-5681"
+    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
+    foaf:name: "Andrey Kartashov"
+    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
 
 requirements:
-  - import: node-engine.cwl
-  - import: envvar-global.cwl
-  - import: ucsc-userapps-docker.cwl
+  - class: InlineJavascriptRequirement
+  - $import: envvar-global.cwl
+  - $import: ucsc-userapps-docker.cwl
 
 inputs:
   - id: "#oldFile"
@@ -195,24 +318,18 @@ inputs:
       position: 1
       prefix: "-chainTable"
 
-
 outputs:
   - id: "#output"
     type: File
     description: "The sorted file"
     outputBinding:
-      glob:
-        engine: cwl:JsonPointer
-        script: /job/newFile
+      glob: $(inputs.newFile)
 
   - id: "#unMappedFile"
     type: File
     description: "The sorted file"
     outputBinding:
-      glob:
-        engine: cwl:JsonPointer
-        script: /job/unMapped
-
+      glob: $(inputs.unMapped)
 
 baseCommand: ["liftOver"]
 
