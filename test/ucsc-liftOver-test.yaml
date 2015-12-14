@@ -1,0 +1,10 @@
+- args: [
+    "liftOver",
+    "./GSM1069662_mmu_sc_m_MethylationCount.bed.sorted",
+    "./mm9ToMm10.over.chain.gz",
+    "GSM1069662_mmu_sc_m_MethylationCount.mm10.bed",
+    "GSM1069662_mmu_sc_m_MethylationCount.mm9.bed.unmapped"
+    ]
+  job:  ucsc-liftOver-job.json
+  tool: ../tools/ucsc-liftOver.cwl
+  doc: General test of command line generation
