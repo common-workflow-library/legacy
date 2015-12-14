@@ -7,11 +7,11 @@
     "class": "File"
   }],
   "genome1": {
-    "path": "test-files/mouse/alea/129S1_SvImJ.fasta",
+    "path": "test-files/alea/129S1_SvImJ.fasta",
     "class": "File"
   },
   "genome2": {
-    "path": "test-files/mouse/alea/CAST_EiJ.fasta",
+    "path": "test-files/alea/CAST_EiJ.fasta",
     "class": "File"
   },
   "outputPrefix": "./test-files/alea_mouse",

@@ -173,8 +173,14 @@ inputs:
       for Bowtie, specify index filename prefix (minus trailing .X.ebwt or .X.bt2)
   inputBinding:
     position: 3
-#    secondaryFiles:
-#    - ".tbi"
+    secondaryFiles:
+    - ".amb"
+    - ".ann"
+    - ".bwt"
+#    - ".fai"
+    - ".pac"
+#    - ".refmap"
+    - ".sa"
 
 - id: "genome2"
   type: ["null",File]
@@ -184,8 +190,14 @@ inputs:
       for Bowtie, specify basename of index files.
   inputBinding:
     position: 3
-#    secondaryFiles:
-#    - ".tbi"
+    secondaryFiles:
+    - ".amb"
+    - ".ann"
+    - ".bwt"
+#    - ".fai"
+    - ".pac"
+#    - ".refmap"
+    - ".sa"
 
 - id: "strain1"
   type: string
