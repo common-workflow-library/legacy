@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/common-workflow-language/workflows.svg?branch=master)](https://travis-ci.org/common-workflow-language/workflows)
 
 
-"CWL Tools & Workflows" is the community's best practices for CWL tools and workflows description. 
+"CWL Tools & Workflows" is the community's best practices for CWL tool and workflow descriptions. 
 
 To submit a new workflow or tool description please make a pull request against this repository.
 
@@ -25,8 +25,26 @@ Please follow these recommendations before pull request:
   * If the tool has subcommands and you are going to use the same Docker image, move the DockerRequirement class into separate file (```samtools-docker.cwl```) and *$import* it
   * If you are a maintainer of the Docker image, it is good to provide content of Dockerfile in class DockerRequirement (dockerFile)
 
-Incomplete descriptions are welcome as long as they are usable.
-General encouragement to share early & often
+Incomplete descriptions are welcome as long as they are usable. Generally sharing early & often is encouraged.
+
+## SPARQL
+
+For your convinience [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) SPARQL server is provided. It automaticaly downloads new CWL tool descriptions converts them into XML/RDF format and makes available at https://sparql-test.commonwl.org. Each CWL tool become a graph then can be queried. 
+Provided sample query all the graphs where foaf:name **"Dobin"** is present. 
+```SPARQL
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX doap: <http://usefulinc.com/ns/doap#>
+
+SELECT distinct ?file ?name
+WHERE {
+  graph ?file {
+  ?P foaf:name ?name  .
+  FILTER (regex(?name, "Dobin","i"))
+  }
+}
+LIMIT 25
+```
+
 
 ## Testing CWLs
 
