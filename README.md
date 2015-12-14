@@ -30,7 +30,7 @@ Incomplete descriptions are welcome as long as they are usable. Generally sharin
 ## SPARQL
 
 For your convinience [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) SPARQL server is provided. It automaticaly downloads new CWL tool descriptions converts them into XML/RDF format and makes available at https://sparql-test.commonwl.org. Each CWL tool becomes a graph that can be queried. 
-Provided sample query all the graphs where foaf:name **"Dobin"** is present. 
+Provided sample queries all the graphs where foaf:name **"Dobin"** is present. 
 ```SPARQL
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX doap: <http://usefulinc.com/ns/doap#>
