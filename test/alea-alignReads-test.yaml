@@ -1,0 +1,15 @@
+- args: [
+    "alea",
+    "alignReads",
+    "-p",
+    "./test-files/s5DE199B-D6AF-C6EC-678A-DEC1179D1B97.fastq",
+    "./test-files/s5DE199B-D6AF-C6EC-678A-DEC1179D1B97_2.fastq",
+    "./test-files/alea/129S1_SvImJ.fasta",
+    "./test-files/alea/CAST_EiJ.fasta",
+    "129S1_SvImJ",
+    "CAST_EiJ",
+    "./test-files/alea_mouse"
+    ]
+  job:  alea-alignReads-job.json
+  tool: ../tools/alea-alignReads.cwl
+  doc: General test of command line generation

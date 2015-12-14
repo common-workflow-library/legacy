@@ -1,0 +1,12 @@
+{
+    "oldFile": {
+        "class": "File",
+        "path": "GSM1069662_mmu_sc_m_MethylationCount.bed.sorted"
+    },
+    "mapChain": {
+        "class": "File",
+        "path": "mm9ToMm10.over.chain.gz"
+    },
+    "newFile": "GSM1069662_mmu_sc_m_MethylationCount.mm10.bed",
+    "unMapped": "GSM1069662_mmu_sc_m_MethylationCount.mm9.bed.unmapped"
+}
