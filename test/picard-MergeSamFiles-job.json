@@ -4,7 +4,7 @@
     
     "tmpdir": "test-files",
     
-    "inputFileName_mergedSam": [{"class": "File", "path": "./test-files/chr21.sam"}, {"class": "File", "path": "./test-files/hg19.dict"}]
+    "inputFileName_mergedSam": [{"class": "File", "path": "test-files/chr21.sam"}, {"class": "File", "path": "test-files/hg19.dict"}]
 
 }
 
