@@ -18,30 +18,20 @@ description: |
 requirements:
   - import: node-engine.cwl
   - import: envvar-global.cwl
+  - import: picard-docker.cwl
   
 inputs:
-  - id: "#java_arg"
-    type: string
-    default: "-Xmx2g"
-    inputBinding:
-      position: 1
-      
-  - id: "#jar_file"
-    type: File
-    inputBinding:
-      position: 2
-      prefix: "-jar"
 
   - id: "#mergeSam"
     type: string
     default: "MergeSamFiles"
     inputBinding:
-      position: 3
+      position: 1
 
   - id: "#outputFileName_mergedSam"
     type: string
     inputBinding:
-      position: 4
+      position: 2
       prefix: "OUTPUT="
 
   - id: "#inputFileName_mergedSam"
@@ -49,7 +39,41 @@ inputs:
       type: array
       items: File
       inputBinding: { prefix: "INPUT=" } 
-    inputBinding: { position: 5}
+    inputBinding: { position: 3}
+
+  - id: "#readSorted"
+    type: ["null", boolean]
+    default: false
+    inputBinding:
+      position: 5
+      prefix: "ASSUME_SORTED="
+
+  - id: "#mergeSequenceDictionaries"
+    type: ["null", boolean]
+    default: false
+    inputBinding:
+      position: 6
+      prefix: "MERGE_SEQUENCE_DICTIONARIES="
+      
+  - id: "#useThreading"
+    type: ["null", boolean]
+    default: false
+    inputBinding:
+      position: 7
+      prefix: "USE_THREADING="
+
+  - id: "#comment"
+    type: string
+    default: "null"
+    inputBinding:
+      position: 8
+      prefix: "COMMENT="
+
+  - id: "#tmpdir"
+    type: string
+    inputBinding:
+      position: 20
+      prefix: "TMP_DIR="
 
 outputs:
   - id: "#mergeSam_output"
@@ -59,4 +83,4 @@ outputs:
         engine: cwl:JsonPointer
         script: /job/outputFileName_mergedSam
       
-baseCommand: ["java"]
+baseCommand: []
