@@ -40,10 +40,9 @@ adms:includedAsset:
     foaf:name: "Broad Institute"
 
 description: |
-  picard-BuildBamIndex.cwl is developed for CWL consortium
-    Generates a BAM index (.bai) file.
+  picard-MergeSamFiles.cwl is developed for CWL consortium
 
-doap:name: "picard-BuildBamIndex.cwl"
+doap:name: "picard-MergeSamFiles.cwl"
 dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/picard-MergeSamFiles.cwl"
 
 dct:isPartOf:
