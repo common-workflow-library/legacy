@@ -210,7 +210,7 @@ outputs:
       glob: $(inputs.outputfile_realignTarget)
         
 arguments:
-  - valueFrom: "test/test-files"
+  - valueFrom: "./test/test-files"
     position: 2
     separate: false
     prefix: "-Djava.io.tmpdir="
