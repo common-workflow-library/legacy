@@ -141,7 +141,7 @@ doap:maintainer:
 requirements:
 - $import: envvar-global.cwl
 - $import: envvar-global.cwl
-- $import: gatk-docker.cwl
+- $import: GATK-docker.cwl
 
 inputs:
 
