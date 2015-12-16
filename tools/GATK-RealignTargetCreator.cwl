@@ -19,7 +19,7 @@ cwlVersion: "cwl:draft-3.dev3"
 class: CommandLineTool
 
 adms:includedAsset:
-  doap:name: "picard"
+  doap:name: "GATK"
   doap:description: >
     The Genome Analysis Toolkit or GATK is a software package for analysis of high-throughput sequencing data, developed by the Data Science and Data Engineering group at the Broad Institute. 
     The toolkit offers a wide variety of tools, with a primary focus on variant discovery and genotyping as well as strong emphasis on data quality assurance.
