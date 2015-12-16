@@ -1,7 +1,7 @@
 - args: [
     "java", 
     "-Xmx4g", 
-    "-Djava.io.tmpdir=./test/test-files", 
+    "-Djava.io.tmpdir=test/test-files", 
     "-jar", 
     "/usr/local/bin/GenomeAnalysisTK.jar", 
     "-T", 
