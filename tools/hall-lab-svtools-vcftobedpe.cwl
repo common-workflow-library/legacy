@@ -10,6 +10,10 @@ description: |
 requirements:
   - "@import": envvar-global.cwl
 
+hints:
+  - class: DockerRequirement
+    dockerPull: biocrusoe/hall-lab-svtools
+
 inputs:
   - id: "#input"
     type: File
