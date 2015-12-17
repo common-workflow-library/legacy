@@ -242,5 +242,6 @@ arguments:
 
   - valueFrom: "RealignerTargetCreator"
     position: 4
+    prefix: "-T"
 
 baseCommand: ["java"]
