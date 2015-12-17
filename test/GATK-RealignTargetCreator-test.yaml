@@ -17,7 +17,7 @@
     "--known", 
     "./test-files/Mills_and_1000G_gold_st.vcf", 
     "--known", 
-    "./test-files/1000G_phase1.indels.hg19.vcf",
+    "./test-files/1000G_phase1.indels.hg19.vcf"
 ]
   job:  GATK-RealignTargetCreator-job.json
   tool: ../tools/GATK-RealignTargetCreator.cwl
