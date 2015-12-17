@@ -130,13 +130,12 @@ dct:creator:
 
 doap:maintainer:
 - class: foaf:Organization
-  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
+  foaf:name: "THE UNIVERSITY OF MELBOURNE"
   foaf:member:
   - class: foaf:Person
-    id: "http://orcid.org/0000-0001-9102-5681"
-    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
-    foaf:name: "Andrey Kartashov"
-    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
+    id: "farahk@student.unimelb.edu.au"
+    foaf:name: "Farah Zaib Khan"
+    foaf:mbox: "mailto:farahk@student.unimelb.edu.au"
     
 requirements:
 - $import: envvar-global.cwl
@@ -150,14 +149,6 @@ inputs:
     default: "-Xmx4g"
     inputBinding: 
       position: 1
-     
-  - id: "#RealignerTarget"
-    type: string
-    description: >
-      tool used for this step from GATK jar
-    default: "RealignerTargetCreator"
-    inputBinding: { position: 4, prefix: "-T" }
-
      
   - id: "#reference"
     type: File
@@ -185,23 +176,53 @@ inputs:
       secondaryFiles:
         - "^.bai"
 
+  - id: "#outputfile_realignTarget"
+    type: string
+    description: >
+      name of the output file from realignTargetCreator
+    inputBinding:
+      prefix: "-o"
+      position: 7
+
+
   - id: "#known"  
     type:
       type: array
       items: File
       inputBinding: { prefix: "--known" }
     description: >
-      File set of known indels 
-    inputBinding: 
-      position: 7
-
-  - id: "#outputfile_realignTarget"
-    type: string
-    description: >
-      name of the output file from realignTargetCreator
+      Any number of VCF files representing known SNPs and/or indels. Could be e.g. dbSNP and/or official 1000 Genomes indel calls. SNPs in these files will be ignored unless the --mismatchFraction argument is used. optional parameter.
     inputBinding:
       position: 8
-      prefix: "-o"
+
+  - id: "#maxIntervalSize"  
+    type: ["null", int]
+    description: >
+      maximum interval size; any intervals larger than this value will be dropped. optional paramter
+    inputBinding:
+      prefix: "--maxIntervalSize"
+
+  - id: "#minReadsAtLocus"  
+    type: ["null", int]
+    description: >
+      minimum reads at a locus to enable using the entropy calculation
+    inputBinding:
+      prefix: "--minReadsAtLocus"
+
+  - id: "#mismatchFraction"  
+    type: ["null", int]
+    description: >
+      fraction of base qualities needing to mismatch for a position to have high entropy
+    inputBinding:
+      prefix: "--mismatchFraction"
+    
+  - id: "#windowSize"  
+    type: ["null", int]
+    description: >
+      window size for calculating entropy or SNP clusters
+    inputBinding:
+      prefix: "--windowSize"
+
 
 outputs:
   - id: "#output_realignTarget"
@@ -218,5 +239,8 @@ arguments:
   - valueFrom: "/usr/local/bin/GenomeAnalysisTK.jar"
     position: 3
     prefix: "-jar"
+
+  - valueFrom: "RealignerTargetCreator"
+    position: 4
 
 baseCommand: ["java"]
