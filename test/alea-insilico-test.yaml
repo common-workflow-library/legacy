@@ -1,0 +1,14 @@
+- args: [
+    "alea",
+    "createGenome",
+    "-snps-indels-separately",
+    "./test-files/mouse/mm10.fa",
+    "./test-files/mouse/mgp.v3.snps.rsIDdbSNPv137.vcf.gz",
+    "./test-files/mouse/mgp.v3.indels.rsIDdbSNPv137.vcf.gz",
+    "129S1_SvImJ",
+    "CAST_EiJ",
+    "./test-files/alea"
+            ]
+  job:  alea-createGenome-job.json
+  tool: ../tools/alea-createGenome.cwl
+  doc: General test of command line generation
