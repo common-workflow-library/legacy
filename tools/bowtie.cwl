@@ -173,8 +173,48 @@ requirements:
           rm -rf ./${NAME}-${VERSION}/
 
 inputs:
-  - id: '#stdoutfile'
+  - id: '#ebwt'
     type: string
+    description: >
+      The basename of the index to be searched.
+      The basename is the name of any of the index files up to but not including the final .1.ebwt / .rev.1.ebwt / etc. bowtie looks for
+      the specified index first in the current directory,
+      then in the indexes subdirectory under the directory where the bowtie executable is located,
+      then looks in the directory specified in the BOWTIE_INDEXES environment variable.
+    inputBinding:
+      position: 8
+
+  - id: '#filelist'
+    type:
+      type: array
+      items: File
+    description: |
+      {-1 <m1> -2 <m2> | --12 <r> | <s>}
+      <m1>    Comma-separated list of files containing upstream mates (or the
+            sequences themselves, if -c is set) paired with mates in <m2>
+      <m2>    Comma-separated list of files containing downstream mates (or the
+            sequences themselves if -c is set) paired with mates in <m1>
+      <r>     Comma-separated list of files containing Crossbow-style reads.  Can be
+            a mixture of paired and unpaired.  Specify "-"for stdin.
+      <s>     Comma-separated list of files containing unpaired reads, or the
+            sequences themselves, if -c is set.  Specify "-"for stdin.
+    inputBinding:
+      itemSeparator: ","
+      position: 9
+
+  - id: '#filelist_mates'
+    type:
+      - "null"
+      - type: array
+        items: File
+    inputBinding:
+      itemSeparator: ","
+      position: 9
+
+  - id: '#filename'
+    type: string
+    inputBinding:
+      position: 10
 
   - id: '#q'
     type:
@@ -625,7 +665,7 @@ inputs:
     inputBinding:
       position: 1
       prefix: '--col-keepends'
-  - id: '#S'
+  - id: '#sam'
     type:
       - 'null'
       - boolean
@@ -722,12 +762,10 @@ inputs:
       prefix: '--verbose'
 
 outputs:
-  - id: '#stdoutfile'
+  - id: '#output'
     type: File
     outputBinding:
-      glob: $(inputs.stdoutfile)
-
-stdout: $(inputs.stdoutfile)
+      glob: $(inputs.filename)
 
 baseCommand:
   - bowtie
