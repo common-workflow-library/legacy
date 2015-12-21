@@ -92,7 +92,7 @@ inputs:
     prefix: "--output-fasta="
 
 outputs:
-- id: "output-fasta"
+- id: "output"
   type: File
   outputBinding:
     glob: $(inputs.output_filename)
@@ -103,6 +103,7 @@ outputs:
 baseCommand: ["java", "-Xms4G", "-Xmx8G", "-jar", "/usr/local/bin/alea.jar" ,"insilico"]
 
 $namespaces:
+  schema: http://schema.org/
   dct: http://purl.org/dc/terms/
   foaf: http://xmlns.com/foaf/0.1/
   doap: http://usefulinc.com/ns/doap#
