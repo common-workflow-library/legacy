@@ -1,0 +1,7 @@
+- args: [
+    "/bin/sh",
+    "-c",
+    "'bcftools' 'consensus' '-c' './test-files/CASTEiJ.chain' '-o' './test-files/CASTEiJ.bcftools.fasta' '-f' './test-files/mouse/mm10.fa' '-s' 'CASTEiJ' './test-files/mouse/mgp.v3.concat.chrname.rsIDdbSNPv137.vcf.gz' 2>/dev/null"    ]
+  job:  bcftools-consensus-job.json
+  tool: ../tools/bcftools-consensus.cwl
+  doc: General test of command line generation
