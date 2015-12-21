@@ -1,0 +1,16 @@
+{
+  "vcfs": [
+    {
+    "path": "test-files/mouse/mgp.v3.snps.chrname.rsIDdbSNPv137.vcf.gz",
+    "class": "File"
+    } ,  {
+      "path": "test-files/mouse/mgp.v3.indels.chrname.rsIDdbSNPv137.vcf.gz",
+      "class": "File"
+    }
+  ],
+  "rm_dups":"both",
+  "output_type":"z",
+  "threads": 2,
+  "allow_overlaps": true,
+  "filename": "./test-files/mouse/mgp.v3.concat.chrname.rsIDdbSNPv137.vcf.gz"
+}
