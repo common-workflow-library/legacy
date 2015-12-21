@@ -1,6 +1,7 @@
 - args: [
-    "bcftools",
+   "bcftools",
     "concat",
+    "-a",
     "-o",
     "./test-files/mouse/mgp.v3.concat.chrname.rsIDdbSNPv137.vcf.gz",
     "-Oz",
