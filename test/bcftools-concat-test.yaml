@@ -1,0 +1,17 @@
+- args: [
+   "bcftools",
+    "concat",
+    "-a",
+    "-o",
+    "./test-files/mouse/mgp.v3.concat.chrname.rsIDdbSNPv137.vcf.gz",
+    "-Oz",
+    "-d",
+    "both",
+    "--threads",
+    "2",
+    "./test-files/mouse/mgp.v3.snps.chrname.rsIDdbSNPv137.vcf.gz",
+    "./test-files/mouse/mgp.v3.indels.chrname.rsIDdbSNPv137.vcf.gz"
+      ]
+  job:  bcftools-concat-job.json
+  tool: ../tools/bcftools-concat.cwl
+  doc: General test of command line generation

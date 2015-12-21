@@ -1,54 +1,262 @@
 #!/usr/bin/env cwl-runner
-#
-# Auto generated CWL please use with caution
-# Author: Andrey.Kartashov@cchmc.org (http://orcid.org/0000-0001-9102-5681) / Cincinnati Children’s Hospital Medical Center
-# Developed for CWL consortium http://commonwl.org/
+
+$namespaces:
+  dct: http://purl.org/dc/terms/
+  foaf: http://xmlns.com/foaf/0.1/
+  doap: http://usefulinc.com/ns/doap#
+  adms: http://www.w3.org/ns/adms#
+  dcat: http://www.w3.org/ns/dcat#
+
+$schemas:
+- http://schema.rdfs.org/all.rdf
+- http://dublincore.org/2012/06/14/dcterms.rdf
+- http://xmlns.com/foaf/spec/20140114.rdf
+- http://usefulinc.com/ns/doap#
+- http://www.w3.org/ns/adms#
+- http://www.w3.org/ns/dcat.rdf
+
+cwlVersion: "cwl:draft-3.dev3"
 
 class: CommandLineTool
+
+adms:includedAsset:
+  doap:name: "bowtie"
+  doap:description: ""
+  doap:homepage: "http://bowtie-bio.sourceforge.net"
+  doap:repository:
+  - class: doap:GitRepository
+    doap:location: "https://github.com/BenLangmead/bowtie.git"
+  doap:release:
+  - class: doap:Version
+    doap:revision: "1.1.2"
+  doap:license: "GPL"
+  doap:category: "commandline tool"
+  doap:programming-language: "C++"
+  foaf:publications:
+  - id: urn:pmid:0
+    foaf:title: ""
+    foaf:homepage: ""
+  doap:developer:
+  - class: foaf:Organization
+    foaf:name: ""
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: ""
+      foaf:mbox: ""
+      foaf:fundedBy: ""
+
+label: "bowtie.cwl"
+doap:name: "bowtie.cwl"
+dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/bowtie.cwl"
+
+dct:isPartOf:
+  doap:name: "CWL Workflows"
+  doap:homepage: "http://commonwl.org/"
+  doap:license: "Apache2"
+
+  doap:implements:
+  - class: doap:Specification
+    doap:homepage: "http://common-workflow-language.github.io/draft-3/"
+
+  doap:repository:
+  - class: doap:GitRepository
+    doap:location: "https://github.com/common-workflow-language/workflows"
+
+  dct:creator:
+  - class: foaf:Organization
+    foaf:name: "Curoverse"
+    foaf:member:
+    - class: foaf:Person
+      id: "http://orcid.org/0000-0003-3566-7705"
+      foaf:name: "Peter Amstutz"
+      foaf:mbox: "mailto:peter.amstutz@curoverse.com"
+  - class: foaf:Organization
+    foaf:name: "Seven Bridges Genomics"
+    foaf:member:
+    - class: foaf:Person
+      id: "mailto:nebojsa.tijanic@sbgenomics.com"
+      foaf:name: "Nebojša Tijanić"
+      foaf:mbox: "mailto:nebojsa.tijanic@sbgenomics.com"
+
+  dct:contributor:
+  - class: foaf:Organization
+    foaf:name: "Seven Bridges Genomics"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Luka Stojanovic"
+      foaf:mbox: "mailto:luka.stojanovic@sbgenomics.com"
+  - class: foaf:Organization
+    foaf:name: "Galaxy Project, Pennsylvania State University"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "John Chilton"
+      foaf:mbox: "mailto:jmchilton@gmail.com"
+  - class: foaf:Organization
+    foaf:name: "University of California, Davis"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Michael R. Crusoe"
+      foaf:mbox: "mailto:crusoe@ucdavis.edu"
+  - class: foaf:Organization
+    foaf:name: "Institut Pasteur"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Hervé Ménager"
+      foaf:mbox: "mailto:herve.menager@gmail.com"
+  - class: foaf:Organization
+    foaf:name: "BioDatomics"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Maxim Mikheev"
+      foaf:mbox: "mailto:mikhmv@biodatomics.com"
+  - class: foaf:Organization
+    foaf:name: "University of Manchester"
+    foaf:member:
+    - class: foaf:Person
+      foaf:name: "Stian Soiland-Reyes"
+      foaf:mbox: "mailto:soiland-reyes@cs.manchester.ac.uk"
+
+doap:maintainer:
+- class: foaf:Organization
+  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
+  foaf:member:
+  - class: foaf:Person
+    id: "http://orcid.org/0000-0001-9102-5681"
+    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
+    foaf:name: "Andrey Kartashov"
+    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
+
+
 requirements:
-  - import: node-engine.cwl
-  - import: envvar-global.cwl
-  - import: bowtie-docker.cwl
+  - $import: envvar-global.cwl
+  - class: InlineJavascriptRequirement
+  - class: DockerRequirement
+    #dockerImageId: scidap/bowtie:v1.1.2 #not yet ready
+    dockerPull: scidap/bowtie:v1.1.2
+    dockerFile: |
+      #################################################################
+      # Dockerfile
+      #
+      # Software:         bowtie
+      # Software Version: 1.1.2
+      # Description:      Bowtie image for SciDAP
+      # Website:          http://bowtie-bio.sourceforge.net, http://scidap.com/
+      # Provides:         bowtie
+      # Base Image:       scidap/scidap:v0.0.1
+      # Build Cmd:        docker build --rm -t scidap/bowtie:v1.1.2 .
+      # Pull Cmd:         docker pull scidap/bowtie:v1.1.2
+      # Run Cmd:          docker run --rm scidap/bowtie:v1.1.2 bowtie
+      #################################################################
+
+      ### Base Image
+      FROM scidap/scidap:v0.0.1
+      MAINTAINER Andrey V Kartashov "porter@porter.st"
+      ENV DEBIAN_FRONTEND noninteractive
+
+      ################## BEGIN INSTALLATION ######################
+
+      WORKDIR /tmp
+
+      ### Installing bowtie
+
+      ENV VERSION 1.1.2
+      ENV NAME bowtie
+      ENV URL "https://github.com/BenLangmead/bowtie/archive/v${VERSION}.tar.gz"
+
+      RUN wget -q -O - $URL | tar -zxv && \
+          cd ${NAME}-${VERSION} && \
+          make -j 4 && \
+          cd .. && \
+          cp ./${NAME}-${VERSION}/${NAME} /usr/local/bin/ && \
+          cp ./${NAME}-${VERSION}/${NAME}-* /usr/local/bin/ && \
+          strip /usr/local/bin/*; true && \
+          rm -rf ./${NAME}-${VERSION}/
+
 inputs:
-  - id: '#stdoutfile'
+  - id: '#ebwt'
     type: string
+    description: >
+      The basename of the index to be searched.
+      The basename is the name of any of the index files up to but not including the final .1.ebwt / .rev.1.ebwt / etc. bowtie looks for
+      the specified index first in the current directory,
+      then in the indexes subdirectory under the directory where the bowtie executable is located,
+      then looks in the directory specified in the BOWTIE_INDEXES environment variable.
+    inputBinding:
+      position: 8
+
+  - id: '#filelist'
+    type:
+      type: array
+      items: File
+    description: |
+      {-1 <m1> -2 <m2> | --12 <r> | <s>}
+      <m1>    Comma-separated list of files containing upstream mates (or the
+            sequences themselves, if -c is set) paired with mates in <m2>
+      <m2>    Comma-separated list of files containing downstream mates (or the
+            sequences themselves if -c is set) paired with mates in <m1>
+      <r>     Comma-separated list of files containing Crossbow-style reads.  Can be
+            a mixture of paired and unpaired.  Specify "-"for stdin.
+      <s>     Comma-separated list of files containing unpaired reads, or the
+            sequences themselves, if -c is set.  Specify "-"for stdin.
+    inputBinding:
+      itemSeparator: ","
+      position: 9
+
+  - id: '#filelist_mates'
+    type:
+      - "null"
+      - type: array
+        items: File
+    inputBinding:
+      itemSeparator: ","
+      position: 9
+
+  - id: '#filename'
+    type: string
+    inputBinding:
+      position: 10
+
   - id: '#q'
     type:
       - 'null'
       - boolean
-    description: "                query input files are FASTQ .fq/.fastq (default)\n"
+    description: "query input files are FASTQ .fq/.fastq (default)\n"
     inputBinding:
       position: 1
       prefix: '-q'
+
   - id: '#f'
     type:
       - 'null'
       - boolean
-    description: "                query input files are (multi-)FASTA .fa/.mfa\n"
+    description: "query input files are (multi-)FASTA .fa/.mfa\n"
     inputBinding:
       position: 1
       prefix: '-f'
+
   - id: '#r'
     type:
       - 'null'
       - boolean
-    description: "                query input files are raw one-sequence-per-line\n"
+    description: "query input files are raw one-sequence-per-line\n"
     inputBinding:
       position: 1
       prefix: '-r'
+
   - id: '#c'
     type:
       - 'null'
       - boolean
-    description: "                query sequences given on cmd line (as <mates>, <singles>)\n"
+    description: "query sequences given on cmd line (as <mates>, <singles>)\n"
     inputBinding:
       position: 1
       prefix: '-c'
+
   - id: '#C'
     type:
       - 'null'
       - boolean
-    description: "                reads and index are in colorspace\n"
+    description: "reads and index are in colorspace\n"
     inputBinding:
       position: 1
       prefix: '-C'
@@ -110,7 +318,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "   input quals are Phred+33 (default)\n"
+    description: "input quals are Phred+33 (default)\n"
     inputBinding:
       position: 1
       prefix: '--phred33-quals'
@@ -118,7 +326,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "   input quals are Phred+64 (same as --solexa1.3-quals)\n"
+    description: "input quals are Phred+64 (same as --solexa1.3-quals)\n"
     inputBinding:
       position: 1
       prefix: '--phred64-quals'
@@ -126,7 +334,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "    input quals are from GA Pipeline ver. < 1.3\n"
+    description: "input quals are from GA Pipeline ver. < 1.3\n"
     inputBinding:
       position: 1
       prefix: '--solexa-quals'
@@ -134,7 +342,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: " input quals are from GA Pipeline ver. >= 1.3\n"
+    description: "input quals are from GA Pipeline ver. >= 1.3\n"
     inputBinding:
       position: 1
       prefix: '--solexa1.3-quals'
@@ -142,7 +350,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "   qualities are given as space-separated integers (not ASCII)\n"
+    description: "qualities are given as space-separated integers (not ASCII)\n"
     inputBinding:
       position: 1
       prefix: '--integer-quals'
@@ -150,7 +358,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "     force usage of a 'large' index, even if a small one is present\nAlignment:\n"
+    description: "force usage of a 'large' index, even if a small one is present\nAlignment:\n"
     inputBinding:
       position: 1
       prefix: '--large-index'
@@ -197,7 +405,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "      disable Maq-like quality rounding for -n (nearest 10 <= 30)\n"
+    description: "disable Maq-like quality rounding for -n (nearest 10 <= 30)\n"
     inputBinding:
       position: 1
       prefix: '--nomaqround'
@@ -316,7 +524,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "            hits guaranteed best stratum; ties broken by quality\n"
+    description: "hits guaranteed best stratum; ties broken by quality\n"
     inputBinding:
       position: 1
       prefix: '--best'
@@ -324,7 +532,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "          hits in sub-optimal strata aren't reported (requires --best)\nOutput:\n"
+    description: "hits in sub-optimal strata aren't reported (requires --best)\nOutput:\n"
     inputBinding:
       position: 1
       prefix: '--strata'
@@ -350,7 +558,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "           print nothing but the alignments\n"
+    description: "print nothing but the alignments\n"
     inputBinding:
       position: 1
       prefix: '--quiet'
@@ -358,7 +566,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "          write alignments to files refXXXXX.map, 1 map per reference\n"
+    description: "write alignments to files refXXXXX.map, 1 map per reference\n"
     inputBinding:
       position: 1
       prefix: '--refout'
@@ -366,7 +574,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "          refer to ref. seqs by 0-based index rather than name\n"
+    description: "refer to ref. seqs by 0-based index rather than name\n"
     inputBinding:
       position: 1
       prefix: '--refidx'
@@ -410,7 +618,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "         write entire ref name (default: only up to 1st space)\nColorspace:\n"
+    description: "write entire ref name (default: only up to 1st space)\nColorspace:\n"
     inputBinding:
       position: 1
       prefix: '--fullref'
@@ -437,7 +645,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "        print aligned colorspace seqs as colors, not decoded bases\n"
+    description: "print aligned colorspace seqs as colors, not decoded bases\n"
     inputBinding:
       position: 1
       prefix: '--col-cseq'
@@ -445,7 +653,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "       print original colorspace quals, not decoded quals\n"
+    description: "print original colorspace quals, not decoded quals\n"
     inputBinding:
       position: 1
       prefix: '--col-cqual'
@@ -453,11 +661,11 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "    keep nucleotides at extreme ends of decoded alignment\nSAM:\n"
+    description: "keep nucleotides at extreme ends of decoded alignment\nSAM:\n"
     inputBinding:
       position: 1
       prefix: '--col-keepends'
-  - id: '#S'
+  - id: '#sam'
     type:
       - 'null'
       - boolean
@@ -479,7 +687,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "      supppress header lines (starting with @) for SAM output\n"
+    description: "supppress header lines (starting with @) for SAM output\n"
     inputBinding:
       position: 1
       prefix: '--sam-nohead'
@@ -487,7 +695,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "        supppress @SQ header lines for SAM output\n"
+    description: "supppress @SQ header lines for SAM output\n"
     inputBinding:
       position: 1
       prefix: '--sam-nosq'
@@ -523,7 +731,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "              use memory-mapped I/O for index; many 'bowtie's can share\n"
+    description: "use memory-mapped I/O for index; many 'bowtie's can share\n"
     inputBinding:
       position: 1
       prefix: '--mm'
@@ -531,7 +739,7 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "           use shared mem for index; many 'bowtie's can share\nOther:\n"
+    description: "use shared mem for index; many 'bowtie's can share\nOther:\n"
     inputBinding:
       position: 1
       prefix: '--shmem'
@@ -548,40 +756,23 @@ inputs:
     type:
       - 'null'
       - boolean
-    description: "         verbose output (for debugging)\n"
+    description: "verbose output (for debugging)\n"
     inputBinding:
       position: 1
       prefix: '--verbose'
-  - id: '#version'
-    type:
-      - 'null'
-      - boolean
-    description: "         print version information and quit\n"
-    inputBinding:
-      position: 1
-      prefix: '--version'
-  - id: '#h'
-    type:
-      - 'null'
-      - boolean
-    description: |
-      --help          print this usage message
-    inputBinding:
-      position: 1
-      prefix: '-h'
+
 outputs:
-  - id: '#stdoutfile'
+  - id: '#output'
     type: File
     outputBinding:
-      glob:
-        engine: 'cwl:JsonPointer'
-        script: /job/stdoutfile
-stdout:
-  engine: 'cwl:JsonPointer'
-  script: /job/stdoutfile
+      glob: $(inputs.filename)
+
 baseCommand:
   - bowtie
+
 description: |
+  bowtie.cwl is developed for CWL consortium
+
   Usage: 
   bowtie [options]* <ebwt> {-1 <m1> -2 <m2> | --12 <r> | <s>} [<hit>]
 
@@ -590,9 +781,9 @@ description: |
     <m2>    Comma-separated list of files containing downstream mates (or the
             sequences themselves if -c is set) paired with mates in <m1>
     <r>     Comma-separated list of files containing Crossbow-style reads.  Can be
-            a mixture of paired and unpaired.  Specify "-" for stdin.
+            a mixture of paired and unpaired.  Specify "-"for stdin.
     <s>     Comma-separated list of files containing unpaired reads, or the
-            sequences themselves, if -c is set.  Specify "-" for stdin.
+            sequences themselves, if -c is set.  Specify "-"for stdin.
     <hit>   File to write hits to (default: stdout)
   Input:
     -q                 query input files are FASTQ .fq/.fastq (default)
