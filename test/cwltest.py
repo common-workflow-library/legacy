@@ -10,6 +10,7 @@ import tempfile
 import yaml
 import pipes
 import logging
+import re
 
 _logger = logging.getLogger("cwltool")
 _logger.addHandler(logging.StreamHandler())
@@ -95,6 +96,7 @@ def run_test(args, i, t):
                             t["tool"],
                             t["job"]]
             outstr = subprocess.check_output(test_command)
+            outstr = re.sub("^\[.*\n", "", outstr)
             out = yaml.load(outstr)
     except ValueError as v:
         _logger.error(v)

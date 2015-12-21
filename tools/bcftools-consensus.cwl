@@ -11,10 +11,11 @@ requirements:
   - $import: envvar-global.cwl
   - $import: bcftools-docker.cwl
   - class: InlineJavascriptRequirement
+  - class: ShellCommandRequirement
 
 inputs:
 
-  - id: '#filename'
+  - id: filename
     type: string
     description: |
       write output to a file
@@ -22,11 +23,12 @@ inputs:
       position: 1
       prefix: '-o'
 
-  - id: filevcf
+  - id: vcf
     type: File
-    description: '<file.vcf>'
     inputBinding:
       position: 2
+      secondaryFiles:
+        - .tbi
 
   - id: reference
     type: File
@@ -41,7 +43,7 @@ inputs:
       - 'null'
       - int
     description: |
-      apply variants for the given haplotype
+      apply variants for the given haplotype <1|2>
     inputBinding:
       position: 1
       prefix: '-H'
@@ -69,7 +71,7 @@ inputs:
   - id: chain
     type:
       - 'null'
-      - File
+      - string
     description: |
       write a chain file for liftover
     inputBinding:
@@ -79,7 +81,7 @@ inputs:
   - id: sample
     type:
       - 'null'
-      - boolean
+      - string
     description: |
       apply variants of the given sample
     inputBinding:
@@ -92,9 +94,19 @@ outputs:
     outputBinding:
       glob: $(inputs.filename)
 
+  - id: liftover
+    type: File
+    outputBinding:
+      glob: $(inputs.chain)
+
 baseCommand:
   - bcftools
   - consensus
+
+arguments:
+  - valueFrom: "2>/dev/null"
+    position: 99
+    shellQuote: false
 
 description: |
   About:   Create consensus sequence by applying VCF variants to a reference

@@ -1,0 +1,14 @@
+{
+  "reference": {
+    "path": "test-files/mouse/mm10.fa",
+    "class": "File"
+  },
+  "vcf": {
+    "path": "test-files/mouse/mgp.v3.concat.chrname.rsIDdbSNPv137.vcf.gz",
+    "class": "File"
+  },
+  "filename": "./test-files/CASTEiJ.bcftools.fasta",
+  "strain1": "129S1_SvImJ",
+  "chain": "./test-files/CASTEiJ.chain",
+  "sample": "CASTEiJ"
+}
