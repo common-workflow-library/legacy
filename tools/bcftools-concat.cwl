@@ -26,6 +26,9 @@ inputs:
     type:
       type: array
       items: File
+      inputBinding:
+        secondaryFiles:
+          - .tbi
     inputBinding:
       position: 2
 
