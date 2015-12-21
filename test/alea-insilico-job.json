@@ -4,10 +4,10 @@
     "class": "File"
   },
   "phased": {    
-    "path": "test-files/mouse/mgp.v3.merged.rsIDdbSNPv137.vcf.gz",  
+    "path": "test-files/mouse/mgp.v3.concat.chrname.rsIDdbSNPv137.vcf.gz",
     "class": "File"
   },
-  "output_filename": "./test-files/alea/CASTEiJ.fasta",
+  "filename": "./test-files/alea/CASTEiJ.concat.fasta",
   "strain1": "129S1_SvImJ",
   "strain": "CASTEiJ"
 }

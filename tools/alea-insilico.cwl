@@ -84,7 +84,7 @@ inputs:
     prefix: "--strain="
     position: 4
 
-- id: "output_filename"
+- id: "filename"
   type: string
   inputBinding:
     position: 5
