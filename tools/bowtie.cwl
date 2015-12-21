@@ -172,7 +172,6 @@ requirements:
           strip /usr/local/bin/*; true && \
           rm -rf ./${NAME}-${VERSION}/
 
-
 inputs:
   - id: '#stdoutfile'
     type: string
