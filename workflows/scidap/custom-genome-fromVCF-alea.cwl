@@ -1,9 +1,15 @@
 #!/usr/bin/env cwl-runner
+#
+# Author: Andrey.Kartashov@cchmc.org (http://orcid.org/0000-0001-9102-5681) / Dr. Barski Lab / Cincinnati Children’s Hospital Medical Center
+# Developed for CWL consortium http://commonwl.org/
 
 class: Workflow
+
 cwlVersion: "cwl:draft-3.dev3"
+
 description:
   creates custom genome from reference genome and two phased VCF files SNPs and Indels
+
 requirements:
   - $import: ../../tools/envvar-global.cwl
 

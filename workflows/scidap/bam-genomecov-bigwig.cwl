@@ -1,67 +1,74 @@
 #!/usr/bin/env cwl-runner
+#
+# Author: Andrey.Kartashov@cchmc.org (http://orcid.org/0000-0001-9102-5681) / Dr. Barski Lab / Cincinnati Children’s Hospital Medical Center
+# Developed for CWL consortium http://commonwl.org/
 
 class: Workflow
+
+cwlVersion: "cwl:draft-3.dev3"
+
+description:
+  creates genome coverage bigWig file from .bam file
+
 requirements:
-  - import: node-engine.cwl
-  - import: ../../tools/envvar-global.cwl
-#  - import: ../../tools/bedtools-genomecov-types.cwl
+  - $import: ../../tools/envvar-global.cwl
 
 inputs:
-  - id: "#input"
+  - id: input
     type: File
 
-  - id: "#genomeFile"
+  - id: genomeFile
     type: File
 
-  - id: "#scale"
+  - id: scale
     type: float
 
-  - id: "#pairchip"
+  - id: pairchip
     type: ["null",boolean]
 
-  - id: "#fragmentsize"
+  - id: fragmentsize
     type: ["null",int]
 
-  - id: "#strand"
+  - id: strand
     type: ["null",string]
 
-  - id: "#bigWig"
+  - id: bigWig
     type: string
 
 outputs:
-  - id: "#outfile"
+  - id: outfile
     type: File
-    source: "#bigwig.bigWigOut"
+    source: "#bigwig/bigWigOut"
 
 steps:
-  - id: "#genomecov"
-    run: {import: ../../tools/bedtools-genomecov.cwl}
+  - id: genomecov
+    run: ../../tools/bedtools-genomecov.cwl
     inputs:
-      - {id: "#genomecov.input", source: "#input"}
-      - {id: "#genomecov.genomeFile", source: "#genomeFile"}
-      - {id: "#genomecov.genomecoverageout", default: "genomecov.bed" }
-      - {id: "#genomecov.dept", default: '-bg' }
-      - {id: "#genomecov.split", default: true }
-      - {id: "#genomecov.pairchip", source: "#pairchip" }
-      - {id: "#genomecov.fragmentsize", source: "#fragmentsize" }
-      - {id: "#genomecov.scale", source: "#scale" }
-      - {id: "#genomecov.strand", source: "#strand" }
+      - {id: input, source: "#input"}
+      - {id: genomeFile, source: "#genomeFile"}
+      - {id: genomecoverageout, default: "genomecov.bed" }
+      - {id: dept, default: '-bg' }
+      - {id: split, default: true }
+      - {id: pairchip, source: "#pairchip" }
+      - {id: fragmentsize, source: "#fragmentsize" }
+      - {id: scale, source: "#scale" }
+      - {id: strand, source: "#strand" }
     outputs:
-      - {id: "#genomecov.genomecoverage"}
+      - {id: genomecoverage}
 
-  - id: "#sort"
-    run: {import: ../../tools/linux-sort.cwl}
+  - id: sort
+    run: ../../tools/linux-sort.cwl
     inputs:
-      - {id: "#sort.input", source: "#genomecov.genomecoverage" }
-      - {id: "#sort.key", default: ["1,1","2,2n"] }
+      - {id: input, source: "#genomecov/genomecoverage" }
+      - {id: key", default: ["1,1","2,2n"] }
     outputs:
-      - {id: "#sort.sorted"}
+      - {id: sorted}
 
-  - id: "#bigwig"
-    run: {import: ../../tools/ucsc-bedGraphToBigWig.cwl}
+  - id: bigwig
+    run: ../../tools/ucsc-bedGraphToBigWig.cwl
     inputs:
-      - {id: "#bigwig.input", source: "#sort.sorted"}
-      - {id: "#bigwig.genomeFile", source: "#genomeFile"}
-      - {id: "#bigwig.bigWig", source: "#bigWig"}
+      - {id: input, source: "#sort/sorted"}
+      - {id: genomeFile, source: "#genomeFile"}
+      - {id: bigWig, source: "#bigWig"}
     outputs:
-      - {id: "#bigwig.bigWigOut"}
+      - {id: bigWigOut}
