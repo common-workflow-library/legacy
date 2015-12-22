@@ -1,0 +1,10 @@
+- args: [
+    "bowtie",
+    "-S",
+    "test-files/dm3/dm3",
+    "./test-files/SRR1031972.fastq",
+    "./test-files/SRR1031972.SAM"
+    ]
+  job:  bowtie-job.json
+  tool: ../tools/bowtie.cwl
+  doc: General test of command line generation

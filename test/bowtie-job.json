@@ -1,0 +1,6 @@
+{
+  "ebwt": "test-files/dm3/dm3",
+  "filelist": [{"class": "File", "path": "test-files/SRR1031972.fastq"}],
+  "filename":"./test-files/SRR1031972.SAM",
+  "sam":true
+}

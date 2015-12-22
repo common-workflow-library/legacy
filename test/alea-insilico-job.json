@@ -1,0 +1,13 @@
+{
+  "reference": {
+    "path": "test-files/mouse/mm10.fa",
+    "class": "File"
+  },
+  "phased": {    
+    "path": "test-files/mouse/mgp.v3.concat.chrname.rsIDdbSNPv137.vcf.gz",
+    "class": "File"
+  },
+  "filename": "./test-files/alea/CASTEiJ.concat.fasta",
+  "strain1": "129S1_SvImJ",
+  "strain": "CASTEiJ"
+}

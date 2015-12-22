@@ -1,0 +1,14 @@
+- args: [
+    "java",
+    "-Xms4G",
+    "-Xmx8G",
+    "-jar",
+    "/usr/local/bin/alea.jar",
+    "insilico",
+    "--input-fasta=./test-files/mouse/mm10.fa",
+    "--input-vcf=./test-files/mouse/mgp.v3.concat.chrname.rsIDdbSNPv137.vcf.gz",
+    "--strain=CASTEiJ",
+    "--output-fasta=./test-files/alea/CASTEiJ.concat.fasta"
+            ]
+  job:  alea-insilico-job.json
+  doc: General test of command line generation
