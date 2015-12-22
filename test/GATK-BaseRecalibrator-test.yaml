@@ -1,4 +1,4 @@
- - args: [
+- args: [
         "java", 
         "-Xmx4g", 
         "-Djava.io.tmpdir=./test/test-files", 
