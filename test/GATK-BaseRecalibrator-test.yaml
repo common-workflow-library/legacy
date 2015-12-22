@@ -19,6 +19,3 @@
   tool: ../tools/GATK-BaseRecalibrator.cwl
   doc: General test of command line generation
   outdir: "test-files/"
- 
- 
-         [
