@@ -10,6 +10,7 @@ import tempfile
 import yaml
 import pipes
 import logging
+import re
 
 _logger = logging.getLogger("cwltool")
 _logger.addHandler(logging.StreamHandler())
@@ -63,6 +64,12 @@ def compare(a, b, i=None):
 def run_test(args, i, t):
     out = {}
     outdir = None
+    if args.force_test_tool:
+        t["tool"] = args.force_test_tool
+
+    if t["tool"].split("/")[-1] != re.sub("\-test\.yaml$", ".cwl",args.test.split("/")[-1]):
+        raise CompareFail("%s != %s" % (t["tool"].split("/")[-1],re.sub("\-test\.yaml$",".cwl",args.test.split("/")[-1])))
+
     try:
         if "output" in t and not args.conformance_test:
             test_command = [args.tool]
@@ -95,6 +102,7 @@ def run_test(args, i, t):
                             t["tool"],
                             t["job"]]
             outstr = subprocess.check_output(test_command)
+            outstr = re.sub("^\[.*\n", "", outstr)
             out = yaml.load(outstr)
     except ValueError as v:
         _logger.error(v)
@@ -149,6 +157,7 @@ def run_test(args, i, t):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--test", type=str, help="YAML file describing test cases", required=True)
+    parser.add_argument("--force-test-tool", type=str, help="Force to replace tool to test",default=None)
     parser.add_argument("--basedir", type=str, help="Basedir to use for tests", default=".")
     parser.add_argument("-n", type=int, default=None, help="Run a specific test")
     parser.add_argument("--tmp", default=False, action="store_true", help="Enable --tmp params for the tool")
