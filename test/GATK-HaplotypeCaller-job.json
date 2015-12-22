@@ -1,0 +1,18 @@
+{ 
+     "inputBam_HaplotypeCaller": {
+        "class": "File",
+        "path": "test/test-files/printReads.bam"
+    },
+    "reference": {
+        "class": "File",
+        "path": "test/test-files/hg19.fasta",
+    },  
+    "dbsnp": {
+        "class": "File",
+        "path": "test/test-files/dbsnp_138.vcf", 
+    }, 
+  
+    "outputfile_HaplotypeCaller": "haplotypeCaller.vcf"
+     
+}
+
