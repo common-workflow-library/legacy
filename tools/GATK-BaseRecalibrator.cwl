@@ -177,12 +177,13 @@ inputs:
       prefix: "-I"
       secondaryFiles:
         - "^.bai"      
-     
+
   - id: "#known"  
     type:
-      type: array
-      items: File
-      inputBinding: { prefix: "-knownSites" }
+      - "null"
+      - type: array
+        items: File
+        inputBinding: { prefix: "-knownSites" }
     inputBinding: 
       position: 7
       
