@@ -1,0 +1,21 @@
+- args: [
+    "java", 
+    "-Xmx4g", 
+    "-jar", 
+    "/usr/local/bin/picard.jar", 
+    "MergeSamFiles", 
+    "OUTPUT=", 
+    "mergedSam.sam", 
+    "INPUT=", 
+    "./test-files/chr21.sam", 
+    "INPUT=", 
+    "./test-files/hg19.dict", 
+    "TMP_DIR=", 
+    "test-files"
+]
+  job:  picard-MergeSamFiles-job.json
+  tool: ../tools/picard-MergeSamFiles.cwl
+  doc: General test of command line generation
+  outdir: "test-files/"
+
+
