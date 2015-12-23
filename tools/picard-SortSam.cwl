@@ -185,8 +185,8 @@ inputs:
       prefix: "TMP_DIR="
 
   - id: "#createIndex"
-    type: ["null", boolean]
-    default: true
+    type: ["null", string]
+    default: "true"
     description: Whether to create a BAM index when writing a coordinate-sorted BAM file. Default value false. This option can be set to 'null' to clear the default value. Possible values {true, false}
     inputBinding:
       position: 8
