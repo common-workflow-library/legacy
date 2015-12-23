@@ -275,7 +275,7 @@ inputs:
   - id: "#createIndex"
     type: ["null", boolean]
     default: true
-    description: Whether to create a BAM index when writing a coordinate-sorted BAM file. Default value: false. This option can be set to 'null' to clear the default value. Possible values {true, false}
+    description: Whether to create a BAM index when writing a coordinate-sorted BAM file. Default value false. This option can be set to 'null' to clear the default value. Possible values {true, false}
     inputBinding:
       position: 20
       prefix: "CREATE_INDEX="
