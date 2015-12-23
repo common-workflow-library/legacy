@@ -136,6 +136,10 @@ doap:maintainer:
     id: "farahk@student.unimelb.edu.au"
     foaf:name: "Farah Zaib Khan"
     foaf:mbox: "mailto:farahk@student.unimelb.edu.au"
+  - class: foaf:Person
+    id: "skanwal@student.unimelb.edu.au"
+    foaf:name: "Sehrish Kanwal"
+    foaf:mbox: "mailto:skanwal@student.unimelb.edu.au"
     
 requirements:
 - $import: envvar-global.cwl
@@ -184,12 +188,12 @@ inputs:
       prefix: "-o"
       position: 7
 
-
   - id: "#known"  
     type:
-      type: array
-      items: File
-      inputBinding: { prefix: "--known" }
+      - "null"
+      - type: array
+        items: File
+        inputBinding: { prefix: "--known" }
     description: >
       Any number of VCF files representing known SNPs and/or indels. Could be e.g. dbSNP and/or official 1000 Genomes indel calls. SNPs in these files will be ignored unless the --mismatchFraction argument is used. optional parameter.
     inputBinding:
