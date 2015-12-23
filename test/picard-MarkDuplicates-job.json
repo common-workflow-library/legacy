@@ -1,10 +1,7 @@
 {
-    
-    "inputFileName_markDups": {
-    "class": "File",
-    "path": "test/test-files/sortedSam.bam"
-     }, 
-     
+
+    "inputFileName_markDups": [{"class": "File", "path": "test/test-files/sortedSam.bam"}],
+
     "outputFileName_markDups": "markDuplicates.bam",
     "metricsFile": "metricsFile-markDuplicates", 
     "tmpdir": "test/test-files", 
