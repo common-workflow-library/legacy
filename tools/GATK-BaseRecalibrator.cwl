@@ -279,7 +279,7 @@ inputs:
       position: 20
       prefix: "--low_quality_tail"
       
-  - id: "#list "
+  - id: "#list"
     type: ["null", boolean]
     description: List the available covariates and exit
     inputBinding:
