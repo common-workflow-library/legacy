@@ -16,11 +16,11 @@ for i in ../tools/*.cwl; do
 
  echo "Testing: ${bn}"
 
- if [ -f ${bn}-test.yaml ]; then
+ #if [ -f ${bn}-test.yaml ]; then
      ./cwltest.py --tool "cwltool" --conformance-test --test ${bn}-test.yaml --force-test-tool ${i}
- else
-    echo "fail"
- fi
+ #else
+ #   echo "fail"
+ #fi
 
 done
 

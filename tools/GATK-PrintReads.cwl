@@ -208,16 +208,16 @@ inputs:
       - "null"
       - type: array
         items: string
-        inputBinding: { prefix: "--sample_name " }
+        inputBinding: { prefix: "--sample_name" }
     inputBinding: 
       position: 10
            
-  - id: "#sample_file "  
+  - id: "#sample_file"
     type:
       - "null"
       - type: array
         items: File
-        inputBinding: { prefix: "--sample_file " }
+        inputBinding: { prefix: "--sample_file" }
     inputBinding: 
       position: 11
 
