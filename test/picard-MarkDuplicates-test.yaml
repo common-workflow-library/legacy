@@ -1,0 +1,21 @@
+- args: [
+        "java", 
+        "-Xmx4g", 
+        "-jar", 
+        "/usr/local/bin/picard.jar", 
+        "MarkDuplicates", 
+        "INPUT=", 
+        "./test/test-files/sortedSam.bam", 
+        "OUTPUT=", 
+        "markDuplicates.bam", 
+        "METRICS_FILE=", 
+        "metricsFile-markDuplicates", 
+        "CREATE_INDEX=", 
+        "true",
+        "TMP_DIR=", 
+        "test/test-files"
+        ]
+  job:  picard-MarkDuplicates-job.json
+  tool: ../tools/picard-MarkDuplicates.cwl
+  doc: General test of command line generation
+  outdir: "test-files/"

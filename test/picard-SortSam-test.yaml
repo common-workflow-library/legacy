@@ -1,0 +1,21 @@
+- args: [
+        "java", 
+        "-Xmx2g", 
+        "-jar", 
+        "/usr/local/bin/picard.jar", 
+        "SortSam", 
+        "INPUT=", 
+        "./test/test-files/mergedSam.sam", 
+        "OUTPUT=", 
+        "sortedSam.bam", 
+        "SORT_ORDER=", 
+        "coordinate", 
+        "TMP_DIR=", 
+        "test/test-files", 
+        "CREATE_INDEX=", 
+        "true"
+        ]
+  job:  picard-SortSam-job.json
+  tool: ../tools/picard-SortSam.cwl
+  doc: General test of command line generation
+  outdir: "test-files/"

@@ -1,0 +1,10 @@
+{
+
+    "outputFileName_sortSam": "sortedSam.bam",
+    "tmpdir": "test/test-files",
+    "inputFileName_sortSam": {
+        "class": "File",
+        "path": "test/test-files/mergedSam.sam"
+    }, 
+    
+}
