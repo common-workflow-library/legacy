@@ -1,14 +1,8 @@
 #!/usr/bin/env cwl-runner
-#
-# Author: Andrey.Kartashov@cchmc.org (http://orcid.org/0000-0001-9102-5681) / Cincinnati Children’s Hospital Medical Center / Dr. Barski Lab
-# Developed for CWL consortium http://commonwl.org/
 
 cwlVersion: "cwl:draft-3.dev3"
 
 class: CommandLineTool
-
-description: |
-  alea-insilico.cwl provides direct call of alea.jar with insilico param
 
 requirements:
 - $import: envvar-global.cwl
@@ -104,27 +98,22 @@ baseCommand: ["java", "-Xms4G", "-Xmx8G", "-jar", "/usr/local/bin/alea.jar" ,"in
 
 $namespaces:
   schema: http://schema.org/
-  dct: http://purl.org/dc/terms/
-  foaf: http://xmlns.com/foaf/0.1/
-  doap: http://usefulinc.com/ns/doap#
-  adms: http://www.w3.org/ns/adms#
-  dcat: http://www.w3.org/ns/dcat#
 
 $schemas:
-- http://schema.rdfs.org/all.rdf
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- http://usefulinc.com/ns/doap#
-- http://www.w3.org/ns/adms#
-- http://www.w3.org/ns/dcat.rdf
+- https://sparql-test.commonwl.org/schema.rdf
+#- http://topbraid.org/schema/schema.rdf
 
-adms:includedAsset:
-  $include: alea-ontology.yaml
+schema:mainEntity:
+  $import: alea-ontology.inc
 
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/alea-insilico.cwl"
-doap:repository:
-- class: doap:GitRepository
-  doap:location: "https://github.com/common-workflow-language/workflows"
-doap:homepage: "http://commonwl.org/"
-doap:license: "Apache2"
+schema:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/alea-insilico.cwl
+schema:codeRepository: https://github.com/common-workflow-language/workflows
+schema:license: http://www.apache.org/licenses/LICENSE-2.0
+schema:isPartOf:
+  class: schema:CreativeWork
+  schema:name: "Common Workflow Language"
+  schema:url: http://commonwl.org/
+
+schema:author:
+  $import: https://scidap.com/porter.yaml
 
