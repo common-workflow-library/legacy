@@ -104,7 +104,7 @@ $schemas:
 #- http://topbraid.org/schema/schema.rdf
 
 schema:mainEntity:
-  $import: alea-info.yaml
+  $import: https://scidap.com/description/tools/alea.yaml
 
 schema:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/alea-insilico.cwl
 schema:codeRepository: https://github.com/common-workflow-language/workflows
