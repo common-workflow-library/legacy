@@ -53,7 +53,7 @@ $schemas:
 - https://sparql-test.commonwl.org/schema.rdf
 
 schema:mainEntity:
-  $import: samtools-ontology.inc
+  $import: https://scidap.com/description/tools/samtools.yaml
 
 description: |
   samtools-faidx.cwl is developed for CWL consortium
@@ -68,4 +68,4 @@ schema:isPartOf:
   schema:url: http://commonwl.org/
 
 schema:author:
-  $import: https://scidap.com/porter.yaml
+  $import: https://scidap.com/description/porter.yaml
