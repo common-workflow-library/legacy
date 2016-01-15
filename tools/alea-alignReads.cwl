@@ -150,7 +150,7 @@ $schemas:
 - https://sparql-test.commonwl.org/schema.rdf
 
 schema:mainEntity:
-  $import: alea-ontology.inc
+  $import: https://scidap.com/description/tools/alea.yaml
 
 schema:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/alea-alignReads.cwl
 schema:codeRepository: https://github.com/common-workflow-language/workflows
@@ -161,4 +161,4 @@ schema:isPartOf:
   schema:url: http://commonwl.org/
 
 schema:author:
-  $import: https://scidap.com/porter.yaml
+  $import: https://scidap.com/description/porter.yaml

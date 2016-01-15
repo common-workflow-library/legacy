@@ -31,18 +31,77 @@ Incomplete descriptions are welcome as long as they are usable. Generally sharin
 
 For your convinience [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) SPARQL server is provided. It automaticaly downloads new CWL tool descriptions converts them into XML/RDF format and makes available at https://sparql-test.commonwl.org. Each CWL tool becomes a graph that can be queried. 
 Provided sample queries all the graphs where foaf:name **"Dobin"** is present. 
-```SPARQL
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX doap: <http://usefulinc.com/ns/doap#>
 
-SELECT distinct ?file ?name
-WHERE {
-  graph ?file {
-  ?P foaf:name ?name  .
-  FILTER (regex(?name, "Dobin","i"))
-  }
-}
-LIMIT 25
+To run a simple query that searches for all graphs(cwl files) where foaf:name is "Dobin":
+```SPARQL
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX doap: <http://usefulinc.com/ns/doap#>
+        SELECT distinct ?file ?name
+    WHERE {
+      graph ?file {
+      ?P foaf:name ?name  .
+      FILTER (regex(?name, "Dobin","i"))
+      }
+    }
+    LIMIT 25
+```
+
+If you use different ontologies like schema and foaf you can join them in one query using union: 
+```SPARQL
+    PREFIX schema: <http://schema.org/>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX adms: <http://www.w3.org/ns/adms#>    
+    SELECT ?file ?name 
+    WHERE {
+      graph ?file {
+      {
+       ?P a foaf:Person;
+            foaf:name ?name.
+       ?x adms:includedAsset ?SSC .
+       ?SSC !schema:Thing+ ?P .
+       FILTER (regex(?name, "Dobin","i"))
+       }
+     union {
+       ?P a schema:Person;
+            schema:name ?name.
+       ?SSC a schema:SoftwareSourceCode .
+       ?file ?direct ?SSC .
+       ?SSC !schema:Thing+ ?P .
+       FILTER (regex(?name, "Karimi","i"))
+       }
+      }
+    }
+```
+
+If you provide DOI url and use it as id for a class, it will be automaticaly pulled into default graph. You can query DOI information to find corresponding CWL:
+```SPARQL
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+	PREFIX schema: <http://schema.org/>
+    SELECT distinct ?file ?DOI ?name
+    WHERE {
+       ?DOI ?direct0 ?P .
+       ?P foaf:name ?name  .    
+       FILTER (regex(?name, "Lorincz","i"))
+    GRAPH ?file {
+        ?SSC a schema:SoftwareSourceCode .
+        ?file ?direct1 ?SSC .
+        ?SSC !schema:Thing+ ?DOI .
+        } 
+    }
+```
+
+Another one:
+```SPARQL
+    PREFIX schema: <http://schema.org/>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    select distinct ?file ?name
+    where {
+    ?pub !schema:Thing+ ?Person .
+    ?Person foaf:name ?name .
+    graph ?file {
+        ?SSC schema:publication ?pub .
+     } 
+    }
 ```
 
 
