@@ -32,6 +32,7 @@ Incomplete descriptions are welcome as long as they are usable. Generally sharin
 For your convinience [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) SPARQL server is provided. It automaticaly downloads new CWL tool descriptions converts them into XML/RDF format and makes available at https://sparql-test.commonwl.org. Each CWL tool becomes a graph that can be queried. 
 Provided sample queries all the graphs where foaf:name **"Dobin"** is present. 
 
+To run a simple query that searches for all graphs(cwl files) where foaf:name is "Dobin":
 ```SPARQL
     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
     PREFIX doap: <http://usefulinc.com/ns/doap#>
@@ -45,6 +46,7 @@ Provided sample queries all the graphs where foaf:name **"Dobin"** is present.
     LIMIT 25
 ```
 
+If you use different ontologies like schema and foaf you can join them in one query using union: 
 ```SPARQL
     PREFIX schema: <http://schema.org/>
     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
@@ -68,6 +70,37 @@ Provided sample queries all the graphs where foaf:name **"Dobin"** is present.
        FILTER (regex(?name, "Karimi","i"))
        }
       }
+    }
+```
+
+If you provide doi url and use it as id for a class, it will be automaticaly pulled into default graph. Query example if doi annotation was used:
+```SPARQL
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+	PREFIX schema: <http://schema.org/>
+    SELECT distinct ?file ?Pub ?name
+    WHERE {
+       ?Pub ?direct0 ?P .
+       ?P foaf:name ?name  .    
+       FILTER (regex(?name, "Lorincz","i"))
+    GRAPH ?file {
+        ?SSC a schema:SoftwareSourceCode .
+        ?file ?direct1 ?SSC .
+        ?SSC !schema:Thing+ ?Pub .
+        } 
+    }
+```
+
+Another one:
+```SPARQL
+    PREFIX schema: <http://schema.org/>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    select distinct ?file ?name
+    where {
+    ?pub !schema:Thing+ ?Person .
+    ?Person foaf:name ?name .
+    graph ?file {
+        ?SSC schema:publication ?pub .
+     } 
     }
 ```
 
