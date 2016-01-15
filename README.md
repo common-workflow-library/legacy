@@ -73,19 +73,19 @@ If you use different ontologies like schema and foaf you can join them in one qu
     }
 ```
 
-If you provide doi url and use it as id for a class, it will be automaticaly pulled into default graph. Query example if doi annotation was used:
+If you provide DOI url and use it as id for a class, it will be automaticaly pulled into default graph. You can query DOI information to find corresponding CWL:
 ```SPARQL
     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 	PREFIX schema: <http://schema.org/>
-    SELECT distinct ?file ?Pub ?name
+    SELECT distinct ?file ?DOI ?name
     WHERE {
-       ?Pub ?direct0 ?P .
+       ?DOI ?direct0 ?P .
        ?P foaf:name ?name  .    
        FILTER (regex(?name, "Lorincz","i"))
     GRAPH ?file {
         ?SSC a schema:SoftwareSourceCode .
         ?file ?direct1 ?SSC .
-        ?SSC !schema:Thing+ ?Pub .
+        ?SSC !schema:Thing+ ?DOI .
         } 
     }
 ```
