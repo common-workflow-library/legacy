@@ -1,0 +1,21 @@
+- args: [
+    "kwip",
+    "--distance", "kwip-test.dist",
+    "--kernel", "kwip-test.kern",
+    "test-data/kwip/kwip-test-1.ct",
+    "test-data/kwip/kwip-test-2.ct",
+    "test-data/kwip/kwip-test-3.ct",
+    ]
+  createfiles: {
+      "kwip-test.dist": {
+          "class": "File",
+          "path": "kwip-test.dist"
+      },
+      "kwip-test.kern": {
+          "class": "File",
+          "path": "kwip-test.kern"
+      }
+    }
+  job: kwip-job.json
+  tool: ../tools/kwip-tool.cwl
+  doc: Test of kwip tool file (weighted, defined files)
