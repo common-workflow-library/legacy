@@ -17,5 +17,5 @@
       }
     }
   job: kwip-job.json
-  tool: ../tools/kwip-tool.cwl
-  doc: Test of kwip tool file (weighted, defined files)
+  tool: ../tools/kwip.cwl
+  doc: General test of command line generation
