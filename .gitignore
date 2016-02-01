@@ -1,6 +1,9 @@
 .vagrant
 .DS_Store
 
+# editor temp files
+.*.sw?
+
 #bioinformatics stuff
 *.bam
 *.bai
