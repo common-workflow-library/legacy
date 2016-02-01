@@ -2,6 +2,7 @@
     "kwip",
     "--distance", "kwip-test.dist",
     "--kernel", "kwip-test.kern",
+    "--threads", "4",
     "test-data/kwip/kwip-test-1.ct",
     "test-data/kwip/kwip-test-2.ct",
     "test-data/kwip/kwip-test-3.ct",

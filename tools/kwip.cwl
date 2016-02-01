@@ -49,4 +49,4 @@ baseCommand: [kwip,]
 arguments:
   - valueFrom: $(runtime.cores)
     position: 1
-    prefix: -t
+    prefix: --threads
