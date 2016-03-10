@@ -3,7 +3,7 @@ example, for the simple Makefile, want would be equivalent CWL file please?"
 
 To run for yourself after `pip install cwl-runner`
 
-cwl-runner dna.cwl#main rna.json
+`cwl-runner dna.cwl#main rna.json`
 
 See: Makefile, dna.cwl
 
