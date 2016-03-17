@@ -1,64 +1,47 @@
 #!/usr/bin/env cwl-runner
 
 $namespaces:
-  dct: http://purl.org/dc/terms/
-  foaf: http://xmlns.com/foaf/0.1/
-  doap: http://usefulinc.com/ns/doap#
-  adms: http://www.w3.org/ns/adms#
-  dcat: http://www.w3.org/ns/dcat#
+  schema: http://schema.org/
 
 $schemas:
-- http://schema.rdfs.org/all.rdf
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- http://usefulinc.com/ns/doap#
-- http://www.w3.org/ns/adms#
-- http://www.w3.org/ns/dcat.rdf
+- https://sparql-test.commonwl.org/schema.rdf
 
-cwlVersion: "cwl:draft-3.dev3"
+schema:mainEntity:
+#  $import: https://scidap.com/description/tools/bowtie.yaml
+  class: schema:SoftwareSourceCode
+  schema:name: "bowtie"
+  schema:about: >
+    Bowtie is an ultrafast, memory-efficient short read aligner.
+    It aligns short DNA sequences (reads) to the human genome at a rate of over 25 million 35-bp reads per hour.
+    Bowtie indexes the genome with a Burrows-Wheeler index to keep its memory footprint small: typically about 2.2 GB for the human genome (2.9 GB for paired-end).
+  schema:url: http://bowtie-bio.sourceforge.net
+  schema:codeRepository: https://github.com/BenLangmead/bowtie.git
+
+  schema:license:
+  - https://opensource.org/licenses/GPL-3.0
+
+  schema:targetProduct:
+    class: schema:SoftwareApplication
+    schema:softwareVersion: "1.1.2"
+    schema:applicationCategory: "commandline tool"
+
+  schema:programmingLanguage: "C++"
+
+  schema:publication:
+  - class: schema:ScholarlyArticle
+    id: http://dx.doi.org/10.1186/gb-2009-10-3-r25
+
+  schema:isPartOf:
+    class: schema:CreativeWork
+    schema:name: "Common Workflow Language"
+    schema:url: http://commonwl.org/
+
+schema:author:
+  $import: https://scidap.com/description/porter.yaml
+
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
-
-adms:includedAsset:
-  doap:name: "bowtie"
-  doap:description: ""
-  doap:homepage: "http://bowtie-bio.sourceforge.net"
-  doap:repository:
-  - class: doap:GitRepository
-    doap:location: "https://github.com/BenLangmead/bowtie.git"
-  doap:release:
-  - class: doap:Version
-    doap:revision: "1.1.2"
-  doap:license: "GPL"
-  doap:category: "commandline tool"
-  doap:programming-language: "C++"
-  foaf:publications:
-  - id: urn:pmid:0
-    foaf:title: ""
-    foaf:homepage: ""
-  doap:developer:
-  - class: foaf:Organization
-    foaf:name: ""
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: ""
-      foaf:mbox: ""
-      foaf:fundedBy: ""
-
-label: "bowtie.cwl"
-doap:name: "bowtie.cwl"
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/bowtie.cwl"
-
-doap:maintainer:
-- class: foaf:Organization
-  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
-  foaf:member:
-  - class: foaf:Person
-    id: "http://orcid.org/0000-0001-9102-5681"
-    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
-    foaf:name: "Andrey Kartashov"
-    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
-
 
 requirements:
   - $import: envvar-global.cwl
