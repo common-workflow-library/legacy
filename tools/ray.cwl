@@ -28,8 +28,8 @@ inputs:
      type: array
      items: File
      format: edam:format_1930
-     inputBinding:
-       prefix: "-p"
+   inputBinding:
+     prefix: "-p"
    
 outputs:
  - id: contigs
