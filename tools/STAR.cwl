@@ -14,7 +14,7 @@ $schemas:
 - http://www.w3.org/ns/adms#
 - http://www.w3.org/ns/dcat.rdf
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -62,7 +62,6 @@ doap:maintainer:
     foaf:openid: "http://orcid.org/0000-0001-9102-5681"
     foaf:name: "Andrey Kartashov"
     foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
-
 
 requirements:
   - $import: envvar-global.cwl
@@ -1671,26 +1670,26 @@ outputs:
             return [];
           return inputs.genomeDir+"/Genome";
         }
-      secondaryFiles: |
-        ${
-          var p=inputs.genomeDir;
-          return [
-            {"path": p+"/SA", "class":"File"},
-            {"path": p+"/SAindex", "class":"File"},
-            {"path": p+"/chrNameLength.txt", "class":"File"},
-            {"path": p+"/chrLength.txt", "class":"File"},
-            {"path": p+"/chrStart.txt", "class":"File"},
-            {"path": p+"/geneInfo.tab", "class":"File"},
-            {"path": p+"/sjdbList.fromGTF.out.tab", "class":"File"},
-            {"path": p+"/chrName.txt", "class":"File"},
-            {"path": p+"/exonGeTrInfo.tab", "class":"File"},
-            {"path": p+"/genomeParameters.txt", "class":"File"},
-            {"path": p+"/sjdbList.out.tab", "class":"File"},
-            {"path": p+"/exonInfo.tab", "class":"File"},
-            {"path": p+"/sjdbInfo.txt", "class":"File"},
-            {"path": p+"/transcriptInfo.tab", "class":"File"}
-          ];
-        }
+    secondaryFiles: |
+      ${
+        var p=inputs.genomeDir;
+        return [
+          {"path": p+"/SA", "class":"File"},
+          {"path": p+"/SAindex", "class":"File"},
+          {"path": p+"/chrNameLength.txt", "class":"File"},
+          {"path": p+"/chrLength.txt", "class":"File"},
+          {"path": p+"/chrStart.txt", "class":"File"},
+          {"path": p+"/geneInfo.tab", "class":"File"},
+          {"path": p+"/sjdbList.fromGTF.out.tab", "class":"File"},
+          {"path": p+"/chrName.txt", "class":"File"},
+          {"path": p+"/exonGeTrInfo.tab", "class":"File"},
+          {"path": p+"/genomeParameters.txt", "class":"File"},
+          {"path": p+"/sjdbList.out.tab", "class":"File"},
+          {"path": p+"/exonInfo.tab", "class":"File"},
+          {"path": p+"/sjdbInfo.txt", "class":"File"},
+          {"path": p+"/transcriptInfo.tab", "class":"File"}
+        ];
+      }
 
   - id: "#aligned"
     type: ["null",File]
@@ -1710,15 +1709,15 @@ outputs:
                 return p+"Aligned.out.bam";
             }
           }
-      secondaryFiles: |
-         ${
-            var p=inputs.outFileNamePrefix?inputs.outFileNamePrefix:"";
-            return [
-              {"path": p+"Log.final.out", "class":"File"},
-              {"path": p+"SJ.out.tab", "class":"File"},
-              {"path": p+"Log.out", "class":"File"}
-            ];
-         }
+    secondaryFiles: |
+       ${
+          var p=inputs.outFileNamePrefix?inputs.outFileNamePrefix:"";
+          return [
+            {"path": p+"Log.final.out", "class":"File"},
+            {"path": p+"SJ.out.tab", "class":"File"},
+            {"path": p+"Log.out", "class":"File"}
+          ];
+       }
 
   - id: "#mappingstats"
     type: ["null", string]
