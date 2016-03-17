@@ -5,26 +5,31 @@ description: "Ray is a parallel de novo genome assembler that utilises the messa
 
 $namespaces:
  edam: http://edamontology.org/
+ foaf: http://xmlns.com/foaf/0.1/
+ dct: http://purl.org/dc/terms/
 
 $schemas:
  - http://edamontology.org/
+ - http://dublincore.org/2012/06/14/dcterms.rdf
+ - http://xmlns.com/foaf/spec/20140114.rdf
 
 inputs:
- - id: k-mer_size
+ - id: kmer_length
    type: int
    description: "Selects the length of k-mers. The default value is 21."
    label: "k-mer length"
-   - inputBinding: 
+   inputBinding:
      prefix: "-k"
    
  - id: input_files
    label: "Paired end reads"
    description: "Provides two files containing paired-end reads."
-    - type: array
-      items: File
-      format: edam:format_1930
-      - inputBinding:
-        prefix: "-p"
+   type:
+     type: array
+     items: File
+     format: edam:format_1930
+     inputBinding:
+       prefix: "-p"
    
 outputs:
  - id: contigs
