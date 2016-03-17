@@ -37,7 +37,7 @@ outputs:
    description: "Contiguous sequences in FASTA format"
    format: edam:format_1929
    outputBinding:
-    glob: "Contigs.fasta"
+    glob: "RayOutput/Contigs.fasta"
   
 baseCommand: "Ray"
 
