@@ -29,7 +29,7 @@ Incomplete descriptions are welcome as long as they are usable. Generally sharin
 
 ## SPARQL
 
-For your convinience [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) SPARQL server is provided. It automaticaly downloads new CWL tool descriptions converts them into XML/RDF format and makes available at https://sparql-test.commonwl.org. Each CWL tool becomes a graph that can be queried. 
+For your convinience [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) SPARQL server is provided. It automaticaly downloads new CWL tool descriptions converts them into XML/RDF format and makes available at https://sparql-test.commonwl.org or https://sparql-cwl.cloudapp.net/ . Each CWL tool becomes a graph that can be queried. 
 Provided sample queries all the graphs where foaf:name **"Dobin"** is present. 
 
 To run a simple query that searches for all graphs(cwl files) where foaf:name is "Dobin":
