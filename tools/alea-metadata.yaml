@@ -1,6 +1,6 @@
-class: schema:SoftwareSourceCode
-schema:name: "alea"
-schema:about: >
+class: s:SoftwareSourceCode
+s:name: "alea"
+s:about: >
   ALEA is a computational toolbox for allele-specific (AS) epigenomics analysis, which incorporates allelic variation data within existing
   resources, allowing for the identification of significant associations between epigenetic modifications and specific allelic variants
   in human and mouse cells. ALEA provides a customizable pipeline of command line tools for AS analysis of next-generation sequencing data
@@ -10,28 +10,28 @@ schema:about: >
   RNA-seq dataset, ALEA generates two wig files from short reads aligned differentially to each haplotype.
   This pipeline has been validated using human and hybrid mouse ChIP-seq and RNA-seq data (See Test Data section).
 
-schema:targetProduct:
-  class: schema:SoftwareApplication
-  schema:downloadUrl: ftp://ftp.bcgsc.ca/supplementary/ALEA/files/alea.1.2.2.tar.gz
-  schema:softwareVersion: "1.2.2"
-  schema:applicationCategory: "command line tool"
+s:targetProduct:
+  class: s:SoftwareApplication
+  s:downloadUrl: ftp://ftp.bcgsc.ca/supplementary/ALEA/files/alea.1.2.2.tar.gz
+  s:softwareVersion: "1.2.2"
+  s:applicationCategory: "command line tool"
 
-schema:url: http://www.bcgsc.ca/platform/bioinfo/software/alea
-schema:license: https://opensource.org/licenses/AFL-3.0
-schema:programmingLanguage: "JAVA"
+s:url: http://www.bcgsc.ca/platform/bioinfo/software/alea
+s:license: https://opensource.org/licenses/AFL-3.0
+s:programmingLanguage: "JAVA"
 
-schema:publication:
+s:publication:
   - id: http://dx.doi.org/10.1093/bioinformatics/btt744
 
-schema:author:
-- class: schema:Person
+s:author:
+- class: s:Person
   id: mailto:mkarimi@bcgsc.ca
-  schema:name: "Mohammad Karimi"
-  schema:email: mailto:mkarimi@bcgsc.ca
-  schema:url: http://www.bcgsc.ca/author/mkarimi
-  schema:worksFor:
-  - class: schema:Organization
-    schema:name: "Canada's Michael Smith Genome Sciences Centre, BC Cancer Agency, Vancouver, British Columbia, V5Z 4S6, Canada"
-  - class: schema:Organization
-    schema:name: "Department of Medical Genetics, Life Sciences Institute, The University of British Columbia, Vancouver, British Columbia, V6T 1Z3, Canada"
+  s:name: "Mohammad Karimi"
+  s:email: mailto:mkarimi@bcgsc.ca
+  s:url: http://www.bcgsc.ca/author/mkarimi
+  s:worksFor:
+  - class: s:Organization
+    s:name: "Canada's Michael Smith Genome Sciences Centre, BC Cancer Agency, Vancouver, British Columbia, V5Z 4S6, Canada"
+  - class: s:Organization
+    s:name: "Department of Medical Genetics, Life Sciences Institute, The University of British Columbia, Vancouver, British Columbia, V6T 1Z3, Canada"
 
