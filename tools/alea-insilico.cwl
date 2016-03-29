@@ -1,6 +1,6 @@
 #!/usr/bin/env cwl-runner
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -18,8 +18,8 @@ inputs:
     separate: false
     prefix: "--input-fasta="
     position: 2
-    secondaryFiles:
-    - ".fai"
+  secondaryFiles:
+  - ".fai"
 
 - id: "phased"
   type: File
@@ -29,8 +29,8 @@ inputs:
     separate: false
     prefix: "--input-vcf="
     position: 3
-    secondaryFiles:
-    - ".tbi"
+  secondaryFiles:
+  - ".tbi"
 
 - id: "strain"
   type: string
@@ -90,30 +90,41 @@ outputs:
   type: File
   outputBinding:
     glob: $(inputs.output_filename)
-    secondaryFiles:
-    - ".fai"
-    - ".refmap"
+  secondaryFiles:
+  - ".fai"
+  - ".refmap"
 
 baseCommand: ["java", "-Xms4G", "-Xmx8G", "-jar", "/usr/local/bin/alea.jar" ,"insilico"]
 
 $namespaces:
-  schema: http://schema.org/
+  s: http://schema.org/
 
 $schemas:
 - https://sparql-test.commonwl.org/schema.rdf
 #- http://topbraid.org/schema/schema.rdf
 
-schema:mainEntity:
-  $import: https://scidap.com/description/tools/alea.yaml
+s:mainEntity:
+  $import: alea-metadata.yaml
 
-schema:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/alea-insilico.cwl
-schema:codeRepository: https://github.com/common-workflow-language/workflows
-schema:license: http://www.apache.org/licenses/LICENSE-2.0
-schema:isPartOf:
-  class: schema:CreativeWork
-  schema:name: "Common Workflow Language"
-  schema:url: http://commonwl.org/
+s:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/alea-insilico.cwl
+s:codeRepository: https://github.com/common-workflow-language/workflows
+s:license: http://www.apache.org/licenses/LICENSE-2.0
+s:isPartOf:
+  class: s:CreativeWork
+  s:name: "Common Workflow Language"
+  s:url: http://commonwl.org/
 
-schema:author:
-  $import: https://scidap.com/description/porter.yaml
+s:author:
+  class: s:Person
+  s:name: "Andrey Kartashov"
+  s:email: mailto:Andrey.Kartashov@cchmc.org
+  s:sameAs:
+  - id: http://orcid.org/0000-0001-9102-5681
+  s:worksFor:
+  - class: s:Organization
+    s:name: "Cincinnati Children's Hospital Medical Center"
+    s:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    s:department:
+    - class: s:Organization
+      s:name: "Barski Lab"
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env cwl-runner
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -24,8 +24,8 @@ inputs:
     the reference genome fasta file
   inputBinding:
     position: 2
-    secondaryFiles:
-    - ".fai"
+  secondaryFiles:
+  - ".fai"
 
 - id: "phased"
   type: File
@@ -34,8 +34,8 @@ inputs:
     or the phased SNPs (should be specified first)
   inputBinding:
     position: 3
-    secondaryFiles:
-    - ".tbi"
+  secondaryFiles:
+  - ".tbi"
 
 - id: "phasedindels"
   type: ["null", File]
@@ -43,8 +43,8 @@ inputs:
     the phased Indels (should be specified second)
   inputBinding:
     position: 4
-    secondaryFiles:
-    - ".tbi"
+  secondaryFiles:
+  - ".tbi"
 
 - id: "strain1"
   type: string
@@ -113,37 +113,37 @@ outputs:
   type: File
   outputBinding:
     glob: $(inputs.outputDir+"/"+inputs.strain1+".fasta")
-    secondaryFiles:
-    - ".amb"
-    - ".ann"
-    - ".bwt"
-    - ".fai"
-    - ".pac"
-    - ".refmap"
-    - ".sa"
+  secondaryFiles:
+  - ".amb"
+  - ".ann"
+  - ".bwt"
+  - ".fai"
+  - ".pac"
+  - ".refmap"
+  - ".sa"
 - id: "strain2_indices"
   type: File
   outputBinding:
     glob: $(inputs.outputDir+"/"+inputs.strain1+".fasta")
-    secondaryFiles:
-    - ".amb"
-    - ".ann"
-    - ".bwt"
-    - ".fai"
-    - ".pac"
-    - ".refmap"
-    - ".sa"
+  secondaryFiles:
+  - ".amb"
+  - ".ann"
+  - ".bwt"
+  - ".fai"
+  - ".pac"
+  - ".refmap"
+  - ".sa"
 - id: "strain12_indices"
   type: ["null",File]
   outputBinding:
     glob: $(inputs.CONCATENATED_GENOME?inputs.outputDir+"/"+inputs.strain1+"_"+inputs.strain2+".fasta":[])
-    secondaryFiles:
-    - ".amb"
-    - ".ann"
-    - ".bwt"
-    - ".fai"
-    - ".pac"
-    - ".sa"
+  secondaryFiles:
+  - ".amb"
+  - ".ann"
+  - ".bwt"
+  - ".fai"
+  - ".pac"
+  - ".sa"
 
 baseCommand: ["alea", "createGenome"]
 
@@ -152,21 +152,33 @@ arguments:
     position: 1
 
 $namespaces:
-  schema: http://schema.org/
+  s: http://schema.org/
 
 $schemas:
 - https://sparql-test.commonwl.org/schema.rdf
 
-schema:mainEntity:
-  $import: https://scidap.com/description/tools/alea.yaml
+s:mainEntity:
+  $import: alea-metadata.yaml
 
-schema:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/alea-createGenome.cwl
-schema:codeRepository: https://github.com/common-workflow-language/workflows
-schema:license: http://www.apache.org/licenses/LICENSE-2.0
-schema:isPartOf:
-  class: schema:CreativeWork
-  schema:name: "Common Workflow Language"
-  schema:url: http://commonwl.org/
+s:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/alea-createGenome.cwl
+s:codeRepository: https://github.com/common-workflow-language/workflows
+s:license: http://www.apache.org/licenses/LICENSE-2.0
+s:isPartOf:
+  class: s:CreativeWork
+  s:name: "Common Workflow Language"
+  s:url: http://commonwl.org/
 
-schema:author:
-  $import: https://scidap.com/description/porter.yaml
+s:author:
+  class: s:Person
+  s:name: "Andrey Kartashov"
+  s:email: mailto:Andrey.Kartashov@cchmc.org
+  s:sameAs:
+  - id: http://orcid.org/0000-0001-9102-5681
+  s:worksFor:
+  - class: s:Organization
+    s:name: "Cincinnati Children's Hospital Medical Center"
+    s:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    s:department:
+    - class: s:Organization
+      s:name: "Barski Lab"
+
