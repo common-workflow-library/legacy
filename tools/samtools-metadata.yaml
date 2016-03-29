@@ -16,7 +16,7 @@ s:license:
 s:targetProduct:
   class: s:SoftwareApplication
   s:softwareVersion: "1.2-242-4d56437"
-  s:applicationCategory: "command line tool"
+  s:applicationCategory: "commandline tool"
 
 s:programmingLanguage: "C, Perl"
 

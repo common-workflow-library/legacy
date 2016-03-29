@@ -1,49 +1,8 @@
 #!/usr/bin/env cwl-runner
 
-$namespaces:
-  dct: http://purl.org/dc/terms/
-  foaf: http://xmlns.com/foaf/0.1/
-  doap: http://usefulinc.com/ns/doap#
-  adms: http://www.w3.org/ns/adms#
-  dcat: http://www.w3.org/ns/dcat#
-
-$schemas:
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- http://usefulinc.com/ns/doap#
-- http://www.w3.org/ns/adms#
-- http://www.w3.org/ns/dcat.rdf
-
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
-
-adms:includedAsset:
-  doap:name: "UCSC userApps"
-  doap:description: |
-    UCSC genome browser 'kent' bioinformatic utilities
-    These are only the command line bioinformatic utilities
-    from the kent source tree.
-    liftOver - Move annotations from one assembly to another
-  doap:homepage: "https://genome.ucsc.edu/util.html"
-  dcat:downloadURL: "http://hgdownload.cse.ucsc.edu/admin/exe/userApps.v325.src.tgz"
-  doap:release:
-  - class: doap:Version
-    doap:revision: "v325"
-  doap:license: "GPL"
-  doap:category: "commandline tool"
-  doap:programming-language: "C"
-  foaf:publications:
-  - id: urn:pmid:20639541
-    foaf:title: "(Kent et al., 2010) BigWig and BigBed: enabling browsing of large distributed datasets. Bioinformatics."
-    foaf:homepage: "http://www.ncbi.nlm.nih.gov/pubmed/20639541"
-  doap:developer:
-  - class: foaf:Organization
-    foaf:name: "CIRM Stem Cell Genomics Data Management Center"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Jim Kent"
-      foaf:mbox: "mailto:kent@soe.ucsc.edu"
 
 description: |
   ucsc-liftOver.cwl is developed for CWL consortium
@@ -61,19 +20,6 @@ description: |
              been a rearrangement in one of the species, the size of the
              region being mapped may change dramatically after mapping.
     ***********************************************************************
-
-doap:name: "ucsc-liftOver.cwl"
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/ucsc-liftOver.cwl"
-
-doap:maintainer:
-- class: foaf:Organization
-  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
-  foaf:member:
-  - class: foaf:Person
-    id: "http://orcid.org/0000-0001-9102-5681"
-    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
-    foaf:name: "Andrey Kartashov"
-    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
 
 requirements:
   - class: InlineJavascriptRequirement
@@ -266,4 +212,34 @@ outputs:
 
 baseCommand: ["liftOver"]
 
+$namespaces:
+  s: http://schema.org/
 
+$schemas:
+- https://sparql-test.commonwl.org/schema.rdf
+
+s:mainEntity:
+  $import: ucsc-metadata.yaml
+
+s:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/ucsc-liftOver.cwl
+s:codeRepository: https://github.com/common-workflow-language/workflows
+s:license: http://www.apache.org/licenses/LICENSE-2.0
+
+s:isPartOf:
+  class: s:CreativeWork
+  s:name: "Common Workflow Language"
+  s:url: http://commonwl.org/
+
+s:author:
+  class: s:Person
+  s:name: "Andrey Kartashov"
+  s:email: mailto:Andrey.Kartashov@cchmc.org
+  s:sameAs:
+  - id: http://orcid.org/0000-0001-9102-5681
+  s:worksFor:
+  - class: s:Organization
+    s:name: "Cincinnati Children's Hospital Medical Center"
+    s:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    s:department:
+    - class: s:Organization
+      s:name: "Barski Lab"
