@@ -1,67 +1,8 @@
 #!/usr/bin/env cwl-runner
 
-$namespaces:
-  dct: http://purl.org/dc/terms/
-  foaf: http://xmlns.com/foaf/0.1/
-  doap: http://usefulinc.com/ns/doap#
-  adms: http://www.w3.org/ns/adms#
-  dcat: http://www.w3.org/ns/dcat#
-
-$schemas:
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- http://usefulinc.com/ns/doap#
-- http://www.w3.org/ns/adms#
-- http://www.w3.org/ns/dcat.rdf
-
 cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
-
-adms:includedAsset:
-  doap:name: "STAR"
-  doap:description: >
-    Aligns RNA-seq reads to a reference genome using uncompressed suffix arrays.
-    STAR has a potential for accurately aligning long (several kilobases) reads that are
-    emerging from the third-generation sequencing technologies.
-  doap:homepage: "https://github.com/alexdobin/STAR"
-  doap:repository:
-  - class: doap:GitRepository
-    doap:location: "https://github.com/alexdobin/STAR.git"
-  doap:release:
-  - class: doap:Version
-    doap:revision: "2.5.0b"
-  doap:license: "GPL"
-  doap:category: "commandline tool"
-  doap:programming-language: "C++"
-  foaf:publications:
-  - id: urn:pmid:23104886
-    foaf:title: "Dobin, A., Davis, C. A., Schlesinger, F., Drenkow, J., Zaleski, C., Jha, S., Gingeras, T. R. (2013). STAR: ultrafast universal RNA-seq aligner. Bioinformatics, 29(1), 15–21. http://doi.org/10.1093/bioinformatics/bts635"
-    foaf:homepage: "http://bioinformatics.oxfordjournals.org/content/29/1/15.full"
-  doap:developer:
-  - class: foaf:Organization
-    foaf:name: "Cold Spring Harbor Laboratory, Cold Spring Harbor, NY, USA"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Alexander Dobin"
-      foaf:mbox: "mailto:dobin at cshl.edu"
-      foaf:fundedBy: "NHGRI (NIH) grant U54HG004557"
-
-description: |
-  STAR.cwl is developed for CWL consortium
-
-doap:name: "STAR.cwl"
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/STAR.cwl"
-
-doap:maintainer:
-- class: foaf:Organization
-  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
-  foaf:member:
-  - class: foaf:Person
-    id: "http://orcid.org/0000-0001-9102-5681"
-    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
-    foaf:name: "Andrey Kartashov"
-    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
 
 requirements:
   - $import: envvar-global.cwl
@@ -1742,3 +1683,64 @@ outputs:
           }
 
 baseCommand: ["STAR"]
+
+
+$namespaces:
+  s: http://schema.org/
+$schemas:
+- https://sparql-test.commonwl.org/schema.rdf
+
+s:mainEntity:
+  class: s:SoftwareSourceCode
+  s:name: "STAR"
+  s:about: >
+    Aligns RNA-seq reads to a reference genome using uncompressed suffix arrays.
+    STAR has a potential for accurately aligning long (several kilobases) reads that are
+    emerging from the third-generation sequencing technologies.
+  s:url: https://github.com/alexdobin/STAR
+  s:codeRepository: https://github.com/alexdobin/STAR.git
+
+  s:license:
+  - https://opensource.org/licenses/GPL-3.0
+
+  s:targetProduct:
+    class: s:SoftwareApplication
+    s:softwareVersion: "2.5.0b"
+    s:applicationCategory: "commandline tool"
+
+  s:programmingLanguage: "C++"
+
+  s:publication:
+  - class: s:ScholarlyArticle
+    id: http://dx.doi.org/10.1093/bioinformatics/bts635
+
+  s:author:
+  - class: s:Person
+    id: mailto:dobin@cshl.edu
+    s:name: "Alexander Dobin"
+    s:email: mailto:dobin@cshl.edu
+#    foaf:fundedBy: "NHGRI (NIH) grant U54HG004557"
+    s:worksFor:
+    - class: s:Organization
+      s:name: "Cold Spring Harbor Laboratory, Cold Spring Harbor, NY, USA"
+
+s:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/STAR.cwl
+s:codeRepository: https://github.com/common-workflow-language/workflows
+s:isPartOf:
+  class: s:CreativeWork
+  s:name: "Common Workflow Language"
+  s:url: http://commonwl.org/
+
+s:author:
+  class: s:Person
+  s:name: "Andrey Kartashov"
+  s:email: mailto:Andrey.Kartashov@cchmc.org
+  s:sameAs:
+  - id: http://orcid.org/0000-0001-9102-5681
+  s:worksFor:
+  - class: s:Organization
+    s:name: "Cincinnati Children's Hospital Medical Center"
+    s:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    s:department:
+    - class: s:Organization
+      s:name: "Barski Lab"

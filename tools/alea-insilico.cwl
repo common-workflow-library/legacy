@@ -1,6 +1,6 @@
 #!/usr/bin/env cwl-runner
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -18,8 +18,8 @@ inputs:
     separate: false
     prefix: "--input-fasta="
     position: 2
-    secondaryFiles:
-    - ".fai"
+  secondaryFiles:
+  - ".fai"
 
 - id: "phased"
   type: File
@@ -29,8 +29,8 @@ inputs:
     separate: false
     prefix: "--input-vcf="
     position: 3
-    secondaryFiles:
-    - ".tbi"
+  secondaryFiles:
+  - ".tbi"
 
 - id: "strain"
   type: string
@@ -90,9 +90,9 @@ outputs:
   type: File
   outputBinding:
     glob: $(inputs.output_filename)
-    secondaryFiles:
-    - ".fai"
-    - ".refmap"
+  secondaryFiles:
+  - ".fai"
+  - ".refmap"
 
 baseCommand: ["java", "-Xms4G", "-Xmx8G", "-jar", "/usr/local/bin/alea.jar" ,"insilico"]
 
@@ -104,7 +104,7 @@ $schemas:
 #- http://topbraid.org/schema/schema.rdf
 
 schema:mainEntity:
-  $import: https://scidap.com/description/tools/alea.yaml
+  $import: alea-metadata.yaml
 
 schema:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/alea-insilico.cwl
 schema:codeRepository: https://github.com/common-workflow-language/workflows
@@ -115,5 +115,16 @@ schema:isPartOf:
   schema:url: http://commonwl.org/
 
 schema:author:
-  $import: https://scidap.com/description/porter.yaml
+  class: schema:Person
+  schema:name: "Andrey Kartashov"
+  schema:email: mailto:Andrey.Kartashov@cchmc.org
+  schema:sameAs:
+  - id: http://orcid.org/0000-0001-9102-5681
+  schema:worksFor:
+  - class: schema:Organization
+    schema:name: "Cincinnati Children's Hospital Medical Center"
+    schema:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    schema:department:
+    - class: schema:Organization
+      schema:name: "Barski Lab"
 

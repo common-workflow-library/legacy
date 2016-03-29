@@ -1,6 +1,6 @@
 #!/usr/bin/env cwl-runner
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -47,7 +47,7 @@ $schemas:
 - https://sparql-test.commonwl.org/schema.rdf
 
 schema:mainEntity:
-  $import: https://scidap.com/description/tools/alea.yaml
+  $import: alea-metadata.yaml
 
 schema:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/alea-phaseVCF.cwl
 schema:codeRepository: https://github.com/common-workflow-language/workflows
@@ -58,4 +58,15 @@ schema:isPartOf:
   schema:url: http://commonwl.org/
 
 schema:author:
-  $import: https://scidap.com/description/porter.yaml
+  class: schema:Person
+  schema:name: "Andrey Kartashov"
+  schema:email: mailto:Andrey.Kartashov@cchmc.org
+  schema:sameAs:
+  - id: http://orcid.org/0000-0001-9102-5681
+  schema:worksFor:
+  - class: schema:Organization
+    schema:name: "Cincinnati Children's Hospital Medical Center"
+    schema:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    schema:department:
+    - class: schema:Organization
+      schema:name: "Barski Lab"
