@@ -781,10 +781,10 @@ schema:mainEntity:
   - class: schema:ScholarlyArticle
     id: http://dx.doi.org/10.1186/gb-2009-10-3-r25
 
-  schema:isPartOf:
-    class: schema:CreativeWork
-    schema:name: "Common Workflow Language"
-    schema:url: http://commonwl.org/
+schema:isPartOf:
+  class: schema:CreativeWork
+  schema:name: "Common Workflow Language"
+  schema:url: http://commonwl.org/
 
 schema:author:
   class: schema:Person
