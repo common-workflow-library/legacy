@@ -5,7 +5,7 @@
 
 class: Workflow
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 description:
   creates genome coverage bigWig file from .bam file

@@ -14,7 +14,7 @@ $schemas:
 - http://www.w3.org/ns/adms#
 - http://www.w3.org/ns/dcat.rdf
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -90,7 +90,7 @@ inputs:
             var prefix = ((/.*\.bam$/i).test(inputs.input.path))?'-ibam':'-i';
             return [prefix,inputs.input.path];
           }
-      secondaryFiles: |
+    secondaryFiles: |
            ${
             if ((/.*\.bam$/i).test(inputs.input.path))
                return {"path": inputs.input.path+".bai", "class": "File"};
