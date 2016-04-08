@@ -9,8 +9,8 @@ cwlVersion: "cwl:draft-3"
 class: CommandLineTool
 
 requirements:
-- $import: envvar-global.cwl
-- $import: samtools-docker.cwl
+- $import: envvar-global.yml
+- $import: samtools-docker.yml
 - class: InlineJavascriptRequirement
 - class: CreateFileRequirement
   fileDef:

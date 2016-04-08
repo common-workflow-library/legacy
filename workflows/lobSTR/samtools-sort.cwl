@@ -1,11 +1,12 @@
 #!/usr/bin/env cwl-runner
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
 description: "Invoke 'samtools sort' (samtools 1.19)"
 
 inputs:
-  - id: "#compression_level"
+  - id: compression_level
     type: ["null", int]
     description: |
       Set the desired compression level for the final output file, ranging from
@@ -17,7 +18,7 @@ inputs:
     inputBinding:
       prefix: "-l"
 
-  - id: "#memory"
+  - id: memory
     type: ["null", int]
     description: |
       Approximately the maximum required memory per thread, specified  in
@@ -25,19 +26,19 @@ inputs:
     inputBinding:
       prefix: "-m"
 
-  - id: "#sort_by_name"
+  - id: sort_by_name
     type: ["null", boolean]
     description: "Sort by read names (i.e., the QNAME field) rather than by chromosomal coordinates."
     inputBinding:
       prefix: -n
 
-  - id: "#output_name"
+  - id: output_name
     type: string
     description: "Desired output filename."
     inputBinding:
       position: 2
 
-  - id: "#input"
+  - id: input
     type: File
     description:
       Input bam file.
@@ -45,12 +46,10 @@ inputs:
       position: 1
 
 outputs:
-  - id: "#output_file"
+  - id: output_file
     type: File
     outputBinding:
-      glob:
-        engine: "cwl:JsonPointer"
-        script: "job/output_name"
+      glob: $(job['output_name'])
 
 baseCommand: ["samtools", "sort"]
 

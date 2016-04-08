@@ -1,4 +1,5 @@
 #!/usr/bin/env cwl-runner
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -8,23 +9,21 @@ requirements:
   - class: CreateFileRequirement
     fileDef:
       - filename: indexed.bam
-        fileContent:
-          engine: "cwl:JsonPointer"
-          script: "job/input"
+        fileContent: $(inputs['input'])
 
 inputs:
-  - id: "#input"
+  - id: input
     type: File
     description:
       Input bam file.
 
 outputs:
-  - id: "#bam_with_bai"
+  - id: bam_with_bai
     type: File
     outputBinding:
       glob: "indexed.bam"
-      secondaryFiles:
-        - ".bai"
+    secondaryFiles:
+      - ".bai"
 
 baseCommand: ["samtools", "index"]
 

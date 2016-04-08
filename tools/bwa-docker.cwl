@@ -1,3 +1,4 @@
+cwlVersion: "cwl:draft-3"
 class: DockerRequirement
 #dockerImageId: scidap/bwa:v0.7.12 #not yet ready
 dockerPull: scidap/bwa:v0.7.12

@@ -5,13 +5,13 @@
 
 class: Workflow
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 description:
   creates custom genome from reference genome and two phased VCF files SNPs and Indels
 
 requirements:
-  - $import: ../../tools/envvar-global.cwl
+  - $import: ../../tools/envvar-global.yml
 
 inputs:
 - id: reference

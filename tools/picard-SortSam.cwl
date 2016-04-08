@@ -14,7 +14,7 @@ $schemas:
 - http://www.w3.org/ns/adms#
 - http://www.w3.org/ns/dcat.rdf
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -77,8 +77,8 @@ doap:maintainer:
 class: CommandLineTool
    
 requirements:
-- $import: envvar-global.cwl
-- $import: picard-docker.cwl
+- $import: envvar-global.yml
+- $import: picard-docker.yml
 - class: InlineJavascriptRequirement
   
 inputs:

@@ -5,7 +5,7 @@ cwlVersion: "cwl:draft-3"
 class: CommandLineTool
 
 requirements:
-- $import: envvar-global.cwl
+- $import: envvar-global.yml
 - class: InlineJavascriptRequirement
 - class: ShellCommandRequirement
 - class: DockerRequirement

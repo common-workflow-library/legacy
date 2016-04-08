@@ -1,4 +1,6 @@
+#!/usr/bin/env cwl-runner
 {
+    "cwl:tool": "filtercount.cwl",
     "pattern": "one",
     "infile": [
         {"path": "mock.txt", "class": "File"},

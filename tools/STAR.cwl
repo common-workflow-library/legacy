@@ -5,7 +5,7 @@ cwlVersion: "cwl:draft-3"
 class: CommandLineTool
 
 requirements:
-  - $import: envvar-global.cwl
+  - $import: envvar-global.yml
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
     #dockerImageId: scidap/star:v2.5.0b #not yet ready

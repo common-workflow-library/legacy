@@ -36,8 +36,8 @@ description: |
              -@ INT   number of BAM compression threads [0]
 
 requirements:
-- $import: envvar-global.cwl
-- $import: samtools-docker.cwl
+- $import: envvar-global.yml
+- $import: samtools-docker.yml
 - class: InlineJavascriptRequirement
 
 inputs:
