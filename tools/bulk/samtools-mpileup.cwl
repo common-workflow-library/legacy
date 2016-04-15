@@ -7,8 +7,8 @@
 class: CommandLineTool
 requirements:
   - import: node-engine.cwl
-  - import: envvar-global.cwl
-  - import: samtools-docker.cwl
+  - import: envvar-global.yml
+  - import: samtools-docker.yml
 inputs:
   - id: '#stdoutfile'
     type: string

@@ -11,7 +11,7 @@ description:
   creates genome coverage bigWig file from .bam file
 
 requirements:
-  - $import: ../../tools/envvar-global.cwl
+  - $import: ../../tools/envvar-global.yml
 
 inputs:
   - id: input

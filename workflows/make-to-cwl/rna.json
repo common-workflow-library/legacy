@@ -1,3 +1,5 @@
+#!/usr/bin/env cwl-runner
 {
+  "cwl:tool": "dna.cwl#main",
   "rna": ["AUGAAGACUGACUCGAUCGAUCG", "AUGAAGACUGACUCGAUCGAUCG", "AUGAAGACUGACUCGAUCGAUCG"]
 }

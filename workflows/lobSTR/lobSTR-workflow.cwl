@@ -1,65 +1,63 @@
 #!/usr/bin/env cwl-runner
+cwlVersion: "cwl:draft-3"
 
 class: Workflow
 
 inputs:
-  - id: "#p1"
+  - id: p1
     type:
       - "null"
       - type: array
         items: File
     description: list of files containing the first end of paired end reads in fasta or fastq format
 
-  - id: "#p2"
+  - id: p2
     type:
       - "null"
       - type: array
         items: File
     description: list of files containing the second end of paired end reads in fasta or fastq format
 
-  - id: "#output_prefix"
+  - id: output_prefix
     type: string
     description: prefix for output files. will output prefix.aligned.bam and prefix.aligned.stats
 
-  - id: "#reference"
+  - id: reference
     type: File
     description: "lobSTR's bwa reference files"
 
-  - id: "#rg-sample"
+  - id: rg-sample
     type: string
     description: Use this in the read group SM tag
 
-  - id: "#rg-lib"
+  - id: rg-lib
     type: string
     description: Use this in the read group LB tag
 
-  - id: "#strinfo"
+  - id: strinfo
     type: File
-    description: |
-      File containing statistics for each STR.
+    description: File containing statistics for each STR.
 
-  - id: "#noise_model"
+  - id: noise_model
     type: File
-    description: |
-      File to read noise model parameters from (.stepmodel)
-    inputBinding:
-      secondaryFiles:
-        - "^.stuttermodel"
+    description: File to read noise model parameters from (.stepmodel)
+    secondaryFiles:
+      - "^.stuttermodel"
 
 outputs:
-  - id: "#bam"
+  - id: bam
     type: File
     source: "#samindex.bam_with_bai"
 
-  - id: "#bam_stats"
+  - id: bam_stats
     type: File
     source: "#lobSTR.bam_stats"
 
-  - id: "#vcf"
+  - id: vcf
     type: File
     source: "#allelotype.vcf"
 
-  - id: "#vcf_stats"
+  - id: vcf_stats
     type: File
     source: "#allelotype.vcf_stats"
 
@@ -69,42 +67,42 @@ hints:
     dockerImageId: 7e0c0ae3bf4e70442f9b8eee816ec23426d9e1169a2925316e5c932745e21613
 
 steps:
-  - id: "#lobSTR"
-    run: { import: lobSTR-tool.cwl }
+  - id: lobSTR
+    run: lobSTR-tool.cwl
     inputs:
-      - { id: "#lobSTR.p1", source: "#p1" }
-      - { id: "#lobSTR.p2", source: "#p2" }
-      - { id: "#lobSTR.output_prefix", source: "#output_prefix" }
-      - { id: "#lobSTR.reference", source: "#reference" }
-      - { id: "#lobSTR.rg-sample", source: "#rg-sample" }
-      - { id: "#lobSTR.rg-lib", source: "#rg-lib" }
+      - { id: p1, source: "#p1" }
+      - { id: p2, source: "#p2" }
+      - { id: output_prefix, source: "#output_prefix" }
+      - { id: reference, source: "#reference" }
+      - { id: rg-sample, source: "#rg-sample" }
+      - { id: rg-lib, source: "#rg-lib" }
     outputs:
-      - { id: "#lobSTR.bam" }
-      - { id: "#lobSTR.bam_stats" }
+      - { id: bam }
+      - { id: bam_stats }
 
-  - id: "#samsort"
-    run: { import: samtools-sort.cwl }
+  - id: samsort
+    run: samtools-sort.cwl
     inputs:
-      - { id: "#samsort.input", source: "#lobSTR.bam" }
-      - { id: "#samsort.output_name", default: "aligned.sorted.bam" }
+      - { id: input, source: "#lobSTR/bam" }
+      - { id: output_name, default: "aligned.sorted.bam" }
     outputs:
-      - { id: "#samsort.output_file" }
+      - { id: output_file }
 
-  - id: "#samindex"
-    run: { import: samtools-index.cwl }
+  - id: samindex
+    run: samtools-index.cwl
     inputs:
-      - { id: "#samindex.input", source: "#samsort.output_file" }
+      - { id: input, source: "#samsort/output_file" }
     outputs:
-      - { id: "#samindex.bam_with_bai" }
+      - { id: bam_with_bai }
 
-  - id: "#allelotype"
-    run: { import: allelotype.cwl }
+  - id: allelotype
+    run: allelotype.cwl
     inputs:
-      - { id: "#allelotype.bam", source: "#samindex.bam_with_bai" }
-      - { id: "#allelotype.reference", source: "#reference" }
-      - { id: "#allelotype.output_prefix", source: "#output_prefix" }
-      - { id: "#allelotype.noise_model", source: "#noise_model" }
-      - { id: "#allelotype.strinfo", source: "#strinfo" }
+      - { id: bam, source: "#samindex/bam_with_bai" }
+      - { id: reference, source: "#reference" }
+      - { id: output_prefix, source: "#output_prefix" }
+      - { id: noise_model, source: "#noise_model" }
+      - { id: strinfo, source: "#strinfo" }
     outputs:
-      - { id: "#allelotype.vcf" }
-      - { id: "#allelotype.vcf_stats" }
+      - { id: vcf }
+      - { id: vcf_stats }

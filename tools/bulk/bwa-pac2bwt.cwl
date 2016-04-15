@@ -7,7 +7,7 @@
 class: CommandLineTool
 requirements:
   - import: node-engine.cwl
-  - import: envvar-global.cwl
+  - import: envvar-global.yml
   - import: bwa-docker.cwl
 inputs:
   - id: '#stdoutfile'

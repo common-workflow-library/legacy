@@ -72,12 +72,12 @@ doap:maintainer:
     foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
 
 requirements:
-  - $import: envvar-global.cwl
-  - $import: bedtools-docker.cwl
+  - $import: envvar-global.yml
+  - $import: bedtools-docker.yml
   - class: InlineJavascriptRequirement
 
 inputs:
-  - id: "#input"
+  - id: input
     type: File
     description: |
       The input file can be in BAM format
@@ -97,7 +97,7 @@ inputs:
             return [];
            }
 
-  - id: "#genomeFile"
+  - id: genomeFile
     type: File
     description:
       Input genome file.
@@ -105,7 +105,7 @@ inputs:
       position: 2
       prefix: "-g"
 
-  - id: "#dept"
+  - id: dept
     type:
       name: "JustDepts"
       type: enum
@@ -113,7 +113,7 @@ inputs:
     inputBinding:
       position: 4
 
-  - id: "#scale"
+  - id: scale
     type: ["null",float ]
     description: |
       Scale the coverage by a constant factor.
@@ -125,7 +125,7 @@ inputs:
       position: 4
       prefix: -scale
 
-  - id: "#dz"
+  - id: dz
     type: ["null",boolean]
     description: |
       Report the depth at each genome position (with zero-based coordinates).
@@ -135,7 +135,7 @@ inputs:
       position: 4
       prefix: "-dz"
 
-  - id: "#split"
+  - id: split
     type: ["null",boolean]
     description: |
       reat "split" BAM or BED12 entries as distinct BED intervals.
@@ -148,7 +148,7 @@ inputs:
       position: 4
       prefix: "-split"
 
-  - id: "#strand"
+  - id: strand
     type: ["null", string]
     description: |
       Calculate coverage of intervals from a specific strand.
@@ -158,21 +158,21 @@ inputs:
       position: 4
       prefix: "-strand"
 
-  - id: "#pairchip"
+  - id: pairchip
     type: ["null", boolean]
     description: "pair-end chip seq experiment"
     inputBinding:
       position: 4
       prefix: "-pc"
 
-  - id: "#fragmentsize"
+  - id: fragmentsize
     type: ["null", int]
     description: "fixed fragment size"
     inputBinding:
       position: 4
       prefix: "-fs"
 
-  - id: "#max"
+  - id: max
     type: ["null",int]
     description: |
       Combine all positions with a depth >= max into
@@ -183,7 +183,7 @@ inputs:
       position: 4
       prefix: "-max"
 
-  - id: "#m5"
+  - id: m5
     type: ["null",boolean]
     description: |
       Calculate coverage of 5" positions (instead of entire interval).
@@ -191,7 +191,7 @@ inputs:
       position: 4
       prefix: "-5"
 
-  - id: "#m3"
+  - id: m3
     type: ["null",boolean]
     description: |
       Calculate coverage of 3" positions (instead of entire interval).
@@ -199,11 +199,11 @@ inputs:
       position: 4
       prefix: "-3"
 
-  - id: "#genomecoverageout"
+  - id: genomecoverageout
     type: string
 
 outputs:
-  - id: "#genomecoverage"
+  - id: genomecoverage
     type: File
     description: "The file containing the genome coverage"
     outputBinding:

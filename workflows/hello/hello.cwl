@@ -1,17 +1,18 @@
 #!/usr/bin/env cwl-runner
 
 
-- id: "#echocmd"
+- id: echocmd
   class: CommandLineTool
+  cwlVersion: "cwl:draft-3"
   inputs:
-    - id: "#echo-in"
+    - id: echo-in
       type: string
       label: "Message"
       description: "The message to print"
       default: "Hello World"
       inputBinding: {}
   outputs:
-    - id: "#echo-out"
+    - id: echo-out
       type: File
       label: "Printed Message"
       description: "The file containing the message"
@@ -20,20 +21,19 @@
   baseCommand: echo
   stdout: messageout.txt
 
-- id: "#main"
+- id: main
+  cwlVersion: "cwl:draft-3"
   class: Workflow
   label: "Hello World"
   description: "Puts a message into a file using echo"
   inputs: []
   outputs:
-    - id: "#main.output"
+    - id: output
       type: File
-      source: "#echocmd.echo-out"
+      source: "#main/step0/echo-out"
   steps :
-    - id: "#step0"
-      run: {import: "#echocmd"}
+    - id: step0
+      run: "#echocmd"
       inputs: []
       outputs:
-        - { id: "#echocmd.echo-out" }
-
-
+        - { id: echo-out }

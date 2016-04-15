@@ -5,8 +5,8 @@ cwlVersion: "cwl:draft-3"
 class: CommandLineTool
 
 requirements:
-  - $import: envvar-global.cwl
-  - $import: alea-docker.cwl
+  - $import: envvar-global.yml
+  - $import: alea-docker.yml
   - class: InlineJavascriptRequirement
 
 inputs:

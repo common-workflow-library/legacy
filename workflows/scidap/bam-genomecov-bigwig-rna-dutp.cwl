@@ -1,55 +1,56 @@
 #!/usr/bin/env cwl-runner
+cwlVersion: "cwl:draft-3"
 
 class: Workflow
+
 requirements:
   - class: SubworkflowFeatureRequirement
-  - import: node-engine.cwl
-  - import: ../../tools/envvar-global.cwl
+  - $import: ../../tools/envvar-global.yml
 
 inputs:
-  - id: "#input"
+  - id: input
     type: File
 
-  - id: "#genomeFile"
+  - id: genomeFile
     type: File
 
-  - id: "#scale"
+  - id: scale
     type: float
 
-  - id: "#bigWigP"
+  - id: bigWigP
     type: string
 
-  - id: "#bigWigR"
+  - id: bigWigR
     type: string
 
 outputs:
-  - id: "#outfileP"
+  - id: outfileP
     type: File
     source: "#genomecovP.outfile"
 
-  - id: "#outfileR"
+  - id: outfileR
     type: File
     source: "#genomecovR.outfile"
 
 steps:
   - id: "#genomecovP"
-    run: {import: ./bam-genomecov-bigwig.cwl}
+    run: bam-genomecov-bigwig.cwl
     inputs:
-      - {id: "#genomecovP.input", source: "#input"}
-      - {id: "#genomecovP.genomeFile", source: "#genomeFile"}
-      - {id: "#genomecovP.strand", default: "+" }
-      - {id: "#genomecovP.scale", source: "#scale" }
-      - {id: "#genomecovP.bigWig", source: "#bigWigP" }
+      - {id: input, source: "#input"}
+      - {id: genomeFile, source: "#genomeFile"}
+      - {id: strand, default: "+" }
+      - {id: scale, source: "#scale" }
+      - {id: bigWig, source: "#bigWigP" }
     outputs:
-      - {id: "#genomecovP.outfile"}
+      - {id: outfile"}
 
   - id: "#genomecovR"
-    run: {import: ./bam-genomecov-bigwig.cwl}
+    run: bam-genomecov-bigwig.cwl
     inputs:
-      - {id: "#genomecovR.input", source: "#input"}
-      - {id: "#genomecovR.genomeFile", source: "#genomeFile"}
-      - {id: "#genomecovR.strand", default: "-" }
-      - {id: "#genomecovR.scale", source: "#scale" }
-      - {id: "#genomecovR.bigWig", source: "#bigWigR" }
+      - {id: input, source: "#input"}
+      - {id: genomeFile, source: "#genomeFile"}
+      - {id: strand, default: "-" }
+      - {id: scale, source: "#scale" }
+      - {id: bigWig, source: "#bigWigR" }
     outputs:
-      - {id: "#genomecovR.outfile"}
+      - {id: outfile}

@@ -23,8 +23,8 @@ description: |
 
 requirements:
   - class: InlineJavascriptRequirement
-  - $import: envvar-global.cwl
-  - $import: ucsc-userapps-docker.cwl
+  - $import: envvar-global.yml
+  - $import: ucsc-userapps-docker.yml
 
 inputs:
   - id: "#oldFile"

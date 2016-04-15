@@ -8,8 +8,8 @@ description: |
   GATK-FastaAlternateReferenceMaker.cwl is developed for CWL consortium
 
 requirements:
-- $import: envvar-global.cwl
-- $import: GATK-docker.cwl
+- $import: envvar-global.yml
+- $import: GATK-docker.yml
 - class: InlineJavascriptRequirement
 
 inputs:

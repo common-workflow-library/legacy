@@ -5,8 +5,8 @@ cwlVersion: "cwl:draft-3"
 class: CommandLineTool
 
 requirements:
-- $import: envvar-global.cwl
-- $import: samtools-docker.cwl
+- $import: envvar-global.yml
+- $import: samtools-docker.yml
 - class: InlineJavascriptRequirement
   expressionLib:
   - "var new_ext = function() { var ext=inputs.bai?'.bai':inputs.csi?'.csi':'.bai'; return inputs.input.path.split('/').slice(-1)[0]+ext; };"

@@ -1,6 +1,7 @@
 #!/usr/bin/env cwl-runner
 
 - id: "#compile"
+  cwlVersion: "cwl:draft-3"
   class: CommandLineTool
   inputs:
     - id: "#src"
@@ -24,6 +25,7 @@
 
 - id: "#link"
   class: CommandLineTool
+  cwlVersion: "cwl:draft-3"
   inputs:
     - id: "#objects"
       type:  { type: array, items: File }
@@ -46,6 +48,7 @@
 
 - id: "#main"
   class: Workflow
+  cwlVersion: "cwl:draft-3"
   requirements:
     - class: EnvVarRequirement
       envDef:

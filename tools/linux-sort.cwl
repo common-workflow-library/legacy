@@ -14,7 +14,7 @@ $schemas:
 - http://www.w3.org/ns/adms#
 - http://www.w3.org/ns/dcat.rdf
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -53,8 +53,8 @@ doap:maintainer:
     foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
 
 requirements:
-  - $import: envvar-global.cwl
-  - $import: linux-sort-docker.cwl
+  - $import: envvar-global.yml
+  - $import: linux-sort-docker.yml
   - class: InlineJavascriptRequirement
 
 inputs:

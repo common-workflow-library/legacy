@@ -7,8 +7,8 @@
 class: CommandLineTool
 requirements:
   - import: node-engine.cwl
-  - import: envvar-global.cwl
-  - import: bedtools-docker.cwl
+  - import: envvar-global.yml
+  - import: bedtools-docker.yml
 inputs:
   - id: '#stdoutfile'
     type: string

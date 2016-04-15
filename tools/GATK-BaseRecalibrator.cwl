@@ -14,7 +14,7 @@ $schemas:
 - http://www.w3.org/ns/adms#
 - http://www.w3.org/ns/dcat.rdf
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -79,9 +79,8 @@ doap:maintainer:
     foaf:mbox: "mailto:skanwal@student.unimelb.edu.au"
     
 requirements:
-- $import: envvar-global.cwl
-- $import: envvar-global.cwl
-- $import: GATK-docker.cwl
+- $import: envvar-global.yml
+- $import: GATK-docker.yml
 
 inputs:
   - id: "#java_arg"
@@ -95,17 +94,17 @@ inputs:
     inputBinding:
       position: 5
       prefix: "-R"
-      secondaryFiles:
-        - ".amb"
-        - ".ann"
-        - ".bwt"
-        - ".pac"
-        - ".rbwt"
-        - ".rpac"
-        - ".rsa"
-        - ".sa"
-        - ".fai"
-        - "^.dict"
+    secondaryFiles:
+      - ".amb"
+      - ".ann"
+      - ".bwt"
+      - ".pac"
+      - ".rbwt"
+      - ".rpac"
+      - ".rsa"
+      - ".sa"
+      - ".fai"
+      - "^.dict"
 
   - id: "#inputBam_BaseRecalibrator"
     type: File
@@ -113,8 +112,8 @@ inputs:
     inputBinding:
       position: 6 
       prefix: "-I"
-      secondaryFiles:
-        - "^.bai"      
+    secondaryFiles:
+      - "^.bai"
 
   - id: "#known"  
     type:
