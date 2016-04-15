@@ -1,13 +1,13 @@
 {
     "input": {
         "class": "File",
-        "path": "./test-files/rna.SRR948778.bam"
+        "path": "./SRR1031972.Aligned.sortedByCoord.out.bam"
     },
     "genomeFile": {
         "class": "File",
-        "path": "./test-files/mm10-chrNameLength.txt"
+        "path": "./dm3/chrNameLength.txt"
     },
     "scale": 1,
     "dept":"-bg",
-    "bigWig": "./rna.SRR948778.bigwig"
+    "bigWig": "./SRR1031972.bigwig"
 }

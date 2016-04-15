@@ -84,7 +84,33 @@ inputs:
     description: |
       string: path to the directory where genome files are stored (if
       runMode!=generateGenome) or will be generated (if runMode==generateGenome)
+    secondaryFiles: |
+      ${
+        var p=inputs.genomeDir.path.split('/').slice(0,-1).join('/');
+        return [
+          {"path": p+"/SA", "class":"File"},
+          {"path": p+"/SAindex", "class":"File"},
+          {"path": p+"/chrNameLength.txt", "class":"File"},
+          {"path": p+"/chrLength.txt", "class":"File"},
+          {"path": p+"/chrStart.txt", "class":"File"},
+          {"path": p+"/geneInfo.tab", "class":"File"},
+          {"path": p+"/sjdbList.fromGTF.out.tab", "class":"File"},
+          {"path": p+"/chrName.txt", "class":"File"},
+          {"path": p+"/exonGeTrInfo.tab", "class":"File"},
+          {"path": p+"/genomeParameters.txt", "class":"File"},
+          {"path": p+"/sjdbList.out.tab", "class":"File"},
+          {"path": p+"/exonInfo.tab", "class":"File"},
+          {"path": p+"/sjdbInfo.txt", "class":"File"},
+          {"path": p+"/transcriptInfo.tab", "class":"File"}
+        ];
+      }
     inputBinding:
+      valueFrom: |
+        ${
+              if (inputs.runMode != "genomeGenerate")
+                return inputs.genomeDir.path.split('/').slice(0,-1).join('/');
+              return inputs.genomeDir;
+        }
       position: 1
       prefix: '--genomeDir'
 
