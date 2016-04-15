@@ -84,7 +84,7 @@
 
 - args:
     ["STAR",
-    "--genomeDir",  ./test-files/dm3/,
+    "--genomeDir",  ./test-files/dm3,
     "--outBAMcompression", "10",
     "--outFileNamePrefix", "./test-files/SRR1031972.",
     "--outSAMmode", "Full",
