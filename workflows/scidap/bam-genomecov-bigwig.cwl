@@ -59,8 +59,9 @@ steps:
   - id: sort
     run: ../../tools/linux-sort.cwl
     inputs:
-      - {id: input, source: "#genomecov/genomecoverage" }
-      - {id: key", default: ["1,1","2,2n"] }
+      - {id: input, source: "#genomecov/genomecoverage", linkMerge: merge_flattened }
+      - {id: key, default: ["1,1","2,2n"] }
+      - {id: output, default: tmp_sorted}
     outputs:
       - {id: sorted}
 
