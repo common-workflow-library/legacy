@@ -11,7 +11,11 @@ To run locally, you may install the reference implementation of CWL:
 $ wget http://files.teamerlich.org/lobstr/v3/ref/lobSTR_v3.0.2_hg19_resource_bundle.tar.gz
 $ tar xvzf lobSTR_v3.0.2_hg19_resource_bundle.tar.gz
 
-3) Run the demo:
+3) Ensure your docker version is compatible with the Arvados image ( < 1.10 ):
+
+$ docker --version
+
+4) Run the demo:
 
 $ ./lobSTR-workflow.cwl lobSTR-demo.json
 

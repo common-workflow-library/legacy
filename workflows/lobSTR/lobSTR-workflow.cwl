@@ -47,19 +47,19 @@ inputs:
 outputs:
   - id: bam
     type: File
-    source: "#samindex.bam_with_bai"
+    source: "#samindex/bam_with_bai"
 
   - id: bam_stats
     type: File
-    source: "#lobSTR.bam_stats"
+    source: "#lobSTR/bam_stats"
 
   - id: vcf
     type: File
-    source: "#allelotype.vcf"
+    source: "#allelotype/vcf"
 
   - id: vcf_stats
     type: File
-    source: "#allelotype.vcf_stats"
+    source: "#allelotype/vcf_stats"
 
 hints:
   - class: DockerRequirement

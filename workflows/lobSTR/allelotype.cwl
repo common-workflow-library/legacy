@@ -5,6 +5,9 @@ class: CommandLineTool
 
 description: Run lobSTR allelotype classifier.
 
+requirements:
+ - class: InlineJavascriptRequirement
+
 inputs:
   - id: bam
     type: File
@@ -45,7 +48,7 @@ inputs:
     inputBinding:
       prefix: "--index-prefix"
       valueFrom: |
-          ${ return {"path": $self.path.match(/(.*)ref\.fasta/)[1], "class": "File"}; }
+          ${ return {"path": self.path.match(/(.*)ref\.fasta/)[1], "class": "File"}; }
 
     secondaryFiles:
       - ".amb"
@@ -55,19 +58,19 @@ inputs:
       - ".rbwt"
       - ".rpac"
       - ".rsa"
-      - ${return $self.replace(/(.*)ref\.fasta/, "$1chromsizes.tab")}
-      - ${return $self.replace(/(.*)ref\.fasta/, "$1mergedref.bed")}
-      - ${return $self.replace(/(.*)ref\.fasta/, "$1ref_map.tab")}
+      - ${return self.path.replace(/(.*)ref\.fasta/, "$1chromsizes.tab")}
+      - ${return self.path.replace(/(.*)ref\.fasta/, "$1mergedref.bed")}
+      - ${return self.path.replace(/(.*)ref\.fasta/, "$1ref_map.tab")}
 
 outputs:
   - id: vcf
     type: File
     outputBinding:
-      glob: $(job.output_prefix + '.vcf')
+      glob: $(inputs['output_prefix'] + '.vcf')
   - id: "#vcf_stats"
     type: File
     outputBinding:
-      glob: $(job.output_prefix + '.allelotype.stats')
+      glob: $(inputs['output_prefix'] + '.allelotype.stats')
 
 baseCommand: ["allelotype", "--command", "classify"]
 

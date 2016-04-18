@@ -49,7 +49,7 @@ outputs:
   - id: output_file
     type: File
     outputBinding:
-      glob: $(job['output_name'])
+      glob: $(inputs['output_name'])
 
 baseCommand: ["samtools", "sort"]
 

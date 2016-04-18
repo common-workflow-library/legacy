@@ -236,12 +236,12 @@ outputs:
   - id: bam
     type: File
     outputBinding:
-      glob: $(job.output_prefix + '.aligned.bam')
+      glob: $(inputs['output_prefix'] + '.aligned.bam')
 
   - id: bam_stats
     type: File
     outputBinding:
-      glob: $(job.output_prefix + '.aligned.stats')
+      glob: $(inputs['output_prefix'] + '.aligned.stats')
 
 baseCommand: ["lobSTR"]
 arguments:
