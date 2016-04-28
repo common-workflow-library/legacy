@@ -6,6 +6,7 @@ $namespaces:
   doap: http://usefulinc.com/ns/doap#
   adms: http://www.w3.org/ns/adms#
   dcat: http://www.w3.org/ns/dcat#
+  edam: http://edamontology.org/
 
 $schemas:
 - http://dublincore.org/2012/06/14/dcterms.rdf
@@ -13,6 +14,7 @@ $schemas:
 - http://usefulinc.com/ns/doap#
 - http://www.w3.org/ns/adms#
 - http://www.w3.org/ns/dcat.rdf
+- http://edamontology.org/EDAM.owl
 
 cwlVersion: "cwl:draft-3"
 
@@ -83,6 +85,7 @@ inputs:
       The input file can be in BAM format
           (Note: BAM _must_ be sorted by position)
       or <bed/gff/vcf>
+    format: edam:format_2572
     inputBinding:
       position: 1
       valueFrom: |
