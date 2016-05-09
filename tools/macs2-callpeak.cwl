@@ -12,22 +12,22 @@ inputs:
 # ---------------------------------- #
 # ------ Input files arguments ----- #
 # ---------------------------------- #
-  - id: t
+  - id: treatment
     type:
       type: array
       items: File
     description: "Treatment sample file(s). If multiple files are given as -t A B C, then they will all be read and pooled together. IMPORTANT: the first sample will be used as the outputs basename."
     inputBinding:
       position: 2
-      prefix: -t
-  - id: c
+      prefix: --treatment
+  - id: control
     type:
       - 'null'
       - File
     description: 'Control sample file.'
     inputBinding:
       position: 2
-      prefix: -c
+      prefix: --control
   - id: format
     type:
       - 'null'
@@ -346,7 +346,7 @@ outputs:
     type: File
     description: "Peak calling output file in narrowPeak format."
     outputBinding:
-      glob: $(inputs.t[0].path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '_peaks.*Peak')
+      glob: $(inputs.treatment[0].path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '_peaks.*Peak')
       outputEval: $(self[0])
   - id: output_ext_frag_bdg_file
     type:
@@ -354,23 +354,23 @@ outputs:
       - File
     description: "Bedgraph with extended fragment pileup."
     outputBinding:
-      glob: $(inputs.t[0].path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '_treat_pileup.bdg')
+      glob: $(inputs.treatment[0].path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '_treat_pileup.bdg')
   - id: output_peak_xls_file
     type: File
     description: "Peaks information/report file."
     outputBinding:
-      glob: $(inputs.t[0].path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '_peaks.xls')
+      glob: $(inputs.treatment[0].path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '_peaks.xls')
   - id: output_peak_summits_file
     type: File
     description: "Peaks summits bedfile."
     outputBinding:
-      glob: $(inputs.t[0].path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '_summits.bed')
+      glob: $(inputs.treatment[0].path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '_summits.bed')
 
 baseCommand:
   - macs2
   - callpeak
 
 arguments:
-  - valueFrom: $(inputs.t[0].path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, ''))
+  - valueFrom: $(inputs.treatment[0].path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, ''))
     prefix: "-n"
     position: 1

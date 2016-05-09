@@ -3,7 +3,7 @@
     "callpeak",
     "-n",
     "aligned",
-    "-t",
+    "--treatment",
     "./test-files/aligned.bam"
   ]
   job:  macs2-callpeak-job.json

@@ -1,5 +1,5 @@
 {
-  "t":[
+  "treatment":[
     {
     "path": "test-files/aligned.bam",
     "class": "File"
