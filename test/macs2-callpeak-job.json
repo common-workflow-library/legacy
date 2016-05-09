@@ -1,0 +1,8 @@
+{
+  "t":[
+    {
+    "path": "test-files/aligned.bam",
+    "class": "File"
+    }
+  ]
+}
