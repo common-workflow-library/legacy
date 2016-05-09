@@ -7,7 +7,7 @@ cd test/
 mkdir -p test-files/dm3
 chmod 777 test-files/dm3
 
-for i in ../tools/macs*.cwl; do
+for i in ../tools/*.cwl; do
  bn=`basename ${i} .cwl`
 
  if [ "$(cat "${i}"|egrep -e "^class:\s+CommandLineTool$")" = "" ]; then
