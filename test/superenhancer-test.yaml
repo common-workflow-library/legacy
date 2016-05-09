@@ -1,0 +1,15 @@
+- args: [
+    "python",
+    "/usr/local/bin/ROSE_main.py",
+    "-g",
+    "./test-files/hg18_refseq.ucsc",
+    "-r",
+    "./test-files/F750DD5E-CF29-1720-F2A9-CA655F726017.sorted.bam",
+    "-i",
+    "./test-files/F750DD5E-CF29-1720-F2A9-CA655F726017.gff",
+    "-o",
+    ""
+  ]
+  job:  superenhancer-job.json
+  tool: ../tools/superenhancer.cwl
+  doc: General test of command line generation

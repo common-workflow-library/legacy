@@ -1,0 +1,19 @@
+{
+    "genome": {
+        "class": "File",
+        "path": "test-files/hg18_refseq.ucsc"
+    },
+    "inputgff": {
+        "class": "File",
+        "path": "test-files/F750DD5E-CF29-1720-F2A9-CA655F726017.gff"
+    },
+    "inputbam": {
+        "class": "File",
+        "path": "test-files/F750DD5E-CF29-1720-F2A9-CA655F726017.sorted.bam"
+    },
+    "inputbai": {
+        "class": "File",
+        "path": "test-files/F750DD5E-CF29-1720-F2A9-CA655F726017.sorted.bai"
+    },
+    "output_name": ""
+}
