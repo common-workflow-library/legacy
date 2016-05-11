@@ -3,6 +3,9 @@
 cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
+hints:
+- class: DockerRequirement
+  dockerPull: bharath90/superenhancer
 
 description: |
   Super Enhancer Workflow
@@ -18,8 +21,6 @@ description: |
 
 requirements:
 - $import: envvar-global.yml
-- $import: superenhancer.yml
-- class: InlineJavascriptRequirement
 
 inputs:
 - id: "genome"
@@ -95,7 +96,7 @@ s:mainEntity:
   class: s:SoftwareSourceCode
   s:name: "superenhnacer"
   s:about: >
-  PURPOSE: To create stitched enhancers, and to separate super-enhancers from typical enhancers using sequencing data (.bam) given a file of previously identified constituent enhancers (.gff)It makes use of the superenhancer script developed by Young Lab
+    PURPOSE: To create stitched enhancers, and to separate super-enhancers from typical enhancers using sequencing data (.bam) given a file of previously identified constituent enhancers (.gff)It makes use of the superenhancer script developed by Young Lab
 
   s:url: http://younglab.wi.mit.edu/super_enhancer_code.html
 
@@ -115,12 +116,10 @@ s:mainEntity:
   s:publication:
   - class: s:ScholarlyArticle
     id: http://dx.doi.org/10.1016/j.cell.2013.03.035
-    s:name: Warren A. Whyte, David A. Orlando, Denes Hnisz, Brian J. Abraham, Charles Y. Lin, Michael H. Kagey, Peter B. Rahl, Tong Ihn Lee and Richard A. Young Cell 
     s:url: http://www.cell.com/abstract/S0092-8674(13)00392-9
 
   - class: s:ScholarlyArticle
     id: http://dx.doi.org/10.1016/j.cell.2013.03.036
-    s:name: Jakob Lovén, Heather A. Hoke, Charles Y. Lin, Ashley Lau, David A. Orlando, Christopher R. Vakoc, James E. Bradner, Tong Ihn Lee, and Richard A. Young Cell
     s:url: http://www.cell.com/abstract/S0092-8674(13)00393-0
 
 s:downloadUrl: https://bitbucket.org/bharath-cchmc/se-docker-cwl-trial
