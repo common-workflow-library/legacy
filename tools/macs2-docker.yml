@@ -1,0 +1,27 @@
+class: DockerRequirement
+dockerPull: dukegcb/macs2
+dockerFile: |
+  #################################################################
+  # Dockerfile
+  #
+  # Software:         macs2
+  # Software Version: 2.1.0.20151222
+  # Description:      DukeGCB macs2 image
+  # Website:          https://github.com/taoliu/MACS
+  # Provides:         macs2
+  # Base Image:       dukegcb/macs2
+  # Build Cmd:        docker build --rm -t dukegcb/macs2:2.1.0 .
+  # Pull Cmd:         docker pull dukegcb/macs2:2.1.0
+  # Run Cmd:          docker run --rm dukegcb/macs2:2.1.0 macs2
+  #################################################################
+
+  FROM python:2.7
+  MAINTAINER Alejandro Barrera <alejandro.barrera@duke.edu>
+
+  # Install python and MACS2 from pip
+  ENV MACS2_VERSION 2.1.0.20151222
+  RUN pip install numpy
+  RUN pip install MACS2==${MACS2_VERSION}
+
+  # Default command to execute at startup of the container
+  CMD ["macs2"]
