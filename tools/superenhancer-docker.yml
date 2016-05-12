@@ -23,44 +23,39 @@ dockerFile: |
   #change the nameserver in resolv.conf to current DNS server
   #
   RUN apt-get clean all && \
-    apt-get update && \
-    apt-get install -y  \
-    libncurses5-dev \
-    ed \
-    less \
-    locales \
-    wget \
-    ca-certificates &&\
-    apt-get clean && \
-    apt-get purge
+  apt-get update && \
+  apt-get install -y  \
+  libncurses5-dev \
+  ed \
+  less \
+  locales \
+  wget \
+  ca-certificates &&\
+  apt-get clean && \
+  apt-get purge
   ### Install the Super Enhancer Script
   RUN wget -q -O edited-Super-Enhancer-master.zip https://github.com/bharath-cchmc/edited-Super-Enhancer/archive/master.zip && \
-    unzip edited-Super-Enhancer-master.zip && \
-    cp -r edited-Super-Enhancer-master /usr/local && \
-    rm -rf edited-Super-Enhancer-master && \
-    rm -f edited-Super-Enhancer-master.zip
+  unzip edited-Super-Enhancer-master.zip && \
+  cp -r edited-Super-Enhancer-master /usr/local && \
+  rm -rf edited-Super-Enhancer-master && \
+  rm -f edited-Super-Enhancer-master.zip
   ### patching the difference in script
   RUN wget -q -O young_computation.zip https://bitbucket.org/young_computation/rose/get/1a9bb86b5464.zip && \
-    unzip young_computation.zip && \
-    #cp -r young_computation-rose-1a9bb86b5464 /usr/local/bin && \
-    ls &&\
-    rm -f young_computation.zip && \
-    rm -rf /usr/local/bin/young_computation-rose-1a9bb86b5464/annotation && \
-    rm /usr/local/bin/young_computation-rose-1a9bb86b5464/README.txt
-  
+  unzip young_computation.zip && \
+  #cp -r young_computation-rose-1a9bb86b5464 /usr/local/bin && \
+  ls &&\
+  rm -f young_computation.zip && \
+  rm -rf /usr/local/bin/young_computation-rose-1a9bb86b5464/annotation && \
+  rm /usr/local/bin/young_computation-rose-1a9bb86b5464/README.txt
   RUN diff /usr/local/bin/young_computation-rose-1a9bb86b5464 /usr/local/edited-Super-Enhancer-master | > wow.patch
-  
   RUN patch < wow.patch && \
-    rm wow.patch && \
-    cp -r young_computation-rose-1a9bb86b5464/* /usr/local/bin
-  
+  rm wow.patch && \
+  cp -r young_computation-rose-1a9bb86b5464/* /usr/local/bin
   RUN rm -rf young_computation-rose-1a9bb86b5464
   RUN rm -f /usr/local/edited-Super-Enhancer-master.zip
   RUN chmod -R +x /usr/local/bin
-
   ### Install R
   RUN apt-get update
   RUN apt-get -y install r-base
   ### Cleanup
-  
   RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /var/lib/apt/lists/*
