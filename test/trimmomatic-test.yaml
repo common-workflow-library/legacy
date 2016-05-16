@@ -1,0 +1,10 @@
+- args: [
+    "/bin/sh",
+    "-c",
+    "'java' '-jar' '/usr/share/java/trimmomatic.jar' 'SE' '-threads' '1' '-phred64' './test-files/test.fastq' 'test.trimmed.fastq' 'ILLUMINACLIP:./test-files/adapters.fa:2:30:15'"
+  ]
+  job:  trimmomatic-job.json
+  tool: ../tools/trimmomatic.cwl
+  doc: General test for Trimmomatic SE
+
+
