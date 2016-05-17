@@ -1,0 +1,25 @@
+class: DockerRequirement
+dockerPull: dukegcb/trimmomatic
+dockerFile: |
+  #################################################################
+  # Dockerfile
+  #
+  # Software:         trimmomatic
+  # Software Version: 0.32+dfsg-1
+  # Description:      DukeGCB trimmomatic image
+  # Website:          http://www.usadellab.org/cms/?page=trimmomatic
+  # Provides:         trimmomatic
+  # Base Image:       dukegcb/trimmomatic
+  # Build Cmd:        docker build --rm -t dukegcb/trimmomatic .
+  # Pull Cmd:         docker pull dukegcb/trimmomatic
+  # Run Cmd:          docker run --rm -it dukegcb/trimmomatic
+  #################################################################
+
+  FROM phusion/baseimage
+  MAINTAINER Dan Leehr <dan.leehr@duke.edu>
+
+  RUN apt-get update && apt-get install -y \
+    openjdk-7-jre-headless \
+    trimmomatic="0.32+dfsg-1"
+
+  CMD ["/usr/bin/java", "-jar", "/usr/share/java/trimmomatic.jar"]

@@ -1,0 +1,15 @@
+{
+  "trimmomatic_jar_path": "/usr/share/java/trimmomatic.jar",
+  "input_read1_fastq_file":
+  {
+    "path":  "test-files/test.fastq",
+    "class": "File"
+  },
+  "input_adapters_file":
+  {
+    "path":  "test-files/adapters.fa",
+    "class": "File"
+  },
+  "end_mode": "SE",
+  "illuminaclip": "2:30:15"
+}
