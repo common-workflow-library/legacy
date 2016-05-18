@@ -1,0 +1,12 @@
+- args: [
+    "bamCoverage",
+    "--bam",
+    "./test-files/aligned.bam",
+    "--outFileFormat",
+    "bigwig",
+    "--outFileName",
+    "aligned.bw"
+  ]
+  job:  deeptools-bamcoverage-job.json
+  tool: ../tools/deeptools-bamcoverage.cwl
+  doc: General test for deeptools bamCoverage

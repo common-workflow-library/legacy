@@ -1,0 +1,31 @@
+class: DockerRequirement
+dockerPull: dukegcb/deeptools
+dockerFile: |
+  #################################################################
+  # Dockerfile
+  #
+  # Software:         deeptools
+  # Software Version: 2.1.0
+  # Description:      DukeGCB deeptools image
+  # Website:          https://github.com/fidelram/deepTools
+  # Provides:         bamCompare,bamCoverage,multiBamSummary,
+  #                   plotHeatmap,plotFingerprint,estimateScaleFactor,
+  #                   bamPEFragmentSize,computeMatrix,plotProfile,
+  #                   computeGCBias,correctGCBias,multiBigwigSummary,
+  #                   bigwigCompare,plotCoverage,plotPCA,plotCorrelation
+  # Base Image:       dukegcb/deeptools
+  # Build Cmd:        docker build --rm -t dukegcb/deeptools:2.1.0 .
+  # Pull Cmd:         docker pull dukegcb/deeptools:2.1.0
+  # Run Cmd:          docker run --rm dukegcb/deeptools:2.1.0 bamCompare
+  #################################################################
+
+  FROM continuumio/miniconda
+  MAINTAINER Alejandro Barrera <alejandro.barrera@duke.edu>
+
+  ENV DEEPTOOLS_VERSION=2.1.0
+
+  RUN conda install -c bioconda deeptools=${DEEPTOOLS_VERSION}
+
+  # Default command to execute at startup of the container
+  CMD ["conda"]
+
