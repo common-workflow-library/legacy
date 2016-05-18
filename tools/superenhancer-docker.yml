@@ -5,24 +5,29 @@ dockerFile: |
   # Software:         Super Enhancer
   # Software Version: 1a9bb86b5464
   # Description:      Super Enhancer Image for Scidap
-  # Website:          https://bitbucket.org/young_computation/rose,http://scidap.com/
+  # Website:          https://bitbucket.org/young_computation/rose, http://scidap.com/
   # Provides:         https://bitbucket.org/young_computation/rose/get/1a9bb86b5464.zip
   # Base Image:       scidap/scidap:v0.0.1
   # Build Cmd:        docker build --rm -t scidap/superenhancer .
   # Pull Cmd:         docker pull scidap/superenhancer
   # Run Cmd:          docker run --rm scidap/superenhancer
   #################################################################
+
   FROM scidap/samtools:v1.2-242-4d56437
   MAINTAINER BHARATH MANICKA VASAGAM bharath.manickavasagam@cchmc.org
   ENV DEBIAN_FRONTEND noninteractive
+
   ################## BEGIN INSTALLATION ######################
+  COPY . /usr/local/bin
+
   WORKDIR /usr/local/bin/
   ### Install required packages
   #To configure the virtualbox with another DNS
   #CMD "sh" "-c" "echo nameserver 8.8.8.8 > /etc/resolv.conf"
   #change the nameserver in resolv.conf to current DNS server
   #
-  RUN apt-get clean all && \
+  RUN rm -rf /var/lib/apt/lists/* && \
+  apt-get clean all && \
   apt-get update && \
   apt-get install -y  \
   libncurses5-dev \
@@ -30,15 +35,10 @@ dockerFile: |
   less \
   locales \
   wget \
-  ca-certificates &&\
+  ca-certificates && \
   apt-get clean && \
   apt-get purge
-  ### Install the Super Enhancer Script
-  RUN wget -q -O edited-Super-Enhancer-master.zip https://github.com/bharath-cchmc/edited-Super-Enhancer/archive/master.zip && \
-  unzip edited-Super-Enhancer-master.zip && \
-  cp -r edited-Super-Enhancer-master /usr/local && \
-  rm -rf edited-Super-Enhancer-master && \
-  rm -f edited-Super-Enhancer-master.zip
+
   ### patching the difference in script
   RUN wget -q -O young_computation.zip https://bitbucket.org/young_computation/rose/get/1a9bb86b5464.zip && \
   unzip young_computation.zip && \
@@ -46,16 +46,16 @@ dockerFile: |
   ls &&\
   rm -f young_computation.zip && \
   rm -rf /usr/local/bin/young_computation-rose-1a9bb86b5464/annotation && \
-  rm /usr/local/bin/young_computation-rose-1a9bb86b5464/README.txt
-  RUN diff /usr/local/bin/young_computation-rose-1a9bb86b5464 /usr/local/edited-Super-Enhancer-master | > wow.patch
-  RUN patch < wow.patch && \
-  rm wow.patch && \
-  cp -r young_computation-rose-1a9bb86b5464/* /usr/local/bin
-  RUN rm -rf young_computation-rose-1a9bb86b5464
-  RUN rm -f /usr/local/edited-Super-Enhancer-master.zip
-  RUN chmod -R +x /usr/local/bin
+  cp -r young_computation-rose-1a9bb86b5464/* /usr/local/bin && \
+  patch < wow.diff && \
+  rm wow.diff && \
+  rm -rf young_computation-rose-1a9bb86b5464 && \
+  rm -f /usr/local/edited-Super-Enhancer-master.zip && \
+  chmod -R +x /usr/local/bin
+
   ### Install R
-  RUN apt-get update
-  RUN apt-get -y install r-base
+  RUN apt-get update && \
+  apt-get -y install r-base
+
   ### Cleanup
   RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /var/lib/apt/lists/*

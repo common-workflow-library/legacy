@@ -3,14 +3,9 @@
 cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
-
 hints:
 - class: DockerRequirement
-  dockerPull: bharath90/superenhancer
-
-requirements:
-- class: InlineJavascriptRequirement
-- $import: envvar-global.yml
+  dockerPull: scidap/superenhancer
 
 description: |
   Super Enhancer Workflow
@@ -23,6 +18,9 @@ description: |
        -s INT     STITCHING DISTANCE: max distance between two regios to stitch together. (Default: 12500)
        -t INT     TSS EXCLUSION ZONE: excludes regios contained within +/- this distance from TSS in order to account for promoter bias (Default: 0, recommended: 2500)
        -c FILE    CONTROL_BAM: .bam file used as control. Subtracted from the density of the ranking_Bam
+
+requirements:
+- $import: envvar-global.yml
 
 inputs:
 - id: "genome"
