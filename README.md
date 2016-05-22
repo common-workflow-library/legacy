@@ -13,6 +13,10 @@ this repository.
 Any contribution submitted for inclusion in this repository shall be under the
 terms and conditions of the Apache License version 2.0 (see LICENSE.txt).
 
+## Other CWL repositories
+
+* https://github.com/Duke-GCB/GGR-cwl
+
 ## Pull request
 
 Please follow these recommendations before pull request:
