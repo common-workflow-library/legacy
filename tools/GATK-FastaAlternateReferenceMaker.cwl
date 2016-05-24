@@ -80,7 +80,7 @@ $namespaces:
   schema: http://schema.org/
 
 $schemas:
-- https://sparql-test.commonwl.org/schema.rdf
+- http://schema.org/docs/schema_org_rdfa.html
 
 schema:mainEntity:
   $import: GATK-metadata.yaml
