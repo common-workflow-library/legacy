@@ -1,0 +1,15 @@
+{
+  "bam-files": [
+    "test-files/Test1-ready.bam"
+  ],
+  "normal":["test-files/s5DE199B-D6AF-C6EC-678A-DEC1179D1B97.fastq",
+  ],
+  "targets": "test-files/InfiniumPsychArray-24v1-1_A1.bed",
+  "split": true,
+  "annotate": "test-files/cnvkit-batch/refFlat.txt",
+  "fasta": "test-files/cnvkit-batch/ERCC92.fa",
+  "access": "test-files/InfiniumPsychArray-24v1-1_A1.bed",
+  "output-dir": "test-files/cnvkit-batch/",
+  "diagram": true,
+  "scatter": true
+}

@@ -1,0 +1,18 @@
+- args: [
+      "cvnkit.py",
+      "batch",
+      "*Tumor.bam",
+      "--normal", "*Normal.bam",
+      "--targets", "my_baits.bed",
+      "--split",
+      "--annotate", "refFlat.txt",
+      "--fasta", "hg19.fasta",
+       "--access", "data/access-5kb-mappable.hg19.bed",
+      "--output-reference", "my_reference.cnn",
+       "--output-dir", "results/",
+      "--diagram", "--scatter"
+  ]
+  stdout: "test-files/my_reference.cnn"
+  job:  cnvkit-batch-job.json
+  tool: ../tools/cnvkit-batch.cwl
+  doc: General test of command line generation
