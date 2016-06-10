@@ -12,7 +12,6 @@
        "--output-dir", "results/",
        "--scatter", "--diagram"
   ]
-  stdout: "test-files/my_reference.cnn"
   job:  cnvkit-batch-job.json
   tool: ../tools/cnvkit-batch.cwl
   doc: General test of command line generation
