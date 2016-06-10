@@ -1,5 +1,5 @@
 {
-  "bam-files": [
+  "bam_files": [
     "*Tumor.bam"
   ],
   "normal":[
@@ -10,7 +10,7 @@
   "annotate": "refFlat.txt",
   "fasta": "hg19.fasta",
   "access": "data/access-5kb-mappable.hg19.bed",
-  "output-dir": "results/",
+  "output_dir": "results/",
   "diagram": true,
   "scatter": true
 }

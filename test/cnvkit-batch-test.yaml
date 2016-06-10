@@ -2,15 +2,15 @@
       "cvnkit.py",
       "batch",
       "*Tumor.bam",
+      "--processes", "1",
       "--normal", "*Normal.bam",
-      "--targets", "my_baits.bed",
-      "--split",
-      "--annotate", "refFlat.txt",
       "--fasta", "hg19.fasta",
+      "--targets", "my_baits.bed",
+      "--annotate", "refFlat.txt",
+      "--split",
        "--access", "data/access-5kb-mappable.hg19.bed",
-      "--output-reference", "my_reference.cnn",
        "--output-dir", "results/",
-      "--diagram", "--scatter"
+       "--scatter", "--diagram"
   ]
   stdout: "test-files/my_reference.cnn"
   job:  cnvkit-batch-job.json
