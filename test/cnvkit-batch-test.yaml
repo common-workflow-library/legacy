@@ -1,16 +1,17 @@
 - args: [
       "cnvkit.py",
       "batch",
-      "*Tumor.bam",
-      "--processes", "1",
-      "--normal", "*Normal.bam",
-      "--fasta", "hg19.fasta",
-      "--targets", "my_baits.bed",
-      "--annotate", "refFlat.txt",
-      "--split",
        "--access", "data/access-5kb-mappable.hg19.bed",
+      "--annotate", "refFlat.txt",
+       "--diagram",
+      "--fasta", "hg19.fasta",
+      "--normal", "*Normal.bam",
        "--output-dir", "results/",
-       "--scatter", "--diagram"
+      "--processes", "1",
+       "--scatter",
+      "--split",
+      "--targets", "my_baits.bed",
+      "*Tumor.bam",
   ]
   job:  cnvkit-batch-job.json
   tool: ../tools/cnvkit-batch.cwl
