@@ -122,7 +122,7 @@ s:mainEntity:
     id: http://dx.doi.org/10.1016/j.cell.2013.03.036
     s:url: http://www.cell.com/abstract/S0092-8674(13)00393-0
 
-s:downloadUrl: https://bitbucket.org/bharath-cchmc/se-docker-cwl-trial
+s:downloadUrl: https://bitbucket.org/young_computation/rose
 s:codeRepository: https://github.com/common-workflow-language/workflows
 s:license: http://www.apache.org/licenses/LICENSE-2.0
 
