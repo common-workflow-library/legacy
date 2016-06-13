@@ -1,6 +1,6 @@
 - args: [
     "python",
-    "/usr/local/bin/ROSE_main.py",
+    "ROSE_main.py",
     "-g",
     "./test-files/hg18_refseq.ucsc",
     "-r",
