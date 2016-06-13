@@ -39,7 +39,7 @@ dockerFile: |
   r-base \
   ca-certificates && \
   apt-get clean && \
-  apt-get purge && \
+  apt-get purge
 
   ### Patch File
 
