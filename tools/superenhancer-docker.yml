@@ -30,19 +30,18 @@ dockerFile: |
   RUN rm -rf /var/lib/apt/lists/* && \ 
   apt-get clean all && \
   apt-get update && \
-  apt-get install -y  \
+  apt-get install \
   libncurses5-dev \
   ed \
   less \
   locales \
   wget \
+  r-base \
   ca-certificates && \
   apt-get clean && \
-  apt-get purge
+  apt-get purge && \
 
-  ### Echoing patch file
-
-  RUN touch wow.diff
+  ### Patch File
 
   RUN echo '--- ROSE_bamToGFF.py\n\
   +++ ROSE_bamToGFF.py\n\
@@ -112,7 +111,7 @@ dockerFile: |
   >         coords = [float(start),float(end)]\n\
   Binary files young_computation-rose-1a9bb86b5464/ROSE_utils.pyc and edited-Super-Enhancer/ROSE_utils.pyc differ\n\
   Only in young_computation-rose-1a9bb86b5464: annotation\n'\
-  >> wow.diff
+  >> patch.diff
 
   ### patching the difference in script
   RUN wget -q -O young_computation.zip https://bitbucket.org/young_computation/rose/get/1a9bb86b5464.zip && \
@@ -120,15 +119,11 @@ dockerFile: |
   rm -f young_computation.zip && \
   rm -rf /usr/local/bin/young_computation-rose-1a9bb86b5464/annotation && \
   cp -r young_computation-rose-1a9bb86b5464/* /usr/local/bin && \
-  patch < wow.diff && \
-  rm wow.diff && \
+  patch < patch.diff && \
+  rm patch.diff && \
   rm -rf young_computation-rose-1a9bb86b5464 && \
   rm -f /usr/local/edited-Super-Enhancer-master.zip && \
   chmod -R +x /usr/local/bin
-
-  ### Install R
-  RUN apt-get update && \
-  apt-get -y install r-base
 
   ### Cleanup
   RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /var/lib/apt/lists/*

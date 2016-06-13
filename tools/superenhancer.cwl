@@ -84,7 +84,7 @@ outputs:
     glob: $(inputs.output_name)
 
 
-baseCommand: ["python", "/usr/local/bin/ROSE_main.py"]
+baseCommand: ["python", "ROSE_main.py"]
 
 $schemas:
  - https://sparql-test.commonwl.org/schema.rdf
@@ -96,11 +96,11 @@ s:mainEntity:
   class: s:SoftwareSourceCode
   s:name: "superenhnacer"
   s:about: >
-    PURPOSE: To create stitched enhancers, and to separate super-enhancers from typical enhancers using sequencing data (.bam) given a file of previously identified constituent enhancers (.gff)It makes use of the superenhancer script developed by Young Lab
+  PURPOSE: To create stitched enhancers, and to separate super-enhancers from typical enhancers using sequencing data (.bam) given a file of previously identified constituent enhancers (.gff)It makes use of the superenhancer script developed by Young Lab
 
   s:url: http://younglab.wi.mit.edu/super_enhancer_code.html
 
-  s:codeRespository: https://github.com/bharath-cchmc/edited-Super-Enhancer
+  s:codeRespository: https://bitbucket.org/young_computation/rose
 
   s:license: 
   - http://younglab.wi.mit.edu/ROSE/LICENSE.txt
