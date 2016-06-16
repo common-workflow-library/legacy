@@ -100,7 +100,7 @@ $namespaces:
   s: http://schema.org/
 
 $schemas:
-- https://sparql-test.commonwl.org/schema.rdf
+- http://schema.org/docs/schema_org_rdfa.html
 #- http://topbraid.org/schema/schema.rdf
 
 s:mainEntity:
