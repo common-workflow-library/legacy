@@ -7,7 +7,8 @@ class: CommandLineTool
 requirements:
   - $import: envvar-global.yml
   - class: InitialWorkDirRequirement
-    listing: $(inputs.reference_genome)
+    listing:
+     - $(inputs.reference_genome)
 
 hints:
   - $import: bwa-docker.yml
@@ -38,12 +39,12 @@ outputs:
     type: File
     format: http://edamontology.org/format_1929  # FASTA
     secondaryFiles:
-     - '^.bai'
-     - '^.amb'
-     - '^.ann'
-     - '^.bwt'
-     - '^.pac'
-     - '^.sa'
+     - '.bai'
+     - '.amb'
+     - '.ann'
+     - '.bwt'
+     - '.pac'
+     - '.sa'
     outputBinding:
       glob: $(inputs.reference_genome.basename)
 
