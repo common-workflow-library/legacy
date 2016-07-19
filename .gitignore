@@ -5,23 +5,23 @@
 .*.sw?
 
 #bioinformatics stuff
-*.bam
-*.bai
-*.fa
-*.fastq
-*.fasta
-*.gtf
-*.tbi
-*.vcf
-*.fai
-*.bed
-*.bedGraph
-*.bw
-*.bigWig
-*.amb
-*.ann
-*.pac
-*.refmap
+#*.bam
+#*.bai
+#*.fa
+#*.fastq
+#*.fasta
+#*.gtf
+#*.tbi
+#*.vcf
+#*.fai
+#*.bed
+#*.bedGraph
+#*.bw
+#*.bigWig
+#*.amb
+#*.ann
+#*.pac
+#*.refmap
 
 #archives
 *.bz2
