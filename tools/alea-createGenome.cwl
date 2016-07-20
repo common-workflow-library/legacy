@@ -138,7 +138,7 @@ outputs:
   - ".sa"
 
  strain12_indices:
-  type: ["null",File]
+  type: File?
   outputBinding:
     glob: $(inputs.CONCATENATED_GENOME?inputs.outputDir+"/"+inputs.strain1+"_"+inputs.strain2+".fasta":[])
   secondaryFiles:
