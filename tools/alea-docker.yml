@@ -1,19 +1,19 @@
 class: DockerRequirement
-dockerPull: scidap/alea:v1.2.2
+dockerPull: scidap/alea:v1.3
 #dockerImageId: scidap/alea:v1.2.2 #not yet ready
 dockerFile: |
   #################################################################
   # Dockerfile
   #
   # Software:         Alea
-  # Software Version: 1.2.2
+  # Software Version: 1.3
   # Description:      Alea image for SciDAP
   # Website:          http://scidap.com/
   # Provides:         alea|bwa|Plink|vcftools|bedGraphToBigWig|shapeit2
   # Base Image:       scidap/scidap:v0.0.1
-  # Build Cmd:        docker build --rm -t scidap/alea:v1.2.2 .
-  # Pull Cmd:         docker pull scidap/alea:v1.2.2
-  # Run Cmd:          docker run --rm scidap/alea:v1.2.2 alea
+  # Build Cmd:        docker build --rm -t scidap/alea:v1.3 .
+  # Pull Cmd:         docker pull scidap/alea:v1.3
+  # Run Cmd:          docker run --rm scidap/alea:v1.3 alea
   #################################################################
 
   ### Base Image
@@ -135,7 +135,7 @@ dockerFile: |
 
   ### Installing alea
 
-  RUN wget -q -O - ftp://ftp.bcgsc.ca/supplementary/ALEA/files/alea.1.2.2.tar.gz | tar -zxv -C /usr/local --strip-components=1 && \
+  RUN wget -q -O - https://github.com/hyounesy/ALEA/raw/master/dist/alea.1.3.tar.gz | tar -zxv -C /usr/local --strip-components=1 && \
       cd /usr/local/bin/ && \
       printf '144c144\n<                 --output-fasta="$VAR_GENOME1_SNPS"\n---\n>                 --output-fasta="$VAR_GENOME2_SNPS"\n'| patch createGenome.sh && \
       sed -i.bak s/^AL_BWA_ALN_PARAMS/#AL_BWA_ALN_PARAMS/g alea.config && \
