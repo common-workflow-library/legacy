@@ -1,173 +1,160 @@
 #!/usr/bin/env cwl-runner
+# This tool description was generated automatically by argparse2cwl ver. 0.2.8
+# To generate again: $ cnvkit.py --generate_cwl_tool
+# Help: $ cnvkit.py --help_arg2cwl
 
-cwlVersion: "cwl:draft-3"
+cwlVersion: "cwl:v1.0"
 
 class: CommandLineTool
 baseCommand: ['cnvkit.py', 'batch']
-
-requirements:
-  - class: InlineJavascriptRequirement
 
 description: |
   Run the complete CNVkit pipeline on one or more BAM files.
 
 inputs:
   
+  bam_files:
+    type:
+    - "null"
+    - type: array
+      items: string
+  
+    description: Mapped sequence reads (.bam)
+    inputBinding:
+      position: 1
 
-- id: bam_files
-  type:
-  - "null"
-  - type: array
-    items: string
+  male_reference:
+    type: ["null", boolean]
+    default: False
+    description: Use or assume a male reference (i.e. female samples will have +1 log-CNR of chrX; otherwise male samples would have -1 chrX).
+    inputBinding:
+      prefix: --male-reference 
 
-  description: Mapped sequence reads (.bam)
-  inputBinding:
-    position: 1
+  count_reads:
+    type: ["null", boolean]
+    default: False
+    description: Get read depths by counting read midpoints within each bin. (An alternative algorithm).
+    inputBinding:
+      prefix: --count-reads 
 
-- id: male_reference
-  type: ["null", boolean]
-  default: null
-  description: Use or assume a male reference (i.e. female samples will have +1
-                log-CNR of chrX; otherwise male samples would have -1 chrX).
-  inputBinding:
-    prefix: --male-reference 
+  processes:
+    type: ["null", int]
+    default: 1
+    description: Number of subprocesses used to running each of the BAM files in parallel. Give 0 or a negative value to use the maximum number of available CPUs. [Default - process each BAM in serial]
+    inputBinding:
+      prefix: --processes 
 
-- id: count_reads
-  type: ["null", boolean]
-  default: null
-  description: Get read depths by counting read midpoints within each bin.
-                (An alternative algorithm).
-  inputBinding:
-    prefix: --count-reads
+  rlibpath:
+    type: ["null", string]
+    description: Path to an alternative site-library to use for R packages.
+    inputBinding:
+      prefix: --rlibpath 
 
-- id: processes
-  type: ["null", int]
-  default: 1
-  description: Number of subprocesses used to running each of the BAM files in
-                parallel. Give 0 or a negative value to use the maximum number
-                of available CPUs. [Default - process each BAM in serial]
-  inputBinding:
-    prefix: --processes 
+  normal:
+    type:
+    - "null"
+    - type: array
+      items: string
+  
+    description: Normal samples (.bam) to construct the pooled reference. If this option is used but no files are given, a "flat" reference will be built.
+    inputBinding:
+      prefix: --normal 
 
-- id: rlibpath
-  type: ["null", string]
-  description: Path to an alternative site-library to use for R packages.
-  inputBinding:
-    prefix: --rlibpath 
+  fasta:
+    type: ["null", string]
+    description: Reference genome, FASTA format (e.g. UCSC hg19.fa)
+    inputBinding:
+      prefix: --fasta 
 
-- id: normal
-  type:
-  - "null"
-  - type: array
-    items: string
+  targets:
+    type: ["null", string]
+    description: Target intervals (.bed or .list)
+    inputBinding:
+      prefix: --targets 
 
-  description: Normal samples (.bam) to construct the pooled reference.
-                If this option is used but no files are given, a "flat"
-                reference will be built.
-  inputBinding:
-    prefix: --normal 
+  antitargets:
+    type: ["null", string]
+    description: Antitarget intervals (.bed or .list)
+    inputBinding:
+      prefix: --antitargets 
 
-- id: fasta
-  type: ["null", string]
-  description: Reference genome, FASTA format (e.g. UCSC hg19.fa)
-  inputBinding:
-    prefix: --fasta 
+  annotate:
+    type: ["null", string]
+    description: UCSC refFlat.txt or ensFlat.txt file for the reference genome. Pull gene names from this file and assign them to the target regions.
+    inputBinding:
+      prefix: --annotate 
 
-- id: targets
-  type: ["null", string]
-  description: Target intervals (.bed or .list)
-  inputBinding:
-    prefix: --targets 
+  short_names:
+    type: ["null", boolean]
+    default: False
+    description: Reduce multi-accession bait labels to be short and consistent.
+    inputBinding:
+      prefix: --short-names 
 
-- id: antitargets
-  type: ["null", string]
-  description: Antitarget intervals (.bed or .list)
-  inputBinding:
-    prefix: --antitargets 
+  split:
+    type: ["null", boolean]
+    default: False
+    description: Split large tiled intervals into smaller, consecutive targets.
+    inputBinding:
+      prefix: --split 
 
-- id: annotate
-  type: ["null", string]
-  description: UCSC refFlat.txt or ensFlat.txt file for the reference genome.
-                Pull gene names from this file and assign them to the target
-                regions.
-  inputBinding:
-    prefix: --annotate 
+  target_avg_size:
+    type: ["null", int]
+    description: Average size of split target bins (results are approximate).
+    inputBinding:
+      prefix: --target-avg-size 
 
-- id: short_names
-  type: ["null", boolean]
-  default: null
-  description: Reduce multi-accession bait labels to be short and consistent.
-  inputBinding:
-    prefix: --short-names 
+  access:
+    type: ["null", string]
+    description: Regions of accessible sequence on chromosomes (.bed), as output by the 'access' command.
+    inputBinding:
+      prefix: --access 
 
-- id: split
-  type: ["null", boolean]
-  default: null
-  description: Split large tiled intervals into smaller, consecutive targets.
-  inputBinding:
-    prefix: --split 
+  antitarget_avg_size:
+    type: ["null", int]
+    description: Average size of antitarget bins (results are approximate).
+    inputBinding:
+      prefix: --antitarget-avg-size 
 
-- id: target_avg_size
-  type: ["null", int]
-  description: Average size of split target bins (results are approximate).
-  inputBinding:
-    prefix: --target-avg-size 
+  antitarget_min_size:
+    type: ["null", int]
+    description: Minimum size of antitarget bins (smaller regions are dropped).
+    inputBinding:
+      prefix: --antitarget-min-size 
 
-- id: access
-  type: ["null", string]
-  description: Regions of accessible sequence on chromosomes (.bed), as
-                output by the 'access' command.
-  inputBinding:
-    prefix: --access 
+  output_reference:
+    type: ["null", string]
+    description: Output filename/path for the new reference file being created. (If given, ignores the -o/--output-dir option and will write the file to the given path. Otherwise, "reference.cnn" will be created in the current directory or specified output directory.) 
+    inputBinding:
+      prefix: --output-reference 
 
-- id: antitarget_avg_size
-  type: ["null", int]
-  description: Average size of antitarget bins (results are approximate).
-  inputBinding:
-    prefix: --antitarget-avg-size 
+  reference:
+    type: ["null", string]
+    description: Copy number reference file (.cnn).
+    inputBinding:
+      prefix: --reference 
 
-- id: antitarget_min_size
-  type: ["null", int]
-  description: Minimum size of antitarget bins (smaller regions are dropped).
-  inputBinding:
-    prefix: --antitarget-min-size 
+  output_dir:
+    type: ["null", string]
+    default: .
+    description: Output directory.
+    inputBinding:
+      prefix: --output-dir 
 
-- id: output_reference
-  type: ["null", string]
-  description: Output filename/path for the new reference file being created.
-                (If given, ignores the -o/--output-dir option and will write the
-                file to the given path. Otherwise, "reference.cnn" will be
-                created in the current directory or specified output directory.)
-                
-  inputBinding:
-    prefix: --output-reference 
+  scatter:
+    type: ["null", boolean]
+    default: False
+    description: Create a whole-genome copy ratio profile as a PDF scatter plot.
+    inputBinding:
+      prefix: --scatter 
 
-- id: reference
-  type: ["null", string]
-  description: Copy number reference file (.cnn).
-  inputBinding:
-    prefix: --reference
+  diagram:
+    type: ["null", boolean]
+    default: False
+    description: Create a diagram of copy ratios on chromosomes as a PDF.
+    inputBinding:
+      prefix: --diagram 
 
-- id: output_dir
-  type: ["null", string]
-  default: .
-  description: Output directory.
-  inputBinding:
-    prefix: --output-dir 
-
-- id: scatter
-  type: ["null", boolean]
-  default: null
-  description: Create a whole-genome copy ratio profile as a PDF scatter plot.
-  inputBinding:
-    prefix: --scatter
-
-- id: diagram
-  type: ["null", boolean]
-  default: null
-  description: Create a diagram of copy ratios on chromosomes as a PDF.
-  inputBinding:
-    prefix: --diagram 
 
 outputs:
     []
