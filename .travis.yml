@@ -7,7 +7,7 @@ python:
 
 # command to install dependencies
 install:
-    pip install setuptools==18.5
+  - pip install setuptools==18.5
   - pip install PyYAML
   - pip install cwltool
   - pip install cwl-runner
