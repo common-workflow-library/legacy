@@ -40,3 +40,8 @@ This section, like the rest of this project, is a work in progress.
 
 - Put ``DockerRequirement`` and ``SoftwareRequirement`` under ``hints``, not ``requirements``
 
+-----
+Misc.
+-----
+
+Parts of this document were inspired from https://github.com/nayafia/contributing-template/blob/master/CONTRIBUTING-template.md
