@@ -1,0 +1,28 @@
+class: schema:SoftwareSourceCode
+schema:name: "GATK"
+schema:about: >
+  A set of Java command line tools for manipulating high-throughput sequencing data (HTS) data and formats.
+  Picard is implemented using the HTSJDK Java library HTSJDK, supporting accessing of common file formats,
+  such as SAM and VCF, used for high-throughput sequencing data.
+  http://broadinstitute.github.io/picard/command-line-overview.html#CreateSequenceDictionary
+
+schema:url: http://broadinstitute.github.io/picard/
+schema:codeRepository: https://github.com/broadinstitute/picard.git
+
+schema:license:
+- https://opensource.org/licenses/MIT
+
+schema:targetProduct:
+  class: schema:SoftwareApplication
+  schema:softwareVersion: "1.141"
+  schema:applicationCategory: "commandline tool"
+
+schema:programmingLanguage: "JAVA"
+
+schema:publication:
+- class: schema:ScholarlyArticle
+  id: http://dx.doi.org/10.1101/gr.107524.110
+
+schema:creator:
+- class: schema:Organization
+  schema:name: "Broad Institute"
