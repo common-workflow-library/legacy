@@ -3,6 +3,9 @@
 cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
+hints:
+- class: DockerRequirement
+  dockerPull: scidap/superenhancer
 
 description: |
   Super Enhancer Workflow
@@ -18,8 +21,6 @@ description: |
 
 requirements:
 - $import: envvar-global.yml
-- $import: superenhancer.yml
-- class: InlineJavascriptRequirement
 
 inputs:
 - id: "genome"
@@ -83,7 +84,7 @@ outputs:
     glob: $(inputs.output_name)
 
 
-baseCommand: ["python", "/usr/local/bin/ROSE_main.py"]
+baseCommand: ["python", "ROSE_main.py"]
 
 $schemas:
  - http://schema.org/docs/schema_org_rdfa.html
@@ -99,7 +100,7 @@ s:mainEntity:
 
   s:url: http://younglab.wi.mit.edu/super_enhancer_code.html
 
-  s:codeRespository: https://github.com/bharath-cchmc/edited-Super-Enhancer
+  s:codeRespository: https://bitbucket.org/young_computation/rose
 
   s:license: 
   - http://younglab.wi.mit.edu/ROSE/LICENSE.txt
@@ -115,15 +116,13 @@ s:mainEntity:
   s:publication:
   - class: s:ScholarlyArticle
     id: http://dx.doi.org/10.1016/j.cell.2013.03.035
-    s:name: Warren A. Whyte, David A. Orlando, Denes Hnisz, Brian J. Abraham, Charles Y. Lin, Michael H. Kagey, Peter B. Rahl, Tong Ihn Lee and Richard A. Young Cell 
     s:url: http://www.cell.com/abstract/S0092-8674(13)00392-9
 
   - class: s:ScholarlyArticle
     id: http://dx.doi.org/10.1016/j.cell.2013.03.036
-    s:name: Jakob Lovén, Heather A. Hoke, Charles Y. Lin, Ashley Lau, David A. Orlando, Christopher R. Vakoc, James E. Bradner, Tong Ihn Lee, and Richard A. Young Cell
     s:url: http://www.cell.com/abstract/S0092-8674(13)00393-0
 
-s:downloadUrl: https://bitbucket.org/bharath-cchmc/se-docker-cwl-trial
+s:downloadUrl: https://bitbucket.org/young_computation/rose
 s:codeRepository: https://github.com/common-workflow-language/workflows
 s:license: http://www.apache.org/licenses/LICENSE-2.0
 

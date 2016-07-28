@@ -4,7 +4,7 @@ cwlVersion: v1.0
 
 class: CommandLineTool
 
-baseCommand: ["alea", "createGenome"]
+baseCommand: ["alea", "createTracks"]
 
 requirements:
 - $import: alea-docker.yml
@@ -20,33 +20,28 @@ requirements:
     envValue: "/usr/local/bin/"
 
 inputs:
- reference:
-  type: File
+ bamprefix:
+  type: string
   doc: |
-    the reference genome fasta file
+    BAM directory prefix
   inputBinding:
     position: 2
-  secondaryFiles:
-  - ".fai"
 
- phased:
+ strain1_refmap:
   type: File
   doc: |
-    the phased variants vcf file (including SNPs and Indels)
-    or the phased SNPs (should be specified first)
+      (when AL_USE_CONCATENATED_GENOME=0)
+      strain1.fasta.refmap file
   inputBinding:
     position: 3
-  secondaryFiles:
-  - ".tbi"
 
- phasedindels:
-  type: File?
+ strain2_refmap:
+  type: File
   doc: |
-    the phased Indels (should be specified second)
+      (when AL_USE_CONCATENATED_GENOME=0)
+      strain2.fasta.refmap file
   inputBinding:
-    position: 4
-  secondaryFiles:
-  - ".tbi"
+    position: 3
 
  strain1:
   type: string
@@ -99,7 +94,7 @@ inputs:
   inputBinding:
     position: 6
 
- outputDir:
+ outputPrefix:
   type: string
   doc: |
     location of the output directory
@@ -110,54 +105,32 @@ inputs:
   type: boolean
   default: false
 
-outputs:
- strain1_indices:
-  type: File
-  outputBinding:
-    glob: $(inputs.outputDir+"/"+inputs.strain1+".fasta")
-  secondaryFiles:
-  - ".amb"
-  - ".ann"
-  - ".bwt"
-  - ".fai"
-  - ".pac"
-  - ".refmap"
-  - ".sa"
+outputs: []
+# strain1_indices:
+#  type: File
+#  outputBinding:
+#    glob: $(inputs.outputPrefix+inputs.bamPrefix+"/"+inputs.strain1+".wig.gz")
+#  secondaryFiles:
+#    - ".bw"
+#    - ".bedGraph"
 
- strain2_indices:
-  type: File
-  outputBinding:
-    glob: $(inputs.outputDir+"/"+inputs.strain1+".fasta")
-  secondaryFiles:
-  - ".amb"
-  - ".ann"
-  - ".bwt"
-  - ".fai"
-  - ".pac"
-  - ".refmap"
-  - ".sa"
-
- strain12_indices:
-  type: File?
-  outputBinding:
-    glob: $(inputs.CONCATENATED_GENOME?inputs.outputDir+"/"+inputs.strain1+"_"+inputs.strain2+".fasta":[])
-  secondaryFiles:
-  - ".amb"
-  - ".ann"
-  - ".bwt"
-  - ".fai"
-  - ".pac"
-  - ".sa"
+# strain2_indices:
+#  type: File
+#  outputBinding:
+#    glob: $(inputs.outputPrefix+inputs.bamPrefix"/"+inputs.strain2+".wig.gz")
+#  secondaryFiles:
+#    - ".bw"
+#    - ".bedGraph"
 
 arguments:
-  - valueFrom: $(inputs.phasedindels?"-snps-indels-separately":[])
+  - valueFrom: $(inputs.input_reads.length==1?"-s":"-p")
     position: 1
 
 $namespaces:
   s: http://schema.org/
 
 $schemas:
-- http://schema.org/docs/schema_org_rdfa.html
+- https://sparql-test.commonwl.org/schema.rdf
 
 s:mainEntity:
   $import: alea-metadata.yaml
