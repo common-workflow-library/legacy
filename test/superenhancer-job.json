@@ -1,19 +1,15 @@
 {
     "genome": {
         "class": "File",
-        "path": "test-files/hg18_refseq.ucsc"
+        "path": "./hg18_refseq.ucsc"
     },
     "inputgff": {
         "class": "File",
-        "path": "test-files/F750DD5E-CF29-1720-F2A9-CA655F726017.gff"
+        "path": "./ROSE_DATA/data/HG18_MM1S_MED1.gff"
     },
     "inputbam": {
         "class": "File",
-        "path": "test-files/F750DD5E-CF29-1720-F2A9-CA655F726017.sorted.bam"
+        "path": "./ROSE_DATA/data/MM1S_MED1.hg18.bwt.sorted.bam"
     },
-    "inputbai": {
-        "class": "File",
-        "path": "test-files/F750DD5E-CF29-1720-F2A9-CA655F726017.sorted.bai"
-    },
-    "output_name": ""
+    "output_name": "output"
 }

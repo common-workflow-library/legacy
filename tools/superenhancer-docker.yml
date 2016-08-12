@@ -30,7 +30,7 @@ dockerFile: |
   RUN rm -rf /var/lib/apt/lists/* && \ 
   apt-get clean all && \
   apt-get update && \
-  apt-get install \
+  apt-get install -y \
   libncurses5-dev \
   ed \
   less \
@@ -39,7 +39,8 @@ dockerFile: |
   r-base \
   ca-certificates && \
   apt-get clean && \
-  apt-get purge
+  apt-get purge && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /var/lib/apt/lists/*
 
   ### Patch File
 
@@ -61,12 +62,13 @@ dockerFile: |
   >                       help = "Reference genome file: example- hg18_refseq.ucsc")\n\
   301a302\n\
   > \n\
-  332c333\n\
+  332,333d332\n\
   < \n\
-  ---\n\
-  >    \n\ 
-  336,342c337,345\n\
-  <     genomeDict = {\n\
+  < \n\
+  336,342c337,345'\
+  >> patch.diff
+
+  RUN echo "<     genomeDict = {\n\
   <         'HG18':'%s/annotation/hg18_refseq.ucsc' % (cwd),\n\
   <         'MM9': '%s/annotation/mm9_refseq.ucsc' % (cwd),\n\
   <         'HG19':'%s/annotation/hg19_refseq.ucsc' % (cwd),\n\
@@ -83,35 +85,37 @@ dockerFile: |
   > ##        }\n\
   >     \n\
   >     annotFile = genome\n\
-  344c347\n\
+  344c345\n\
   <     annotFile = genomeDict[upper(genome)]\n\
   ---\n\
   > ##    annotFile = genomeDict[upper(genome)]\n\
-  412c415\n\
-  <         cmd1 = "python ROSE_bamToGFF.py -f 1 -e 200 -r -m %s -b %s -i %s -o %s &" % (nBin,bamFile,stitchedGFFFile,mappedOut1)\n\
+  412c413"\
+  >> patch.diff
+  RUN echo '<         cmd1 = "python ROSE_bamToGFF.py -f 1 -e 200 -r -m %s -b %s -i %s -o %s &" % (nBin,bamFile,stitchedGFFFile,mappedOut1)\n\
   ---\n\
   >         cmd1 = "python /usr/local/'bin'/ROSE_bamToGFF.py -f 1 -e 200 -r -m %s -b %s -i %s -o %s &" % (nBin,bamFile,stitchedGFFFile,mappedOut1)\n\
-  419c422\n\
+  419c420\n\
   <         cmd2 = "python ROSE_bamToGFF.py -f 1 -e 200 -r -m %s -b %s -i %s -o %s &" % (nBin,bamFile,inputGFFFile,mappedOut2)\n\
   ---\n\
   >         cmd2 = "python /usr/local/'bin'/ROSE_bamToGFF.py -f 1 -e 200 -r -m %s -b %s -i %s -o %s &" % (nBin,bamFile,inputGFFFile,mappedOut2)\n\
-  484c487\n\
-  <         cmd = "R --no-save %s %s %s %s < ROSE_callSuper.R" % (outFolder,outputFile1,inputName,controlName)\n\
+  484c485\'\
+  >> patch.diff
+  RUN echo "<         cmd = 'R --no-save %s %s %s %s < ROSE_callSuper.R' % (outFolder,outputFile1,inputName,controlName)\n\
   ---\n\
-  >         cmd = "R --no-save %s %s %s %s < /usr/local/bin/ROSE_callSuper.R" % (outFolder,outputFile1,inputName,controlName)\n\
-  489c492\n\
-  <         cmd = "R --no-save %s %s %s %s < ROSE_callSuper.R" % (outFolder,outputFile1,inputName,controlName)\n\
+  >         cmd = 'R --no-save %s %s %s %s < /usr/local/bin/ROSE_callSuper.R' % (outFolder,outputFile1,inputName,controlName)\n\
+  489c490\n\
+  <         cmd = 'R --no-save %s %s %s %s < ROSE_callSuper.R' % (outFolder,outputFile1,inputName,controlName)\n\
   ---\n\
-  >         cmd = "R --no-save %s %s %s %s < /usr/local/bin/ROSE_callSuper.R" % (outFolder,outputFile1,inputName,controlName)\n\
+  >         cmd = 'R --no-save %s %s %s %s < /usr/local/bin/ROSE_callSuper.R' % (outFolder,outputFile1,inputName,controlName)\n\
   --- ROSE_utils.py\n\
   +++ ROSE_utils.py\n\
   265c265\n\
   <         coords = [int(start),int(end)]\n\
   ---\n\
-  >         coords = [float(start),float(end)]\n\
-  Binary files young_computation-rose-1a9bb86b5464/ROSE_utils.pyc and edited-Super-Enhancer/ROSE_utils.pyc differ\n\
-  Only in young_computation-rose-1a9bb86b5464: annotation\n'\
+  >         coords = [float(start),float(end)]\n"\
   >> patch.diff
+
+  RUN cat patch.diff
 
   ### patching the difference in script
   RUN wget -q -O young_computation.zip https://bitbucket.org/young_computation/rose/get/1a9bb86b5464.zip && \
@@ -124,6 +128,3 @@ dockerFile: |
   rm -rf young_computation-rose-1a9bb86b5464 && \
   rm -f /usr/local/edited-Super-Enhancer-master.zip && \
   chmod -R +x /usr/local/bin
-
-  ### Cleanup
-  RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* /var/lib/apt/lists/*
