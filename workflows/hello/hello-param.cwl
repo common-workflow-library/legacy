@@ -1,52 +1,46 @@
 #!/usr/bin/env cwl-runner
 
+cwlVersion: v1.0
+$graph:
 - id: echocmd
   class: CommandLineTool
-  cwlVersion: cwl:draft-3
   inputs:
-    - id: echo-in-message
+    echo-in-message:
       type: string
       label: "Message"
-      description: "The message to print"
+      doc: "The message to print"
       default: "Hello World"
       inputBinding: {}
-    - id: echo-in-outputfile
+    echo-in-outputfile:
       type: string
       label: "Output file"
-      description: "The file containing the message"
+      doc: "The file containing the message"
   outputs:
-    - id: echo-out-filename
-      type: File
+    echo-out-filename:
+      type: stdout
       label: "Printed Message"
-      description: "The file containing the message"
-      outputBinding:
-          glob: $(inputs['echo-in-outputfile'])
+      doc: "The file containing the message"
   baseCommand: echo
   arguments:
      - "-n"
      - "-e"
   stdout: $(inputs['echo-in-outputfile'])
 
-
 - id: main
   class: Workflow
   label: "Hello World"
-  description: "Puts a message into a file using echo"
+  doc: "Puts a message into a file using echo"
   inputs:
-     - id: usermessage
-       type: string
-     - id: useroutput
-       type: string
+     usermessage: string
+     useroutput: string
   outputs:
-    - id: output
+    output:
       type: File
-      source: "#main/step0/echo-out-filename"
+      outputSource: step0/echo-out-filename
   steps :
     - id: step0
       run: "#echocmd"
-      inputs:
-        - { id: echo-in-message,  source: "#main/usermessage"  }
-        - { id: echo-in-outputfile,  source: "#main/useroutput"  }
-      outputs:
-        - { id: echo-out-filename }
-
+      in:
+        echo-in-message: usermessage
+        echo-in-outputfile: useroutput
+      out: [echo-out-filename]
