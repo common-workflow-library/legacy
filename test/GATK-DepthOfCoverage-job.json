@@ -1,4 +1,6 @@
 {
+    "coresMin" : 16,
+    
     "omitIntervalStatistics" : true,
 
     "omitDepthOutputAtEachBase" : true,
