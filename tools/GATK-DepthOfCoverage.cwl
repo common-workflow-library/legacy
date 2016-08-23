@@ -121,6 +121,7 @@ inputs:
   - id: "#outputfile_DepthOfCoverage"
     type: ["null", string]
     description: name of the output report basename
+    default: sample
     inputBinding:
       position: 10
       prefix: "-o"
