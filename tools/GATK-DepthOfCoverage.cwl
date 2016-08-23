@@ -129,7 +129,7 @@ inputs:
 
 outputs:
   - id: "#output_DepthOfCoverage"
-    type: File
+    type: { type: array, items: File }
     outputBinding:
       glob: "$(inputs.outputfile_DepthOfCoverage).*"
 
