@@ -131,7 +131,7 @@ outputs:
   - id: "#output_DepthOfCoverage"
     type: File
     outputBinding:
-      glob: $(inputs.outputfile_DepthOfCoverage)
+      glob: "$(inputs.outputfile_DepthOfCoverage).*"
 
 
 arguments:
