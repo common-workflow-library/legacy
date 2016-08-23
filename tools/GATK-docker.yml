@@ -1,6 +1,4 @@
 class: DockerRequirement
-dockerPull: scidap/gatk:v3.5
-#dockerImageId: scidap/gatk:v3.5 #not yet ready
 dockerFile: |
   #################################################################
   # Dockerfile
@@ -12,9 +10,6 @@ dockerFile: |
   # Provides:         GATK|bwa|picard
 
   # Base Image:       scidap/scidap:v0.0.1
-  # Build Cmd:        docker build --rm -t scidap/gatk:v3.5 .
-  # Pull Cmd:         docker pull scidap/gatk:v3.5
-  # Run Cmd:          docker run --rm scidap/gatk:v3.5 GenomeAnalysisTK
   #################################################################
 
   ### Base Image
