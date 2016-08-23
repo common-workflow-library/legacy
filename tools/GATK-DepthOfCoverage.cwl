@@ -105,9 +105,8 @@ inputs:
       position: 8
       prefix: "-R"
     secondaryFiles:
-      - ".fasta"
-      - ".fasta.fai"
-      - ".dict"
+      - ".fai"
+      - "^.dict"
 
   - id: "#inputBam_DepthOfCoverage"
     type: File
