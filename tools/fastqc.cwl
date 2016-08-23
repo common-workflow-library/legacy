@@ -8,8 +8,10 @@ inputs:
     inputBinding:
       position: 1
 
-baseCommand: [ fastqc, ] #"--extract" ]
+baseCommand: [ fastqc, "--outdir", .] #"--extract"]
 
 outputs:
   zippedFile:
     type: File
+    outputBinding:
+      glob: "*.zip"
