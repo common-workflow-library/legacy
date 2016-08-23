@@ -18,3 +18,5 @@ services:
 script:
   - test/test.sh
 
+notifications:
+  email: false
