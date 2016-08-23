@@ -80,7 +80,7 @@ inputs:
 
   - id: "#threads"
     type: string
-    default: "$(runtime.cores)"
+    default: $(runtime.cores)
     inputBinding:
       position: 5
       prefix: "-nt"
