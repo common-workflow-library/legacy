@@ -82,7 +82,7 @@ inputs:
     type: ["null", boolean]
     description: Do not calculate per-interval statistics
     inputBinding:
-      prefix: "--noOriginalAlignmentTags"
+      prefix: "--omitIntervalStatistics"
       position: 6
 
   - id: "#omitDepthOutputAtEachBase"
