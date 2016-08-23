@@ -78,6 +78,14 @@ inputs:
     inputBinding:
       position: 1
 
+  - id: "#threads"
+    type: int
+    default: 4
+    description: number of threads
+    inputBinding:
+      prefix: "-nt"
+      position: 5
+
   - id: "#omitIntervalStatistics"
     type: ["null", boolean]
     description: Do not calculate per-interval statistics
@@ -139,11 +147,6 @@ arguments:
   - valueFrom: "DepthOfCoverage"
     position: 4
     prefix: "-T"
-
-  - id: "#threads"
-    position: 5
-    valueFrom: $(runtime.cores)
-    prefix: "-nt"
 
 
 baseCommand: ["java"]

@@ -1,6 +1,6 @@
 {
-    "coresMin" : 16,
-    
+    "threads" : 16,
+
     "omitIntervalStatistics" : true,
 
     "omitDepthOutputAtEachBase" : true,
