@@ -82,7 +82,7 @@ inputs:
     type: string
     default: "$(runtime.cores)"
     inputBinding:
-      position: 2
+      position: 5
       prefix: "-nt"
 
   - id: "#omitIntervalStatistics"
@@ -135,16 +135,16 @@ outputs:
 
 arguments:
   - valueFrom: "./test/test-files"
-    position: 3
+    position: 2
     separate: false
     prefix: "-Djava.io.tmpdir="
 
   - valueFrom: "/usr/local/bin/GenomeAnalysisTK.jar"
-    position: 4
+    position: 3
     prefix: "-jar"
 
   - valueFrom: "DepthOfCoverage"
-    position: 5
+    position: 4
     prefix: "-T"
 
 
