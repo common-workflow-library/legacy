@@ -10,7 +10,7 @@
 
     "reference": {
         "class": "File",
-        "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19",
+        "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta",
     },
 
     "outputfile_DepthOfCoverage": "sample_report"
