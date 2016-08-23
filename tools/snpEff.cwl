@@ -3,16 +3,20 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
+hints:
+  DockerRequirement:
+    dockerPull: quay.io/snpeff:4.3
+
 requirements:
   - class: InlineJavascriptRequirement
 
-stdout: $(inputs.inputfile.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '.ann.vcf')
+#stdout: $(inputs.inputfile.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '.ann.vcf')
 
 inputs:
 
   genome:
-    type: string
-    default: "GRCh37.75"
+    type: string?
+    #default: "GRCh37.75"
     inputBinding:
       position: 1
 
@@ -22,11 +26,10 @@ inputs:
     inputBinding:
       position: 2
 
-  stats_filename:
-    type: string?
-    default: "snpEff_summary.html"
+  genome_dir:
+    type: Directory
     inputBinding:
-      prefix: "-stats"
+      position: 2
 
   no_stats:
     type: boolean?
@@ -45,11 +48,16 @@ inputs:
     inputBinding:
       prefix: -o
 
+  nodownload:
+    type: boolean?
+    inputBinding:
+      prefix: -nodownload
+
   verbose:
     type: boolean?
     inputBinding:
       prefix: -v
-  
+
 outputs:
   annotated_vcf:
     type: stdout
@@ -57,14 +65,12 @@ outputs:
   summary_html:
     type: File?
     outputBinding:
-      glob: $(input.stats_filename)
+      glob: "snpEff_summary.html"
 
   summary_txt:
     type: File?
     outputBinding:
       glob: "snpEff_genes.txt"
 
-baseCommand: [ "java", "-Xmx4g" ]
-
-arguments: [ "-jar", "snpEff.jar" ]
-
+baseCommand: [ snpEff ]
+arguments: [ "-stats", "snpEff_summary.html" ]

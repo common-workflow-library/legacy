@@ -1,0 +1,20 @@
+FROM java:8-jdk
+
+RUN apt-get update && apt-get install -y unzip wget
+
+WORKDIR /usr/local
+RUN wget https://sourceforge.net/projects/snpeff/files/snpEff_v4_3_core.zip
+RUN unzip snpEff_v4_3_core.zip
+RUN rm snpEff_v4_3_core.zip
+
+RUN chmod a+x /usr/local/snpEff/scripts/snpEff
+
+ENV PATH /usr/local/snpEff/scripts:$PATH
+
+RUN mkdir /data
+WORKDIR /data
+
+RUN groupadd -r -g 1000 ubuntu && useradd -r -g ubuntu -u 1000 ubuntu
+USER ubuntu
+
+CMD ["/bin/bash"]
