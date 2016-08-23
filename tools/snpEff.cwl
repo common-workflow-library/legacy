@@ -40,7 +40,7 @@ inputs:
 
   output_format:
     type:
-      type: num
+      type: enum
       symbols: [ vcf, gatk, bed, bedAnn ]
     inputBinding:
       prefix: -o
