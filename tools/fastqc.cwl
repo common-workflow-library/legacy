@@ -2,6 +2,10 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
+requirements:
+- $import: envvar-global.yml
+- $import: fastqc_dockerfile.yml
+
 inputs:
   fastqFile:
     type: File #No reason to aaccept multiple files as no overall report is generated
