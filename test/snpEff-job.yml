@@ -4,6 +4,4 @@ variant_calling_file:
 
 nodownload: true
 output_format: vcf
-genome_dir:
-  class: Directory
-  location: /cip0/software/x86_64/miniconda-3.19.0/share/snpeff-4.3-2/GRCh37.75
+data_dir: /cip0/software/x86_64/miniconda-3.19.0/share/snpeff-4.3-2
