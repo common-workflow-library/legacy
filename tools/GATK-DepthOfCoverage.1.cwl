@@ -43,6 +43,7 @@ adms:includedAsset:
     foaf:name: Broad Institute
 doap:name: GATK-DepthOfCoverage.cwl
 dcat:downloadURL: https://github.com/common-workflow-language/workflows/blob/master/tools/GATK-DepthOfCoverage.cwl
+
 dct:creator:
 - class: foaf:Organization
   foaf:name: UCSC
@@ -51,6 +52,7 @@ dct:creator:
     id: http://orcid.org/0000-0002-7681-6415
     foaf:name: Brian O'Connor
     foaf:mbox: mailto:briandoconnor@ucsc.edu
+
 doap:maintainer:
 - class: foaf:Organization
   foaf:name: UCSC
@@ -59,12 +61,42 @@ doap:maintainer:
     id: http://orcid.org/0000-0002-7681-6415
     foaf:name: Brian O'Connor
     foaf:mbox: mailto:briandoconnor@ucsc.edu
+
 requirements:
 - $import: envvar-global.yml
 - $import: envvar-global.yml
 - $import: GATK-docker.yml
 
 inputs:
+
+  java_arg:
+    type: string
+    default: -Xmx4g
+    inputBinding:
+      position: 1
+
+  threads:
+    type: int
+    default: 4
+    inputBinding:
+      prefix: -nt
+      position: 5
+    doc: number of threads
+
+  omitIntervalStatistics:
+    type: boolean?
+    inputBinding:
+      prefix: --omitIntervalStatistics
+      position: 6
+    doc: Do not calculate per-interval statistics
+
+  omitDepthOutputAtEachBase:
+    type: boolean?
+    inputBinding:
+      prefix: --omitDepthOutputAtEachBase
+      position: 7
+    doc: Do not output depth of coverage at each base
+
   reference:
     type: File
     inputBinding:
@@ -73,28 +105,7 @@ inputs:
     secondaryFiles:
     - .fai
     - ^.dict
-  outputfile_DepthOfCoverage:
-    type: string?
-    default: sample
-    inputBinding:
-      position: 10
-      prefix: -o
-    doc: name of the output report basename
-  omitDepthOutputAtEachBase:
-    type: boolean?
-    inputBinding:
-      prefix: --omitDepthOutputAtEachBase
-      position: 7
 
-    doc: Do not output depth of coverage at each base
-  threads:
-    type: int
-    default: 4
-    inputBinding:
-      prefix: -nt
-      position: 5
-
-    doc: number of threads
   inputBam_DepthOfCoverage:
     type: File
     inputBinding:
@@ -103,24 +114,21 @@ inputs:
     secondaryFiles:
     - ^.bai
     doc: bam file, make sure it was aligned to the reference files used
-  java_arg:
-    type: string
-    default: -Xmx4g
-    inputBinding:
-      position: 1
 
-  omitIntervalStatistics:
-    type: boolean?
+  outputfile_DepthOfCoverage:
+    type: string?
+    default: sample
     inputBinding:
-      prefix: --omitIntervalStatistics
-      position: 6
+      position: 10
+      prefix: -o
+    doc: name of the output report basename
 
-    doc: Do not calculate per-interval statistics
 outputs:
   output_DepthOfCoverage:
     type: {type: array, items: File}
     outputBinding:
       glob: $(inputs.outputfile_DepthOfCoverage).*
+
 arguments:
 - valueFrom: ./test/test-files
   position: 2
@@ -132,9 +140,10 @@ arguments:
 - valueFrom: DepthOfCoverage
   position: 4
   prefix: -T
+
 baseCommand: [java]
+
 doc: |
   GATK-DepthOfCoverage.cwl is developed for CWL consortium
   Assess sequence coverage by a wide array of metrics, partitioned by sample, read group, or library
     Usage: java -jar GenomeAnalysisTK.jar -T DepthOfCoverage -R reference.fasta -o file_name_base -I input_bams.list [-geneList refSeq.sorted.txt] [-pt readgroup] [-ct 4 -ct 6 -ct 10] [-L my_capture_genes.interval_list]
-
