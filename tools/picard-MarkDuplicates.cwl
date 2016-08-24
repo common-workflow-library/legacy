@@ -72,7 +72,6 @@ inputs:
     type: File[]?
     inputBinding:
       position: 17
-
     doc: Comment(s) to include in the output files header. Default value null. This
       option may be specified 0 or more times
   groupCommandName:
@@ -86,6 +85,7 @@ inputs:
     type: File[]?
     inputBinding:
       position: 4
+      prefix: INPUT=
 
     doc: One or more input SAM or BAM files to analyze. Must be coordinate sorted.
       Default value null. This option may be specified 0 or more times
