@@ -10,59 +10,60 @@ hints:
 requirements:
   - class: InlineJavascriptRequirement
 
-#stdout: $(inputs.inputfile.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '.ann.vcf')
-
 inputs:
 
-  genome:
-    type: string?
-    #default: "GRCh37.75"
-    inputBinding:
-      position: 1
-
-  variant_calling_file:
-    type: File
-    format: "http://edamontology.org/format_3016"
-    inputBinding:
-      position: 2
-
-  #genome_dir:
-  #  type: Directory
-  #  inputBinding:
-  #    position: 2
-
   data_dir:
-    type: string
+    type: Directory
     inputBinding:
       prefix: "-dataDir"
-      
+      position: 1
+
   no_stats:
     type: boolean?
     inputBinding:
       prefix: "-noStats"
+      position: 2
 
   csvStats:
     type: boolean?
     inputBinding:
       prefix: "-csvStats"
+      position: 3
 
   output_format:
     type:
       type: enum
       symbols: [ vcf, gatk, bed, bedAnn ]
+    default: vcf
     inputBinding:
       prefix: -o
+      position: 4
 
   nodownload:
     type: boolean?
     inputBinding:
       prefix: -nodownload
+      position: 5
 
   verbose:
     type: boolean?
     inputBinding:
       prefix: -v
+      position: 6
+    
+  genome:
+    type: string
+    inputBinding:
+      position: 7
 
+  variant_calling_file:
+    type: File
+    format: "http://edamontology.org/format_3016"
+    inputBinding:
+      position: 8
+
+stdout: $(inputs.variant_calling_file.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '.ann.vcf')
+ 
 outputs:
   annotated_vcf:
     type: stdout
@@ -78,4 +79,4 @@ outputs:
       glob: "snpEff_genes.txt"
 
 baseCommand: [ snpEff ]
-arguments: [ "-stats", "snpEff_summary.html" ]
+arguments: [ "ann", "-stats", "snpEff_summary.html" ]
