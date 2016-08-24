@@ -1,3 +1,6 @@
+#!/usr/bin/env cwl-runner
+
+cwl:tool: runtime-demo.cwl
 cwl:requirements:
  - class: ResourceRequirement
    coresMin: 4
