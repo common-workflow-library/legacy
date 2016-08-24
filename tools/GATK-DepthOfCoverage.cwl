@@ -64,81 +64,69 @@ doap:maintainer:
 
 requirements:
 - $import: envvar-global.yml
-- $import: envvar-global.yml
 - $import: GATK-docker.yml
 
 inputs:
 
   java_arg:
     type: string
-    default: -Xmx4g
+    default: mx4g
     inputBinding:
-      position: 1
+      separate: false
+      prefix: -X
 
   threads:
     type: int
     default: 4
     inputBinding:
       prefix: -nt
-      position: 5
     doc: number of threads
 
   omitIntervalStatistics:
     type: boolean?
     inputBinding:
       prefix: --omitIntervalStatistics
-      position: 6
     doc: Do not calculate per-interval statistics
 
   omitDepthOutputAtEachBase:
     type: boolean?
     inputBinding:
       prefix: --omitDepthOutputAtEachBase
-      position: 7
     doc: Do not output depth of coverage at each base
 
   reference:
     type: File
+    format: http://edamontology.org/format_1929  # FASTA
     inputBinding:
-      position: 8
       prefix: -R
     secondaryFiles:
     - .fai
     - ^.dict
 
-  inputBam_DepthOfCoverage:
+  alignments:
     type: File
+    format: http://edamontology.org/format_2572  # BAM
     inputBinding:
-      position: 9
       prefix: -I
     secondaryFiles:
     - ^.bai
     doc: bam file, make sure it was aligned to the reference files used
 
-  outputfile_DepthOfCoverage:
-    type: string?
-    default: sample
-    inputBinding:
-      position: 10
-      prefix: -o
-    doc: name of the output report basename
-
 outputs:
-  output_DepthOfCoverage:
-    type: {type: array, items: File}
+  depthOfCoverage:
+    type: File[]
     outputBinding:
-      glob: $(inputs.outputfile_DepthOfCoverage).*
+      glob: '*'
 
 arguments:
-- valueFrom: ./test/test-files
-  position: 2
+- valueFrom: "sample"
+  prefix: -o
+- valueFrom: $(runtime.tmpdir)
   separate: false
   prefix: -Djava.io.tmpdir=
 - valueFrom: /usr/local/bin/GenomeAnalysisTK.jar
-  position: 3
   prefix: -jar
 - valueFrom: DepthOfCoverage
-  position: 4
   prefix: -T
 
 baseCommand: [java]
