@@ -1,67 +1,62 @@
 #!/usr/bin/env cwl-runner
 
-cwlVersion: "cwl:draft-3"
-
+cwlVersion: v1.0
 class: CommandLineTool
 
 requirements:
-  - $import: envvar-global.yml
-  - $import: bwa-docker.yml
-  - class: InlineJavascriptRequirement
+- $import: envvar-global.yml
+- $import: bwa-docker.yml
+- class: InlineJavascriptRequirement
 
 inputs:
-  - id: "reference"
+  minimum_seed_length:
+    type: int?
+    inputBinding:
+      position: 1
+      prefix: -k
+    doc: -k INT        minimum seed length [19]
+  reference:
     type: File
+    secondaryFiles:
+      - .amb
+      - .ann
+      - .bwt
+      - .pac
+      - .sa
     inputBinding:
       position: 2
 
-  - id: "reads"
-    type:
-      type: array
-      items: File
+  output_filename: string
+  reads:
+    type: File[]
     inputBinding:
       position: 3
 
-  - id: "minimum_seed_length"
-    type: ["null",int]
-    description: "-k INT        minimum seed length [19]"
+  threads:
+    type: int?
     inputBinding:
       position: 1
-      prefix: "-k"
-
-  - id: "min_std_max_min"
-    type:
-    - "null"
-    - type: array
-      items: int
+      prefix: -t
+    doc: -t INT        number of threads [1]
+  min_std_max_min:
+    type: int[]?
     inputBinding:
       position: 1
-      prefix: "-I"
-      itemSeparator: ","
-
-  - id: "output_filename"
-    type: string
-
-  - id: "threads"
-    type: ["null",int]
-    description: "-t INT        number of threads [1]"
-    inputBinding:
-      position: 1
-      prefix: "-t"
-
+      prefix: -I
+      itemSeparator: ','
 stdout: $(inputs.output_filename)
 
 outputs:
-  - id: output
+  output:
     type: File
     outputBinding:
       glob: $(inputs.output_filename)
 
 baseCommand:
-  - bwa
-  - mem
+- bwa
+- mem
 
-description: |
+doc: |
   Usage: bwa mem [options] <idxbase> <in1.fq> [in2.fq]
 
   Algorithm options:
@@ -113,3 +108,4 @@ description: |
                        FR orientation only. [inferred]
 
   Note: Please read the man page for detailed description of the command line and options.
+
