@@ -26,11 +26,16 @@ inputs:
     inputBinding:
       position: 2
 
-  genome_dir:
-    type: Directory
-    inputBinding:
-      position: 2
+  #genome_dir:
+  #  type: Directory
+  #  inputBinding:
+  #    position: 2
 
+  data_dir:
+    type: string
+    inputBinding:
+      prefix: "-dataDir"
+      
   no_stats:
     type: boolean?
     inputBinding:

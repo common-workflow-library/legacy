@@ -3,7 +3,12 @@ variant_calling_file:
   path: "/data_small/small_vcf/NA12878.sorted.vcf"
 
 nodownload: true
+
 output_format: vcf
+
 genome_dir:
   class: Directory
   location: "/data_small/snpEff_hg19/data/hg19"
+
+data_dir: /cip0/software/x86_64/miniconda-3.19.0/share/snpeff-4.3-2
+
