@@ -1,6 +1,0 @@
-input:
-  class: File
-  path: /data_small/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta
-
-a: "bwtsw"
-six: true
