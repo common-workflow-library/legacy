@@ -1,0 +1,12 @@
+- args: [
+    "bwa",
+    "aln",
+    "-I",
+    "-f",
+    "test-files/aligned.bam",
+    "./test-files/alea/129S1_SvImJ.fasta",
+    "./test-files/s5DE199B-D6AF-C6EC-678A-DEC1179D1B97.fastq"
+  ]
+  job:  bwa-aln-job.json
+  tool: ../tools/bwa-aln.cwl
+  doc: General test of command line generation

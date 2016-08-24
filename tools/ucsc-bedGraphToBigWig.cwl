@@ -1,48 +1,8 @@
 #!/usr/bin/env cwl-runner
 
-$namespaces:
-  dct: http://purl.org/dc/terms/
-  foaf: http://xmlns.com/foaf/0.1/
-  doap: http://usefulinc.com/ns/doap#
-  adms: http://www.w3.org/ns/adms#
-  dcat: http://www.w3.org/ns/dcat#
-
-$schemas:
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- http://usefulinc.com/ns/doap#
-- http://www.w3.org/ns/adms#
-- http://www.w3.org/ns/dcat.rdf
-
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
-
-adms:includedAsset:
-  doap:name: "UCSC userApps"
-  doap:description: |
-    UCSC genome browser 'kent' bioinformatic utilities
-    These are only the command line bioinformatic utilities
-    from the kent source tree.
-  doap:homepage: "http://genome.ucsc.edu/goldenPath/help/bigWig.html"
-  dcat:downloadURL: "http://hgdownload.cse.ucsc.edu/admin/exe/userApps.v325.src.tgz"
-  doap:release:
-  - class: doap:Version
-    doap:revision: "v325"
-  doap:license: "GPL"
-  doap:category: "commandline tool"
-  doap:programming-language: "C"
-  foaf:publications:
-  - id: urn:pmid:20639541
-    foaf:title: "(Kent et al., 2010) BigWig and BigBed: enabling browsing of large distributed datasets. Bioinformatics."
-    foaf:homepage: "http://www.ncbi.nlm.nih.gov/pubmed/20639541"
-  doap:developer:
-  - class: foaf:Organization
-    foaf:name: "CIRM Stem Cell Genomics Data Management Center"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Jim Kent"
-      foaf:mbox: "mailto:kent@soe.ucsc.edu"
 
 description: |
   ucsc-bedGraphToBigWig.cwl is developed for CWL consortium
@@ -62,131 +22,51 @@ description: |
       The input bedGraph file must be sorted, use the unix sort command:
         sort -k1,1 -k2,2n unsorted.bedGraph > sorted.bedGraph
 
-doap:name: "ucsc-bedGraphToBigWig.cwl"
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/ucsc-bedGraphToBigWig.cwl"
-
-dct:isPartOf:
-  doap:name: "CWL Workflows"
-  doap:homepage: "http://commonwl.org/"
-  doap:license: "Apache2"
-
-  doap:implements:
-  - class: doap:Specification
-    doap:homepage: "http://common-workflow-language.github.io/draft-3/"
-
-  doap:repository:
-  - class: doap:GitRepository
-    doap:location: "https://github.com/common-workflow-language/workflows"
-
-  dct:creator:
-  - class: foaf:Organization
-    foaf:name: "Curoverse"
-    foaf:member:
-    - class: foaf:Person
-      id: "http://orcid.org/0000-0003-3566-7705"
-      foaf:name: "Peter Amstutz"
-      foaf:mbox: "mailto:peter.amstutz@curoverse.com"
-  - class: foaf:Organization
-    foaf:name: "Seven Bridges Genomics"
-    foaf:member:
-    - class: foaf:Person
-      id: "mailto:nebojsa.tijanic@sbgenomics.com"
-      foaf:name: "Nebojša Tijanić"
-      foaf:mbox: "mailto:nebojsa.tijanic@sbgenomics.com"
-
-  dct:contributor:
-  - class: foaf:Organization
-    foaf:name: "Seven Bridges Genomics"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Luka Stojanovic"
-      foaf:mbox: "mailto:luka.stojanovic@sbgenomics.com"
-  - class: foaf:Organization
-    foaf:name: "Galaxy Project, Pennsylvania State University"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "John Chilton"
-      foaf:mbox: "mailto:jmchilton@gmail.com"
-  - class: foaf:Organization
-    foaf:name: "University of California, Davis"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Michael R. Crusoe"
-      foaf:mbox: "mailto:crusoe@ucdavis.edu"
-  - class: foaf:Organization
-    foaf:name: "Institut Pasteur"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Hervé Ménager"
-      foaf:mbox: "mailto:herve.menager@gmail.com"
-  - class: foaf:Organization
-    foaf:name: "BioDatomics"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Maxim Mikheev"
-      foaf:mbox: "mailto:mikhmv@biodatomics.com"
-  - class: foaf:Organization
-    foaf:name: "University of Manchester"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Stian Soiland-Reyes"
-      foaf:mbox: "mailto:soiland-reyes@cs.manchester.ac.uk"
-
-doap:maintainer:
-- class: foaf:Organization
-  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
-  foaf:member:
-  - class: foaf:Person
-    id: "http://orcid.org/0000-0001-9102-5681"
-    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
-    foaf:name: "Andrey Kartashov"
-    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
-
 requirements:
-  - class: InlineJavascriptRequirement
-  - $import: envvar-global.cwl
-  - $import: ucsc-userapps-docker.cwl
+- class: InlineJavascriptRequirement
+- $import: envvar-global.yml
+- $import: ucsc-userapps-docker.yml
 
 inputs:
-  - id: "#input"
-    type: File
-    inputBinding:
-      position: 2
+- id: "#input"
+  type: File
+  inputBinding:
+    position: 2
 
-  - id: "#genomeFile"
-    type: File
-    inputBinding:
-      position: 3
+- id: "#genomeFile"
+  type: File
+  inputBinding:
+    position: 3
 
-  - id: "#bigWig"
-    type: string
-    inputBinding:
-      position: 4
+- id: "#bigWig"
+  type: string
+  inputBinding:
+    position: 4
 
-  - id: "#unc"
-    type: ["null",boolean]
-    description: "If set, do not use compression."
-    inputBinding:
-      position: 1
-      prefix: "-unc"
+- id: "#unc"
+  type: ["null",boolean]
+  description: "If set, do not use compression."
+  inputBinding:
+    position: 1
+    prefix: "-unc"
 
-  - id: "#itemsPerSlot"
-    type: ["null",int]
-    description: |
-      -itemsPerSlot=N - Number of data points bundled at lowest level. Default 1024
-    inputBinding:
-      separate: false
-      position: 1
-      prefix: "-itemsPerSlot="
+- id: "#itemsPerSlot"
+  type: ["null",int]
+  description: |
+    -itemsPerSlot=N - Number of data points bundled at lowest level. Default 1024
+  inputBinding:
+    separate: false
+    position: 1
+    prefix: "-itemsPerSlot="
 
-  - id: "#blockSize"
-    type: ["null",int]
-    description: |
-      -blockSize=N - Number of items to bundle in r-tree.  Default 256
-    inputBinding:
-      separate: false
-      position: 1
-      prefix: "-blockSize="
+- id: "#blockSize"
+  type: ["null",int]
+  description: |
+    -blockSize=N - Number of items to bundle in r-tree.  Default 256
+  inputBinding:
+    separate: false
+    position: 1
+    prefix: "-blockSize="
 
 outputs:
   - id: "#bigWigOut"
@@ -195,3 +75,35 @@ outputs:
       glob: $(inputs.bigWig)
 
 baseCommand: ["bedGraphToBigWig"]
+
+$namespaces:
+  s: http://schema.org/
+
+$schemas:
+- http://schema.org/docs/schema_org_rdfa.html
+
+s:mainEntity:
+  $import: ucsc-metadata.yaml
+
+s:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/ucsc-bedGraphToBigWig.cwl
+s:codeRepository: https://github.com/common-workflow-language/workflows
+s:license: http://www.apache.org/licenses/LICENSE-2.0
+
+s:isPartOf:
+  class: s:CreativeWork
+  s:name: "Common Workflow Language"
+  s:url: http://commonwl.org/
+
+s:author:
+  class: s:Person
+  s:name: "Andrey Kartashov"
+  s:email: mailto:Andrey.Kartashov@cchmc.org
+  s:sameAs:
+  - id: http://orcid.org/0000-0001-9102-5681
+  s:worksFor:
+  - class: s:Organization
+    s:name: "Cincinnati Children's Hospital Medical Center"
+    s:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    s:department:
+    - class: s:Organization
+      s:name: "Barski Lab"

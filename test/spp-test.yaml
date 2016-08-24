@@ -1,0 +1,9 @@
+- args: [
+    "run_spp.R",
+    "-out=aligned.spp_cross_corr.txt",
+    "-c=./test-files/aligned.bam",
+    "-rf"
+  ]
+  job:  spp-job.json
+  tool: ../tools/spp.cwl
+  doc: General test of command line generation for spp tool

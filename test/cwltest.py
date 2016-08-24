@@ -180,7 +180,7 @@ def main():
     unsupported = 0
 
     if args.n is not None:
-        sys.stderr.write("\rTest [%i/%i] " % (args.n, len(tests)))
+        sys.stderr.write("\nTest [%i/%i] " % (args.n, len(tests)))
         rt = run_test(args, args.n - 1, tests[args.n - 1])
         if rt == 1:
             failures += 1
@@ -188,7 +188,7 @@ def main():
             unsupported += 1
     else:
         for i, t in enumerate(tests):
-            sys.stderr.write("\rTest [%i/%i] " % (i + 1, len(tests)))
+            sys.stderr.write("\nTest [%i/%i] " % (i + 1, len(tests)))
             sys.stderr.flush()
             rt = run_test(args, i, t)
             if rt == 1:

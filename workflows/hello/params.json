@@ -1,4 +1,6 @@
+#!/usr/bin/env cwl-runner
 {
+"cwl:tool"    : "hello-param.cwl#main",
 "usermessage" : "Hello, CWL !\nHello World !",
 "useroutput"  :  "useroutput.txt" 
 }

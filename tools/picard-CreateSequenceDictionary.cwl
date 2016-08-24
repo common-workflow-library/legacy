@@ -14,7 +14,7 @@ $schemas:
 - http://www.w3.org/ns/adms#
 - http://www.w3.org/ns/dcat.rdf
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -46,73 +46,6 @@ description: |
 doap:name: "picard-CreateSequenceDictionary.cwl"
 dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/picard-CreateSequenceDictionary.cwl"
 
-dct:isPartOf:
-  doap:name: "CWL Workflows"
-  doap:homepage: "http://commonwl.org/"
-  doap:license: "Apache2"
-
-  doap:implements:
-  - class: doap:Specification
-    doap:homepage: "http://common-workflow-language.github.io/draft-3/"
-
-  doap:repository:
-  - class: doap:GitRepository
-    doap:location: "https://github.com/common-workflow-language/workflows"
-
-  dct:creator:
-  - class: foaf:Organization
-    foaf:name: "Curoverse"
-    foaf:member:
-    - class: foaf:Person
-      id: "http://orcid.org/0000-0003-3566-7705"
-      foaf:name: "Peter Amstutz"
-      foaf:mbox: "mailto:peter.amstutz@curoverse.com"
-  - class: foaf:Organization
-    foaf:name: "Seven Bridges Genomics"
-    foaf:member:
-    - class: foaf:Person
-      id: "mailto:nebojsa.tijanic@sbgenomics.com"
-      foaf:name: "Nebojša Tijanić"
-      foaf:mbox: "mailto:nebojsa.tijanic@sbgenomics.com"
-
-  dct:contributor:
-  - class: foaf:Organization
-    foaf:name: "Seven Bridges Genomics"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Luka Stojanovic"
-      foaf:mbox: "mailto:luka.stojanovic@sbgenomics.com"
-  - class: foaf:Organization
-    foaf:name: "Galaxy Project, Pennsylvania State University"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "John Chilton"
-      foaf:mbox: "mailto:jmchilton@gmail.com"
-  - class: foaf:Organization
-    foaf:name: "University of California, Davis"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Michael R. Crusoe"
-      foaf:mbox: "mailto:crusoe@ucdavis.edu"
-  - class: foaf:Organization
-    foaf:name: "Institut Pasteur"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Hervé Ménager"
-      foaf:mbox: "mailto:herve.menager@gmail.com"
-  - class: foaf:Organization
-    foaf:name: "BioDatomics"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Maxim Mikheev"
-      foaf:mbox: "mailto:mikhmv@biodatomics.com"
-  - class: foaf:Organization
-    foaf:name: "University of Manchester"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Stian Soiland-Reyes"
-      foaf:mbox: "mailto:soiland-reyes@cs.manchester.ac.uk"
-
 doap:maintainer:
 - class: foaf:Organization
   foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
@@ -124,8 +57,8 @@ doap:maintainer:
     foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
 
 requirements:
-- $import: envvar-global.cwl
-- $import: picard-docker.cwl
+- $import: envvar-global.yml
+- $import: picard-docker.yml
 - class: InlineJavascriptRequirement
 
 inputs:

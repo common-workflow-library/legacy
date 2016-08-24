@@ -14,7 +14,7 @@ $schemas:
 - http://www.w3.org/ns/adms#
 - http://www.w3.org/ns/dcat.rdf
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -61,73 +61,6 @@ description: |
 doap:name: "bedtools-genomecov.cwl"
 dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/bedtools-genomecov.cwl"
 
-dct:isPartOf:
-  doap:name: "CWL Workflows"
-  doap:homepage: "http://commonwl.org/"
-  doap:license: "Apache2"
-
-  doap:implements:
-  - class: doap:Specification
-    doap:homepage: "http://common-workflow-language.github.io/draft-3/"
-
-  doap:repository:
-  - class: doap:GitRepository
-    doap:location: "https://github.com/common-workflow-language/workflows"
-
-  dct:creator:
-  - class: foaf:Organization
-    foaf:name: "Curoverse"
-    foaf:member:
-    - class: foaf:Person
-      id: "http://orcid.org/0000-0003-3566-7705"
-      foaf:name: "Peter Amstutz"
-      foaf:mbox: "mailto:peter.amstutz@curoverse.com"
-  - class: foaf:Organization
-    foaf:name: "Seven Bridges Genomics"
-    foaf:member:
-    - class: foaf:Person
-      id: "mailto:nebojsa.tijanic@sbgenomics.com"
-      foaf:name: "Nebojša Tijanić"
-      foaf:mbox: "mailto:nebojsa.tijanic@sbgenomics.com"
-
-  dct:contributor:
-  - class: foaf:Organization
-    foaf:name: "Seven Bridges Genomics"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Luka Stojanovic"
-      foaf:mbox: "mailto:luka.stojanovic@sbgenomics.com"
-  - class: foaf:Organization
-    foaf:name: "Galaxy Project, Pennsylvania State University"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "John Chilton"
-      foaf:mbox: "mailto:jmchilton@gmail.com"
-  - class: foaf:Organization
-    foaf:name: "University of California, Davis"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Michael R. Crusoe"
-      foaf:mbox: "mailto:crusoe@ucdavis.edu"
-  - class: foaf:Organization
-    foaf:name: "Institut Pasteur"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Hervé Ménager"
-      foaf:mbox: "mailto:herve.menager@gmail.com"
-  - class: foaf:Organization
-    foaf:name: "BioDatomics"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Maxim Mikheev"
-      foaf:mbox: "mailto:mikhmv@biodatomics.com"
-  - class: foaf:Organization
-    foaf:name: "University of Manchester"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Stian Soiland-Reyes"
-      foaf:mbox: "mailto:soiland-reyes@cs.manchester.ac.uk"
-
 doap:maintainer:
 - class: foaf:Organization
   foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
@@ -139,12 +72,12 @@ doap:maintainer:
     foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
 
 requirements:
-  - $import: envvar-global.cwl
-  - $import: bedtools-docker.cwl
+  - $import: envvar-global.yml
+  - $import: bedtools-docker.yml
   - class: InlineJavascriptRequirement
 
 inputs:
-  - id: "#input"
+  - id: input
     type: File
     description: |
       The input file can be in BAM format
@@ -157,14 +90,14 @@ inputs:
             var prefix = ((/.*\.bam$/i).test(inputs.input.path))?'-ibam':'-i';
             return [prefix,inputs.input.path];
           }
-      secondaryFiles: |
+    secondaryFiles: |
            ${
             if ((/.*\.bam$/i).test(inputs.input.path))
                return {"path": inputs.input.path+".bai", "class": "File"};
             return [];
            }
 
-  - id: "#genomeFile"
+  - id: genomeFile
     type: File
     description:
       Input genome file.
@@ -172,7 +105,7 @@ inputs:
       position: 2
       prefix: "-g"
 
-  - id: "#dept"
+  - id: dept
     type:
       name: "JustDepts"
       type: enum
@@ -180,7 +113,7 @@ inputs:
     inputBinding:
       position: 4
 
-  - id: "#scale"
+  - id: scale
     type: ["null",float ]
     description: |
       Scale the coverage by a constant factor.
@@ -192,7 +125,7 @@ inputs:
       position: 4
       prefix: -scale
 
-  - id: "#dz"
+  - id: dz
     type: ["null",boolean]
     description: |
       Report the depth at each genome position (with zero-based coordinates).
@@ -202,7 +135,7 @@ inputs:
       position: 4
       prefix: "-dz"
 
-  - id: "#split"
+  - id: split
     type: ["null",boolean]
     description: |
       reat "split" BAM or BED12 entries as distinct BED intervals.
@@ -215,7 +148,7 @@ inputs:
       position: 4
       prefix: "-split"
 
-  - id: "#strand"
+  - id: strand
     type: ["null", string]
     description: |
       Calculate coverage of intervals from a specific strand.
@@ -225,21 +158,21 @@ inputs:
       position: 4
       prefix: "-strand"
 
-  - id: "#pairchip"
+  - id: pairchip
     type: ["null", boolean]
     description: "pair-end chip seq experiment"
     inputBinding:
       position: 4
       prefix: "-pc"
 
-  - id: "#fragmentsize"
+  - id: fragmentsize
     type: ["null", int]
     description: "fixed fragment size"
     inputBinding:
       position: 4
       prefix: "-fs"
 
-  - id: "#max"
+  - id: max
     type: ["null",int]
     description: |
       Combine all positions with a depth >= max into
@@ -250,7 +183,7 @@ inputs:
       position: 4
       prefix: "-max"
 
-  - id: "#m5"
+  - id: m5
     type: ["null",boolean]
     description: |
       Calculate coverage of 5" positions (instead of entire interval).
@@ -258,7 +191,7 @@ inputs:
       position: 4
       prefix: "-5"
 
-  - id: "#m3"
+  - id: m3
     type: ["null",boolean]
     description: |
       Calculate coverage of 3" positions (instead of entire interval).
@@ -266,11 +199,11 @@ inputs:
       position: 4
       prefix: "-3"
 
-  - id: "#genomecoverageout"
+  - id: genomecoverageout
     type: string
 
 outputs:
-  - id: "#genomecoverage"
+  - id: genomecoverage
     type: File
     description: "The file containing the genome coverage"
     outputBinding:

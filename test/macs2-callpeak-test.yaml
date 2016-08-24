@@ -1,0 +1,11 @@
+- args: [
+    "macs2",
+    "callpeak",
+    "-n",
+    "aligned",
+    "--treatment",
+    "./test-files/aligned.bam"
+  ]
+  job:  macs2-callpeak-job.json
+  tool: ../tools/macs2-callpeak.cwl
+  doc: General test for MACS2 callpeak

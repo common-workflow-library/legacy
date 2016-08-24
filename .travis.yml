@@ -7,18 +7,16 @@ python:
 
 # command to install dependencies
 install:
+  - pip install setuptools==18.5
   - pip install PyYAML
-#  - git clone https://github.com/SciDAP/cwltool.git && cd cwltool && sudo python setup.py install && cd ..
   - pip install cwltool
   - pip install cwl-runner
 
 services:
   - docker
 
-before_install:
-#  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker pull commonworkflowlanguage/nodejs-engine
-
 script:
   - test/test.sh
 
+notifications:
+  email: false

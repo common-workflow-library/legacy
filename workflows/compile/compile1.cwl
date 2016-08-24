@@ -1,83 +1,79 @@
 #!/usr/bin/env cwl-runner
 
-- id: "#compile"
+cwlVersion: v1.0
+$graph:
+- id: compile
   class: CommandLineTool
   inputs:
-    - id: "#src"
+    src:
       type: File
       inputBinding: {}
-    - id: "#object"
+    object:
       type: string
       inputBinding:
           prefix: "-o"
   outputs:
-    - id: "#compiled"
+    compiled:
       type: File
       outputBinding:
-          glob:
-             engine: cwl:JsonPointer
-             script: /job/object
+        glob: $(inputs.object)
   baseCommand: gcc
   arguments:
     - "-c"
     - "-Wall"
 
-- id: "#link"
+- id: link
   class: CommandLineTool
   inputs:
-    - id: "#objects"
-      type:  { type: array, items: File }
+    objects:
+      type:  File[]
       inputBinding:
         position: 2
-    - id: "#output"
+    output:
       type: string
       inputBinding:
           position: 1
           prefix: "-o"
   outputs:
-    - id: "#executable"
+    executable:
       type: File
       outputBinding:
-          glob:
-             engine: cwl:JsonPointer
-             script: /job/output
+          glob: $(inputs.output)
   baseCommand: gcc
 
-
-- id: "#main"
+- id: main
   class: Workflow
   requirements:
-    - class: EnvVarRequirement
-      envDef:
-        - envName: PATH
-          envValue: /usr/bin
+    - class: MultipleInputFeatureRequirement
   inputs: []
   outputs:
-    - id: "#main.output"
+    - id: output
       type: File
-      source: "#linkobj.executable"
-  steps :
-    - id: "#compilesources-src1"
-      run: {import: "#compile"}
-      inputs:
-         - { id: "#compilesources-src1.src" , default: {class: File, path: "source1.c" } }
-         - { id: "#compilesources-src1.object" , default: "source1.o" }
-      outputs:
-        - { id: "#compilesources-src1.compiled" }
+      outputSource: linkobj/executable
+  steps:
+    compilesources-src1:
+      run: "#compile"
+      in:
+         src:
+           default:
+             class: File
+             location: source1.c
+             secondaryFiles:
+               - class: File
+                 location: source1.h
+         object: { default: "source1.o" }
+      out: [compiled]
 
-    - id: "#compilesources-src2"
-      run: {import: "#compile"}
-      inputs:
-         - { id: "#compilesources-src2.src" , default: {class: File, path: "source2.c" } }
-         - { id: "#compilesources-src2.object" , default: "source2.o" }
-      outputs:
-         - { id: "#compilesources-src2.compiled" }
+    compilesources-src2:
+      run: "#compile"
+      in:
+         src: { default: {class: File, location: "source2.c" } }
+         object: { default: "source2.o" }
+      out: [compiled]
 
-    - id: "#linkobj"
-      run: {import: "#link"}
-      inputs:
-         - { id: "#linkobj.objects" , source: ["#compilesources-src1.compiled", "#compilesources-src2.compiled"] }
-         - { id: "#linkobj.output" , default: "a.out" }
-      outputs:
-         - { id: "#linkobj.executable" }
-
+    linkobj:
+      run: "#link"
+      in:
+         objects: [compilesources-src1/compiled, compilesources-src2/compiled]
+         output: { default: "a.out" }
+      out: [executable]

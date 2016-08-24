@@ -1,112 +1,70 @@
 #!/usr/bin/env cwl-runner
-
-- id: "#rnaseq"
+cwlVersion: v1.0
+$graph:
+- id: rnaseq
   class: CommandLineTool
   inputs:
-    - id: "#sequence"
-      type: string
-      inputBinding: {}
+    sequence: string
   outputs:
-    - id: "#seqout"
-      type: File
-      outputBinding:
-        glob: rnaseq
-  baseCommand: echo
+    seqout: stdout
+  arguments: [echo, $(inputs.sequence)]
   stdout: rnaseq
 
-- id: "#cat"
+- id: cat
   class: CommandLineTool
   inputs:
-    - id: "#sequences"
-      type:
-        type: array
-        items: File
-      inputBinding: {}
-    - id: "#catfilename"
-      type: string
+    sequences: File[]
+    catfilename: string
   outputs:
-    - id: "#catout"
-      type: File
-      outputBinding:
-        glob:
-          engine: cwl:JsonPointer
-          script: /job/catfilename
-  baseCommand: cat
-  stdout:
-    engine: cwl:JsonPointer
-    script: /job/catfilename
+    catout: stdout
+  arguments: [cat, $(inputs.sequences)]
+  stdout: $(inputs.catfilename)
 
-
-- id: "#tr"
+- id: tr
   class: CommandLineTool
   inputs:
-    - id: "#trinput"
-      type: File
-    - id: "#from"
-      type: string
-      inputBinding:
-        position: 1
-    - id: "#to"
-      type: string
-      inputBinding:
-        position: 1
-    - id: "#filename"
-      type: string
+    trinput: File
+    from: string
+    to: string
+    filename: string
   outputs:
-    - id: "#trout"
-      type: File
-      outputBinding:
-        glob:
-          engine: cwl:JsonPointer
-          script: /job/filename
-  baseCommand: tr
-  stdin:
-    engine: cwl:JsonPointer
-    script: /job/trinput/path
-  stdout:
-    engine: cwl:JsonPointer
-    script: /job/filename
+    trout: stdout
+  arguments: [tr, $(inputs.from), $(inputs.to)]
+  stdin: $(inputs.trinput.path)
+  stdout: $(inputs.filename)
 
-
-- id: "#main"
+- id: main
   class: Workflow
   inputs:
-    - id: "#rna"
-      type:
-        type: array
-        items: string
+    rna: string[]
   outputs:
-    - id: "#outfile"
+    outfile:
       type: File
-      source: "#combine_sequences.catout"
+      outputSource: translate_sequences/trout
 
   requirements:
     - class: ScatterFeatureRequirement
 
   steps:
-    - id: "#get_sequences"
-      run: {import: "#rnaseq"}
-      scatter: "#get_sequences.sequence"
-      inputs:
-        - { id: "#get_sequences.sequence", source: "#rna" }
-      outputs:
-        - { id: "#get_sequences.seqout" }
+    get_sequences:
+      run: "#rnaseq"
+      scatter: sequence
+      in:
+        sequence: rna
+      out: [seqout]
 
-    - id: "#translate_sequences"
-      run: {import: "#tr"}
-      scatter: "#translate_sequences.trinput"
-      inputs:
-        - { id: "#translate_sequences.trinput", source: "#get_sequences.seqout" }
-        - { id: "#translate_sequences.from", default: "U" }
-        - { id: "#translate_sequences.to", default: "T" }
-        - { id: "#combine_sequences.filename", default: "dna" }
-      outputs:
-        - { id: "#translate_sequences.trout" }
+    combine_sequences:
+      run: "#cat"
+      in:
+        sequences: get_sequences/seqout
+        catfilename: { default: "database.dna" }
+      out: [catout]
 
-    - id: "#combine_sequences"
-      run: {import: "#cat"}
-      inputs:
-        - { id: "#combine_sequences.sequences", source: "#translate_sequences.trout" }
-        - { id: "#combine_sequences.catfilename", default: "database.dna" }
-      outputs:
-        - { id: "#combine_sequences.catout" }
+    translate_sequences:
+      run: "#tr"
+      in:
+        trinput: combine_sequences/catout
+        from: { default: "U" }
+        to: { default: "T" }
+        filename: { default: "database.dna" }
+      out: [trout]

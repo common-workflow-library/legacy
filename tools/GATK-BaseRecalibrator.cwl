@@ -14,16 +14,21 @@ $schemas:
 - http://www.w3.org/ns/adms#
 - http://www.w3.org/ns/dcat.rdf
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
 adms:includedAsset:
   doap:name: "GATK"
   doap:description: >
-    The Genome Analysis Toolkit or GATK is a software package for analysis of high-throughput sequencing data, developed by the Data Science and Data Engineering group at the Broad Institute. 
-    The toolkit offers a wide variety of tools, with a primary focus on variant discovery and genotyping as well as strong emphasis on data quality assurance.
-    Its robust architecture, powerful processing engine and high-performance computing features make it capable of taking on projects of any size.
+    The Genome Analysis Toolkit or GATK is a software package for analysis of
+    high-throughput sequencing data, developed by the Data Science and Data
+    Engineering group at the Broad Institute. 
+    The toolkit offers a wide variety of tools, with a primary focus on variant
+    discovery and genotyping as well as strong emphasis on data quality
+    assurance.
+    Its robust architecture, powerful processing engine and high-performance
+    computing features make it capable of taking on projects of any size.
     http://broadinstitute.github.io/picard/command-line-overview.html#MergeSamFiles
   doap:homepage: "https://www.broadinstitute.org/gatk/"
   doap:repository:
@@ -45,73 +50,6 @@ description: |
     Usage: java -jar GenomeAnalysisTK.jar -T BaseRecalibrator -R reference.fasta -I my_reads.bam -knownSites latest_dbsnp.vcf -o recal_data.table.
 doap:name: "GATK-BaseRecalibrator.cwl"
 dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/GATK-BaseRecalibrator.cwl"
-
-dct:isPartOf:
-  doap:name: "CWL Workflows"
-  doap:homepage: "http://commonwl.org/"
-  doap:license: "Apache2"
-
-  doap:implements:
-  - class: doap:Specification
-    doap:homepage: "http://common-workflow-language.github.io/draft-3/"
-
-  doap:repository:
-  - class: doap:GitRepository
-    doap:location: "https://github.com/common-workflow-language/workflows"
-
-  dct:creator:
-  - class: foaf:Organization
-    foaf:name: "Curoverse"
-    foaf:member:
-    - class: foaf:Person
-      id: "http://orcid.org/0000-0003-3566-7705"
-      foaf:name: "Peter Amstutz"
-      foaf:mbox: "mailto:peter.amstutz@curoverse.com"
-  - class: foaf:Organization
-    foaf:name: "Seven Bridges Genomics"
-    foaf:member:
-    - class: foaf:Person
-      id: "mailto:nebojsa.tijanic@sbgenomics.com"
-      foaf:name: "Nebojša Tijanić"
-      foaf:mbox: "mailto:nebojsa.tijanic@sbgenomics.com"
-
-  dct:contributor:
-  - class: foaf:Organization
-    foaf:name: "Seven Bridges Genomics"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Luka Stojanovic"
-      foaf:mbox: "mailto:luka.stojanovic@sbgenomics.com"
-  - class: foaf:Organization
-    foaf:name: "Galaxy Project, Pennsylvania State University"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "John Chilton"
-      foaf:mbox: "mailto:jmchilton@gmail.com"
-  - class: foaf:Organization
-    foaf:name: "University of California, Davis"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Michael R. Crusoe"
-      foaf:mbox: "mailto:crusoe@ucdavis.edu"
-  - class: foaf:Organization
-    foaf:name: "Institut Pasteur"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Hervé Ménager"
-      foaf:mbox: "mailto:herve.menager@gmail.com"
-  - class: foaf:Organization
-    foaf:name: "BioDatomics"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Maxim Mikheev"
-      foaf:mbox: "mailto:mikhmv@biodatomics.com"
-  - class: foaf:Organization
-    foaf:name: "University of Manchester"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Stian Soiland-Reyes"
-      foaf:mbox: "mailto:soiland-reyes@cs.manchester.ac.uk"
 
 dct:creator:
 - class: foaf:Organization
@@ -141,9 +79,8 @@ doap:maintainer:
     foaf:mbox: "mailto:skanwal@student.unimelb.edu.au"
     
 requirements:
-- $import: envvar-global.cwl
-- $import: envvar-global.cwl
-- $import: GATK-docker.cwl
+- $import: envvar-global.yml
+- $import: GATK-docker.yml
 
 inputs:
   - id: "#java_arg"
@@ -157,17 +94,17 @@ inputs:
     inputBinding:
       position: 5
       prefix: "-R"
-      secondaryFiles:
-        - ".amb"
-        - ".ann"
-        - ".bwt"
-        - ".pac"
-        - ".rbwt"
-        - ".rpac"
-        - ".rsa"
-        - ".sa"
-        - ".fai"
-        - "^.dict"
+    secondaryFiles:
+      - ".amb"
+      - ".ann"
+      - ".bwt"
+      - ".pac"
+      - ".rbwt"
+      - ".rpac"
+      - ".rsa"
+      - ".sa"
+      - ".fai"
+      - "^.dict"
 
   - id: "#inputBam_BaseRecalibrator"
     type: File
@@ -175,8 +112,8 @@ inputs:
     inputBinding:
       position: 6 
       prefix: "-I"
-      secondaryFiles:
-        - "^.bai"      
+    secondaryFiles:
+      - "^.bai"
 
   - id: "#known"  
     type:

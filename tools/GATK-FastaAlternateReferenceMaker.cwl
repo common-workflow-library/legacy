@@ -1,9 +1,6 @@
 #!/usr/bin/env cwl-runner
-#
-# Author: Andrey.Kartashov@cchmc.org (http://orcid.org/0000-0001-9102-5681) / Cincinnati Children’s Hospital Medical Center / Dr. Barski Lab
-# Developed for CWL consortium http://commonwl.org/
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
@@ -11,8 +8,8 @@ description: |
   GATK-FastaAlternateReferenceMaker.cwl is developed for CWL consortium
 
 requirements:
-- $import: envvar-global.cwl
-- $import: GATK-docker.cwl
+- $import: envvar-global.yml
+- $import: GATK-docker.yml
 - class: InlineJavascriptRequirement
 
 inputs:
@@ -80,37 +77,33 @@ arguments:
 
 
 $namespaces:
-  dct: http://purl.org/dc/terms/
-  foaf: http://xmlns.com/foaf/0.1/
-  doap: http://usefulinc.com/ns/doap#
-  adms: http://www.w3.org/ns/adms#
-  dcat: http://www.w3.org/ns/dcat#
+  schema: http://schema.org/
 
 $schemas:
-- http://schema.rdfs.org/all.rdf
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- http://usefulinc.com/ns/doap#
-- http://www.w3.org/ns/adms#
-- http://www.w3.org/ns/dcat.rdf
+- http://schema.org/docs/schema_org_rdfa.html
 
-adms:includedAsset:
-  $include: GATK-ontology.yaml
+schema:mainEntity:
+  $import: GATK-metadata.yaml
 
-doap:name: "GATK-FastaAlternateReferenceMaker.cwl"
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/GATK-FastaAlternateReferenceMaker.cwl"
-doap:repository:
-- class: doap:GitRepository
-  doap:location: "https://github.com/common-workflow-language/workflows"
-doap:homepage: "http://commonwl.org/"
-doap:license: "Apache2"
+schema:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/GATK-FastaAlternateReferenceMaker.cwl
+schema:codeRepository: https://github.com/common-workflow-language/workflows
+schema:license: http://www.apache.org/licenses/LICENSE-2.0
+schema:isPartOf:
+  class: schema:CreativeWork
+  schema:name: "Common Workflow Language"
+  schema:url: http://commonwl.org/
 
-doap:maintainer:
-- class: foaf:Organization
-  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
-  foaf:member:
-  - class: foaf:Person
-    id: "http://orcid.org/0000-0001-9102-5681"
-    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
-    foaf:name: "Andrey Kartashov"
-    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
+schema:author:
+  class: schema:Person
+  schema:name: "Andrey Kartashov"
+  schema:email: mailto:Andrey.Kartashov@cchmc.org
+  schema:sameAs:
+  - id: http://orcid.org/0000-0001-9102-5681
+  schema:worksFor:
+  - class: schema:Organization
+    schema:name: "Cincinnati Children's Hospital Medical Center"
+    schema:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    schema:department:
+    - class: schema:Organization
+      schema:name: "Barski Lab"
+

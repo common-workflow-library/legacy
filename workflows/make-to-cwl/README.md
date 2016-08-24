@@ -1,6 +1,12 @@
 "I'd like to know if I can easily convert a Makefile based workflow to CWL. For
 example, for the simple Makefile, want would be equivalent CWL file please?"
 
+To run for yourself after `pip install cwl-runner`
+
+`./rna.json`
+or
+`cwl-runner rna.json`
+
 See: Makefile, dna.cwl
 
 Notes:

@@ -3,13 +3,13 @@
 # Author: Andrey.Kartashov@cchmc.org (http://orcid.org/0000-0001-9102-5681) / Dr. Barski Lab / Cincinnati Children’s Hospital Medical Center
 # Developed for CWL consortium http://commonwl.org/
 
-cwlVersion: 'cwl:draft-3.dev3'
+cwlVersion: 'cwl:draft-3'
 
 class: CommandLineTool
 
 requirements:
-  - $import: envvar-global.cwl
-  - $import: bcftools-docker.cwl
+  - $import: envvar-global.yml
+  - $import: bcftools-docker.yml
   - class: InlineJavascriptRequirement
   - class: ShellCommandRequirement
 
@@ -27,8 +27,8 @@ inputs:
     type: File
     inputBinding:
       position: 2
-      secondaryFiles:
-        - .tbi
+    secondaryFiles:
+      - .tbi
 
   - id: reference
     type: File

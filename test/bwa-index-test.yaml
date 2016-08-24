@@ -1,0 +1,13 @@
+- args: [
+    "bwa",
+    "index",
+    "-6",
+    "-a",
+    "bwtsw",
+    "-b",
+    "1024",
+    "./test-files/dm3_chr4.fa",
+  ]
+  job:  bwa-index-job.json
+  tool: ../tools/bwa-index.cwl
+  doc: General test of command line generation

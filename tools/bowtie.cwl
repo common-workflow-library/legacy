@@ -1,178 +1,57 @@
 #!/usr/bin/env cwl-runner
 
-$namespaces:
-  dct: http://purl.org/dc/terms/
-  foaf: http://xmlns.com/foaf/0.1/
-  doap: http://usefulinc.com/ns/doap#
-  adms: http://www.w3.org/ns/adms#
-  dcat: http://www.w3.org/ns/dcat#
-
-$schemas:
-- http://schema.rdfs.org/all.rdf
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- http://usefulinc.com/ns/doap#
-- http://www.w3.org/ns/adms#
-- http://www.w3.org/ns/dcat.rdf
-
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
-adms:includedAsset:
-  doap:name: "bowtie"
-  doap:description: ""
-  doap:homepage: "http://bowtie-bio.sourceforge.net"
-  doap:repository:
-  - class: doap:GitRepository
-    doap:location: "https://github.com/BenLangmead/bowtie.git"
-  doap:release:
-  - class: doap:Version
-    doap:revision: "1.1.2"
-  doap:license: "GPL"
-  doap:category: "commandline tool"
-  doap:programming-language: "C++"
-  foaf:publications:
-  - id: urn:pmid:0
-    foaf:title: ""
-    foaf:homepage: ""
-  doap:developer:
-  - class: foaf:Organization
-    foaf:name: ""
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: ""
-      foaf:mbox: ""
-      foaf:fundedBy: ""
-
-label: "bowtie.cwl"
-doap:name: "bowtie.cwl"
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/bowtie.cwl"
-
-dct:isPartOf:
-  doap:name: "CWL Workflows"
-  doap:homepage: "http://commonwl.org/"
-  doap:license: "Apache2"
-
-  doap:implements:
-  - class: doap:Specification
-    doap:homepage: "http://common-workflow-language.github.io/draft-3/"
-
-  doap:repository:
-  - class: doap:GitRepository
-    doap:location: "https://github.com/common-workflow-language/workflows"
-
-  dct:creator:
-  - class: foaf:Organization
-    foaf:name: "Curoverse"
-    foaf:member:
-    - class: foaf:Person
-      id: "http://orcid.org/0000-0003-3566-7705"
-      foaf:name: "Peter Amstutz"
-      foaf:mbox: "mailto:peter.amstutz@curoverse.com"
-  - class: foaf:Organization
-    foaf:name: "Seven Bridges Genomics"
-    foaf:member:
-    - class: foaf:Person
-      id: "mailto:nebojsa.tijanic@sbgenomics.com"
-      foaf:name: "Nebojša Tijanić"
-      foaf:mbox: "mailto:nebojsa.tijanic@sbgenomics.com"
-
-  dct:contributor:
-  - class: foaf:Organization
-    foaf:name: "Seven Bridges Genomics"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Luka Stojanovic"
-      foaf:mbox: "mailto:luka.stojanovic@sbgenomics.com"
-  - class: foaf:Organization
-    foaf:name: "Galaxy Project, Pennsylvania State University"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "John Chilton"
-      foaf:mbox: "mailto:jmchilton@gmail.com"
-  - class: foaf:Organization
-    foaf:name: "University of California, Davis"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Michael R. Crusoe"
-      foaf:mbox: "mailto:crusoe@ucdavis.edu"
-  - class: foaf:Organization
-    foaf:name: "Institut Pasteur"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Hervé Ménager"
-      foaf:mbox: "mailto:herve.menager@gmail.com"
-  - class: foaf:Organization
-    foaf:name: "BioDatomics"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Maxim Mikheev"
-      foaf:mbox: "mailto:mikhmv@biodatomics.com"
-  - class: foaf:Organization
-    foaf:name: "University of Manchester"
-    foaf:member:
-    - class: foaf:Person
-      foaf:name: "Stian Soiland-Reyes"
-      foaf:mbox: "mailto:soiland-reyes@cs.manchester.ac.uk"
-
-doap:maintainer:
-- class: foaf:Organization
-  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
-  foaf:member:
-  - class: foaf:Person
-    id: "http://orcid.org/0000-0001-9102-5681"
-    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
-    foaf:name: "Andrey Kartashov"
-    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
-
-
 requirements:
-  - $import: envvar-global.cwl
-  - class: InlineJavascriptRequirement
-  - class: DockerRequirement
-    #dockerImageId: scidap/bowtie:v1.1.2 #not yet ready
-    dockerPull: scidap/bowtie:v1.1.2
-    dockerFile: |
-      #################################################################
-      # Dockerfile
-      #
-      # Software:         bowtie
-      # Software Version: 1.1.2
-      # Description:      Bowtie image for SciDAP
-      # Website:          http://bowtie-bio.sourceforge.net, http://scidap.com/
-      # Provides:         bowtie
-      # Base Image:       scidap/scidap:v0.0.1
-      # Build Cmd:        docker build --rm -t scidap/bowtie:v1.1.2 .
-      # Pull Cmd:         docker pull scidap/bowtie:v1.1.2
-      # Run Cmd:          docker run --rm scidap/bowtie:v1.1.2 bowtie
-      #################################################################
+- $import: envvar-global.yml
+- class: InlineJavascriptRequirement
+- class: ShellCommandRequirement
+- class: DockerRequirement
+  #dockerImageId: scidap/bowtie:v1.1.2 #not yet ready
+  dockerPull: scidap/bowtie:v1.1.2
+  dockerFile: |
+    #################################################################
+    # Dockerfile
+    #
+    # Software:         bowtie
+    # Software Version: 1.1.2
+    # Description:      Bowtie image for SciDAP
+    # Website:          http://bowtie-bio.sourceforge.net, http://scidap.com/
+    # Provides:         bowtie
+    # Base Image:       scidap/scidap:v0.0.1
+    # Build Cmd:        docker build --rm -t scidap/bowtie:v1.1.2 .
+    # Pull Cmd:         docker pull scidap/bowtie:v1.1.2
+    # Run Cmd:          docker run --rm scidap/bowtie:v1.1.2 bowtie
+    #################################################################
 
-      ### Base Image
-      FROM scidap/scidap:v0.0.1
-      MAINTAINER Andrey V Kartashov "porter@porter.st"
-      ENV DEBIAN_FRONTEND noninteractive
+    ### Base Image
+    FROM scidap/scidap:v0.0.1
+    MAINTAINER Andrey V Kartashov "porter@porter.st"
+    ENV DEBIAN_FRONTEND noninteractive
 
-      ################## BEGIN INSTALLATION ######################
+    ################## BEGIN INSTALLATION ######################
 
-      WORKDIR /tmp
+    WORKDIR /tmp
 
-      ### Installing bowtie
+    ### Installing bowtie
 
-      ENV VERSION 1.1.2
-      ENV NAME bowtie
-      ENV URL "https://github.com/BenLangmead/bowtie/archive/v${VERSION}.tar.gz"
+    ENV VERSION 1.1.2
+    ENV NAME bowtie
+    ENV URL "https://github.com/BenLangmead/bowtie/archive/v${VERSION}.tar.gz"
 
-      RUN wget -q -O - $URL | tar -zxv && \
-          cd ${NAME}-${VERSION} && \
-          make -j 4 && \
-          cd .. && \
-          cp ./${NAME}-${VERSION}/${NAME} /usr/local/bin/ && \
-          cp ./${NAME}-${VERSION}/${NAME}-* /usr/local/bin/ && \
-          strip /usr/local/bin/*; true && \
-          rm -rf ./${NAME}-${VERSION}/
+    RUN wget -q -O - $URL | tar -zxv && \
+        cd ${NAME}-${VERSION} && \
+        make -j 4 && \
+        cd .. && \
+        cp ./${NAME}-${VERSION}/${NAME} /usr/local/bin/ && \
+        cp ./${NAME}-${VERSION}/${NAME}-* /usr/local/bin/ && \
+        strip /usr/local/bin/*; true && \
+        rm -rf ./${NAME}-${VERSION}/
 
 inputs:
+
   - id: '#ebwt'
     type: string
     description: >
@@ -209,12 +88,12 @@ inputs:
         items: File
     inputBinding:
       itemSeparator: ","
-      position: 9
+      position: 10
 
   - id: '#filename'
     type: string
     inputBinding:
-      position: 10
+      position: 11
 
   - id: '#q'
     type:
@@ -767,8 +646,18 @@ outputs:
     outputBinding:
       glob: $(inputs.filename)
 
+  - id: "#output_bowtie_log"
+    type: File
+    outputBinding:
+      glob: $(inputs.filename + '.log’)
+
 baseCommand:
   - bowtie
+
+arguments:
+  - valueFrom: $('2> ' + inputs.filename + '.log')
+    position: 100000
+    shellQuote: false
 
 description: |
   bowtie.cwl is developed for CWL consortium
@@ -860,3 +749,53 @@ description: |
     --version          print version information and quit
     -h/--help          print this usage message
 
+
+$namespaces:
+  schema: http://schema.org/
+
+$schemas:
+- http://schema.org/docs/schema_org_rdfa.html
+
+schema:mainEntity:
+#  $import: https://scidap.com/description/tools/bowtie.yaml
+  class: schema:SoftwareSourceCode
+  schema:name: "bowtie"
+  schema:about: >
+    Bowtie is an ultrafast, memory-efficient short read aligner.
+    It aligns short DNA sequences (reads) to the human genome at a rate of over 25 million 35-bp reads per hour.
+    Bowtie indexes the genome with a Burrows-Wheeler index to keep its memory footprint small: typically about 2.2 GB for the human genome (2.9 GB for paired-end).
+  schema:url: http://bowtie-bio.sourceforge.net
+  schema:codeRepository: https://github.com/BenLangmead/bowtie.git
+
+  schema:license:
+  - https://opensource.org/licenses/GPL-3.0
+
+  schema:targetProduct:
+    class: schema:SoftwareApplication
+    schema:softwareVersion: "1.1.2"
+    schema:applicationCategory: "commandline tool"
+
+  schema:programmingLanguage: "C++"
+
+  schema:publication:
+  - class: schema:ScholarlyArticle
+    id: http://dx.doi.org/10.1186/gb-2009-10-3-r25
+
+schema:isPartOf:
+  class: schema:CreativeWork
+  schema:name: "Common Workflow Language"
+  schema:url: http://commonwl.org/
+
+schema:author:
+  class: schema:Person
+  schema:name: "Andrey Kartashov"
+  schema:email: mailto:Andrey.Kartashov@cchmc.org
+  schema:sameAs:
+  - id: http://orcid.org/0000-0001-9102-5681
+  schema:worksFor:
+  - class: schema:Organization
+    schema:name: "Cincinnati Children's Hospital Medical Center"
+    schema:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    schema:department:
+    - class: schema:Organization
+      schema:name: "Barski Lab"

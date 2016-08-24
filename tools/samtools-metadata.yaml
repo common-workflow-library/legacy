@@ -1,0 +1,73 @@
+class: s:SoftwareSourceCode
+s:name: "samtools"
+s:about: >
+  A suite of programs for interacting with high-throughput sequencing data.
+  It consists of three separate repositories: Samtools (Reading/writing/editing/indexing/viewing SAM/BAM/CRAM format),
+  BCFtools (Reading/writing BCF2/VCF/gVCF files and calling/filtering/summarising SNP and short indel sequence variants)
+  and HTSlib (A C library for reading/writing high-throughput sequencing data).
+
+s:url: http://www.htslib.org/
+s:codeRepository: https://github.com/samtools/samtools.git
+
+s:license:
+- https://opensource.org/licenses/MIT
+- https://opensource.org/licenses/BSD-3-Clause
+
+s:targetProduct:
+  class: s:SoftwareApplication
+  s:softwareVersion: "1.2-242-4d56437"
+  s:applicationCategory: "commandline tool"
+
+s:programmingLanguage: "C, Perl"
+
+s:publication:
+- class: s:ScholarlyArticle
+  id: http://dx.doi.org/10.1093/bioinformatics/btr509
+  s:name: "(Li, 2011) A statistical framework for SNP calling, mutation discovery, association mapping and population genetical parameter estimation from sequencing data. Bioinformatics."
+  s:url: http://www.ncbi.nlm.nih.gov/pubmed/21903627
+- class: s:ScholarlyArticle
+  id: http://dx.doi.org/10.1093/bioinformatics/btr076
+  s:name: "(Li, 2011) Improving SNP discovery by base alignment quality. Bioinformatics."
+  s:url: http://www.ncbi.nlm.nih.gov/pubmed/21320865
+- class: s:ScholarlyArticle
+  id: http://dx.doi.org/10.1093/bioinformatics/btp352
+  s:name: "(Li et al., 2009) The Sequence Alignment/Map format and SAMtools. Bioinformatics."
+  s:url: http://www.ncbi.nlm.nih.gov/pubmed/19505943
+
+s:discussionUrl:
+- https://lists.sourceforge.net/lists/listinfo/samtools-help
+- https://lists.sourceforge.net/lists/listinfo/samtools-devel
+
+s:creator:
+- class: s:Organization
+  s:name: "Sanger Institute"
+  s:member:
+  - class: s:Person
+    s:name: "Heng Li"
+    s:description: "wrote most of the initial source codes of SAMtools and various converters."
+- class: s:Organization
+  s:name: "Broad Institute"
+  s:member:
+  - class: s:Person
+    s:name: "Bob Handsaker"
+    s:description: |
+      A major contributor to the
+      SAM/BAM specification. He designed and implemented the BGZF format, the
+      underlying indexable compression format for the BAM format. BGZF does
+      not support arithmetic between file offsets.
+- class: s:Organization
+  s:name: "Beijing Genome Institute"
+  s:member:
+  - class: s:Person
+    s:name: "Jue Ruan"
+    s:description: |
+      Designed and implemented the
+      RAZF format, an alternative indexable compression format. RAZF is no longer
+      used by or provided with SAMtools. Source code remains available in older
+      SAMtools 0.1.x releases and from the standalone branch in the repository.
+- class: s:Person
+  s:name: "Colin Hercus"
+  s:description: "updated novo2sam.pl to support gapped alignment by novoalign."
+- class: s:Person
+  s:name: "Petr Danecek"
+  s:description: "contributed the header parsing library sam_header.c and sam2vcf.pl script."

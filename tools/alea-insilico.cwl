@@ -1,18 +1,12 @@
 #!/usr/bin/env cwl-runner
-#
-# Author: Andrey.Kartashov@cchmc.org (http://orcid.org/0000-0001-9102-5681) / Cincinnati Children’s Hospital Medical Center / Dr. Barski Lab
-# Developed for CWL consortium http://commonwl.org/
 
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
-description: |
-  alea-insilico.cwl provides direct call of alea.jar with insilico param
-
 requirements:
-- $import: envvar-global.cwl
-- $import: alea-docker.cwl
+- $import: envvar-global.yml
+- $import: alea-docker.yml
 - class: InlineJavascriptRequirement
 
 inputs:
@@ -24,8 +18,8 @@ inputs:
     separate: false
     prefix: "--input-fasta="
     position: 2
-    secondaryFiles:
-    - ".fai"
+  secondaryFiles:
+  - ".fai"
 
 - id: "phased"
   type: File
@@ -35,8 +29,8 @@ inputs:
     separate: false
     prefix: "--input-vcf="
     position: 3
-    secondaryFiles:
-    - ".tbi"
+  secondaryFiles:
+  - ".tbi"
 
 - id: "strain"
   type: string
@@ -96,35 +90,41 @@ outputs:
   type: File
   outputBinding:
     glob: $(inputs.output_filename)
-    secondaryFiles:
-    - ".fai"
-    - ".refmap"
+  secondaryFiles:
+  - ".fai"
+  - ".refmap"
 
 baseCommand: ["java", "-Xms4G", "-Xmx8G", "-jar", "/usr/local/bin/alea.jar" ,"insilico"]
 
 $namespaces:
-  schema: http://schema.org/
-  dct: http://purl.org/dc/terms/
-  foaf: http://xmlns.com/foaf/0.1/
-  doap: http://usefulinc.com/ns/doap#
-  adms: http://www.w3.org/ns/adms#
-  dcat: http://www.w3.org/ns/dcat#
+  s: http://schema.org/
 
 $schemas:
-- http://schema.rdfs.org/all.rdf
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- http://usefulinc.com/ns/doap#
-- http://www.w3.org/ns/adms#
-- http://www.w3.org/ns/dcat.rdf
+- http://schema.org/docs/schema_org_rdfa.html
+#- http://topbraid.org/schema/schema.rdf
 
-adms:includedAsset:
-  $include: alea-ontology.yaml
+s:mainEntity:
+  $import: alea-metadata.yaml
 
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/alea-insilico.cwl"
-doap:repository:
-- class: doap:GitRepository
-  doap:location: "https://github.com/common-workflow-language/workflows"
-doap:homepage: "http://commonwl.org/"
-doap:license: "Apache2"
+s:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/alea-insilico.cwl
+s:codeRepository: https://github.com/common-workflow-language/workflows
+s:license: http://www.apache.org/licenses/LICENSE-2.0
+s:isPartOf:
+  class: s:CreativeWork
+  s:name: "Common Workflow Language"
+  s:url: http://commonwl.org/
+
+s:author:
+  class: s:Person
+  s:name: "Andrey Kartashov"
+  s:email: mailto:Andrey.Kartashov@cchmc.org
+  s:sameAs:
+  - id: http://orcid.org/0000-0001-9102-5681
+  s:worksFor:
+  - class: s:Organization
+    s:name: "Cincinnati Children's Hospital Medical Center"
+    s:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    s:department:
+    - class: s:Organization
+      s:name: "Barski Lab"
 

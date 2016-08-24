@@ -1,49 +1,12 @@
 #!/usr/bin/env cwl-runner
 
-$namespaces:
-  dct: http://purl.org/dc/terms/
-  foaf: http://xmlns.com/foaf/0.1/
-  doap: http://usefulinc.com/ns/doap#
-  adms: http://www.w3.org/ns/adms#
-  dcat: http://www.w3.org/ns/dcat#
-
-$schemas:
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- http://usefulinc.com/ns/doap#
-- http://www.w3.org/ns/adms#
-- http://www.w3.org/ns/dcat.rdf
-
-cwlVersion: "cwl:draft-3.dev3"
+cwlVersion: "cwl:draft-3"
 
 class: CommandLineTool
 
-adms:includedAsset:
-  $include: alea-ontology.yaml
-
-description: |
-  alea-phaseVCF.cwl is developed for CWL consortium
-
-dcat:downloadURL: "https://github.com/common-workflow-language/workflows/blob/master/tools/alea-phaseVCF.cwl"
-doap:repository:
-- class: doap:GitRepository
-  doap:location: "https://github.com/common-workflow-language/workflows"
-doap:homepage: "http://commonwl.org/"
-doap:license: "Apache2"
-
-doap:maintainer:
-- class: foaf:Organization
-  foaf:name: "Barski Lab, Cincinnati Children's Hospital Medical Center"
-  foaf:member:
-  - class: foaf:Person
-    id: "http://orcid.org/0000-0001-9102-5681"
-    foaf:openid: "http://orcid.org/0000-0001-9102-5681"
-    foaf:name: "Andrey Kartashov"
-    foaf:mbox: "mailto:Andrey.Kartashov@cchmc.org"
-
 requirements:
-  - $import: envvar-global.cwl
-  - $import: alea-docker.cwl
+  - $import: envvar-global.yml
+  - $import: alea-docker.yml
   - class: InlineJavascriptRequirement
 
 inputs:
@@ -76,3 +39,34 @@ outputs:
       glob: $(inputs.outputPrefix+".vcf.gz")
 
 baseCommand: ["alea", "phaseVCF"]
+
+$namespaces:
+  s: http://schema.org/
+
+$schemas:
+- http://schema.org/docs/schema_org_rdfa.html
+
+s:mainEntity:
+  $import: alea-metadata.yaml
+
+s:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/alea-phaseVCF.cwl
+s:codeRepository: https://github.com/common-workflow-language/workflows
+s:license: http://www.apache.org/licenses/LICENSE-2.0
+s:isPartOf:
+  class: s:CreativeWork
+  s:name: "Common Workflow Language"
+  s:url: http://commonwl.org/
+
+s:author:
+  class: s:Person
+  s:name: "Andrey Kartashov"
+  s:email: mailto:Andrey.Kartashov@cchmc.org
+  s:sameAs:
+  - id: http://orcid.org/0000-0001-9102-5681
+  s:worksFor:
+  - class: s:Organization
+    s:name: "Cincinnati Children's Hospital Medical Center"
+    s:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    s:department:
+    - class: s:Organization
+      s:name: "Barski Lab"
