@@ -82,7 +82,7 @@ inputs:
     doc: Value of PN tag of PG record to be created. Default value MarkDuplicates.
       This option can be set to 'null' to clear the default value
   inputFileName_markDups:
-    type: File[]?
+    type: File[]
     inputBinding:
       position: 4
       prefix: INPUT=
