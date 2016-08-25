@@ -1,0 +1,11 @@
+output_filename: "align.bam"
+reference:
+ class: File
+ path: /data_small/small_bwa/indexes/hg19/genome.fa.gz
+reads: 
+ - class: File
+   path: /data_small/small_fastq/project.NIST_NIST7035_H7AP8ADXX_TAAGGCGA_1_NA12878.bwa.markDuplicates.chr22_1.fq
+reads:
+ - class: File
+   path: /data_small/small_fastq/project.NIST_NIST7035_H7AP8ADXX_TAAGGCGA_1_NA12878.bwa.markDuplicates.chr22_2.fq
+threads: 5
