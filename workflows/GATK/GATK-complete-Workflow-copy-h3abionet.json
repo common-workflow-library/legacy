@@ -21,7 +21,7 @@
     "readSorted_MarkDuplicates": 'true',
     "removeDuplicates_MarkDuplicates": 'true',
     "createIndex_MarkDuplicates": 'true',
-    "samtoolsIndexBai": 'true',
+    "samtools-index-bai": 'true',
     "outputFileName_RealignTargetCreator": "RealignTargetCreator-2016-08-04.intervals",
     "outputFileName_IndelRealigner": "IndelRealigner-2016-08-04.bam",
     "outputFileName_BaseRecalibrator": "BaseRecalibrator-2016-08-04.table",
