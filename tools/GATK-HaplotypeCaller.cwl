@@ -86,16 +86,16 @@ inputs:
       position: 5
       prefix: -R
     secondaryFiles:
-    - .amb
-    - .ann
-    - .bwt
-    - .pac
-    - .rbwt
-    - .rpac
-    - .rsa
-    - .sa
-    - .fai
-    - ^.dict
+#    - .amb
+#    - .ann
+#    - .bwt
+#    - .pac
+#    - .rbwt
+#    - .rpac
+#    - .rsa
+#    - .sa
+     - .fai
+     - ^.dict
   activeProbabilityThreshold:
     type: double?
     inputBinding:
