@@ -4,7 +4,7 @@ class: Workflow
 cwlVersion: v1.0
 
 requirements:
-  class: StepInputExpressionRequirement
+  - class: StepInputExpressionRequirement
 
 inputs:
   reference:
