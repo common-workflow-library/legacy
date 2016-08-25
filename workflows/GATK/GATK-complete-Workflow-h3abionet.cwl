@@ -24,6 +24,10 @@ inputs:
     type: string
     doc: name of bwa-mem output file
 
+  bwa_readgroup:
+    type: string
+    doc: read group
+
   output_RefDictionaryFile:
     type: string
     doc: output file name for picard create dictionary command from picard toolkit
@@ -169,7 +173,7 @@ steps:
       reads: reads
       dictCreated: create-dict/output
       output_filename: bwa_output_name
-      read_group_str: "@RG\tID:1\tPL:ILLUMINA\tPU:pu\tLB:group1\tSM:SAMPLEID"
+      read_group_str: bwa_read_group
     out: [ output ]
 
   samtools-view:
