@@ -1,15 +1,15 @@
 { 
      "inputBam_printReads": {
         "class": "File",
-        "path": "test/test-files/indelRealigner.bam"
+        "path": "/mnt/test-YS/NA12878.mapped.illumina.mosaik.CEU.exome.20110411.chr21.bam"
     },
     "reference": {
         "class": "File",
-        "path": "test/test-files/hg19.fasta",
+        "path": "/mnt/bwa-mem-index/hg19_new/genome.fa",
     },    
     "input_baseRecalibrator": {
         "class": "File",
-        "path": "test/test-files/baseRecalibrator.table", 
+        "path": "/mnt/test-YS/baseRecalibrator.table", 
     }, 
              
     "outputfile_printReads": "printReads.bam"

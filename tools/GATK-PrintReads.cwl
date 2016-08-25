@@ -86,16 +86,12 @@ inputs:
       position: 5
       prefix: -R
     secondaryFiles:
-    - .amb
-    - .ann
-    - .bwt
-    - .pac
-    - .rbwt
-    - .rpac
-    - .rsa
-    - .sa
-    - .fai
-    - ^.dict
+    - .64.amb
+    - .64.ann
+    - .64.bwt
+    - .64.pac
+    - .64.sa
+    - .fai  
   platform:
     type: string?
     inputBinding:
