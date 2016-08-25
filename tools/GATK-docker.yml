@@ -1,4 +1,5 @@
 class: DockerRequirement
+dockerPull: scidap/gatk:v3.5
 dockerFile: |
   #################################################################
   # Dockerfile
@@ -121,5 +122,3 @@ dockerFile: |
       rm -rf ./* && \
       bash -c 'echo -e "#!/bin/bash\njava -jar /usr/local/bin/GenomeAnalysisTK.jar  \$@" > /usr/local/bin/GenomeAnalysisTK' && \
       chmod +x /usr/local/bin/GenomeAnalysisTK
-
-
