@@ -241,4 +241,3 @@ arguments:
 doc: |
   picard-BuildBamIndex.cwl is developed for CWL consortium
     Examines aligned records in the supplied SAM or BAM file to locate duplicate molecules. All records are then written to the output file with the duplicate records flagged
-

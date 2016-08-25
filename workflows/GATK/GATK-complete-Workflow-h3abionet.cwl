@@ -116,10 +116,10 @@ outputs:
   samtoolsIndex_output:
     type: File
     outputSource: samtools-index/index
-#
-#  MarkDuplicates_output:
-#    type: File
-#    outputSource: MarkDuplicates/markDups_output
+
+  MarkDuplicates_output:
+    type: File
+    outputSource: MarkDuplicates/markDups_output
 #
 #  output_realignTarget:
 #    type: File
@@ -182,17 +182,17 @@ steps:
       bai: samtools-index-bai
     out: [ index ]
 
-#  MarkDuplicates:
-#    run: ../../tools/picard-MarkDuplicates.cwl
-#    in:
-#      outputFileName_markDups: outputFileName_MarkDuplicates
-#      inputFileName_markDups: samtools-sort/sorted
-#      metricsFile: metricsFile_MarkDuplicates
-#      readSorted: readSorted_MarkDuplicates
-#      removeDuplicates: removeDuplicates_MarkDuplicates
-#      createIndex: createIndex_MarkDuplicates
-#    out: [ markDups_output ]
-#
+  MarkDuplicates:
+    run: ../../tools/picard-MarkDuplicates.cwl
+    in:
+      outputFileName_markDups: outputFileName_MarkDuplicates
+      inputFileName_markDups: samtools-sort/sorted
+      metricsFile: metricsFile_MarkDuplicates
+      readSorted: readSorted_MarkDuplicates
+      removeDuplicates: removeDuplicates_MarkDuplicates
+      createIndex: createIndex_MarkDuplicates
+    out: [ markDups_output ]
+
 #  RealignTarget:
 #    run: ../../tools/GATK-RealignTargetCreator.cwl # FIXME: this is draft 3
 #    in:
