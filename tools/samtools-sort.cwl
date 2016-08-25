@@ -58,21 +58,22 @@ outputs:
 
 baseCommand: [samtools, sort]
 
-doc: |
-  samtools-sort.cwl is developed for CWL consortium
-    Usage: samtools sort [options...] [in.bam]
-    Options:
-      -l INT     Set compression level, from 0 (uncompressed) to 9 (best)
-      -m INT     Set maximum memory per thread; suffix K/M/G recognized [768M]
-      -n         Sort by read name
-      -o FILE    Write final output to FILE rather than standard output
-      -O FORMAT  Write output as FORMAT ('sam'/'bam'/'cram')   (either -O or
-      -T PREFIX  Write temporary files to PREFIX.nnnn.bam       -T is required)
-      -@ INT     Set number of sorting and compression threads [1]
-
-    Legacy usage: samtools sort [options...] <in.bam> <out.prefix>
-    Options:
-      -f         Use <out.prefix> as full final filename rather than prefix
-      -o         Write final output to stdout rather than <out.prefix>.bam
-      -l,m,n,@   Similar to corresponding options above
-
+#doc: |
+#  samtools-sort.cwl is developed for CWL consortium
+#    Usage: samtools sort [options...] [in.bam]
+#    Options:
+#      -l INT     Set compression level, from 0 (uncompressed) to 9 (best)
+#      -m INT     Set maximum memory per thread; suffix K/M/G recognized [768M]
+#      -n         Sort by read name
+#      -o FILE    Write final output to FILE rather than standard output
+#      -O FORMAT  Write output as FORMAT ('sam'/'bam'/'cram')   (either -O or
+#      -T PREFIX  Write temporary files to PREFIX.nnnn.bam       -T is required)
+#      -@ INT     Set number of sorting and compression threads [1]
+#
+#    Legacy usage: samtools sort [options...] <in.bam> <out.prefix>
+#    Options:
+#      -f         Use <out.prefix> as full final filename rather than prefix
+#      -o         Write final output to stdout rather than <out.prefix>.bam
+#      -l,m,n,@   Similar to corresponding options above
+#
+#

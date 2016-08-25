@@ -80,5 +80,5 @@ arguments:
 #    s:department:
 #    - class: s:Organization
 #      s:name: Barski Lab
-doc: |
-  samtools-index.cwl is developed for CWL consortium
+#doc: |
+#  samtools-index.cwl is developed for CWL consortium
