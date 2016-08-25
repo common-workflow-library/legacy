@@ -144,13 +144,13 @@ steps:
     out: [ createDict_output ]
 
   bwa-mem:
-    run: ../../tools/bwa-mem.cwl # FIXME: this is draft 3
+    run: ../../tools/bwa-mem.cwl
     in:
       reference: reference
       reads: reads
       dictCreated: create-dict/createDict_output
-      output_name: bwa_output_name
-    out: [ sam ]
+      output_filename: bwa_output_name
+    out: [ output ]
 
   samtools-view:
     run: ../../tools/samtools-view.cwl
