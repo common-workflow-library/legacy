@@ -153,7 +153,7 @@ inputs:
       '
   threads:
     type: int
-    default: 16
+    default: 4
     inputBinding:
       prefix: -nt
       position: 4
