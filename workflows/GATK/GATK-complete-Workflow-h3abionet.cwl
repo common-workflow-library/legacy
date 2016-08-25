@@ -169,6 +169,7 @@ steps:
       reads: reads
       dictCreated: create-dict/output
       output_filename: bwa_output_name
+      read_group_str: "@RG\tID:1\tPL:ILLUMINA\tPU:pu\tLB:group1\tSM:SAMPLEID"
     out: [ output ]
 
   samtools-view:

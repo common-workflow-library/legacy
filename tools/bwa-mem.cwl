@@ -44,6 +44,14 @@ inputs:
       position: 1
       prefix: -I
       itemSeparator: ','
+
+  read_group_str:
+    type: string?
+    inputBinding:
+      position: 1
+      prefix: -R
+    doc: -R STR     read group header line such as '@RG\tID:foo\tSM:bar' [null]
+
 stdout: $(inputs.output_filename)
 
 outputs:
