@@ -2,14 +2,14 @@
 
      "inputBam_realign": {
         "class": "File",
-        "path": "test-files/markDups.bam"
+        "path": "/data_small/small_bam/project.NIST_NIST7035_H7AP8ADXX_TAAGGCGA_1_NA12878.bwa.markDuplicates.chr22.bam"
     },
     "reference": {
         "class": "File",
-        "path": "test-files/hg19.fa",
+        "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta",
     },  
     
-    "known": [{"class": "File", "path": "test-files/dbsnp_138.vcf"}, {"class": "File", "path": "test-files/Mills_and_1000G_gold_st.vcf"}, {"class": "File", "path": "test-files/1000G_phase1.indels.hg19.vcf"}  ],
+    "known": [{"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/dbsnp_138.vcf.gz"}, {"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.gz"}, {"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/1000G_phase1.snps.high_confidence.hg19.sites.vcf.gz"}  ],
     
     "outputfile_realignTarget": "realignTargetCreator_output.intervals" 
 }
