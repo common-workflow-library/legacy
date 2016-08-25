@@ -33,7 +33,7 @@ inputs:
       prefix: "-t"
 
   - id: "n"
-    type: ["null",int,float]
+    type: ["null", float]
     description: |
       max #diff (int) or missing prob under 0.02 err rate (float) [0.04]
     inputBinding:
