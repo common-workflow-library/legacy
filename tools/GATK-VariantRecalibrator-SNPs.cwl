@@ -31,13 +31,18 @@ hints:
 - $import: envvar-global.yml
 - $import: GATK-docker.yml
 
-inputs:
+inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
+  GATKJar:
+    type: File
+    inputBinding:
+      position: 1
+      prefix: "-jar"
   haplotypecaller_snps_vcf:
     type: File
     secondaryFiles:
       - .idx
     inputBinding:
-      position: 5
+      position: 2
       prefix: -input
     doc: input vcf File raw variant calls from haplotype caller
 
@@ -45,7 +50,7 @@ inputs:
     type: int
     default: 4
     inputBinding:
-      position: 6
+      position: 2
       prefix: --nt
     doc: multithreading option
 
@@ -55,7 +60,7 @@ inputs:
       - .fai
       - ^.dict
     inputBinding:
-      position: 7
+      position: 2
       prefix: -R
     doc: reference genome
 
@@ -64,7 +69,7 @@ inputs:
     secondaryFiles:
       - .idx
     inputBinding:
-      position: 8
+      position: 2
       prefix: "-resource:hapmap,known=false,training=true,truth=true,prior=15.0"
     doc: hapmap reference data
 
@@ -73,7 +78,7 @@ inputs:
     secondaryFiles:
       - .idx
     inputBinding:
-      position: 9
+      position: 2
       prefix: "-resource:omni,known=false,training=true,truth=false,prior=12.0"
     doc: omni reference data
 
@@ -82,7 +87,7 @@ inputs:
     secondaryFiles:
       - .idx
     inputBinding:
-      position: 10
+      position: 2
       prefix: "-resource:1000G,known=false,training=true,truth=false,prior=10.0"
     doc: 1000 genome reference data
 
@@ -91,7 +96,7 @@ inputs:
     secondaryFiles:
       - .idx
     inputBinding:
-      position: 11
+      position: 2
       prefix: "-resource:dbsnp,known=true,training=false,truth=false,prior=2.0"
     doc: dbSNP  reference data
 
@@ -100,13 +105,8 @@ inputs:
     type: string
     default: -Xmx8g
     inputBinding:
-      position: 1
+      position: 0
 
-  java_tmp:
-    type: string
-    default: -Djava.io.tmpdir=/tmp
-    inputBinding:
-      position: 2
 
 outputs:
     tranches_File:
@@ -129,30 +129,27 @@ outputs:
 
 
 arguments:
-- valueFrom: ./test/test-Files
-  position: 2
+- valueFrom: $(runtime.tmpdir)
+  position: 0
   separate: false
   prefix: -Djava.io.tmpdir=
-- valueFrom: /usr/local/bin/GenomeAnalysisTK.jar
-  position: 3
-  prefix: -jar
 - valueFrom: VariantRecalibrator
-  position: 4
+  position: 2
   prefix: -T
 - valueFrom: "SNP"
-  position: 12
+  position: 2
   prefix: -mode
 - valueFrom: "QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR -an InbreedingCoeff"
-  position: 13
+  position: 2
   prefix: -an
 - valueFrom: vqsr_tranches.out
-  position: 14
+  position: 2
   prefix: -tranchesFile
 - valueFrom: vqsr_recal.out
-  position: 15
+  position: 2
   prefix: -recalFile
 - valueFrom: vqsr.R
-  position: 16
+  position: 2
   prefix: -rscriptFile
 
 baseCommand: [java]
