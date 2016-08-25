@@ -145,9 +145,9 @@ outputs:
     type: File
     outputSource: IndelRealigner/output_indelRealigner
 
-#  outputfile_baseRecalibrator:
-#    type: File
-#    outputSource: BaseRecalibrator/output_baseRecalibrator
+  outputfile_baseRecalibrator:
+    type: File
+    outputSource: BaseRecalibrator/output_baseRecalibrator
 #
 #  output_printReads:
 #    type: File
