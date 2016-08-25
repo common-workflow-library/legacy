@@ -34,9 +34,11 @@ hints:
 inputs:
   haplotypecaller_snps_vcf:
     type: File
+    secondaryFiles:
+      - .idx
     inputBinding:
       position: 5
-      prefix: -R
+      prefix: -input
     doc: input vcf File raw variant calls from haplotype caller
 
   multithreading_nt:
@@ -49,6 +51,9 @@ inputs:
 
   reference:
     type: File
+    secondaryFiles
+      - .fai
+      - ^.dict
     inputBinding:
       position: 7
       prefix: -R
@@ -56,6 +61,8 @@ inputs:
 
   resource_mills:
     type: File
+    secondaryFiles:
+      - .idx
     inputBinding:
       position: 8
       prefix: "-resource:mills,known=false,training=true,truth=true,prior=12.0"
@@ -63,6 +70,8 @@ inputs:
 
   resource_dbsnp:
     type: File
+    secondaryFiles:
+      - .idx
     inputBinding:
       position: 9
       prefix: "-resource:dbsnp,known=true,training=false,truth=false,prior=2.0"

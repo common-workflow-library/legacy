@@ -1,18 +1,18 @@
 { 
      "inputBam_HaplotypeCaller": {
         "class": "File",
-        "path": "test/test-files/printReads.bam"
+        "path": "/mnt/test-YS/samtools-sort-2016-08-04-wRG.bam"
     },
     "reference": {
         "class": "File",
-        "path": "test/test-files/hg19.fasta",
+        "path": "/mnt/bwa-mem-index/hg19/genome.fa",
     },  
     "dbsnp": {
         "class": "File",
-        "path": "test/test-files/dbsnp_138.vcf", 
+        "path": "/mnt/gatk_bundle/2.8/hg19/dbsnp_138.hg19.vcf", 
     }, 
   
-    "outputfile_HaplotypeCaller": "haplotypeCaller.vcf"
+    "outputfile_HaplotypeCaller": "/mnt/test-YS/haplotypeCaller.vcf"
      
 }
 
