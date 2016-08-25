@@ -16,7 +16,7 @@
     "output_RefDictionaryFile": "genome.fa.dict",
     "tmpdir": "./tmp",
     "bwa_output_name": "bwa-mem-2016-08-04.sam",
-    "bwa_read_group": "@RG\tID:1\tPL:ILLUMINA\tPU:pu\tLB:group1\tSM:SAMPLEID",
+    "bwa_read_group": '@RG\tID:1\tPL:ILLUMINA\tPU:pu\tLB:group1\tSM:SAMPLEID',
     "samtools-view-isbam":true,
     "samtools-view-sambam": "-Sb",
     "output_samtools-view": "samtools-view-2016-08-04.bam",
