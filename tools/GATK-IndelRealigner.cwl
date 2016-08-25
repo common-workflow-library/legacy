@@ -93,11 +93,11 @@ inputs:
       position: 5
       prefix: -R
     secondaryFiles:
-    - .gz.64.amb
-    - .gz.64.ann
-    - .gz.64.bwt
-    - .gz.64.pac
-    - .gz.64.sa
+    - .64.amb
+    - .64.ann
+    - .64.bwt
+    - .64.pac
+    - .64.sa
     - .fai
     - ^.dict
   LODThresholdForCleaning:
