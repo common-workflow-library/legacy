@@ -231,16 +231,16 @@ steps:
       known: known_variant_db
     out: [ output_indelRealigner ]
 
-#  BaseRecalibrator:
-#    run: ../../tools/GATK-BaseRecalibrator.cwl  # FIXME: this is draft 3
-#    in:
-#      outputfile_BaseRecalibrator: outputFileName_BaseRecalibrator
-#      inputBam_BaseRecalibrator: IndelRealigner/output_indelRealigner
-#      reference: reference
-#      covariate: covariate
-#      known: known_variant_db
-#    out: [ output_baseRecalibrator ]
-#
+  BaseRecalibrator:
+    run: ../../tools/GATK-BaseRecalibrator.cwl
+    in:
+      outputfile_BaseRecalibrator: outputFileName_BaseRecalibrator
+      inputBam_BaseRecalibrator: IndelRealigner/output_indelRealigner
+      reference: reference
+      covariate: covariate
+      known: known_variant_db
+    out: [ output_baseRecalibrator ]
+
 #  PrintReads:
 #    run: ../../tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
 #    in:
