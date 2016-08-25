@@ -108,6 +108,10 @@ outputs:
   samtoolsSort_output:
     type: File
     outputSource: samtools-sort/sorted
+
+  samtoolsIndex_output:
+    type: File
+    outputSource: samtools-index/index
 #
 #  MarkDuplicates_output:
 #    type: File
@@ -166,6 +170,13 @@ steps:
       input: samtools-view/output
       output_name: output_samtools-sort
     out: [ sorted ]
+
+  samtools-index:
+    run: ../../tools/samtools-index.cwl
+    in:
+      input: samtools-sort/sorted
+      bai: true
+    out: [ index ]
 
 #  MarkDuplicates:
 #    run: ../../tools/picard-MarkDuplicates.cwl
