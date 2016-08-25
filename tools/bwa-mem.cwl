@@ -18,11 +18,11 @@ inputs:
   reference:
     type: File
     secondaryFiles:
-      - .amb
-      - .ann
-      - .bwt
-      - .pac
-      - .sa
+      - .64.amb
+      - .64.ann
+      - .64.bwt
+      - .64.pac
+      - .64.sa
     inputBinding:
       position: 2
 
