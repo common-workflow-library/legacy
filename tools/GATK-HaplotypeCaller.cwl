@@ -75,7 +75,6 @@ doap:maintainer:
     
 requirements:
 - $import: envvar-global.yml
-- $import: envvar-global.yml
 - $import: GATK-docker.yml
 
     
