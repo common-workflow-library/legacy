@@ -1,0 +1,4 @@
+class: DockerRequirement
+dockerPull: genomicpariscentre/fastqc
+dockerFile: >
+  $import: fastqc-Dockerfile
