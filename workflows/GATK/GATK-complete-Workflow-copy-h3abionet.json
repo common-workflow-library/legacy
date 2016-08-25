@@ -1,7 +1,7 @@
 {
     "reference": {
      "class": "File",
-     "path": "genome.fa.gz"
+     "path": "genome.fa"
     },
     "uncompressed_reference": {
        "class": "File",
