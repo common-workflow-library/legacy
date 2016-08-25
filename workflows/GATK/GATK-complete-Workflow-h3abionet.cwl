@@ -49,7 +49,7 @@ inputs:
     doc: set to be true showing that reads are sorted already
 
   removeDuplicates_MarkDuplicates:
-    type: string
+    type: boolean
     doc: set to be true
 
   createIndex_MarkDuplicates:

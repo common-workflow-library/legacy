@@ -19,7 +19,7 @@
     "outputFileName_MarkDuplicates": "MarkDuplicates-2016-08-04.bam",
     "metricsFile_MarkDuplicates": "metricsFile-markDups-2016-08-04.metrics",
     "readSorted_MarkDuplicates": true,
-    "removeDuplicates_MarkDuplicates": 'true',
+    "removeDuplicates_MarkDuplicates": true,
     "createIndex_MarkDuplicates": 'true',
     "samtools-index-bai": true,
     "outputFileName_RealignTargetCreator": "RealignTargetCreator-2016-08-04.intervals",
