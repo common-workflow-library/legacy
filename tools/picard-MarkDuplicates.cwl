@@ -97,7 +97,7 @@ inputs:
     doc: Value of VN tag of PG record to be created. If not specified, the version
       will be detected automatically. Default value null
   readSorted:
-    type: boolean?
+    type: string?
     inputBinding:
       position: 22
       prefix: ASSUME_SORTED=
@@ -191,7 +191,7 @@ inputs:
     doc: Value of CL tag of PG record to be created. If not supplied the command line
       will be detected automatically. Default value null
   removeDuplicates:
-    type: boolean?
+    type: string?
     inputBinding:
       position: 7
       prefix: REMOVE_DUPLICATES=
