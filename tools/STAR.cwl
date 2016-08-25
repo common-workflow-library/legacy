@@ -340,29 +340,7 @@ inputs:
       string: feature type in GTF file to be used as exons for building
       transcripts
   genomeDir:
-    type:
-    - File
-    - string
-    secondaryFiles: |
-      ${
-        var p=inputs.genomeDir.path.split('/').slice(0,-1).join('/');
-        return [
-          {"path": p+"/SA", "class":"File"},
-          {"path": p+"/SAindex", "class":"File"},
-          {"path": p+"/chrNameLength.txt", "class":"File"},
-          {"path": p+"/chrLength.txt", "class":"File"},
-          {"path": p+"/chrStart.txt", "class":"File"},
-          {"path": p+"/geneInfo.tab", "class":"File"},
-          {"path": p+"/sjdbList.fromGTF.out.tab", "class":"File"},
-          {"path": p+"/chrName.txt", "class":"File"},
-          {"path": p+"/exonGeTrInfo.tab", "class":"File"},
-          {"path": p+"/genomeParameters.txt", "class":"File"},
-          {"path": p+"/sjdbList.out.tab", "class":"File"},
-          {"path": p+"/exonInfo.tab", "class":"File"},
-          {"path": p+"/sjdbInfo.txt", "class":"File"},
-          {"path": p+"/transcriptInfo.tab", "class":"File"}
-        ];
-      }
+    type: Directory
     inputBinding:
       valueFrom: |
         ${
