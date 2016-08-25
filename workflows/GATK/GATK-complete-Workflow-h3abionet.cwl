@@ -3,6 +3,9 @@
 class: Workflow
 cwlVersion: v1.0
 
+requirements:
+  class: StepInputExpressionRequirement
+
 inputs:
   reference:
     type: File
