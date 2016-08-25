@@ -91,11 +91,46 @@ inputs:
   covariate:
     type: string[]?
     doc: required for base recalibrator
- 
-outputs:
-  bwamem_output:
+  
+  phred:
+    type: string
+    doc: |
+       "33"|"64"
+       -phred33 ("33") or -phred64 ("64") specifies the base quality encoding. Default: -phred64
+	  
+  input_read1_fastq_file:
     type: File
-    outputSource: bwa-mem/sam
+    doc: FASTQ file for input read (read R1 in Paired End mode)
+  
+  input_adapters_file:
+    type: File
+    doc: FASTA file containing adapters, PCR sequences, etc. It is used to search
+      for and remove these sequences in the input FASTQ file(s)
+ 
+  end_mode:
+    type: string
+    doc: |
+      SE|PE
+      Single End (SE) or Paired End (PE) mode
+	  
+  nthreads:
+    type: int
+    doc: Number of threads.
+  
+  illuminaclip:
+    type: string
+    doc:  Find and remove Illumina adapters. 
+
+
+
+ outputs:
+  output_read1_trimmed_file:
+   type: File
+   outputSource: trimmomatic/output_read1_trimmed_file
+  
+  bwamem_output:
+   type: File
+   outputSource: bwa-mem/sam
 
   ReferenceSequenceDictionary:
     type: File
@@ -133,7 +168,7 @@ outputs:
     type: File
     outputSource: HaplotypeCaller/output_HaplotypeCaller
 
-steps:
+ steps:
 
   create-dict:
     run: ../../tools/picard-CreateSequenceDictionary.cwl
@@ -225,3 +260,14 @@ steps:
       reference: reference
       dbsnp: dbsnp
     out: [ output_HaplotypeCaller ]
+
+  trimmomatic:
+    run: trimmomatic.cwl
+    in:
+	 phred: phred
+	 input_read1_fastq_file: input_read1_fastq_file
+	 input_adapters_file: input_adapters_file
+	 end_mode: end_mode
+	 nthreads: nthreads
+	 illuminaclip: illuminaclip
+    out: [output_read1_trimmed_file]
