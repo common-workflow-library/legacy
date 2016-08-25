@@ -1,3 +1,2 @@
 class: DockerRequirement
-dockerFile: >
-  $import: GATK-Dockerfile
+dockerPull: openjdk:8
