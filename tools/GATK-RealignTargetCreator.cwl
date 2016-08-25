@@ -152,6 +152,12 @@ inputs:
 
       '
   java_arg:
+    type: int
+    default: 16
+    inputBinding:
+      prefix: -nt
+
+  java_arg:
     type: string
     default: -Xmx4g
     inputBinding:
