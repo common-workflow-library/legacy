@@ -3,10 +3,12 @@
     "view",
     "-@",
     "4",
-    "-b",
+    "-S",
+    "-h",
+    "-u",
     "-o",
-    "./test-files/SRR1031972.sorted.bam",
-    "./test-files/SRR1031972.Aligned.sortedByCoord.out.bam"
+    "/mnt/test-YS/NA12878.mapped.illumina.mosaik.CEU.exome.20110411.chr21.aligned.bam",
+    "/mnt/test-YS/NA12878.mapped.illumina.mosaik.CEU.exome.20110411.chr21.bam"
   ]
   job:  samtools-view-job.json
   tool: ../tools/samtools-view.cwl
