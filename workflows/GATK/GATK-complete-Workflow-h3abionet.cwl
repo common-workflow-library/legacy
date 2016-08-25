@@ -12,6 +12,10 @@ inputs:
     type: File
     doc: reference human genome file
 
+  uncompressed_reference:
+    type: File
+    doc: reference human genome file
+
   reads:
     type: File[]?
     doc: files containing the paired end reads in fastq format required for bwa-mem
