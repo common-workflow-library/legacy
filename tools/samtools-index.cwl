@@ -9,7 +9,7 @@ requirements:
 - class: InlineJavascriptRequirement
   expressionLib:
   - var new_ext = function() { var ext=inputs.bai?'.bai':inputs.csi?'.csi':'.bai';
-    return inputs.input.path.split('/').slice(-1)[0].replace('.bam', '')+ext; };
+    return inputs.input.path.split('/').slice(-1)[0].replace(/.bam', '')+ext; };
 inputs:
   input:
     type: File
