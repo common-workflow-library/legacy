@@ -9,10 +9,10 @@
     },  
     "dbsnp": {
         "class": "File",
-        "path": "/mnt/gatk_bundle/2.8/hg19/dbsnp_138.hg19.vcf", 
+        "path": "/mnt/gatk_bundle/2.8/hg19/dbsnp_138.hg19.nochr.vcf", 
     }, 
   
-    "outputfile_HaplotypeCaller": "/mnt/test-YS/haplotypeCaller.vcf"
+    "outputfile_HaplotypeCaller": "test/test-files/haplotypeCaller.vcf"
      
 }
 
