@@ -6,13 +6,13 @@
     },
     "reference": {
         "class": "File",
-        "path": "/mnt/bwa-mem-index/hg19/genome.fa.gz",
+        "path": "/mnt/bwa-mem-index/hg19_new/genome.fa",
     },
 
     "known": [
-       {"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/dbsnp_138.hg19.vcf.gz"},
-       {"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.gz"},
-       {"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/1000G_phase1.indels.hg19.sites.vcf.gz"}
+       {"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/dbsnp_138.hg19.vcf"},
+       {"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf"},
+       {"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/1000G_phase1.indels.hg19.sites.vcf"}
     ],
 
     "outputfile_realignTarget": "realignTargetCreator_output.intervals"

@@ -1,7 +1,7 @@
 {
   "reference": {
-    "path": "test-files/dm3_chr4.fa",
+    "path": "/mnt/bwa-mem-index/hg19/genome.fa",
     "class": "File"
   },
-  "output_filename": "./test-files/dm3_chr4.dict"
+  "output_filename": "genome.dict"
 }
