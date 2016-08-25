@@ -230,6 +230,10 @@ outputs:
     type: File
     outputBinding:
       glob: $(inputs.outputFileName_markDups)
+  markDups_output_index:
+    type: File
+    outputBinding:
+      glob: $("*.bai")
 
 baseCommand: [java]
 arguments:

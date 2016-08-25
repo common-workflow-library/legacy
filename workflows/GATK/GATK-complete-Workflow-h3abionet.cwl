@@ -124,6 +124,11 @@ outputs:
   MarkDuplicates_output:
     type: File
     outputSource: MarkDuplicates/markDups_output
+
+  MarkDuplicates_output_index:
+    type: File
+    outputSource: MarkDuplicates/markDups_output_index
+
 #
 #  output_realignTarget:
 #    type: File
@@ -197,7 +202,7 @@ steps:
       readSorted: readSorted_MarkDuplicates
       removeDuplicates: removeDuplicates_MarkDuplicates
       createIndex: createIndex_MarkDuplicates
-    out: [ markDups_output ]
+    out: [ markDups_output, markDups_output_index ]
 
 #  RealignTarget:
 #    run: ../../tools/GATK-RealignTargetCreator.cwl # FIXME: this is draft 3
