@@ -105,13 +105,13 @@ inputs:
       position: 5
       prefix: -R
     secondaryFiles:
-    - .amb
-    - .ann
-    - .bwt
-    - .pac
-    - .sa
+    - .64.amb
+    - .64.ann
+    - .64.bwt
+    - .64.pac
+    - .64.sa
     - .fai
-    - ^.dict
+#    - ^.dict
     doc: 'human reference sequence along with the secondary files.
 
       '
@@ -138,10 +138,14 @@ inputs:
 
       '
   known:
-    type: File[]?
+    type:
+      - "null" 
+      - type: array
+        items: File
+        inputBinding:
+          prefix: --known
     inputBinding:
       position: 8
-
     doc: 'Any number of VCF files representing known SNPs and/or indels. Could be
       e.g. dbSNP and/or official 1000 Genomes indel calls. SNPs in these files will
       be ignored unless the --mismatchFraction argument is used. optional parameter.
