@@ -1,62 +1,67 @@
 #!/usr/bin/env cwl-runner
 
-cwlVersion: v1.0
+cwlVersion: "cwl:draft-3"
+
 class: CommandLineTool
 
 requirements:
-- $import: envvar-global.yml
-- $import: bwa-docker.yml
-- class: InlineJavascriptRequirement
+  - $import: envvar-global.yml
+  - $import: bwa-docker.yml
+  - class: InlineJavascriptRequirement
 
 inputs:
-  minimum_seed_length:
-    type: int?
-    inputBinding:
-      position: 1
-      prefix: -k
-    doc: -k INT        minimum seed length [19]
-  reference:
+  - id: "reference"
     type: File
-    secondaryFiles:
-      - .64.amb
-      - .64.ann
-      - .64.bwt
-      - .64.pac
-      - .64.sa
     inputBinding:
       position: 2
 
-  output_filename: string
-  reads:
-    type: File[]
+  - id: "reads"
+    type:
+      type: array
+      items: File
     inputBinding:
       position: 3
 
-  threads:
-    type: int?
+  - id: "minimum_seed_length"
+    type: ["null",int]
+    description: "-k INT        minimum seed length [19]"
     inputBinding:
       position: 1
-      prefix: -t
-    doc: -t INT        number of threads [1]
-  min_std_max_min:
-    type: int[]?
+      prefix: "-k"
+
+  - id: "min_std_max_min"
+    type:
+    - "null"
+    - type: array
+      items: int
     inputBinding:
       position: 1
-      prefix: -I
-      itemSeparator: ','
+      prefix: "-I"
+      itemSeparator: ","
+
+  - id: "output_filename"
+    type: string
+
+  - id: "threads"
+    type: ["null",int]
+    description: "-t INT        number of threads [1]"
+    inputBinding:
+      position: 1
+      prefix: "-t"
+
 stdout: $(inputs.output_filename)
 
 outputs:
-  output:
+  - id: output
     type: File
     outputBinding:
       glob: $(inputs.output_filename)
 
 baseCommand:
-- bwa
-- mem
+  - bwa
+  - mem
 
-doc: |
+description: |
   Usage: bwa mem [options] <idxbase> <in1.fq> [in2.fq]
 
   Algorithm options:
@@ -108,4 +113,3 @@ doc: |
                        FR orientation only. [inferred]
 
   Note: Please read the man page for detailed description of the command line and options.
-
