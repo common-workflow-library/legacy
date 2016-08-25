@@ -5,7 +5,8 @@
 FROM debian:testing
 MAINTAINER Laurent Jourdren <jourdren@biologie.ens.fr> 
 
-RUN apt-get update && apt-get install --yes \
-  fastqc
+RUN apt-get update && apt-get upgrade && apt-get install --yes \
+  fastqc \
+  libfindbin-libs-perl
 
 CMD ["fastqc"]
