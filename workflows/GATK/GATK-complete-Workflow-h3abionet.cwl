@@ -95,7 +95,7 @@ inputs:
 outputs:
   bwamem_output:
     type: File
-    outputSource: bwa-mem/sam
+    outputSource: bwa-mem/output
 
   ReferenceSequenceDictionary:
     type: File
