@@ -186,7 +186,9 @@ steps:
     run: ../../tools/picard-MarkDuplicates.cwl
     in:
       outputFileName_markDups: outputFileName_MarkDuplicates
-      inputFileName_markDups: samtools-sort/sorted 
+      inputFileName_markDups:
+        source: samtools-sort/sorted
+        valueFrom: ${return [ self ];}
       metricsFile: metricsFile_MarkDuplicates
       readSorted: readSorted_MarkDuplicates
       removeDuplicates: removeDuplicates_MarkDuplicates
