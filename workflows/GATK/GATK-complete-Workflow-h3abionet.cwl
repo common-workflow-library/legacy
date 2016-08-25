@@ -129,15 +129,14 @@ outputs:
     type: File
     outputSource: MarkDuplicates/markDups_output_index
 
-#
-#  output_realignTarget:
-#    type: File
-#    outputSource: RealignTarget/output_realignTarget
-#
-#  output_indelRealigner:
-#    type: File
-#    outputSource: IndelRealigner/output_indelRealigner
-#
+  output_realignTarget:
+    type: File
+    outputSource: RealignTarget/output_realignTarget
+
+  output_indelRealigner:
+    type: File
+    outputSource: IndelRealigner/output_indelRealigner
+
 #  outputfile_baseRecalibrator:
 #    type: File
 #    outputSource: BaseRecalibrator/output_baseRecalibrator
@@ -204,25 +203,25 @@ steps:
       createIndex: createIndex_MarkDuplicates
     out: [ markDups_output, markDups_output_index ]
 
-#  RealignTarget:
-#    run: ../../tools/GATK-RealignTargetCreator.cwl # FIXME: this is draft 3
-#    in:
-#      outputfile_realignTarget: outputFileName_RealignTargetCreator
-#      inputBam_realign: MarkDuplicates/markDups_output
-#      reference: reference
-#      known: known_variant_db
-#    out: [ output_realignTarget ]
-#
-#  IndelRealigner:
-#    run: ../../tools/GATK-IndelRealigner.cwl  # FIXME: this is draft 3
-#    in:
-#      outputfile_indelRealigner: outputFileName_IndelRealigner
-#      inputBam_realign: MarkDuplicates/markDups_output
-#      intervals: RealignTarget/output_realignTarget
-#      reference: reference
-#      known: known_variant_db
-#    out: [ output_indelRealigner ]
-#
+  RealignTarget:
+    run: ../../tools/GATK-RealignTargetCreator.cwl
+    in:
+      outputfile_realignTarget: outputFileName_RealignTargetCreator
+      inputBam_realign: MarkDuplicates/markDups_output
+      reference: reference
+      known: known_variant_db
+    out: [ output_realignTarget ]
+
+  IndelRealigner:
+    run: ../../tools/GATK-IndelRealigner.cwl  # FIXME: this is draft 3
+    in:
+      outputfile_indelRealigner: outputFileName_IndelRealigner
+      inputBam_realign: MarkDuplicates/markDups_output
+      intervals: RealignTarget/output_realignTarget
+      reference: reference
+      known: known_variant_db
+    out: [ output_indelRealigner ]
+
 #  BaseRecalibrator:
 #    run: ../../tools/GATK-BaseRecalibrator.cwl  # FIXME: this is draft 3
 #    in:
