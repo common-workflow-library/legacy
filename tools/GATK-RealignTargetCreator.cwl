@@ -151,7 +151,7 @@ inputs:
       be ignored unless the --mismatchFraction argument is used. optional parameter.
 
       '
-  java_arg:
+  threads:
     type: int
     default: 16
     inputBinding:
