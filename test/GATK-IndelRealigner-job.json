@@ -9,13 +9,15 @@
     },  
      "intervals": {
         "class": "File",
-        "path": "/mnt/bwa-mem-index/hg19/realignTargetCreator_output.intervals", 
+        "path": "/mnt/gatk_bundle/2.8/hg19/realignTargetCreator_output.intervals", 
     }, 
     
+
     "known": [
-       {"class": "File", "path": "test/test-files/dbsnp_138.vcf"}, 
-       {"class": "File", "path": "test/test-files/Mills_and_1000G_gold_st.vcf"}, 
-       {"class": "File", "path": "test/test-files/1000G_phase1.indels.hg19.vcf"}  ],
+       {"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/dbsnp_138.hg19.vcf"},
+       {"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf"},
+       {"class": "File", "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/1000G_phase1.indels.hg19.sites.vcf"}
+    ],
          
     "outputfile_indelRealigner": "indelRealigner.bam"
      
