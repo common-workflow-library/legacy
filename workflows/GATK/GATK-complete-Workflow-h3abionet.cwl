@@ -24,7 +24,7 @@ inputs:
     type: string
     doc: name of bwa-mem output file
 
-  bwa_readgroup:
+  bwa_read_group:
     type: string
     doc: read group
 
