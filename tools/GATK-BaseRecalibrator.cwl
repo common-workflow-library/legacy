@@ -26,7 +26,8 @@ inputs:
     - .64.bwt
     - .64.pac
     - .64.sa
-    - .fai  
+    - .fai
+    - ^.dict     
   binary_tag_name:
     type: string?
     inputBinding:
