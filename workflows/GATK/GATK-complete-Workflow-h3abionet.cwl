@@ -5,6 +5,7 @@ cwlVersion: v1.0
 
 requirements:
   - class: StepInputExpressionRequirement
+  - class: InlineJavascriptRequirement
 
 inputs:
   reference:
