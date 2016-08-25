@@ -208,7 +208,7 @@ steps:
     in:
       outputfile_realignTarget: outputFileName_RealignTargetCreator
       inputBam_realign: MarkDuplicates/markDups_output
-      reference: reference
+      reference: uncompressed_reference
       known: known_variant_db
     out: [ output_realignTarget ]
 
@@ -218,7 +218,7 @@ steps:
       outputfile_indelRealigner: outputFileName_IndelRealigner
       inputBam_realign: MarkDuplicates/markDups_output
       intervals: RealignTarget/output_realignTarget
-      reference: reference
+      reference: uncompressed_reference
       known: known_variant_db
     out: [ output_indelRealigner ]
 
