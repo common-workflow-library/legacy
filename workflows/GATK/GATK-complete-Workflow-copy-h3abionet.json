@@ -1,8 +1,12 @@
 {
-     "reference": {
-        "class": "File",
-        "path": "genome.fa.gz"
+    "reference": {
+     "class": "File",
+     "path": "genome.fa.gz"
     },
+    "uncompressed_reference": {
+       "class": "File",
+       "path": "genome.fa"
+   },
     "reads": [{"class": "File", "path": "FQ_1.fastq"}, {"class": "File", "path": "FQ_2.fastq"}  ],
     "dbsnp": {
         "class": "File",
