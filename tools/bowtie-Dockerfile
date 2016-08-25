@@ -1,0 +1,37 @@
+#################################################################
+# Dockerfile
+#
+# Software:         bowtie
+# Software Version: 1.1.2
+# Description:      Bowtie image for SciDAP
+# Website:          http://bowtie-bio.sourceforge.net, http://scidap.com/
+# Provides:         bowtie
+# Base Image:       scidap/scidap:v0.0.1
+# Build Cmd:        docker build --rm -t scidap/bowtie:v1.1.2 .
+# Pull Cmd:         docker pull scidap/bowtie:v1.1.2
+# Run Cmd:          docker run --rm scidap/bowtie:v1.1.2 bowtie
+#################################################################
+
+### Base Image
+FROM scidap/scidap:v0.0.1
+MAINTAINER Andrey V Kartashov "porter@porter.st"
+ENV DEBIAN_FRONTEND noninteractive
+
+################## BEGIN INSTALLATION ######################
+
+WORKDIR /tmp
+
+### Installing bowtie
+
+ENV VERSION 1.1.2
+ENV NAME bowtie
+ENV URL "https://github.com/BenLangmead/bowtie/archive/v${VERSION}.tar.gz"
+
+RUN wget -q -O - $URL | tar -zxv && \
+    cd ${NAME}-${VERSION} && \
+    make -j 4 && \
+    cd .. && \
+    cp ./${NAME}-${VERSION}/${NAME} /usr/local/bin/ && \
+    cp ./${NAME}-${VERSION}/${NAME}-* /usr/local/bin/ && \
+    strip /usr/local/bin/*; true && \
+    rm -rf ./${NAME}-${VERSION}/
