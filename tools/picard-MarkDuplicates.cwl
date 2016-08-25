@@ -7,12 +7,12 @@ $namespaces:
   adms: http://www.w3.org/ns/adms#
   dcat: http://www.w3.org/ns/dcat#
 
-$schemas:
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- http://usefulinc.com/ns/doap#
-- http://www.w3.org/ns/adms#
-- http://www.w3.org/ns/dcat.rdf
+#$schemas:
+#- http://dublincore.org/2012/06/14/dcterms.rdf
+#- http://xmlns.com/foaf/spec/20140114.rdf
+#- http://usefulinc.com/ns/doap#
+#- http://www.w3.org/ns/adms#
+#- http://www.w3.org/ns/dcat.rdf
 
 cwlVersion: v1.0
 class: CommandLineTool
