@@ -99,7 +99,7 @@ outputs:
 
   ReferenceSequenceDictionary:
     type: File
-    outputSource: create-dict/createDict_output
+    outputSource: create-dict/output
 
   samtoolsView_output:
     type: File
@@ -139,16 +139,15 @@ steps:
     run: ../../tools/picard-CreateSequenceDictionary.cwl  # FIXME: this is draft3
     in:
       reference: reference
-      outputFileName: output_RefDictionaryFile
-      tmpdir: tmpdir
-    out: [ createDict_output ]
+      output_filename: output_RefDictionaryFile
+    out: [ output ]
 
   bwa-mem:
     run: ../../tools/bwa-mem.cwl
     in:
       reference: reference
       reads: reads
-      dictCreated: create-dict/createDict_output
+      dictCreated: create-dict/output
       output_filename: bwa_output_name
     out: [ output ]
 
