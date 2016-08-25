@@ -32,7 +32,7 @@ inputs:
       Generate CSI-format index for BAM files
   bai:
     type: boolean
-    default: false
+    default: true
     doc: |
       Generate BAI-format index for BAM files [default]
 outputs:
@@ -47,7 +47,7 @@ arguments:
 - valueFrom: $(inputs.bai?'-b':inputs.csi?'-c':[])
   position: 1
 - valueFrom: $(new_ext())
-  position: 3 
+  position: 3
 
 $namespaces:
   s: http://schema.org/
@@ -82,4 +82,3 @@ s:author:
       s:name: Barski Lab
 doc: |
   samtools-index.cwl is developed for CWL consortium
-

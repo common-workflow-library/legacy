@@ -175,7 +175,7 @@ steps:
     run: ../../tools/samtools-index.cwl
     in:
       input: samtools-sort/sorted
-      bai: true
+      bai: samtoolsIndexBai
     out: [ index ]
 
 #  MarkDuplicates:
