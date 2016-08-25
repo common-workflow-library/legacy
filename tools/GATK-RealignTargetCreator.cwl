@@ -71,38 +71,37 @@ requirements:
 - $import: envvar-global.yml
 - $import: GATK-docker.yml
 
-inputs:
+inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
+  GATKJar:
+    type: File
+    inputBinding:
+      position: 1
+      prefix: "-jar"
   maxIntervalSize:
     type: int?
     inputBinding:
       prefix: --maxIntervalSize
+      position: 2
     doc: 'maximum interval size; any intervals larger than this value will be dropped.
-      optional paramter
-
-      '
+      optional paramter'
   inputBam_realign:
     type: File
     inputBinding:
-      position: 6
+      position: 2
       prefix: -I
     secondaryFiles:
     - ^.bai
-    doc: 'bam file produced after mark-duplicates execution
-
-      '
+    doc: 'bam file produced after mark-duplicates execution'
   outputfile_realignTarget:
     type: string
     inputBinding:
       prefix: -o
-      position: 7
-
-    doc: 'name of the output file from realignTargetCreator
-
-      '
+      position: 2
+    doc: 'name of the output file from realignTargetCreator'
   reference:
     type: File
     inputBinding:
-      position: 5
+      position: 2
       prefix: -R
     secondaryFiles:
     - .64.amb
@@ -112,31 +111,26 @@ inputs:
     - .64.sa
     - .fai
     - ^.dict
-    doc: 'human reference sequence along with the secondary files.
-
-      '
+    doc: 'human reference sequence along with the secondary files.'
   minReadsAtLocus:
     type: int?
     inputBinding:
       prefix: --minReadsAtLocus
-    doc: 'minimum reads at a locus to enable using the entropy calculation
-
-      '
+      position: 2
+    doc: 'minimum reads at a locus to enable using the entropy calculation'
   windowSize:
     type: int?
     inputBinding:
       prefix: --windowSize
-    doc: 'window size for calculating entropy or SNP clusters
-
-      '
+      position: 2
+    doc: 'window size for calculating entropy or SNP clusters'
   mismatchFraction:
     type: int?
     inputBinding:
       prefix: --mismatchFraction
+      position: 2
     doc: 'fraction of base qualities needing to mismatch for a position to have high
-      entropy
-
-      '
+      entropy'
   known:
     type:
       - "null" 
@@ -145,17 +139,15 @@ inputs:
         inputBinding:
           prefix: --known
     inputBinding:
-      position: 8
+      position: 2
     doc: 'Any number of VCF files representing known SNPs and/or indels. Could be
       e.g. dbSNP and/or official 1000 Genomes indel calls. SNPs in these files will
-      be ignored unless the --mismatchFraction argument is used. optional parameter.
-
-      '
+      be ignored unless the --mismatchFraction argument is used. optional parameter.'
   java_arg:
     type: string
     default: -Xmx4g
     inputBinding:
-      position: 1
+      position: 0
 
 outputs:
   output_realignTarget:
@@ -164,15 +156,12 @@ outputs:
       glob: $(inputs.outputfile_realignTarget)
 
 arguments:
-- valueFrom: ./test/test-files
-  position: 2
+- valueFrom: $(runtime.tmpdir)
+  position: 0
   separate: false
   prefix: -Djava.io.tmpdir=
-- valueFrom: /usr/local/bin/GenomeAnalysisTK.jar
-  position: 3
-  prefix: -jar
 - valueFrom: RealignerTargetCreator
-  position: 4
+  position: 2
   prefix: -T
 baseCommand: [java]
 doc: |
