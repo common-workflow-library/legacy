@@ -1,8 +1,8 @@
 {
 
-    "inputFileName_markDups": [{"class": "File", "path": "test/test-files/sortedSam.bam"}],
+    "inputFileName_markDups": [{"class": "File", "path": "/data_small/small_bam/project.NIST_NIST7035_H7AP8ADXX_TAAGGCGA_1_NA12878.bwa.markDuplicates.chr22.bam"}],
 
-    "outputFileName_markDups": "markDuplicates.bam",
+    "outputFileName_markDups": "project.NIST_NIST7035_H7AP8ADXX_TAAGGCGA_1_NA12878.bwa.markDuplicates.chr22.markdup.bam",
     "metricsFile": "metricsFile-markDuplicates", 
     "tmpdir": "test/test-files", 
 
