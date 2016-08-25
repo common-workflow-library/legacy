@@ -108,31 +108,31 @@ outputs:
   samtoolsSort_output:
     type: File
     outputSource: samtools-sort/sorted
-
-  MarkDuplicates_output:
-    type: File
-    outputSource: MarkDuplicates/markDups_output
-
-  output_realignTarget:
-    type: File
-    outputSource: RealignTarget/output_realignTarget
-
-  output_indelRealigner:
-    type: File
-    outputSource: IndelRealigner/output_indelRealigner
-
-  outputfile_baseRecalibrator:
-    type: File
-    outputSource: BaseRecalibrator/output_baseRecalibrator
-
-  output_printReads:
-    type: File
-    outputSource: PrintReads/output_PrintReads
-
-  output_HaplotypeCaller:
-    type: File
-    outputSource: HaplotypeCaller/output_HaplotypeCaller
-
+#
+#  MarkDuplicates_output:
+#    type: File
+#    outputSource: MarkDuplicates/markDups_output
+#
+#  output_realignTarget:
+#    type: File
+#    outputSource: RealignTarget/output_realignTarget
+#
+#  output_indelRealigner:
+#    type: File
+#    outputSource: IndelRealigner/output_indelRealigner
+#
+#  outputfile_baseRecalibrator:
+#    type: File
+#    outputSource: BaseRecalibrator/output_baseRecalibrator
+#
+#  output_printReads:
+#    type: File
+#    outputSource: PrintReads/output_PrintReads
+#
+#  output_HaplotypeCaller:
+#    type: File
+#    outputSource: HaplotypeCaller/output_HaplotypeCaller
+#
 steps:
 
   create-dict:
@@ -168,60 +168,60 @@ steps:
       output_name: output_samtools-sort
     out: [ sorted ]
 
-  MarkDuplicates:
-    run: ../../tools/picard-MarkDuplicates.cwl
-    in:
-      outputFileName_markDups: outputFileName_MarkDuplicates
-      inputFileName_markDups: samtools-sort/sorted
-      metricsFile: metricsFile_MarkDuplicates
-      readSorted: readSorted_MarkDuplicates
-      removeDuplicates: removeDuplicates_MarkDuplicates
-      createIndex: createIndex_MarkDuplicates
-    out: [ markDups_output ]
-
-  RealignTarget:
-    run: ../../tools/GATK-RealignTargetCreator.cwl # FIXME: this is draft 3
-    in:
-      outputfile_realignTarget: outputFileName_RealignTargetCreator
-      inputBam_realign: MarkDuplicates/markDups_output
-      reference: reference
-      known: known_variant_db
-    out: [ output_realignTarget ]
-
-  IndelRealigner:
-    run: ../../tools/GATK-IndelRealigner.cwl  # FIXME: this is draft 3
-    in:
-      outputfile_indelRealigner: outputFileName_IndelRealigner
-      inputBam_realign: MarkDuplicates/markDups_output
-      intervals: RealignTarget/output_realignTarget
-      reference: reference
-      known: known_variant_db
-    out: [ output_indelRealigner ]
-
-  BaseRecalibrator:
-    run: ../../tools/GATK-BaseRecalibrator.cwl  # FIXME: this is draft 3
-    in:
-      outputfile_BaseRecalibrator: outputFileName_BaseRecalibrator
-      inputBam_BaseRecalibrator: IndelRealigner/output_indelRealigner
-      reference: reference
-      covariate: covariate
-      known: known_variant_db
-    out: [ output_baseRecalibrator ]
-
-  PrintReads:
-    run: ../../tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
-    in:
-      outputfile_printReads: outputFileName_PrintReads
-      inputBam_printReads: IndelRealigner/output_indelRealigner
-      reference: reference
-      input_baseRecalibrator: BaseRecalibrator/output_baseRecalibrator
-    out: [ output_PrintReads ]
-
-  HaplotypeCaller:
-    run: ../../tools/GATK-HaplotypeCaller.cwl  # FIXME: this is draft 3
-    in:
-      outputfile_HaplotypeCaller: outputFileName_HaplotypeCaller
-      inputBam_HaplotypeCaller: PrintReads/output_PrintReads
-      reference: reference
-      dbsnp: dbsnp
-    out: [ output_HaplotypeCaller ]
+#  MarkDuplicates:
+#    run: ../../tools/picard-MarkDuplicates.cwl
+#    in:
+#      outputFileName_markDups: outputFileName_MarkDuplicates
+#      inputFileName_markDups: samtools-sort/sorted
+#      metricsFile: metricsFile_MarkDuplicates
+#      readSorted: readSorted_MarkDuplicates
+#      removeDuplicates: removeDuplicates_MarkDuplicates
+#      createIndex: createIndex_MarkDuplicates
+#    out: [ markDups_output ]
+#
+#  RealignTarget:
+#    run: ../../tools/GATK-RealignTargetCreator.cwl # FIXME: this is draft 3
+#    in:
+#      outputfile_realignTarget: outputFileName_RealignTargetCreator
+#      inputBam_realign: MarkDuplicates/markDups_output
+#      reference: reference
+#      known: known_variant_db
+#    out: [ output_realignTarget ]
+#
+#  IndelRealigner:
+#    run: ../../tools/GATK-IndelRealigner.cwl  # FIXME: this is draft 3
+#    in:
+#      outputfile_indelRealigner: outputFileName_IndelRealigner
+#      inputBam_realign: MarkDuplicates/markDups_output
+#      intervals: RealignTarget/output_realignTarget
+#      reference: reference
+#      known: known_variant_db
+#    out: [ output_indelRealigner ]
+#
+#  BaseRecalibrator:
+#    run: ../../tools/GATK-BaseRecalibrator.cwl  # FIXME: this is draft 3
+#    in:
+#      outputfile_BaseRecalibrator: outputFileName_BaseRecalibrator
+#      inputBam_BaseRecalibrator: IndelRealigner/output_indelRealigner
+#      reference: reference
+#      covariate: covariate
+#      known: known_variant_db
+#    out: [ output_baseRecalibrator ]
+#
+#  PrintReads:
+#    run: ../../tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
+#    in:
+#      outputfile_printReads: outputFileName_PrintReads
+#      inputBam_printReads: IndelRealigner/output_indelRealigner
+#      reference: reference
+#      input_baseRecalibrator: BaseRecalibrator/output_baseRecalibrator
+#    out: [ output_PrintReads ]
+#
+#  HaplotypeCaller:
+#    run: ../../tools/GATK-HaplotypeCaller.cwl  # FIXME: this is draft 3
+#    in:
+#      outputfile_HaplotypeCaller: outputFileName_HaplotypeCaller
+#      inputBam_HaplotypeCaller: PrintReads/output_PrintReads
+#      reference: reference
+#      dbsnp: dbsnp
+#    out: [ output_HaplotypeCaller ]
