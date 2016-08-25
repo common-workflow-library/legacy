@@ -155,7 +155,7 @@ steps:
   samtools-view:
     run: ../../tools/samtools-view.cwl
     in:
-      input: bwa-mem/sam
+      input: bwa-mem/output
       isbam: samtools-view-isbam
       sambam: samtools-view-sambam
       output_name: output_samtools-view
