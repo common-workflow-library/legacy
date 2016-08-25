@@ -156,6 +156,7 @@ inputs:
     default: 16
     inputBinding:
       prefix: -nt
+      position: 4
 
   java_arg:
     type: string
