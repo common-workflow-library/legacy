@@ -145,9 +145,9 @@ outputs:
     type: File
     outputSource: IndelRealigner/output_indelRealigner
 
-  outputfile_baseRecalibrator:
-    type: File
-    outputSource: BaseRecalibrator/output_baseRecalibrator
+#  outputfile_baseRecalibrator:
+#    type: File
+#    outputSource: BaseRecalibrator/output_baseRecalibrator
 #
 #  output_printReads:
 #    type: File
@@ -231,15 +231,15 @@ steps:
       known: known_variant_db
     out: [ output_indelRealigner ]
 
-  BaseRecalibrator:
-    run: ../../tools/GATK-BaseRecalibrator.cwl
-    in:
-      outputfile_BaseRecalibrator: outputFileName_BaseRecalibrator
-      inputBam_BaseRecalibrator: IndelRealigner/output_indelRealigner
-      reference: reference
-      covariate: covariate
-      known: known_variant_db
-    out: [ output_baseRecalibrator ]
+#  BaseRecalibrator:
+#    run: ../../tools/GATK-BaseRecalibrator.cwl
+#    in:
+#      outputfile_BaseRecalibrator: outputFileName_BaseRecalibrator
+#      inputBam_BaseRecalibrator: IndelRealigner/output_indelRealigner
+#      reference: reference
+#      covariate: covariate
+#      known: known_variant_db
+#    out: [ output_baseRecalibrator ]
 
 #  PrintReads:
 #    run: ../../tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
