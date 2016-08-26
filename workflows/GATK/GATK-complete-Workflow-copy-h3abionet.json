@@ -65,7 +65,7 @@ RawBlameHistory    49 lines (47 sloc)  2.08 KB
     "end_mode":"PE",
     "nthreads":4,
     "illuminaclip":"2:30:10:1:true",
-    "input_adapters_file":"/data_small/small_fastq/NexteraPE-PE.fa"
+    "input_adapters_file":"NexteraPE-PE.fa"
 }
 Contact GitHub API Training Shop Blog About
 © 2016 GitHub, Inc. Terms Privacy Security Status Help
