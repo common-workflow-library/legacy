@@ -1,8 +1,28 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @mustafaghali
+ Unwatch 34
+  Star 50
+ Fork 33 common-workflow-language/workflows
+ Code  Issues 10  Pull requests 21  Wiki  Pulse  Graphs
+Branch: h3abionet-gatk… Find file Copy pathworkflows/workflows/GATK/GATK-complete-Workflow-copy-h3abionet.json
+91f6ee5  2 hours ago
+@hocinebendou hocinebendou Bamstat and Depth of coverage in workflow
+2 contributors @briandoconnor @hocinebendou
+RawBlameHistory    49 lines (47 sloc)  2.08 KB
 {
-     "reference": {
-        "class": "File",
-        "path": "genome.fa.gz"
+    "reference": {
+     "class": "File",
+     "path": "genome.fa"
     },
+    "uncompressed_reference": {
+       "class": "File",
+       "path": "genome.fa"
+   },
     "reads": [{"class": "File", "path": "FQ_1.fastq"}, {"class": "File", "path": "FQ_2.fastq"}  ],
     "dbsnp": {
         "class": "File",
@@ -12,6 +32,7 @@
     "output_RefDictionaryFile": "genome.fa.dict",
     "tmpdir": "./tmp",
     "bwa_output_name": "bwa-mem-2016-08-04.sam",
+    "bwa_read_group": '@RG\tID:1\tPL:ILLUMINA\tPU:pu\tLB:group1\tSM:SAMPLEID',
     "samtools-view-isbam":true,
     "samtools-view-sambam": "-Sb",
     "output_samtools-view": "samtools-view-2016-08-04.bam",
@@ -28,4 +49,18 @@
     "covariate": [ "CycleCovariate", "ContextCovariate" ],
     "outputFileName_PrintReads": "PrintReads-2016-08-04.bam",
     "outputFileName_HaplotypeCaller": "HaplotypeCaller-2016-08-04.vcf",
+
+    "depth_omitIntervalStatistics" : true,
+    "depth_omitDepthOutputAtEachBase" : true,
+    "depth_inputBam_DepthOfCoverage": {
+        "class": "File",
+        "path": "/data_small/small_bam/project.NIST_NIST7035_H7AP8ADXX_TAAGGCGA_1_NA12878.bwa.markDuplicates.bam"
+    },
+    "reference": {
+        "class": "File",
+        "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta",
+    },
+    "depth_outputfile_DepthOfCoverage": "sample_report",
 }
+Contact GitHub API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Status Help
