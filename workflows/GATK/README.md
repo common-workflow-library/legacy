@@ -77,6 +77,26 @@ We use the CWL reference implementation.
     cwltool --cachedir <path_to_tmp_dir> --debug --non-strict --tmpdir-prefix  GATK-complete-Workflow-h3abionet.cwl GATK-complete-Workflow-copy-h3abionet.json
 ```
 
+# Output
+
+Here's the sample output.
+
+```
+-rw-r--r-- 1 ubuntu ubuntu 497M Aug 26 15:19 samtools-view-2016-08-04.bam
+-rw-r--r-- 1 ubuntu ubuntu 403M Aug 26 15:19 samtools-sort-2016-08-04.bam
+-rw-r--r-- 1 ubuntu ubuntu 9.3M Aug 26 15:19 HaplotypeCaller-2016-08-04.vcf
+-rw-r--r-- 1 ubuntu ubuntu 2.0M Aug 26 15:19 bamstats_report.zip
+-rw-r--r-- 1 ubuntu ubuntu 875K Aug 26 15:19 BaseRecalibrator-2016-08-04.table
+-rw-r--r-- 1 ubuntu ubuntu 4.2M Aug 26 15:19 samtools-sort-2016-08-04.bai
+-rw-rw-r-- 1 ubuntu ubuntu 1.6G Aug 26 15:19 bwa-mem-2016-08-04.sam
+-rw-r--r-- 1 ubuntu ubuntu 862M Aug 26 15:19 PrintReads-2016-08-04.bam
+-rw-r--r-- 1 ubuntu ubuntu  81M Aug 26 15:19 RealignTargetCreator-2016-08-04.intervals
+-rw-r--r-- 1 ubuntu ubuntu 408M Aug 26 15:19 MarkDuplicates-2016-08-04.bam
+-rw-r--r-- 1 ubuntu ubuntu 414M Aug 26 15:19 IndelRealigner-2016-08-04.bam
+-rw-r--r-- 1 ubuntu ubuntu 5.2M Aug 26 15:19 MarkDuplicates-2016-08-04.bai
+-rw-r--r-- 1 ubuntu ubuntu  13K Aug 26 15:19 genome.fa.dict
+```
+
 # TODO
 
 - [ ] streaming between steps to improve throughput, currently not supported via the reference implementation
