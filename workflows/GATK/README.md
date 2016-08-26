@@ -3,6 +3,8 @@
 ##Overview
 A [GATK best-practices](https://software.broadinstitute.org/gatk/best-practices/bp_3step.php?case=GermShortWGS) germline workflow designed to work with GATK 3.5  (Van der Auwera et al., 2013).
 
+More details can be found in our [Google doc](https://docs.google.com/document/d/1siCZrequI4plggz3ho351NnX57CoyCJl9GWp3azlxfU/edit#).
+
 ## Pipeline
 
 ![pipeline](gatk_germline.png)
@@ -99,6 +101,8 @@ Here's the sample output.
 
 # TODO
 
+See our [Trello board](https://trello.com/b/pcWKqbXv/stream-b-ngs-variant-calling-illumina) for more information.
+
 - [ ] streaming between steps to improve throughput, currently not supported via the reference implementation
    - [ ] need to stream between samtools/bwa steps for performance
 - [ ] properly configuring/exposing threads per step to maximize speed of the steps, really need to refer to [GATK's guidelines](http://gatkforums.broadinstitute.org/gatk/discussion/1975/how-can-i-use-parallelism-to-make-gatk-tools-run-faster) for this since each tool has an optimal setting.
@@ -116,4 +120,4 @@ Here's the sample output.
 - [ ] add scatter/gather based on chr to the workflow
 - [ ] DepthOfCoverage need to have the input from view and sort steps in the same directory (e.g. the bam and bai need to be mounted in the same directory). CWL puts each input on it's own path and these are read only.  Michael is going to help us work around this.  In the mean time, DepthOfCoverage is commented out
 - [ ] Properly make and pass around the .idx files since many of the tools
-- [ ] multiple fastq sets as input needs to be supported 
+- [ ] multiple fastq sets as input needs to be supported
