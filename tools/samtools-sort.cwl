@@ -46,7 +46,7 @@ inputs:
 
   temp_dir:
     type: string?
-    default: '$TMPDIR'
+    default: $TMPDIR
     inputBinding:
       position: 1
       prefix: -T

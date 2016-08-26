@@ -153,11 +153,11 @@ outputs:
     type: File
     outputSource: bamstat/bamstats_report
 
-  output_DepthOfCoverage:
-    type:
-      type: array
-      items: File
-    outputSource: DepthOfCoverage/output_DepthOfCoverage
+#  output_DepthOfCoverage:
+#    type:
+#      type: array
+#      items: File
+#    outputSource: DepthOfCoverage/output_DepthOfCoverage
 
   samtoolsIndex_output:
     type: File
@@ -243,16 +243,16 @@ steps:
       bam_input: samtools-sort/sorted
     out: [ bamstats_report ]
 
-  DepthOfCoverage:
-    run: ../../tools/GATK-DepthOfCoverage.cwl
-    in:
-      omitIntervalStatistics: depth_omitIntervalStatistics
-      omitDepthOutputAtEachBase: depth_omitDepthOutputAtEachBase
-      inputBam_DepthOfCoverage: samtools-sort/sorted
-      reference: reference
-      outputfile_DepthOfCoverage: depth_outputfile_DepthOfCoverage
-      threads: gatk_threads
-    out: [ output_DepthOfCoverage ]
+#  DepthOfCoverage:
+#    run: ../../tools/GATK-DepthOfCoverage.cwl
+#    in:
+#      omitIntervalStatistics: depth_omitIntervalStatistics
+#      omitDepthOutputAtEachBase: depth_omitDepthOutputAtEachBase
+#      inputBam_DepthOfCoverage: samtools-sort/sorted
+#      reference: reference
+#      outputfile_DepthOfCoverage: depth_outputfile_DepthOfCoverage
+#      threads: gatk_threads
+#    out: [ output_DepthOfCoverage ]
 
   MarkDuplicates:
     run: ../../tools/picard-MarkDuplicates.cwl
