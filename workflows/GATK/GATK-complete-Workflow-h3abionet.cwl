@@ -215,6 +215,13 @@ steps:
       output_name: output_samtools-sort
     out: [ sorted ]
 
+  samtools-index:
+    run: ../../tools/samtools-index.cwl
+    in:
+      input: samtools-sort/sorted
+      bai: samtools-index-bai
+    out: [ index ]
+
   bamstat:
     run: ../../tools/bamstat.cwl
     in:
@@ -230,13 +237,6 @@ steps:
       reference: reference
       outputfile_DepthOfCoverage: depth_outputfile_DepthOfCoverage
     out: [ output_DepthOfCoverage ]
-
-  samtools-index:
-    run: ../../tools/samtools-index.cwl
-    in:
-      input: samtools-sort/sorted
-      bai: samtools-index-bai
-    out: [ index ]
 
   MarkDuplicates:
     run: ../../tools/picard-MarkDuplicates.cwl
