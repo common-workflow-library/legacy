@@ -12,7 +12,7 @@ A GATK best-practices germline workflow designed to work with GATK 3.5.
 
 # TODO
 
-* streaming between steps to improve throughput
+* streaming between steps to improve throughput, currently not supported via the reference implementation  
 * properly configuring/exposing threads per step to maximize speed of the steps
 * remove the dictionary creation steps
 * clearly document the reference files needed
@@ -25,4 +25,4 @@ A GATK best-practices germline workflow designed to work with GATK 3.5.
 * output cleanup, we don't need to save all the files the workflow currently does
 * zip file for DepthOfCoverage
 * need to stream between samtools/bwa steps for performance
-* add scatter/gather based on chr to the workflow 
+* add scatter/gather based on chr to the workflow
