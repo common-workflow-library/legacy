@@ -436,6 +436,14 @@ inputs:
       position: 24
       prefix: --maxNumHaplotypesInPopulation
     doc: Maximum number of haplotypes to consider for your population
+
+  threads:
+    type: int
+    default: 4
+    inputBinding:
+      prefix: -nct
+      position: 56
+
 outputs:
   output_HaplotypeCaller:
     type: File

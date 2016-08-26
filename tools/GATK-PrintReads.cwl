@@ -149,6 +149,12 @@ inputs:
     inputBinding:
       position: 1
 
+  threads:
+    type: int
+    default: 4
+    inputBinding:
+      prefix: -nct
+      position: 14
 
 outputs:
   output_printReads:

@@ -179,6 +179,13 @@ inputs:
     inputBinding:
       position: 1
 
+  threads:
+    type: int
+    default: 4
+    inputBinding:
+      prefix: -nt
+      position: 4
+      
   nWayOut:
     type: string?
     inputBinding:

@@ -28,6 +28,14 @@ inputs:
     type: string
     doc: read group
 
+  bwa_threads:
+    type: int
+    doc: number of threads
+
+  gatk_threads:
+    type: int
+    doc: number of threads
+
   output_RefDictionaryFile:
     type: string
     doc: output file name for picard create dictionary command from picard toolkit
@@ -197,6 +205,7 @@ steps:
       dictCreated: create-dict/output
       output_filename: bwa_output_name
       read_group_str: bwa_read_group
+      threads: bwa_threads
     out: [ output ]
 
   samtools-view:
@@ -236,6 +245,7 @@ steps:
       inputBam_DepthOfCoverage: samtools-sort/sorted
       reference: reference
       outputfile_DepthOfCoverage: depth_outputfile_DepthOfCoverage
+      threads: gatk_threads
     out: [ output_DepthOfCoverage ]
 
   MarkDuplicates:
@@ -258,6 +268,7 @@ steps:
       inputBam_realign: MarkDuplicates/markDups_output
       reference: uncompressed_reference
       known: known_variant_db
+      threads: gatk_threads
     out: [ output_realignTarget ]
 
   IndelRealigner:
@@ -268,6 +279,7 @@ steps:
       intervals: RealignTarget/output_realignTarget
       reference: uncompressed_reference
       known: known_variant_db
+      threads: gatk_threads
     out: [ output_indelRealigner ]
 
   BaseRecalibrator:
@@ -278,6 +290,7 @@ steps:
       reference: reference
       covariate: covariate
       known: known_variant_db
+      threads: gatk_threads
     out: [ output_baseRecalibrator ]
 
   PrintReads:
@@ -287,6 +300,7 @@ steps:
       inputBam_printReads: IndelRealigner/output_indelRealigner
       reference: reference
       input_baseRecalibrator: BaseRecalibrator/output_baseRecalibrator
+      threads: gatk_threads
     out: [ output_printReads ]
 
   HaplotypeCaller:
@@ -296,4 +310,5 @@ steps:
       inputBam_HaplotypeCaller: PrintReads/output_printReads
       reference: reference
       dbsnp: dbsnp
+      threads: gatk_threads
     out: [ output_HaplotypeCaller ]

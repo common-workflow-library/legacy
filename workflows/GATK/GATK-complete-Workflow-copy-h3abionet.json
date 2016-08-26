@@ -17,6 +17,8 @@
     "tmpdir": "./tmp",
     "bwa_output_name": "bwa-mem-2016-08-04.sam",
     "bwa_read_group": '@RG\tID:1\tPL:ILLUMINA\tPU:pu\tLB:group1\tSM:SAMPLEID',
+    "bwa_threads": 16,
+    "gatk_threads": 8,
     "samtools-view-isbam":true,
     "samtools-view-sambam": "-Sb",
     "output_samtools-view": "samtools-view-2016-08-04.bam",

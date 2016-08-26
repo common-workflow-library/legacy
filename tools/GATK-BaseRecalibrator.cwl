@@ -181,6 +181,13 @@ inputs:
     doc: One or more covariates to be used in the recalibration. Can be specified
       multiple times
 
+    threads:
+      type: int
+      default: 4
+      inputBinding:
+        prefix: -nct
+        position: 26
+
 outputs:
   output_baseRecalibrator:
     type: File
