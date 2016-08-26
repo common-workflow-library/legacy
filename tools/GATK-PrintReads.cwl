@@ -92,6 +92,7 @@ inputs:
     - .64.pac
     - .64.sa
     - .fai
+    - ^.dict
   platform:
     type: string?
     inputBinding:

@@ -116,10 +116,6 @@ inputs:
     type: boolean?
     doc: Do not output depth of coverage at each base
 
-  depth_inputBam_DepthOfCoverage:
-    type: File
-    doc: bam file, make sure it was aligned to the reference files used
-
   depth_outputfile_DepthOfCoverage:
     type: string?
     doc: name of the output report basename
@@ -230,7 +226,7 @@ steps:
     in:
       omitIntervalStatistics: depth_omitIntervalStatistics
       omitDepthOutputAtEachBase: depth_omitDepthOutputAtEachBase
-      inputBam_DepthOfCoverage: depth_inputBam_DepthOfCoverage
+      inputBam_DepthOfCoverage: samtools-sort/sorted
       reference: reference
       outputfile_DepthOfCoverage: depth_outputfile_DepthOfCoverage
     out: [ output_DepthOfCoverage ]
