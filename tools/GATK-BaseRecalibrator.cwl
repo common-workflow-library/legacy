@@ -107,7 +107,7 @@ inputs:
     secondaryFiles:
     - ^.bai
     doc: bam file produced after indelRealigner
-  knownSites:
+  known:
     type:
       - "null" 
       - type: array
@@ -115,6 +115,7 @@ inputs:
         inputBinding:
           prefix: --knownSites
     inputBinding:
+      position: 7
     doc: 'Any number of VCF files representing known SNPs and/or indels. Could be
       e.g. dbSNP and/or official 1000 Genomes indel calls. SNPs in these files will
       be ignored unless the --mismatchFraction argument is used. optional parameter.'
@@ -170,10 +171,14 @@ inputs:
       prefix: --mismatches_default_quality
     doc: default quality for the base mismatches covariate
   covariate:
-    type: string?
+    type:
+      - "null"
+      - type: array
+        items: string
+        inputBinding:
+          prefix: --covariate
     inputBinding:
       position: 25
-      prefix: --covariate
     doc: One or more covariates to be used in the recalibration. Can be specified
       multiple times
 outputs:

@@ -6,6 +6,7 @@ cwlVersion: v1.0
 requirements:
   - class: StepInputExpressionRequirement
   - class: InlineJavascriptRequirement
+  - class: ScatterFeatureRequirement
 
 inputs:
   reference:
@@ -108,21 +109,21 @@ inputs:
     type: string[]?
     doc: required for base recalibrator
   
-  depth_omitIntervalStatistics:
-    type: boolean?
-    doc: Do not calculate per-interval statistics
+  #depth_omitIntervalStatistics:
+  #  type: boolean?
+  #  doc: Do not calculate per-interval statistics
 
-  depth_omitDepthOutputAtEachBase:
-    type: boolean?
-    doc: Do not output depth of coverage at each base
+  #depth_omitDepthOutputAtEachBase:
+  #  type: boolean?
+  #  doc: Do not output depth of coverage at each base
 
-  depth_inputBam_DepthOfCoverage:
-    type: File
-    doc: bam file, make sure it was aligned to the reference files used
+  #depth_inputBam_DepthOfCoverage:
+  #  type: File
+  #  doc: bam file, make sure it was aligned to the reference files used
 
-  depth_outputfile_DepthOfCoverage:
-    type: string?
-    doc: name of the output report basename
+  #depth_outputfile_DepthOfCoverage:
+  #  type: string?
+  #  doc: name of the output report basename
 
 outputs:
   bwamem_output:
@@ -145,31 +146,31 @@ outputs:
     type: File
     outputSource: bamstat/bamstats_report
 
-  output_DepthOfCoverage:
-    type:
-      type: array
-      items: File
-    outputSource: DepthOfCoverage/output_DepthOfCoverage
+  #output_DepthOfCoverage:
+  #  type:
+  #    type: array
+  #    items: File
+  #  outputSource: DepthOfCoverage/output_DepthOfCoverage
 
   samtoolsIndex_output:
     type: File
     outputSource: samtools-index/index
 
-  MarkDuplicates_output:
-    type: File
-    outputSource: MarkDuplicates/markDups_output
+ # MarkDuplicates_output:
+ #   type: File
+ #   outputSource: MarkDuplicates/markDups_output
 
-  MarkDuplicates_output_index:
-    type: File
-    outputSource: MarkDuplicates/markDups_output_index
+ # MarkDuplicates_output_index:
+ #   type: File
+ #   outputSource: MarkDuplicates/markDups_output_index
 
-  output_realignTarget:
-    type: File
-    outputSource: RealignTarget/output_realignTarget
+ # output_realignTarget:
+ #   type: File
+ #   outputSource: RealignTarget/output_realignTarget
 
-  output_indelRealigner:
-    type: File
-    outputSource: IndelRealigner/output_indelRealigner
+ # output_indelRealigner:
+ #   type: File
+ #   outputSource: IndelRealigner/output_indelRealigner
 
 
 #  outputfile_baseRecalibrator:
@@ -225,15 +226,15 @@ steps:
       bam_input: samtools-sort/sorted
     out: [ bamstats_report ]
 
-  DepthOfCoverage:
-    run: ../../tools/GATK-DepthOfCoverage.cwl
-    in:
-      omitIntervalStatistics: depth_omitIntervalStatistics
-      omitDepthOutputAtEachBase: depth_omitDepthOutputAtEachBase
-      inputBam_DepthOfCoverage: depth_inputBam_DepthOfCoverage
-      reference: reference
-      outputfile_DepthOfCoverage: depth_outputfile_DepthOfCoverage
-    out: [ output_DepthOfCoverage ]
+  #DepthOfCoverage:
+  #  run: ../../tools/GATK-DepthOfCoverage.cwl
+  #  in:
+  #    omitIntervalStatistics: depth_omitIntervalStatistics
+  #    omitDepthOutputAtEachBase: depth_omitDepthOutputAtEachBase
+  #    inputBam_DepthOfCoverage: depth_inputBam_DepthOfCoverage
+  #    reference: reference
+  #    outputfile_DepthOfCoverage: depth_outputfile_DepthOfCoverage
+  #  out: [ output_DepthOfCoverage ]
 
   samtools-index:
     run: ../../tools/samtools-index.cwl
@@ -274,15 +275,16 @@ steps:
       known: known_variant_db
     out: [ output_indelRealigner ]
 
-#  BaseRecalibrator:
-#    run: ../../tools/GATK-BaseRecalibrator.cwl
-#    in:
-#      outputfile_BaseRecalibrator: outputFileName_BaseRecalibrator
-#      inputBam_BaseRecalibrator: IndelRealigner/output_indelRealigner
-#      reference: reference
-#      covariate: covariate
-#      known: known_variant_db
-#    out: [ output_baseRecalibrator ]
+  BaseRecalibrator:
+    run: ../../tools/GATK-BaseRecalibrator.cwl
+    in:
+      outputfile_BaseRecalibrator: outputFileName_BaseRecalibrator
+      inputBam_BaseRecalibrator: IndelRealigner/output_indelRealigner
+      #inputBam_BaseRecalibrator: samtools-sort/sorted
+      reference: reference
+      covariate: covariate
+      known: known_variant_db
+    out: [ output_baseRecalibrator ]
 
 #  PrintReads:
 #    run: ../../tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
