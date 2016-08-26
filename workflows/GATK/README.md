@@ -116,3 +116,4 @@ Here's the sample output.
 - [ ] add scatter/gather based on chr to the workflow
 - [ ] DepthOfCoverage need to have the input from view and sort steps in the same directory (e.g. the bam and bai need to be mounted in the same directory). CWL puts each input on it's own path and these are read only.  Michael is going to help us work around this.  In the mean time, DepthOfCoverage is commented out
 - [ ] Properly make and pass around the .idx files since many of the tools
+- [ ] multiple fastq sets as input needs to be supported 
