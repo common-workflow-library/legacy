@@ -174,8 +174,9 @@ inputs:
       type: array
       items: string
       inputBinding:
-        position: 25
         prefix: --covariate
+    inputBinding:
+      position: 25
     doc: One or more covariates to be used in the recalibration. Can be specified
       multiple times
 
