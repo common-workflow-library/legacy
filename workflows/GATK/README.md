@@ -25,3 +25,4 @@ A GATK best-practices germline workflow designed to work with GATK 3.5.
 * output cleanup, we don't need to save all the files the workflow currently does
 * zip file for DepthOfCoverage
 * need to stream between samtools/bwa steps for performance
+* add scatter/gather based on chr to the workflow 

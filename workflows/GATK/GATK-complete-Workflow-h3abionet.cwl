@@ -176,14 +176,14 @@ outputs:
     type: File
     outputSource: BaseRecalibrator/output_baseRecalibrator
 
-#  output_printReads:
-#    type: File
-#    outputSource: PrintReads/output_PrintReads
-#
-#  output_HaplotypeCaller:
-#    type: File
-#    outputSource: HaplotypeCaller/output_HaplotypeCaller
-#
+  output_printReads:
+    type: File
+    outputSource: PrintReads/output_PrintReads
+
+  output_HaplotypeCaller:
+    type: File
+    outputSource: HaplotypeCaller/output_HaplotypeCaller
+
 steps:
 
   create-dict:
@@ -284,20 +284,20 @@ steps:
       known: known_variant_db
     out: [ output_baseRecalibrator ]
 
-#  PrintReads:
-#    run: ../../tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
-#    in:
-#      outputfile_printReads: outputFileName_PrintReads
-#      inputBam_printReads: IndelRealigner/output_indelRealigner
-#      reference: reference
-#      input_baseRecalibrator: BaseRecalibrator/output_baseRecalibrator
-#    out: [ output_PrintReads ]
-#
-#  HaplotypeCaller:
-#    run: ../../tools/GATK-HaplotypeCaller.cwl  # FIXME: this is draft 3
-#    in:
-#      outputfile_HaplotypeCaller: outputFileName_HaplotypeCaller
-#      inputBam_HaplotypeCaller: PrintReads/output_PrintReads
-#      reference: reference
-#      dbsnp: dbsnp
-#    out: [ output_HaplotypeCaller ]
+  PrintReads:
+    run: ../../tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
+    in:
+      outputfile_printReads: outputFileName_PrintReads
+      inputBam_printReads: IndelRealigner/output_indelRealigner
+      reference: reference
+      input_baseRecalibrator: BaseRecalibrator/output_baseRecalibrator
+    out: [ output_PrintReads ]
+
+  HaplotypeCaller:
+    run: ../../tools/GATK-HaplotypeCaller.cwl  # FIXME: this is draft 3
+    in:
+      outputfile_HaplotypeCaller: outputFileName_HaplotypeCaller
+      inputBam_HaplotypeCaller: PrintReads/output_PrintReads
+      reference: reference
+      dbsnp: dbsnp
+    out: [ output_HaplotypeCaller ]
