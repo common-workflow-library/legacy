@@ -44,6 +44,15 @@ inputs:
       prefix: -o
     doc: Desired output filename.
 
+  temp_dir:
+    type: string?
+    default: '$TMPDIR'
+    inputBinding:
+      position: 1
+      prefix: -T
+    doc: |
+      working temp directory
+
   sort_by_name:
     type: boolean?
     inputBinding:

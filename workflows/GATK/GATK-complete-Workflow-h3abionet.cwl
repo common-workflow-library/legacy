@@ -28,6 +28,18 @@ inputs:
     type: string
     doc: read group
 
+  bwa_threads:
+    type: int
+    doc: number of threads
+
+  gatk_threads:
+    type: int
+    doc: number of threads
+
+  samtools_threads:
+    type: int
+    doc: number of threads
+
   output_RefDictionaryFile:
     type: string
     doc: output file name for picard create dictionary command from picard toolkit
@@ -116,10 +128,6 @@ inputs:
     type: boolean?
     doc: Do not output depth of coverage at each base
 
-  depth_inputBam_DepthOfCoverage:
-    type: File
-    doc: bam file, make sure it was aligned to the reference files used
-
   depth_outputfile_DepthOfCoverage:
     type: string?
     doc: name of the output report basename
@@ -176,14 +184,14 @@ outputs:
     type: File
     outputSource: BaseRecalibrator/output_baseRecalibrator
 
-#  output_printReads:
-#    type: File
-#    outputSource: PrintReads/output_PrintReads
-#
-#  output_HaplotypeCaller:
-#    type: File
-#    outputSource: HaplotypeCaller/output_HaplotypeCaller
-#
+  output_printReads:
+    type: File
+    outputSource: PrintReads/output_printReads
+
+  output_HaplotypeCaller:
+    type: File
+    outputSource: HaplotypeCaller/output_HaplotypeCaller
+
 steps:
 
   create-dict:
@@ -201,6 +209,7 @@ steps:
       dictCreated: create-dict/output
       output_filename: bwa_output_name
       read_group_str: bwa_read_group
+      threads: bwa_threads
     out: [ output ]
 
   samtools-view:
@@ -210,6 +219,7 @@ steps:
       isbam: samtools-view-isbam
       sambam: samtools-view-sambam
       output_name: output_samtools-view
+      threads: samtools_threads
     out: [ output ]
 
   samtools-sort:
@@ -217,7 +227,15 @@ steps:
     in:
       input: samtools-view/output
       output_name: output_samtools-sort
+      threads: samtools_threads
     out: [ sorted ]
+
+  samtools-index:
+    run: ../../tools/samtools-index.cwl
+    in:
+      input: samtools-sort/sorted
+      bai: samtools-index-bai
+    out: [ index ]
 
   bamstat:
     run: ../../tools/bamstat.cwl
@@ -230,17 +248,11 @@ steps:
     in:
       omitIntervalStatistics: depth_omitIntervalStatistics
       omitDepthOutputAtEachBase: depth_omitDepthOutputAtEachBase
-      inputBam_DepthOfCoverage: depth_inputBam_DepthOfCoverage
+      inputBam_DepthOfCoverage: samtools-sort/sorted
       reference: reference
       outputfile_DepthOfCoverage: depth_outputfile_DepthOfCoverage
+      threads: gatk_threads
     out: [ output_DepthOfCoverage ]
-
-  samtools-index:
-    run: ../../tools/samtools-index.cwl
-    in:
-      input: samtools-sort/sorted
-      bai: samtools-index-bai
-    out: [ index ]
 
   MarkDuplicates:
     run: ../../tools/picard-MarkDuplicates.cwl
@@ -262,6 +274,7 @@ steps:
       inputBam_realign: MarkDuplicates/markDups_output
       reference: uncompressed_reference
       known: known_variant_db
+      threads: gatk_threads
     out: [ output_realignTarget ]
 
   IndelRealigner:
@@ -272,6 +285,7 @@ steps:
       intervals: RealignTarget/output_realignTarget
       reference: uncompressed_reference
       known: known_variant_db
+      threads: gatk_threads
     out: [ output_indelRealigner ]
 
   BaseRecalibrator:
@@ -282,22 +296,25 @@ steps:
       reference: reference
       covariate: covariate
       known: known_variant_db
+      threads: gatk_threads
     out: [ output_baseRecalibrator ]
 
-#  PrintReads:
-#    run: ../../tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
-#    in:
-#      outputfile_printReads: outputFileName_PrintReads
-#      inputBam_printReads: IndelRealigner/output_indelRealigner
-#      reference: reference
-#      input_baseRecalibrator: BaseRecalibrator/output_baseRecalibrator
-#    out: [ output_PrintReads ]
-#
-#  HaplotypeCaller:
-#    run: ../../tools/GATK-HaplotypeCaller.cwl  # FIXME: this is draft 3
-#    in:
-#      outputfile_HaplotypeCaller: outputFileName_HaplotypeCaller
-#      inputBam_HaplotypeCaller: PrintReads/output_PrintReads
-#      reference: reference
-#      dbsnp: dbsnp
-#    out: [ output_HaplotypeCaller ]
+  PrintReads:
+    run: ../../tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
+    in:
+      outputfile_printReads: outputFileName_PrintReads
+      inputBam_printReads: IndelRealigner/output_indelRealigner
+      reference: reference
+      input_baseRecalibrator: BaseRecalibrator/output_baseRecalibrator
+      threads: gatk_threads
+    out: [ output_printReads ]
+
+  HaplotypeCaller:
+    run: ../../tools/GATK-HaplotypeCaller.cwl  # FIXME: this is draft 3
+    in:
+      outputfile_HaplotypeCaller: outputFileName_HaplotypeCaller
+      inputBam_HaplotypeCaller: PrintReads/output_printReads
+      reference: reference
+      dbsnp: dbsnp
+      threads: gatk_threads
+    out: [ output_HaplotypeCaller ]

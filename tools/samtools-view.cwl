@@ -105,6 +105,7 @@ inputs:
       prefix: -@
     doc: |
       number of BAM compression threads [0]
+
   fastcompression:
     type: boolean
     default: false

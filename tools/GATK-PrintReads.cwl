@@ -92,6 +92,7 @@ inputs:
     - .64.pac
     - .64.sa
     - .fai
+    - ^.dict
   platform:
     type: string?
     inputBinding:
@@ -148,6 +149,12 @@ inputs:
     inputBinding:
       position: 1
 
+  threads:
+    type: int
+    default: 4
+    inputBinding:
+      prefix: -nct
+      position: 14
 
 outputs:
   output_printReads:

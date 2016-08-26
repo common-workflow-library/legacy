@@ -12,6 +12,7 @@ A GATK best-practices germline workflow designed to work with GATK 3.5.
 
 # TODO
 
+
 - [ ] streaming between steps to improve throughput
    - [ ] need to stream between samtools/bwa steps for performance
 - [ ] properly configuring/exposing threads per step to maximize speed of the steps

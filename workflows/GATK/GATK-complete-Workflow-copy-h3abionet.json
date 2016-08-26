@@ -17,6 +17,9 @@
     "tmpdir": "./tmp",
     "bwa_output_name": "bwa-mem-2016-08-04.sam",
     "bwa_read_group": '@RG\tID:1\tPL:ILLUMINA\tPU:pu\tLB:group1\tSM:SAMPLEID',
+    "bwa_threads": 16,
+    "gatk_threads": 8,
+    "samtools_threads": 4,
     "samtools-view-isbam":true,
     "samtools-view-sambam": "-Sb",
     "output_samtools-view": "samtools-view-2016-08-04.bam",
@@ -36,13 +39,5 @@
 
     "depth_omitIntervalStatistics" : true,
     "depth_omitDepthOutputAtEachBase" : true,
-    "depth_inputBam_DepthOfCoverage": {
-        "class": "File",
-        "path": "/data_small/small_bam/project.NIST_NIST7035_H7AP8ADXX_TAAGGCGA_1_NA12878.bwa.markDuplicates.bam"
-    },
-    "reference": {
-        "class": "File",
-        "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta",
-    },
     "depth_outputfile_DepthOfCoverage": "sample_report",
 }
