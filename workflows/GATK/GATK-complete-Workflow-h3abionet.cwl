@@ -285,7 +285,6 @@ steps:
       intervals: RealignTarget/output_realignTarget
       reference: uncompressed_reference
       known: known_variant_db
-      threads: gatk_threads
     out: [ output_indelRealigner ]
 
   BaseRecalibrator:

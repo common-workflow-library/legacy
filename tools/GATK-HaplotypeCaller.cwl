@@ -437,9 +437,9 @@ inputs:
       prefix: --maxNumHaplotypesInPopulation
     doc: Maximum number of haplotypes to consider for your population
 
+# recommended not to use, see http://gatkforums.broadinstitute.org/gatk/discussion/1975/how-can-i-use-parallelism-to-make-gatk-tools-run-faster
   threads:
-    type: int
-    default: 4
+    type: int?
     inputBinding:
       prefix: -nct
       position: 56
