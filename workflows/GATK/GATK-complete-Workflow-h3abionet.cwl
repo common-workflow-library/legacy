@@ -315,4 +315,5 @@ steps:
       inputBam_HaplotypeCaller: PrintReads/output_printReads
       reference: reference
       dbsnp: dbsnp
+      threads: gatk_threads
     out: [ output_HaplotypeCaller ]

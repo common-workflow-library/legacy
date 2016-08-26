@@ -438,12 +438,11 @@ inputs:
     doc: Maximum number of haplotypes to consider for your population
 
 # recommended not to use, see http://gatkforums.broadinstitute.org/gatk/discussion/1975/how-can-i-use-parallelism-to-make-gatk-tools-run-faster
-#  threads:
-#    type: int
-#    default: 4
-#    inputBinding:
-#      prefix: -nct
-#      position: 56
+  threads:
+    type: int?
+    inputBinding:
+      prefix: -nct
+      position: 56
 
 outputs:
   output_HaplotypeCaller:
