@@ -1,0 +1,19 @@
+haplotypecaller_snps_vcf:
+  class: File
+  path: /mnt/test-YS/haplotypeCaller.vcf
+multithreading_nt:
+reference:
+  class: File
+  path:  /mnt/bwa-mem-index/hg19/genome.fa
+resource_omni:
+  class: File
+  path: /mnt/gatk_bundle/2.8/b37/1000G_omni2.5.b37.vcf
+resource_dbsnp:
+  class: File
+  path:  /mnt/gatk_bundle/2.8/b37/dbsnp_138.b37.vcf
+resource_1kg:
+  class: File
+  path: /mnt/gatk_bundle/2.8/b37/1000G_phase1.snps.high_confidence.b37.vcf
+resource_hapmap:
+  class: File
+  path: /mnt/gatk_bundle/2.8/b37/hapmap_3.3.b37.vcf
