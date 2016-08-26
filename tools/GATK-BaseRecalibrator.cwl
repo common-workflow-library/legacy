@@ -176,7 +176,6 @@ inputs:
       inputBinding:
         position: 25
         prefix: --covariate
-        separate: false
     doc: One or more covariates to be used in the recalibration. Can be specified
       multiple times
 
