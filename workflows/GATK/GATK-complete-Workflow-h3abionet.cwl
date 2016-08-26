@@ -15,6 +15,31 @@ inputs:
   reads:
     type: File[]?
     doc: files containing the paired end reads in fastq format required for bwa-mem
+    
+  phred:
+    type: string
+    doc: |
+       "33"|"64"
+       -phred33 ("33") or -phred64 ("64") specifies the base quality encoding. Default: -phred64
+  
+  input_adapters_file:
+    type: File
+    doc: FASTA file containing adapters, PCR sequences, etc. It is used to search
+      for and remove these sequences in the input FASTQ file(s)
+ 
+  end_mode:
+    type: string
+    doc: |
+      SE|PE
+      Single End (SE) or Paired End (PE) mode
+	  
+  nthreads:
+    type: int
+    doc: Number of threads.
+  
+  illuminaclip:
+    type: string
+    doc:  Find and remove Illumina adapters. 
 
   bwa_output_name:
     type: string
@@ -101,6 +126,19 @@ inputs:
     doc: required for base recalibrator
 
 outputs:
+
+  output_read1_trimmed_file:
+    type: File
+    outputSource: trimmomatic/output_read1_trimmed_file
+    
+  fastqc_output_zipped_file:
+    type: File
+    outputSource: fastq/zippedFile
+    
+  fastqc_report:
+    type: Directory
+    outputSource: fastq/report
+    
   bwamem_output:
     type: File
     outputSource: bwa-mem/output
@@ -159,6 +197,23 @@ steps:
       output_filename: output_RefDictionaryFile
     out: [ output ]
 
+  trimmomatic:
+    run: trimmomatic.cwl
+    in:
+	    phred: phred
+	    reads: reads
+	    input_adapters_file: input_adapters_file
+	    end_mode: end_mode
+	    nthreads: nthreads
+	    illuminaclip: illuminaclip
+    out: [output_read1_trimmed_file]
+    
+  fastq:
+    run: fastqc.cwl
+    in:
+      reads: reads
+    out: [fastqc_output_zipped_file,fastqc_report]
+  
   bwa-mem:
     run: ../../tools/bwa-mem.cwl
     in:
