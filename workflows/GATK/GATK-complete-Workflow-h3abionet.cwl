@@ -36,6 +36,10 @@ inputs:
     type: int
     doc: number of threads
 
+  samtools_threads:
+    type: int
+    doc: number of threads
+
   output_RefDictionaryFile:
     type: string
     doc: output file name for picard create dictionary command from picard toolkit
@@ -215,6 +219,7 @@ steps:
       isbam: samtools-view-isbam
       sambam: samtools-view-sambam
       output_name: output_samtools-view
+      threads: samtools_threads
     out: [ output ]
 
   samtools-sort:
@@ -222,6 +227,7 @@ steps:
     in:
       input: samtools-view/output
       output_name: output_samtools-sort
+      threads: samtools_threads
     out: [ sorted ]
 
   samtools-index:
