@@ -18,7 +18,7 @@ We use the CWL reference implementation.
 
 - [ ] streaming between steps to improve throughput, currently not supported via the reference implementation
    - [ ] need to stream between samtools/bwa steps for performance
-- [ ] properly configuring/exposing threads per step to maximize speed of the steps
+- [X] properly configuring/exposing threads per step to maximize speed of the steps
 - [ ] remove the dictionary creation steps
 - [ ] clearly document the reference files needed
 - [ ] dealing with the CWL input file directory being not writable (this prevents GATK from making VCF index files on the fly). The error looks like this: `WARN  09:30:55,672 RMDTrackBuilder - Unable to write to /var/lib/cwl/stg24cab595-694a-4cac-b90a-abe40abdeaa2/Mills_and_1000G_gold_st.vcf.idx for the index file, creating index in memory only`
