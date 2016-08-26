@@ -5,6 +5,8 @@ A [GATK best-practices](https://software.broadinstitute.org/gatk/best-practices/
 
 More details can be found in our [Google doc](https://docs.google.com/document/d/1siCZrequI4plggz3ho351NnX57CoyCJl9GWp3azlxfU/edit#).
 
+See our [Trello board](https://trello.com/b/pcWKqbXv/stream-b-ngs-variant-calling-illumina) for more information.
+
 ## Pipeline
 
 ![pipeline](gatk_germline.png)
