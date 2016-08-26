@@ -61,6 +61,11 @@ RawBlameHistory    49 lines (47 sloc)  2.08 KB
         "path": "/data_small/ftp.broadinstitute.org/bundle/2.8/hg19/ucsc.hg19.fasta",
     },
     "depth_outputfile_DepthOfCoverage": "sample_report",
+    "phred":"-phred64",
+    "end_mode":"PE",
+    "nthreads":4,
+    "illuminaclip":"2:30:10:1:true",
+    "input_adapters_file":"/data_small/small_fastq/NexteraPE-PE.fa"
 }
 Contact GitHub API Training Shop Blog About
 © 2016 GitHub, Inc. Terms Privacy Security Status Help
