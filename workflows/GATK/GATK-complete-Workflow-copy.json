@@ -28,4 +28,9 @@
     "covariate": [ "CycleCovariate", "ContextCovariate" ],
     "outputFileName_PrintReads": "PrintReads-2016-08-04.bam",
     "outputFileName_HaplotypeCaller": "HaplotypeCaller-2016-08-04.vcf",
+    "phred":"-phred64",
+    "end_mode":"PE",
+    "nthreads":1,
+    "illuminaclip":"2:30:10:1:true",
+    "input_adapters_file":"/data_small/small_fastq/NexteraPE-PE.fa"
 }
