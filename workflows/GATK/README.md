@@ -1,6 +1,5 @@
 # GATK h3abionet pipeline docs
-# Overview
-
+Overview
 A [GATK best-practices](https://software.broadinstitute.org/gatk/best-practices/bp_3step.php?case=GermShortWGS) germline workflow designed to work with GATK 3.5  (Van der Auwera et al., 2013).
 
 # Dependencies
@@ -11,10 +10,10 @@ The pipeline rely on the following requirements.
 ## Tools
 ### FastQC
 FastQC is used as an initial QC step where the input files are checked for usual metrics such as:
-  - Read length
-  - Reads distribution
-  - GC content
-  - ...
+	- Read length
+	- Reads distribution
+	- GC content
+	- ...
 
 ### Trimmomatic
 Trimmomatic is the entry point of the pipeline, it is used to cleanup the reads in the input fastq files from any sequencing adaptors.
@@ -26,9 +25,9 @@ As GATK tools downstream requires properly formatted Read Group information. We 
 
 ### SAMtools
 [SAMtools](http://www.htslib.org) (Li et al., 2009) are used few times in the pipeline:
-  1. Convert BWA's output from a SAM format to a BAM format
-  2. Sort the reads in the generated BAM file in step 1 (above)
-  3. Indexing the BAM file for the following tools to use
+	1. Convert BWA's output from a SAM format to a BAM format
+	2. Sort the reads in the generated BAM file in step 1 (above)
+	3. Indexing the BAM file for the following tools to use
 
 ### Picard
 [Picard tools](https://broadinstitute.github.io/picard/) are used to mark duplicated reads in the aligned and sorted BAM file, making thus the files lighter and less prone to errors in the downstream steps of the pipeline.
@@ -36,9 +35,25 @@ As GATK tools downstream requires properly formatted Read Group information. We 
 ### GATK
 [Genome Analysis Tool Kit](https://software.broadinstitute.org/gatk) refered to as GATK (DePristo et al., 2011) is used to process the data throught multiple steps as described by the [GATK best-practices](https://software.broadinstitute.org/gatk/best-practices/bp_3step.php?case=GermShortWGS) (i.e. figure bellow).
 ![GATK best-practices pipeline](https://software.broadinstitute.org/gatk/img/BP_workflow_3.6.png)
+The GATK steps are the following:
+	1. Indel Realignment:
+		1. [Realign Target Creator](https://software.broadinstitute.org/gatk/documentation/tooldocs/org_broadinstitute_gatk_tools_walkers_indels_RealignerTargetCreator.php)
+		2. [Indel Realigner](https://software.broadinstitute.org/gatk/documentation/tooldocs/org_broadinstitute_gatk_tools_walkers_indels_IndelRealigner.php)
+	2. Mark Duplicates (a picard step)
+	3. Base Quality Score Recalibration (BQSR):
+		1. [Base Recalibrator](https://software.broadinstitute.org/gatk/documentation/tooldocs/org_broadinstitute_gatk_tools_walkers_bqsr_BaseRecalibrator.php)
+		2. [Print Reads](https://software.broadinstitute.org/gatk/documentation/tooldocs/org_broadinstitute_gatk_tools_walkers_readutils_PrintReads.php)
+	4. [Haplotype Caller](https://software.broadinstitute.org/gatk/documentation/tooldocs/)
+	5. Variant Quality Score Recalibration (VQSR):
+		1. [Variant Recalibrator](https://software.broadinstitute.org/gatk/documentation/tooldocs/org_broadinstitute_gatk_tools_walkers_variantrecalibration_VariantRecalibrator.php)
+		2. [Apply Recalibration](https://software.broadinstitute.org/gatk/documentation/tooldocs/org_broadinstitute_gatk_tools_walkers_variantrecalibration_ApplyRecalibration.php)
 
-### SNPEff
+### SnpEff
+SNPEff is used in this pipeline to annotate the variant calls (Cingolani et al., 2012). The annotation is extensive and uses multi-database approach to provide the user with as much information about the called variants as possible.
+
 ### BAMStat
+[BAMStats](http://bamstats.sourceforge.net), is a simple software tool built on the Picard Java API (2), which can calculate and graphically display various metrics derived from SAM/BAM files of value in QC assessments.
+
 
 
 ## Reference Files
