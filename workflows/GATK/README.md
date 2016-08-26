@@ -22,3 +22,6 @@ A GATK best-practices germline workflow designed to work with GATK 3.5.
   * SV: [Delly2](https://github.com/tobiasrausch/delly)
 * adding Oncotator and Annovar for annotation (have SNPEff)
 * report error back to CWLTools where schemas are loaded on each run (should be cached) and if there's a failure to retrieve an 'utf8' decoding error is reported.
+* output cleanup, we don't need to save all the files the workflow currently does
+* zip file for DepthOfCoverage
+* need to stream between samtools/bwa steps for performance
