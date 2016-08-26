@@ -285,7 +285,6 @@ steps:
       intervals: RealignTarget/output_realignTarget
       reference: uncompressed_reference
       known: known_variant_db
-      threads: gatk_threads
     out: [ output_indelRealigner ]
 
   BaseRecalibrator:
@@ -316,5 +315,4 @@ steps:
       inputBam_HaplotypeCaller: PrintReads/output_printReads
       reference: reference
       dbsnp: dbsnp
-      threads: gatk_threads
     out: [ output_HaplotypeCaller ]

@@ -178,14 +178,14 @@ inputs:
     default: -Xmx4g
     inputBinding:
       position: 1
+# doesn't work, see http://gatkforums.broadinstitute.org/gatk/discussion/1975/how-can-i-use-parallelism-to-make-gatk-tools-run-faster
+#  threads:
+#    type: int
+#    default: 4
+#    inputBinding:
+#      prefix: -nt
+#      position: 4
 
-  threads:
-    type: int
-    default: 4
-    inputBinding:
-      prefix: -nt
-      position: 4
-      
   nWayOut:
     type: string?
     inputBinding:
