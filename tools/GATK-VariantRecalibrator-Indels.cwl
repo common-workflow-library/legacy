@@ -34,8 +34,8 @@ hints:
 inputs:
   haplotypecaller_snps_vcf:
     type: File
-    secondaryFiles:
-      - .idx
+#    secondaryFiles:
+#      - .idx
     inputBinding:
       position: 5
       prefix: -input
