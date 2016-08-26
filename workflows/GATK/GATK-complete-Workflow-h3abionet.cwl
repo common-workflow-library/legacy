@@ -153,11 +153,11 @@ outputs:
     type: File
     outputSource: bamstat/bamstats_report
 
-  output_DepthOfCoverage:
-    type:
-      type: array
-      items: File
-    outputSource: DepthOfCoverage/output_DepthOfCoverage
+#  output_DepthOfCoverage:
+#    type:
+#      type: array
+#      items: File
+#    outputSource: DepthOfCoverage/output_DepthOfCoverage
 
   samtoolsIndex_output:
     type: File
