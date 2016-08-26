@@ -53,6 +53,7 @@ inputs:
 outputs:
   sorted:
     type: File
+    format: http://edamontology.org/format_2572
     outputBinding:
       glob: $(inputs.output_name)
 
