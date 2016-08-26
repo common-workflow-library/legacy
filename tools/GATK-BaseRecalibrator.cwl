@@ -107,7 +107,7 @@ inputs:
     secondaryFiles:
     - ^.bai
     doc: bam file produced after indelRealigner
-  knownSites:
+  known:
     type:
       - "null"
       - type: array

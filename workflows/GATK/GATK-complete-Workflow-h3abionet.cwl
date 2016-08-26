@@ -178,7 +178,7 @@ outputs:
 
   output_printReads:
     type: File
-    outputSource: PrintReads/output_PrintReads
+    outputSource: PrintReads/output_printReads
 
   output_HaplotypeCaller:
     type: File
@@ -291,13 +291,13 @@ steps:
       inputBam_printReads: IndelRealigner/output_indelRealigner
       reference: reference
       input_baseRecalibrator: BaseRecalibrator/output_baseRecalibrator
-    out: [ output_PrintReads ]
+    out: [ output_printReads ]
 
   HaplotypeCaller:
     run: ../../tools/GATK-HaplotypeCaller.cwl  # FIXME: this is draft 3
     in:
       outputfile_HaplotypeCaller: outputFileName_HaplotypeCaller
-      inputBam_HaplotypeCaller: PrintReads/output_PrintReads
+      inputBam_HaplotypeCaller: PrintReads/output_printReads
       reference: reference
       dbsnp: dbsnp
     out: [ output_HaplotypeCaller ]
