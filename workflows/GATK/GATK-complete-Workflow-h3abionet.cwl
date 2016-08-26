@@ -125,6 +125,14 @@ inputs:
   #  type: string?
   #  doc: name of the output report basename
 
+  vqsr_haplotypecaller_snps_vcf:
+    type: File
+    doc: vqsr
+  
+  known_ref_db:
+    type: File[]?
+    doc: array of known variant files for realign target creator
+  
 outputs:
   bwamem_output:
     type: File
@@ -186,6 +194,14 @@ outputs:
 #    outputSource: HaplotypeCaller/output_HaplotypeCaller
 #
 steps:
+  
+  vqsr_snps:
+    run: ../../tools/GATK-VariantRecalibrator-SNPs.cwl
+    in:
+      haplotypecaller_snps_vcf: vqsr_haplotypecaller_snps_vcf
+      reference: reference
+      resource_db: known_ref_db
+    out: [tranches_File, recal_File, vqsr_rscript]
 
   create-dict:
     run: ../../tools/picard-CreateSequenceDictionary.cwl  # FIXME: this is draft3

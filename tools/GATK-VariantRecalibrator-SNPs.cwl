@@ -58,42 +58,54 @@ inputs:
       position: 7
       prefix: -R
     doc: reference genome
-
-  resource_hapmap:
-    type: File
+  
+  resource_db:
+    type:
+      type: array
+      items: File
+      inputBinding:
+        prefix: "-resource:hapmap,known=false,training=true,truth=true,prior=15.0"
     secondaryFiles:
       - .idx
     inputBinding:
       position: 8
-      prefix: "-resource:hapmap,known=false,training=true,truth=true,prior=15.0"
-    doc: hapmap reference data
+    doc: resource reference data
 
-  resource_omni:
-    type: File
-    secondaryFiles:
-      - .idx
-    inputBinding:
-      position: 9
-      prefix: "-resource:omni,known=false,training=true,truth=false,prior=12.0"
-    doc: omni reference data
+ # resource_hapmap:
+ #   type: File
+ #   secondaryFiles:
+ #     - .idx
+ #   inputBinding:
+ #     position: 8
+ #     prefix: "-resource:hapmap,known=false,training=true,truth=true,prior=15.0"
+ #   doc: hapmap reference data
 
-  resource_1kg:
-    type: File
-    secondaryFiles:
-      - .idx
-    inputBinding:
-      position: 10
-      prefix: "-resource:1000G,known=false,training=true,truth=false,prior=10.0"
-    doc: 1000 genome reference data
+ # resource_omni:
+ #   type: File
+ #   secondaryFiles:
+ #     - .idx
+ #   inputBinding:
+ #     position: 9
+ #     prefix: "-resource:omni,known=false,training=true,truth=false,prior=12.0"
+ #   doc: omni reference data
 
-  resource_dbsnp:
-    type: File
-    secondaryFiles:
-      - .idx
-    inputBinding:
-      position: 11
-      prefix: "-resource:dbsnp,known=true,training=false,truth=false,prior=2.0"
-    doc: dbSNP  reference data
+ # resource_1kg:
+ #   type: File
+ #   secondaryFiles:
+ #     - .idx
+ #   inputBinding:
+ #     position: 10
+ #     prefix: "-resource:1000G,known=false,training=true,truth=false,prior=10.0"
+ #   doc: 1000 genome reference data
+
+ # resource_dbsnp:
+ #   type: File
+ #   secondaryFiles:
+ #     - .idx
+ #   inputBinding:
+ #     position: 11
+ #     prefix: "-resource:dbsnp,known=true,training=false,truth=false,prior=2.0"
+ #   doc: dbSNP  reference data
 
 
   java_arg:
