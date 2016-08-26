@@ -62,9 +62,14 @@ SNPEff is used in this pipeline to annotate the variant calls (Cingolani et al.,
 ### BAMStat
 [BAMStats](http://bamstats.sourceforge.net), is a simple software tool built on the Picard Java API (2), which can calculate and graphically display various metrics derived from SAM/BAM files of value in QC assessments.
 
-
-
 ## Reference Files
+The reference files are pulled from the GATK bundle v2.8 (hg19). The used files are:
+  - Human reference genome hg19
+  - dbSNP build 138
+  - HapMap reference data
+  - 1000 genome SNPs and indels
+  - 1000 genome Omni
+  - Mills 1000 genome gold standard variants
 
 # Running
 We use the CWL reference implementation.
