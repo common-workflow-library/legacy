@@ -1,13 +1,21 @@
 # GATK h3abionet pipeline docs
-Overview
+
+##Overview
 A [GATK best-practices](https://software.broadinstitute.org/gatk/best-practices/bp_3step.php?case=GermShortWGS) germline workflow designed to work with GATK 3.5  (Van der Auwera et al., 2013).
+
+## Pipeline
+
+![pipeline](gatk_germline.png)
 
 # Dependencies
 The pipeline rely on the following requirements.
 
 ## System
 
-## Tools
+* Docker
+* cwltools
+
+## Workflow Tools
 ### FastQC
 FastQC is used as an initial QC step where the input files are checked for usual metrics such as:
 	- Read length
@@ -82,4 +90,4 @@ We use the CWL reference implementation.
 - [ ] need to stream between samtools/bwa steps for performance
 - [ ] add scatter/gather based on chr to the workflow
 - [ ] DepthOfCoverage need to have the input from view and sort steps in the same directory (e.g. the bam and bai need to be mounted in the same directory). CWL puts each input on it's own path and these are read only.  Michael is going to help us work around this.  In the mean time, DepthOfCoverage is commented out
-- [ ] Properly make and pass around the .idx files since many of the tools 
+- [ ] Properly make and pass around the .idx files since many of the tools
