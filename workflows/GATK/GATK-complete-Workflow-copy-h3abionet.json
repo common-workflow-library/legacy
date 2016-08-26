@@ -26,4 +26,7 @@
    "snpf_genome": "hg19",
    "snpf_nodownload": true,
    "snpf_data_dir": { "class": "Directory", "location": "/data_small/snpEff_hg19/data"},
+
+   "indels_resource_mills": {"class": "File", "path": "1000G_phase1.snps.high_confidence.hg19.sites.vcf"},
+   "indels_resource_dbsnp": {"class": "File", "path": "dbsnp_138.hg19.vcf"},
 }

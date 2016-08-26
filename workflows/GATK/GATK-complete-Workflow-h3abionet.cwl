@@ -41,6 +41,12 @@ inputs:
   snpf_data_dir:
     type: Directory
 
+  indels_resource_mills:
+    type: File
+
+  indels_resource_dbsnp:
+    type: File
+
 outputs:
   recal_File:
     type: File
@@ -65,6 +71,15 @@ steps:
       reference: reference
       resource_db: known_ref_db
     out: [tranches_File, recal_File, vqsr_rscript]
+  
+  vqsr_indels:
+    run: ../../tools/GATK-VariantRecalibrator-Indels.cwl
+    in:
+      haplotypecaller_snps_vcf: HaplotypeCaller/output_HaplotypeCaller
+      reference: reference
+      resource_mills: indels_resource_mills
+      resource_dbsnp: indels_resource_dbsnp
+    out: [tranches_File, recal_File, vqsr_rscript]
 
   apply_recalibration_snps:
     run: ../../tools/GATK-ApplyRecalibration.cwl
@@ -75,11 +90,29 @@ steps:
       tranches_file: vqsr_snps/tranches_File
     out: [ vqsr_vcf ]
 
+  apply_recalibration_indels:
+    run: ../../tools/GATK-ApplyRecalibration.cwl
+    in:
+      raw_vcf: HaplotypeCaller/output_HaplotypeCaller
+      reference: reference
+      recal_file: vqsr_indels/recal_File
+      tranches_file: vqsr_indels/tranches_File
+    out: [ vqsr_vcf ]
+
   snpeff_snps:
     run: ../../tools/snpEff.cwl
     in:
       genome: snpf_genome
       variant_calling_file: apply_recalibration_snps/vqsr_vcf
+      nodownload: snpf_nodownload
+      data_dir: snpf_data_dir
+    out: [ annotated_vcf ]
+
+  snpeff_indels:
+    run: ../../tools/snpEff.cwl
+    in:
+      genome: snpf_genome
+      variant_calling_file: apply_recalibration_indels/vqsr_vcf
       nodownload: snpf_nodownload
       data_dir: snpf_data_dir
     out: [ annotated_vcf ]
