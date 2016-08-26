@@ -97,10 +97,6 @@ inputs:
     doc: |
        "33"|"64"
        -phred33 ("33") or -phred64 ("64") specifies the base quality encoding. Default: -phred64
-	  
-  input_fastq_file:
-    type: File
-    doc: FASTQ file for input read (read R1 in Paired End mode)
   
   input_adapters_file:
     type: File
@@ -265,7 +261,7 @@ inputs:
     run: trimmomatic.cwl
     in:
 	 phred: phred
-	 input_fastq_file: input_fastq_file
+	 reads: reads
 	 input_adapters_file: input_adapters_file
 	 end_mode: end_mode
 	 nthreads: nthreads
