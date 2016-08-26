@@ -107,6 +107,22 @@ inputs:
   covariate:
     type: string[]?
     doc: required for base recalibrator
+  
+  depth_omitIntervalStatistics:
+    type: boolean?
+    doc: Do not calculate per-interval statistics
+
+  depth_omitDepthOutputAtEachBase:
+    type: boolean?
+    doc: Do not output depth of coverage at each base
+
+  depth_inputBam_DepthOfCoverage:
+    type: File
+    doc: bam file, make sure it was aligned to the reference files used
+
+  depth_outputfile_DepthOfCoverage:
+    type: string?
+    doc: name of the output report basename
 
 outputs:
   bwamem_output:
@@ -124,6 +140,16 @@ outputs:
   samtoolsSort_output:
     type: File
     outputSource: samtools-sort/sorted
+  
+  output_bamstat:
+    type: File
+    outputSource: bamstat/bamstats_report
+
+  output_DepthOfCoverage:
+    type:
+      type: array
+      items: File
+    outputSource: DepthOfCoverage/output_DepthOfCoverage
 
   samtoolsIndex_output:
     type: File
@@ -192,6 +218,22 @@ steps:
       input: samtools-view/output
       output_name: output_samtools-sort
     out: [ sorted ]
+  
+  bamstat:
+    run: ../../tools/bamstat.cwl
+    in:
+      bam_input: samtools-sort/sorted
+    out: [ bamstats_report ]
+
+  DepthOfCoverage:
+    run: ../../tools/GATK-DepthOfCoverage.cwl
+    in:
+      omitIntervalStatistics: depth_omitIntervalStatistics
+      omitDepthOutputAtEachBase: depth_omitDepthOutputAtEachBase
+      inputBam_DepthOfCoverage: depth_inputBam_DepthOfCoverage
+      reference: reference
+      outputfile_DepthOfCoverage: depth_outputfile_DepthOfCoverage
+    out: [ output_DepthOfCoverage ]
 
   samtools-index:
     run: ../../tools/samtools-index.cwl
