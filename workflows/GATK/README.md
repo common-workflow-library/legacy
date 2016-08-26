@@ -10,6 +10,10 @@ A GATK best-practices germline workflow designed to work with GATK 3.5.
 
 # Running
 
+We use the CWL reference implementation.
+
+    cwltool --cachedir <path_to_tmp_dir> --debug --non-strict --tmpdir-prefix  GATK-complete-Workflow-h3abionet.cwl GATK-complete-Workflow-copy-h3abionet.json
+
 # TODO
 
 * streaming between steps to improve throughput, currently not supported via the reference implementation  
