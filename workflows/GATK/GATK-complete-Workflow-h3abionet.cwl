@@ -107,7 +107,7 @@ inputs:
   covariate:
     type: string[]?
     doc: required for base recalibrator
-  
+
   depth_omitIntervalStatistics:
     type: boolean?
     doc: Do not calculate per-interval statistics
@@ -140,7 +140,7 @@ outputs:
   samtoolsSort_output:
     type: File
     outputSource: samtools-sort/sorted
-  
+
   output_bamstat:
     type: File
     outputSource: bamstat/bamstats_report
@@ -218,7 +218,7 @@ steps:
       input: samtools-view/output
       output_name: output_samtools-sort
     out: [ sorted ]
-  
+
   bamstat:
     run: ../../tools/bamstat.cwl
     in:
@@ -274,15 +274,15 @@ steps:
       known: known_variant_db
     out: [ output_indelRealigner ]
 
-#  BaseRecalibrator:
-#    run: ../../tools/GATK-BaseRecalibrator.cwl
-#    in:
-#      outputfile_BaseRecalibrator: outputFileName_BaseRecalibrator
-#      inputBam_BaseRecalibrator: IndelRealigner/output_indelRealigner
-#      reference: reference
-#      covariate: covariate
-#      known: known_variant_db
-#    out: [ output_baseRecalibrator ]
+  BaseRecalibrator:
+    run: ../../tools/GATK-BaseRecalibrator.cwl
+    in:
+      outputfile_BaseRecalibrator: outputFileName_BaseRecalibrator
+      inputBam_BaseRecalibrator: IndelRealigner/output_indelRealigner
+      reference: reference
+      covariate: covariate
+      known: known_variant_db
+    out: [ output_baseRecalibrator ]
 
 #  PrintReads:
 #    run: ../../tools/GATK-PrintReads.cwl  # FIXME: this is draft 3
