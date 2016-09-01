@@ -69,21 +69,24 @@ doap:maintainer:
     foaf:mbox: mailto:skanwal@student.unimelb.edu.au
 requirements:
 - $import: envvar-global.yml
-- $import: envvar-global.yml
 - $import: GATK-docker.yml
 
-inputs:
+inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
+  GATKJar:
+    type: File
+    inputBinding:
+      position: 1
+      prefix: "-jar"
+
   sample_file:
     type: File[]?
     inputBinding:
-      position: 11
-
-
+      position: 2
 
   reference:
     type: File
     inputBinding:
-      position: 5
+      position: 2
       prefix: -R
     secondaryFiles:
     - .64.amb
@@ -95,43 +98,42 @@ inputs:
   platform:
     type: string?
     inputBinding:
-      position: 13
+      position: 2
       prefix: --platform
     doc: Exclude all reads with this platform from the output
   input_baseRecalibrator:
     type: File
     inputBinding:
-      position: 7
+      position: 2
       prefix: -BQSR
     doc: the recalibration table produced by BaseRecalibration
   number:
     type: string?
     inputBinding:
-      position: 13
+      position: 2
       prefix: --number
     doc: Exclude all reads with this platform from the output
   simplify:
     type: boolean?
     inputBinding:
-      position: 9
+      position: 2
       prefix: --simplify
     doc: Erase all extra attributes in the read but keep the read group information
   readGroup:
     type: string?
     inputBinding:
-      position: 12
+      position: 2
       prefix: --readGroup
     doc: Exclude all reads with this read group from the output
   sample_name:
     type: string[]?
     inputBinding:
-      position: 10
-
+      position: 2
     doc: Sample name to be included in the analysis. Can be specified multiple times.
   inputBam_printReads:
     type: File
     inputBinding:
-      position: 6
+      position: 2 
       prefix: -I
     secondaryFiles:
     - ^.bai
@@ -139,14 +141,14 @@ inputs:
   outputfile_printReads:
     type: string?
     inputBinding:
-      position: 8
+      position: 2
       prefix: -o
     doc: name of the output file from indelRealigner
   java_arg:
     type: string
     default: -Xmx4g
     inputBinding:
-      position: 1
+      position: 0
 
 
 outputs:
@@ -157,15 +159,12 @@ outputs:
 
 
 arguments:
-- valueFrom: ./test/test-files
-  position: 2
+- valueFrom: $(runtime.tmpdir)
+  position: 0
   separate: false
   prefix: -Djava.io.tmpdir=
-- valueFrom: /usr/local/bin/GenomeAnalysisTK.jar
-  position: 3
-  prefix: -jar
 - valueFrom: PrintReads
-  position: 4
+  position: 2
   prefix: -T
 baseCommand: [java]
 doc: |
