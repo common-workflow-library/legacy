@@ -16,6 +16,8 @@ terms and conditions of the Apache License version 2.0 (see LICENSE.txt).
 ## Other CWL repositories
 
 * https://github.com/Duke-GCB/GGR-cwl
+* https://github.com/jorvis/FALCON/tree/master/cwl/tools
+* https://github.com/h3abionet/h3abionet16S/tree/master/workflows
 
 ## Pull request
 
