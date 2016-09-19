@@ -6,8 +6,10 @@ class: CommandLineTool
 
 requirements:
   - $import: envvar-global.yml
-  - $import: bwa-docker.yml
   - class: InlineJavascriptRequirement
+
+hints:
+  - $import: bwa-docker.yml
 
 inputs:
   - id: "prefix"
