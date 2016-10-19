@@ -34,8 +34,6 @@ hints:
 inputs:
   haplotypecaller_snps_vcf:
     type: File
-#    secondaryFiles:
-#      - .idx
     inputBinding:
       position: 5
       prefix: -input
@@ -59,35 +57,35 @@ inputs:
       prefix: -R
     doc: reference genome
   
-  resource_db:
-    type:
-      type: array
-      items: File
-      inputBinding:
-        prefix: "-resource:hapmap,known=false,training=true,truth=true,prior=15.0"
+  #resource_db:
+  #  type:
+  #    type: array
+  #    items: File
+  #    inputBinding:
+  #      prefix: "-resource:hapmap,known=false,training=true,truth=true,prior=15.0"
+  #  secondaryFiles:
+  #    - .idx
+  #  inputBinding:
+  #    position: 8
+  #  doc: resource reference data
+
+  resource_hapmap:
+    type: File
     secondaryFiles:
       - .idx
     inputBinding:
       position: 8
-    doc: resource reference data
+      prefix: "-resource:hapmap,known=false,training=true,truth=true,prior=15.0"
+    doc: hapmap reference data
 
- # resource_hapmap:
- #   type: File
- #   secondaryFiles:
- #     - .idx
- #   inputBinding:
- #     position: 8
- #     prefix: "-resource:hapmap,known=false,training=true,truth=true,prior=15.0"
- #   doc: hapmap reference data
-
- # resource_omni:
- #   type: File
- #   secondaryFiles:
- #     - .idx
- #   inputBinding:
- #     position: 9
- #     prefix: "-resource:omni,known=false,training=true,truth=false,prior=12.0"
- #   doc: omni reference data
+  resource_omni:
+    type: File
+    secondaryFiles:
+      - .idx
+    inputBinding:
+      position: 9
+      prefix: "-resource:omni,known=false,training=true,truth=false,prior=12.0"
+    doc: omni reference data
 
  # resource_1kg:
  #   type: File
@@ -98,14 +96,14 @@ inputs:
  #     prefix: "-resource:1000G,known=false,training=true,truth=false,prior=10.0"
  #   doc: 1000 genome reference data
 
- # resource_dbsnp:
- #   type: File
- #   secondaryFiles:
- #     - .idx
- #   inputBinding:
- #     position: 11
- #     prefix: "-resource:dbsnp,known=true,training=false,truth=false,prior=2.0"
- #   doc: dbSNP  reference data
+  resource_dbsnp:
+    type: File
+    secondaryFiles:
+      - .idx
+    inputBinding:
+      position: 11
+      prefix: "-resource:dbsnp,known=true,training=false,truth=false,prior=8.0"
+    doc: dbSNP  reference data
 
 
   java_arg:
@@ -119,51 +117,78 @@ inputs:
     default: -Djava.io.tmpdir=/tmp
     inputBinding:
       position: 2
+  
+  #mingauss:
+  #  type: int
+  #  default: 5000
+  #  inputBinding:
+  #    position: 14
+  #    prefix: -minNumBad
 
 outputs:
     tranches_File:
       type: File
       outputBinding:
-        glob: vqsr_tranches.out
+        glob: vqsr_tranches.recal
       doc: the tranches File
 
     recal_File:
       type: File
       outputBinding:
-        glob: vqsr_recal.out
+        glob: vqsr_recal.recal
       doc: the recal File
 
-    vqsr_rscript:
-        type: File
-        outputBinding:
-          glob: vqsr.R
-        doc: The output recalibration R script for the plots
+    #vqsr_rscript:
+    #    type: File
+    #    outputBinding:
+    #      glob: vqsr_tranches.plots.R
+    #    doc: The output recalibration R script for the plots
 
 
 arguments:
-- valueFrom: ./test/test-Files
-  position: 2
-  separate: false
-  prefix: -Djava.io.tmpdir=
+#- valueFrom: ./test/test-Files
+#  position: 2
+#  separate: false
+#  prefix: -Djava.io.tmpdir=
 - valueFrom: /usr/local/bin/GenomeAnalysisTK.jar
   position: 3
   prefix: -jar
+
 - valueFrom: VariantRecalibrator
   position: 4
   prefix: -T
+
 - valueFrom: "SNP"
   position: 12
   prefix: -mode
-- valueFrom: "QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR -an InbreedingCoeff"
+
+- valueFrom: "QD"
   position: 13
   prefix: -an
-- valueFrom: vqsr_tranches.out
+
+- valueFrom: "MQRankSum"
+  position: 13
+  prefix: -an
+
+- valueFrom: "ReadPosRankSum"
+  position: 13
+  prefix: -an
+
+- valueFrom: "FS"
+  position: 13
+  prefix: -an
+
+- valueFrom: "MQ"
+  position: 13
+  prefix: -an
+
+- valueFrom: vqsr_tranches.recal
   position: 14
   prefix: -tranchesFile
-- valueFrom: vqsr_recal.out
+- valueFrom: vqsr_recal.recal
   position: 15
   prefix: -recalFile
-- valueFrom: vqsr.R
+- valueFrom: vqsr_tranches.plots.R
   position: 16
   prefix: -rscriptFile
 

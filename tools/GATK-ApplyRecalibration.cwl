@@ -14,7 +14,7 @@ inputs:
     default: 4
     inputBinding:
       position: 12
-      prefix: --nt
+      prefix: -nt
     doc: multithreading option
   
   raw_vcf:
@@ -26,6 +26,9 @@ inputs:
 
   reference:
     type: File
+    secondaryFiles:
+      - .fai
+      - ^.dict
     inputBinding:
       position: 6
       prefix: -R
@@ -47,6 +50,7 @@ inputs:
 
   mode:
     type: string
+    default: "SNP"
     inputBinding:
       position: 11
       prefix: -mode

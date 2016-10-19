@@ -41,10 +41,10 @@ inputs:
 
   multithreading_nt:
     type: int
-    default: 4
+    default: 1
     inputBinding:
       position: 6
-      prefix: --nt
+      prefix: -nt
     doc: multithreading option
 
   reference:
@@ -57,12 +57,30 @@ inputs:
       prefix: -R
     doc: reference genome
 
-  resource_mills:
+  resource_hapmap:
     type: File
     secondaryFiles:
       - .idx
     inputBinding:
       position: 8
+      prefix: "-resource:hapmap,known=false,training=true,truth=true,prior=15.0"
+    doc: hapmap reference data
+
+  resource_omni:
+    type: File
+    secondaryFiles:
+      - .idx
+    inputBinding:
+      position: 9
+      prefix: "-resource:omni,known=false,training=true,truth=false,prior=12.0"
+    doc: omni reference data
+
+  resource_mills:
+    type: File
+    secondaryFiles:
+      - .idx
+    inputBinding:
+      position: 9
       prefix: "-resource:mills,known=false,training=true,truth=true,prior=12.0"
     doc: hapmap reference data
 
@@ -72,8 +90,15 @@ inputs:
       - .idx
     inputBinding:
       position: 9
-      prefix: "-resource:dbsnp,known=true,training=false,truth=false,prior=2.0"
+      prefix: "-resource:dbsnp,known=true,training=false,truth=false,prior=8.0"
     doc: dbSNP reference data
+
+  max_gaussian:
+    type: int
+    default: 4
+    inputBinding:
+      position: 10
+      prefix: --maxGaussians
 
   java_arg:
     type: string
@@ -91,48 +116,71 @@ outputs:
     tranches_File:
       type: File
       outputBinding:
-        glob: vqsr_tranches.out
+        glob: vqsr_tranches.recal
       doc: the tranches File
 
     recal_File:
       type: File
       outputBinding:
-        glob: vqsr_recal.out
+        glob: vqsr_recal.recal
       doc: the recal File
 
-    vqsr_rscript:
-        type: File
-        outputBinding:
-          glob: vqsr.R
-        doc: The output recalibration R script for the plots
+   # vqsr_rscript:
+   #     type: File
+   #     outputBinding:
+   #       glob: vqsr_tranches.plots.R
+   #     doc: The output recalibration R script for the plots
 
 
 arguments:
-- valueFrom: ./test/test-Files
-  position: 2
-  separate: false
-  prefix: -Djava.io.tmpdir=
+#- valueFrom: ./test/test-Files
+#  position: 2
+#  separate: false
+#  prefix: -Djava.io.tmpdir=
 - valueFrom: /usr/local/bin/GenomeAnalysisTK.jar
   position: 3
   prefix: -jar
+
 - valueFrom: VariantRecalibrator
   position: 4
   prefix: -T
-- valueFrom: "SNP"
-  position: 10
-  prefix: -mode
-- valueFrom: "QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR -an InbreedingCoeff"
+
+- valueFrom: "INDEL"
   position: 11
-  prefix: -an
-- valueFrom: vqsr_tranches.out
+  prefix: -mode
+
+- valueFrom: "QD"
   position: 12
+  prefix: -an
+
+#- valueFrom: "MQ"
+#  position: 12
+#  prefix: -an
+
+- valueFrom: "MQRankSum"
+  position: 12
+  prefix: -an
+
+- valueFrom: "ReadPosRankSum"
+  position: 12
+  prefix: -an
+
+- valueFrom: "FS"
+  position: 12
+  prefix: -an
+#- valueFrom: "SOR"
+#  position: 12
+#  prefix: -an
+
+- valueFrom: vqsr_tranches.out
+  position: 13
   prefix: -tranchesFile
 - valueFrom: vqsr_recal.out
-  position: 13
-  prefix: -recalFile
-- valueFrom: vqsr.R
   position: 14
-  prefix: -rscriptFile
+  prefix: -recalFile
+#- valueFrom: vqsr_tranches.plots.R
+#  position: 15
+#  prefix: -rscriptFile
 
 baseCommand: [java]
 
