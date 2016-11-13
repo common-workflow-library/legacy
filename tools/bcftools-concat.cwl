@@ -3,156 +3,131 @@
 # Author: Andrey.Kartashov@cchmc.org (http://orcid.org/0000-0001-9102-5681) / Cincinnati Children’s Hospital Medical Center
 # Developed for CWL consortium http://commonwl.org/
 
-cwlVersion: "cwl:draft-3"
-
+cwlVersion: v1.0
 class: CommandLineTool
 
 requirements:
-  - $import: envvar-global.yml
-  - $import: bcftools-docker.yml
-  - class: InlineJavascriptRequirement
+- $import: envvar-global.yml
+- $import: bcftools-docker.yml
+- class: InlineJavascriptRequirement
 
 inputs:
-
-  - id: filename
-    type: string
-    description: |
-      Write output to a file [standard output]
+  allow_overlaps:
+    type: boolean?
     inputBinding:
       position: 1
-      prefix: '-o'
+      prefix: -a
+    doc: 'First coordinate of the next file can precede last record of the current
+      file.
 
-  - id: vcfs
+      '
+  remove_duplicates:
+    type: boolean?
+    inputBinding:
+      position: 1
+      prefix: -D
+    doc: |
+      Alias for -d/--rm-dups none
+  rm_dups:
+    type: string?
+    inputBinding:
+      position: 1
+      prefix: -d
+    doc: 'Output duplicate records present in multiple files only once: <snps|indels|both|all|none>
+
+      '
+  ligate:
+    type: boolean?
+    inputBinding:
+      position: 1
+      prefix: -l
+    doc: 'Ligate phased VCFs by matching phase at overlapping haplotypes
+
+      '
+  threads:
+    type: int?
+    inputBinding:
+      position: 1
+      prefix: --threads
+    doc: 'Number of extra output compression threads [0]
+
+      '
+  min_PQ:
+    type: int?
+    inputBinding:
+      position: 1
+      prefix: -q
+    doc: 'Break phase set if phasing quality is lower than <int> [30]
+
+      '
+  filename:
+    type: string
+    inputBinding:
+      position: 1
+      prefix: -o
+    doc: |
+      Write output to a file [standard output]
+  regions:
+    type: string?
+    inputBinding:
+      position: 1
+      prefix: -r
+    doc: |
+      Restrict to comma-separated list of regions
+  file_list:
+    type: File?
+    inputBinding:
+      position: 1
+      prefix: -f
+    doc: |
+      Read the list of files from a file.
+  compact_PS:
+    type: boolean?
+    inputBinding:
+      position: 1
+      prefix: -c
+    doc: 'Do not output PS tag at each site, only at the start of a new phase set
+      block.
+
+      '
+  regions_file:
+    type: File?
+    inputBinding:
+      position: 1
+      prefix: -R
+    doc: 'Restrict to regions listed in a file
+
+      '
+  vcfs:
     type:
       type: array
       items: File
-      secondaryFiles:
-        - ".tbi"
+    secondaryFiles:
+      - .tbi
     inputBinding:
       position: 2
 
-  - id: allow_overlaps
-    type:
-      - 'null'
-      - boolean
-    description: >
-      First coordinate of the next file can precede last record of the current file.
-    inputBinding:
-      position: 1
-      prefix: '-a'
-
-  - id: compact_PS
-    type:
-      - 'null'
-      - boolean
-    description: >
-      Do not output PS tag at each site, only at the start of a new phase set block.
-    inputBinding:
-      position: 1
-      prefix: '-c'
-
-  - id: rm_dups
-    type:
-      - 'null'
-      - string
-    description: >
-      Output duplicate records present in multiple files only once: <snps|indels|both|all|none>
-    inputBinding:
-      position: 1
-      prefix: '-d'
-
-  - id: remove_duplicates
-    type:
-      - 'null'
-      - boolean
-    description: |
-      Alias for -d/--rm-dups none
-    inputBinding:
-      position: 1
-      prefix: '-D'
-
-  - id: file_list
-    type:
-      - 'null'
-      - File
-    description: |
-      Read the list of files from a file.
-    inputBinding:
-      position: 1
-      prefix: '-f'
-
-  - id: ligate
-    type:
-      - 'null'
-      - boolean
-    description: >
-      Ligate phased VCFs by matching phase at overlapping haplotypes
-    inputBinding:
-      position: 1
-      prefix: '-l'
-
-  - id: output_type
-    type:
-      - 'null'
-      - string
-    description: >
-      <b|u|z|v> b: compressed BCF, u: uncompressed BCF, z: compressed VCF, v: uncompressed VCF [v]
+  output_type:
+    type: string?
     inputBinding:
       position: 1
       separate: false
-      prefix: '-O'
+      prefix: -O
+    doc: '<b|u|z|v> b: compressed BCF, u: uncompressed BCF, z: compressed VCF, v:
+      uncompressed VCF [v]
 
-  - id: min_PQ
-    type:
-      - 'null'
-      - int
-    description: >
-      Break phase set if phasing quality is lower than <int> [30]
-    inputBinding:
-      position: 1
-      prefix: '-q'
-
-  - id: regions
-    type:
-      - 'null'
-      - string
-    description: |
-      Restrict to comma-separated list of regions
-    inputBinding:
-      position: 1
-      prefix: '-r'
-
-  - id: regions_file
-    type:
-      - 'null'
-      - File
-    description: >
-      Restrict to regions listed in a file
-    inputBinding:
-      position: 1
-      prefix: '-R'
-
-  - id: threads
-    type:
-      - 'null'
-      - int
-    description: >
-      Number of extra output compression threads [0]
-    inputBinding:
-      position: 1
-      prefix: '--threads'
-
+      '
 outputs:
-  - id: output
+  output:
     type: File
     outputBinding:
       glob: $(inputs.filename)
 
 baseCommand:
-  - bcftools
-  - concat
+- bcftools
+- concat
 
-description: |
+doc: |
   About:   Concatenate or combine VCF/BCF files. All source files must have the same sample
            columns appearing in the same order. The program can be used, for example, to
            concatenate chromosome VCFs into one VCF, or combine a SNP VCF and an indel

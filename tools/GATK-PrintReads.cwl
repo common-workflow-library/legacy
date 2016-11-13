@@ -76,8 +76,7 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
     type: File
     inputBinding:
       position: 1
-      prefix: "-jar"
-
+      prefix: -jar
   sample_file:
     type: File[]?
     inputBinding:
@@ -94,7 +93,7 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
     - .64.bwt
     - .64.pac
     - .64.sa
-    - .fai  
+    - .fai
   platform:
     type: string?
     inputBinding:
@@ -133,7 +132,7 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
   inputBam_printReads:
     type: File
     inputBinding:
-      position: 2 
+      position: 2
       prefix: -I
     secondaryFiles:
     - ^.bai
@@ -171,4 +170,5 @@ doc: |
   GATK-RealignTargetCreator.cwl is developed for CWL consortium
   Prints all reads that have a mapping quality above zero
     Usage: java -Xmx4g -jar GenomeAnalysisTK.jar -T PrintReads -R reference.fasta -I input1.bam -I input2.bam -o output.bam --read_filter MappingQualityZero
+
 

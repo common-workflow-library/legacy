@@ -6,25 +6,25 @@ class: CommandLineTool
 
 
 doc: |
-      GATK-VariantsRecalibrator.cwl is developed for CWL consortium
+  GATK-VariantsRecalibrator.cwl is developed for CWL consortium
 
-      Usage:
-      ```
-      java -Xmx8G \
-            -jar gatk.jar
-            -T VariantRecalibrator \
-            -R [reference_fasta] \
-            -recalFile    $tmpDir/out.recal \
-            -tranchesFile $tmpDir/out.tranches \
-            -rscriptFile  $tmpDir/out.R \
-            -nt 4 \
-            -an MQRankSum -an ReadPosRankSum -an DP -an FS -an QD \
-            -mode SNP \
-            -resource:hapmap,known=false,training=true,truth=true,prior=15.0 [hapmap_vcf] \
-            -resource:dbsnp,known=true,training=false,truth=false,prior=2.0  [dbsnp_vcf] \
-            -resource:omni,known=false,training=true,truth=true,prior=12.0   [1komni_vcf] \
-            -resource:1000G,known=false,training=true,truth=false,prior=10.0 [1ksnp_vcf]
-      ```
+  Usage:
+  ```
+  java -Xmx8G \
+        -jar gatk.jar
+        -T VariantRecalibrator \
+        -R [reference_fasta] \
+        -recalFile    $tmpDir/out.recal \
+        -tranchesFile $tmpDir/out.tranches \
+        -rscriptFile  $tmpDir/out.R \
+        -nt 4 \
+        -an MQRankSum -an ReadPosRankSum -an DP -an FS -an QD \
+        -mode SNP \
+        -resource:hapmap,known=false,training=true,truth=true,prior=15.0 [hapmap_vcf] \
+        -resource:dbsnp,known=true,training=false,truth=false,prior=2.0  [dbsnp_vcf] \
+        -resource:omni,known=false,training=true,truth=true,prior=12.0   [1komni_vcf] \
+        -resource:1000G,known=false,training=true,truth=false,prior=10.0 [1ksnp_vcf]
+  ```
 
 
 hints:
@@ -36,11 +36,11 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
     type: File
     inputBinding:
       position: 1
-      prefix: "-jar"
+      prefix: -jar
   haplotypecaller_snps_vcf:
     type: File
     secondaryFiles:
-      - .idx
+    - .idx
     inputBinding:
       position: 2
       prefix: -input
@@ -57,8 +57,8 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
   reference:
     type: File
     secondaryFiles:
-      - .fai
-      - ^.dict
+    - .fai
+    - ^.dict
     inputBinding:
       position: 2
       prefix: -R
@@ -67,37 +67,37 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
   resource_hapmap:
     type: File
     secondaryFiles:
-      - .idx
+    - .idx
     inputBinding:
       position: 2
-      prefix: "-resource:hapmap,known=false,training=true,truth=true,prior=15.0"
+      prefix: -resource:hapmap,known=false,training=true,truth=true,prior=15.0
     doc: hapmap reference data
 
   resource_omni:
     type: File
     secondaryFiles:
-      - .idx
+    - .idx
     inputBinding:
       position: 2
-      prefix: "-resource:omni,known=false,training=true,truth=false,prior=12.0"
+      prefix: -resource:omni,known=false,training=true,truth=false,prior=12.0
     doc: omni reference data
 
   resource_1kg:
     type: File
     secondaryFiles:
-      - .idx
+    - .idx
     inputBinding:
       position: 2
-      prefix: "-resource:1000G,known=false,training=true,truth=false,prior=10.0"
+      prefix: -resource:1000G,known=false,training=true,truth=false,prior=10.0
     doc: 1000 genome reference data
 
   resource_dbsnp:
     type: File
     secondaryFiles:
-      - .idx
+    - .idx
     inputBinding:
       position: 2
-      prefix: "-resource:dbsnp,known=true,training=false,truth=false,prior=2.0"
+      prefix: -resource:dbsnp,known=true,training=false,truth=false,prior=2.0
     doc: dbSNP  reference data
 
 
@@ -109,23 +109,23 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
 
 
 outputs:
-    tranches_File:
-      type: File
-      outputBinding:
-        glob: vqsr_tranches.out
-      doc: the tranches File
+  tranches_File:
+    type: File
+    outputBinding:
+      glob: vqsr_tranches.out
+    doc: the tranches File
 
-    recal_File:
-      type: File
-      outputBinding:
-        glob: vqsr_recal.out
-      doc: the recal File
+  recal_File:
+    type: File
+    outputBinding:
+      glob: vqsr_recal.out
+    doc: the recal File
 
-    vqsr_rscript:
-        type: File
-        outputBinding:
-          glob: vqsr.R
-        doc: The output recalibration R script for the plots
+  vqsr_rscript:
+    type: File
+    outputBinding:
+      glob: vqsr.R
+    doc: The output recalibration R script for the plots
 
 
 arguments:
@@ -136,10 +136,10 @@ arguments:
 - valueFrom: VariantRecalibrator
   position: 2
   prefix: -T
-- valueFrom: "SNP"
+- valueFrom: SNP
   position: 2
   prefix: -mode
-- valueFrom: "QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR -an InbreedingCoeff"
+- valueFrom: QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR -an InbreedingCoeff
   position: 2
   prefix: -an
 - valueFrom: vqsr_tranches.out
@@ -153,3 +153,4 @@ arguments:
   prefix: -rscriptFile
 
 baseCommand: [java]
+

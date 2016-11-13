@@ -103,3 +103,4 @@ doc: |
       -o         Write final output to stdout rather than <out.prefix>.bam
       -l,m,n,@   Similar to corresponding options above
 
+

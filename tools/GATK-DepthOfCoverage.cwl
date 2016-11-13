@@ -70,7 +70,7 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
 
   java_arg:
     type: string
-    default: "-Xmx4g"
+    default: -Xmx4g
     inputBinding:
       position: 0
 
@@ -78,27 +78,26 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
     type: File
     inputBinding:
       position: 1
-      prefix: "-jar"
-
+      prefix: -jar
   threads:
     type: int
     default: 4
     inputBinding:
-      prefix: "-nt"
+      prefix: -nt
       position: 2
     doc: number of threads
 
   omitIntervalStatistics:
     type: boolean?
     inputBinding:
-      prefix: "--omitIntervalStatistics"
+      prefix: --omitIntervalStatistics
       position: 2
     doc: Do not calculate per-interval statistics
 
   omitDepthOutputAtEachBase:
     type: boolean?
     inputBinding:
-      prefix: "--omitDepthOutputAtEachBase"
+      prefix: --omitDepthOutputAtEachBase
       position: 2
     doc: Do not output depth of coverage at each base
 
@@ -106,7 +105,7 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
     type: File
     format: http://edamontology.org/format_1929  # FASTA
     inputBinding:
-      prefix: "-R"
+      prefix: -R
       position: 2
     secondaryFiles:
     - .fai
@@ -116,7 +115,7 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
     type: File
     format: http://edamontology.org/format_2572  # BAM
     inputBinding:
-      prefix: "-I"
+      prefix: -I
       position: 2
     secondaryFiles:
     - ^.bai
@@ -127,9 +126,8 @@ outputs:
     type: File[]
     outputBinding:
       glob: '*'
-
 arguments:
-- valueFrom: "sample"
+- valueFrom: sample
   prefix: -o
   position: 2
 - valueFrom: $(runtime.tmpdir)
@@ -141,8 +139,8 @@ arguments:
   position: 2
 
 baseCommand: [java]
-
 doc: |
   GATK-DepthOfCoverage.cwl is developed for CWL consortium
   Assess sequence coverage by a wide array of metrics, partitioned by sample, read group, or library
     Usage: java -jar GenomeAnalysisTK.jar -T DepthOfCoverage -R reference.fasta -o file_name_base -I input_bams.list [-geneList refSeq.sorted.txt] [-pt readgroup] [-ct 4 -ct 6 -ct 10] [-L my_capture_genes.interval_list]
+

@@ -77,7 +77,7 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
     type: File
     inputBinding:
       position: 1
-      prefix: "-jar"
+      prefix: -jar
   inputBam_realign:
     type: File
     inputBinding:
@@ -221,4 +221,5 @@ doc: |
   GATK-RealignTargetCreator.cwl is developed for CWL consortium
   It performs local realignment of reads around indels.
     Usage: java -jar GenomeAnalysisTK.jar -T RealignerTargetCreator -R reference.fasta -I input.bam --known indels.vcf -o forIndelRealigner.intervals.
+
 
