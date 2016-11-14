@@ -27,9 +27,9 @@ doc: |
   ```
 
 
-hints:
-- $import: envvar-global.yml
-- $import: GATK-docker.yml
+#hints:
+#- $import: envvar-global.yml
+#- $import: GATK-docker.yml
 
 inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
   GATKJar:
