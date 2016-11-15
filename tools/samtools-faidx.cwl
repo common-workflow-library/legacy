@@ -4,37 +4,34 @@
 #    example: "./samtools-faidx.cwl --input=./test-files/mm10.fa"
 # As part of a workflow should be no problem at all
 
-cwlVersion: "cwl:draft-3"
-
+cwlVersion: v1.0
 class: CommandLineTool
 
 requirements:
 - $import: envvar-global.yml
 - $import: samtools-docker.yml
 - class: InlineJavascriptRequirement
-- class: CreateFileRequirement
-  fileDef:
-  - filename: $(inputs.input.path.split('/').slice(-1)[0])
-    fileContent: $(inputs.input)
-
+- class: InitialWorkDirRequirement
+  listing:
+  - entry: $(inputs.input)
+    entryname: $(inputs.input.path.split('/').slice(-1)[0])
 inputs:
-- id: '#input'
-  type: File
-  description: '<file.fa|file.fa.gz>'
-
-- id: '#region'
-  type: ["null",string]
-  inputBinding:
-    position: 2
+  input:
+    type: File
+    doc: <file.fa|file.fa.gz>
+  region:
+    type: string?
+    inputBinding:
+      position: 2
 
 outputs:
-- id: "#index"
-  type: File
-  outputBinding:
-    glob: $(inputs.input.path.split('/').slice(-1)[0]) #+'.fai')
-  secondaryFiles:
-  - .fai
-  - .gzi
+  index:
+    type: File
+    outputBinding:
+      glob: $(inputs.input.path.split('/').slice(-1)[0]) #+'.fai')
+    secondaryFiles:
+    - .fai
+    - .gzi
 
 baseCommand:
 - samtools
@@ -43,10 +40,6 @@ baseCommand:
 arguments:
 - valueFrom: $(inputs.input.path.split('/').slice(-1)[0])
   position: 1
-
-description: |
-  samtools-faidx.cwl is developed for CWL consortium
-  Usage:   samtools faidx <file.fa|file.fa.gz> [<reg> [...]]
 
 $namespaces:
   s: http://schema.org/
@@ -63,20 +56,23 @@ s:license: http://www.apache.org/licenses/LICENSE-2.0
 
 s:isPartOf:
   class: s:CreativeWork
-  s:name: "Common Workflow Language"
+  s:name: Common Workflow Language
   s:url: http://commonwl.org/
 
 s:author:
   class: s:Person
-  s:name: "Andrey Kartashov"
+  s:name: Andrey Kartashov
   s:email: mailto:Andrey.Kartashov@cchmc.org
   s:sameAs:
   - id: http://orcid.org/0000-0001-9102-5681
   s:worksFor:
   - class: s:Organization
-    s:name: "Cincinnati Children's Hospital Medical Center"
-    s:location: "3333 Burnet Ave, Cincinnati, OH 45229-3026"
+    s:name: Cincinnati Children's Hospital Medical Center
+    s:location: 3333 Burnet Ave, Cincinnati, OH 45229-3026
     s:department:
     - class: s:Organization
-      s:name: "Barski Lab"
+      s:name: Barski Lab
+doc: |
+  samtools-faidx.cwl is developed for CWL consortium
+  Usage:   samtools faidx <file.fa|file.fa.gz> [<reg> [...]]
 

@@ -77,7 +77,7 @@ inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
     type: File
     inputBinding:
       position: 1
-      prefix: "-jar"
+      prefix: -jar
   max_alternate_alleles:
     type: int?
     inputBinding:
@@ -458,4 +458,5 @@ baseCommand: [java]
 doc: |
   GATK-RealignTargetCreator.cwl is developed for CWL consortium
   Call germline SNPs and indels via local re-assembly of haplotypes
+
 
