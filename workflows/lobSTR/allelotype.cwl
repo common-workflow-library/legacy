@@ -42,7 +42,7 @@ inputs:
     inputBinding:
       prefix: "--strinfo"
 
-  - id: reference
+  reference:
     type: File
     description: "lobSTR's bwa reference files"
     inputBinding:
@@ -76,4 +76,3 @@ baseCommand: ["allelotype", "--command", "classify"]
 
 arguments:
   - "--noweb"
-
