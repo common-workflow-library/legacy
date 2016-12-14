@@ -6,7 +6,7 @@ class: CommandLineTool
 description: "Invoke 'samtools index' to create a 'BAI' index (samtools 1.19)"
 
 requirements:
-  InitialWorkdrRequirement:
+  InitialWorkDirRequirement:
     listing:
       - $(inputs.input)
 
