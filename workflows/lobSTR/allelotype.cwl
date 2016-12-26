@@ -48,7 +48,7 @@ inputs:
     inputBinding:
       prefix: "--index-prefix"
       valueFrom: |
-          $( {"path": self.dirname + "/" + self.nameroot, "class": "File"})
+          $({"path": self.path.replace(/ref\.fasta$/, ""), "class": "File"})
 
     secondaryFiles:
       - ".amb"
@@ -58,9 +58,9 @@ inputs:
       - ".rbwt"
       - ".rpac"
       - ".rsa"
-      - $(self.path.replace(/(.*)ref\.fasta/, "$1chromsizes.tab"))
-      - $(self.path.replace(/(.*)ref\.fasta/, "$1mergedref.bed"))
-      - $(self.path.replace(/(.*)ref\.fasta/, "$1ref_map.tab"))
+      - $(self.path.replace(/ref$/, "chromsizes.tab"))
+      - $(self.path.replace(/ref$/, "mergedref.bed"))
+      - $(self.path)_map.tab
 
 outputs:
   vcf:

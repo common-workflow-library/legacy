@@ -15,17 +15,16 @@ inputs:
     type: File
     description:
       Input bam file.
+    inputBinding:
+      valueFrom: $(self.basename)
 
 outputs:
   bam_with_bai:
     type: File
     outputBinding:
-      glob: indexed.bam
+      glob: $(inputs.input.basename)
     secondaryFiles:
       - .bai
 
 baseCommand: [samtools, index]
-
-arguments:
-  - indexed.bam
 
