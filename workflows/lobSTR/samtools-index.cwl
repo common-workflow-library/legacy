@@ -1,31 +1,30 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: "cwl:draft-3"
+cwlVersion: v1.0
 
 class: CommandLineTool
 
 description: "Invoke 'samtools index' to create a 'BAI' index (samtools 1.19)"
 
 requirements:
-  - class: CreateFileRequirement
-    fileDef:
-      - filename: indexed.bam
-        fileContent: $(inputs['input'])
+  InitialWorkDirRequirement:
+    listing:
+      - $(inputs.input)
 
 inputs:
-  - id: input
+  input:
     type: File
     description:
       Input bam file.
+    inputBinding:
+      valueFrom: $(self.basename)
 
 outputs:
-  - id: bam_with_bai
+  bam_with_bai:
     type: File
     outputBinding:
-      glob: "indexed.bam"
+      glob: $(inputs.input.basename)
     secondaryFiles:
-      - ".bai"
+      - .bai
 
-baseCommand: ["samtools", "index"]
+baseCommand: [samtools, index]
 
-arguments:
-  - "indexed.bam"

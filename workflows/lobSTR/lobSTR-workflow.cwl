@@ -1,108 +1,96 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: "cwl:draft-3"
+cwlVersion: v1.0
 
 class: Workflow
 
 inputs:
-  - id: p1
-    type:
-      - "null"
-      - type: array
-        items: File
+  p1:
+    type: File[]?
     description: list of files containing the first end of paired end reads in fasta or fastq format
 
-  - id: p2
-    type:
-      - "null"
-      - type: array
-        items: File
+  p2:
+    type: File[]?
     description: list of files containing the second end of paired end reads in fasta or fastq format
 
-  - id: output_prefix
+  output_prefix:
     type: string
     description: prefix for output files. will output prefix.aligned.bam and prefix.aligned.stats
 
-  - id: reference
+  reference:
     type: File
     description: "lobSTR's bwa reference files"
 
-  - id: rg-sample
+  rg-sample:
     type: string
     description: Use this in the read group SM tag
 
-  - id: rg-lib
+  rg-lib:
     type: string
     description: Use this in the read group LB tag
 
-  - id: strinfo
+  strinfo:
     type: File
     description: File containing statistics for each STR.
 
-  - id: noise_model
+  noise_model:
     type: File
     description: File to read noise model parameters from (.stepmodel)
     secondaryFiles:
       - "^.stuttermodel"
 
 outputs:
-  - id: bam
+  bam:
     type: File
-    source: "#samindex/bam_with_bai"
+    outputSource: samindex/bam_with_bai
 
-  - id: bam_stats
+  bam_stats:
     type: File
-    source: "#lobSTR/bam_stats"
+    outputSource: lobSTR/bam_stats
 
-  - id: vcf
+  vcf:
     type: File
-    source: "#allelotype/vcf"
+    outputSource: allelotype/vcf
 
-  - id: vcf_stats
+  vcf_stats:
     type: File
-    source: "#allelotype/vcf_stats"
+    outputSource: allelotype/vcf_stats
 
 hints:
-  - class: DockerRequirement
-    dockerLoad: https://workbench.qr1hi.arvadosapi.com/collections/download/qr1hi-4zz18-x2ae13tsx5jqg8d/1nduktd8dpvhdpgsva82lje0i710kgzb6rttks5jldx7s2y7k9/7e0c0ae3bf4e70442f9b8eee816ec23426d9e1169a2925316e5c932745e21613.tar
-    dockerImageId: 7e0c0ae3bf4e70442f9b8eee816ec23426d9e1169a2925316e5c932745e21613
+  DockerRequirement:
+    dockerPull: rabix/lobstr
 
 steps:
-  - id: lobSTR
+  lobSTR:
     run: lobSTR-tool.cwl
-    inputs:
-      - { id: p1, source: "#p1" }
-      - { id: p2, source: "#p2" }
-      - { id: output_prefix, source: "#output_prefix" }
-      - { id: reference, source: "#reference" }
-      - { id: rg-sample, source: "#rg-sample" }
-      - { id: rg-lib, source: "#rg-lib" }
-    outputs:
-      - { id: bam }
-      - { id: bam_stats }
+    in:
+      p1: p1
+      p2: p2
+      output_prefix: output_prefix
+      reference: reference
+      rg-sample: rg-sample
+      rg-lib: rg-lib
+    out: [bam, bam_stats]
 
-  - id: samsort
+  samsort:
     run: samtools-sort.cwl
-    inputs:
-      - { id: input, source: "#lobSTR/bam" }
-      - { id: output_name, default: "aligned.sorted.bam" }
-    outputs:
-      - { id: output_file }
+    in:
+      input: lobSTR/bam
+      output_name: {default: "aligned.sorted.bam" }
+    out: [output_file]
 
-  - id: samindex
+  samindex:
     run: samtools-index.cwl
-    inputs:
-      - { id: input, source: "#samsort/output_file" }
-    outputs:
-      - { id: bam_with_bai }
+    in:
+      input: samsort/output_file
+    out: [bam_with_bai]
 
-  - id: allelotype
+  allelotype:
     run: allelotype.cwl
-    inputs:
-      - { id: bam, source: "#samindex/bam_with_bai" }
-      - { id: reference, source: "#reference" }
-      - { id: output_prefix, source: "#output_prefix" }
-      - { id: noise_model, source: "#noise_model" }
-      - { id: strinfo, source: "#strinfo" }
-    outputs:
-      - { id: vcf }
-      - { id: vcf_stats }
+    in:
+      bam: samindex/bam_with_bai
+      reference: reference
+      output_prefix: output_prefix
+      noise_model: noise_model
+      strinfo: strinfo
+    out: [vcf, vcf_stats]
+
