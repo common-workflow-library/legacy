@@ -25,5 +25,5 @@
 
    "resource_mills": {"class": "File", "path": "1000G_phase1.snps.high_confidence.hg19.sites.vcf"},
    
-   "haplotest_vcf": {"class": "File", "path": "whole_ex.vcf"}
+   "haplotest_vcf": {"class": "File", "path": "HaplotypeCaller-2016-08-04.vcf"}
 }

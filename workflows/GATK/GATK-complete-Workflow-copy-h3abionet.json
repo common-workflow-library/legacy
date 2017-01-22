@@ -7,7 +7,7 @@
        "class": "File",
        "path": "genome.fa"
    },
-    "reads": [{"class": "File", "path": "FQ_1.fastq"}, {"class": "File", "path": "FQ_2.fastq"}  ],
+    "reads": [{"class": "File", "path": "/mnt/fastq/NA12878.R1.fastq.gz"}, {"class": "File", "path": "/mnt/fastq/NA12878.R2.fastq.gz"}],
     "dbsnp": {
         "class": "File",
         "path": "dbsnp_138.vcf",
