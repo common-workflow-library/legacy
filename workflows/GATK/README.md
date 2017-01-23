@@ -19,6 +19,10 @@ The pipeline rely on the following requirements.
 * Docker
 * cwltools
 
+## Sample Data
+
+
+
 ## Workflow Tools
 ### FastQC
 FastQC is used as an initial QC step where the input files are checked for usual metrics such as:
