@@ -22,6 +22,9 @@
 *.ann
 *.pac
 *.refmap
+*.dict
+*.idx
+*.recal
 
 #archives
 *.bz2

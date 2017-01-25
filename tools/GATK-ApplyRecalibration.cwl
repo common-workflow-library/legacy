@@ -14,11 +14,21 @@ inputs:
     default: 4
     inputBinding:
       position: 12
-      prefix: --nt
+      prefix: -nt
     doc: multithreading option
+  
+  raw_vcf:
+    type: File
+    inputBinding:
+      position: 5
+      prefix: -input
+    doc: input vcf File raw variant calls from haplotype caller
 
   reference:
     type: File
+    secondaryFiles:
+      - .fai
+      - ^.dict
     inputBinding:
       position: 6
       prefix: -R
@@ -40,6 +50,7 @@ inputs:
 
   mode:
     type: string
+    default: "SNP"
     inputBinding:
       position: 11
       prefix: -mode
@@ -90,3 +101,4 @@ arguments:
    position: 9
    prefix: -o
 baseCommand: [java]
+

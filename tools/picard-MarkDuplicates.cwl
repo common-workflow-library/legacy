@@ -1,67 +1,67 @@
 #!/usr/bin/env cwl-runner
 
-$namespaces:
-  dct: http://purl.org/dc/terms/
-  foaf: http://xmlns.com/foaf/0.1/
-  doap: http://usefulinc.com/ns/doap#
-  adms: http://www.w3.org/ns/adms#
-  dcat: http://www.w3.org/ns/dcat#
-
-$schemas:
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- http://usefulinc.com/ns/doap#
-- http://www.w3.org/ns/adms#
-- http://www.w3.org/ns/dcat.rdf
+##$namespaces:
+##  dct: http://purl.org/dc/terms/
+##  foaf: http://xmlns.com/foaf/0.1/
+##  doap: http://usefulinc.com/ns/doap#
+##  adms: http://www.w3.org/ns/adms#
+##  dcat: http://www.w3.org/ns/dcat#
+##
+##$schemas:
+##- http://dublincore.org/2012/06/14/dcterms.rdf
+##- http://xmlns.com/foaf/spec/20140114.rdf
+##- http://usefulinc.com/ns/doap#
+##- http://www.w3.org/ns/adms#
+##- http://www.w3.org/ns/dcat.rdf
 
 cwlVersion: v1.0
 class: CommandLineTool
 
-adms:includedAsset:
-  doap:name: picard
-  doap:description: 'A set of Java command line tools for manipulating high-throughput
-    sequencing data (HTS) data and formats. Picard is implemented using the HTSJDK
-    Java library HTSJDK, supporting accessing of common file formats, such as SAM
-    and VCF, used for high-throughput sequencing data. http://broadinstitute.github.io/picard/command-line-overview.html#BuildBamIndex
-
-    '
-  doap:homepage: http://broadinstitute.github.io/picard/
-  doap:repository:
-  - class: doap:GitRepository
-    doap:location: https://github.com/broadinstitute/picard.git
-  doap:release:
-  - class: doap:Version
-    doap:revision: '1.141'
-  doap:license: MIT, Apache2
-  doap:category: commandline tool
-  doap:programming-language: JAVA
-  doap:developer:
-  - class: foaf:Organization
-    foaf:name: Broad Institute
-doap:name: picard-MarkDuplicates.cwl
-dcat:downloadURL: https://github.com/common-workflow-language/workflows/blob/master/tools/picard-MarkDuplicates.cwl
-dct:creator:
-- class: foaf:Organization
-  foaf:name: UNIVERSITY OF MELBOURNE
-  foaf:member:
-  - class: foaf:Person
-    id: farahk@student.unimelb.edu.au
-    foaf:mbox: mailto:farahk@student.unimelb.edu.au
-  - class: foaf:Person
-    id: skanwal@student.unimelb.edu.au
-    foaf:mbox: mailto:skanwal@student.unimelb.edu.au
-doap:maintainer:
-- class: foaf:Organization
-  foaf:name: THE UNIVERSITY OF MELBOURNE
-  foaf:member:
-  - class: foaf:Person
-    id: farahk@student.unimelb.edu.au
-    foaf:name: Farah Zaib Khan
-    foaf:mbox: mailto:farahk@student.unimelb.edu.au
-  - class: foaf:Person
-    id: skanwal@student.unimelb.edu.au
-    foaf:name: Sehrish Kanwal
-    foaf:mbox: mailto:skanwal@student.unimelb.edu.au
+#adms:includedAsset:
+#  doap:name: picard
+#  doap:description: 'A set of Java command line tools for manipulating high-throughput
+#    sequencing data (HTS) data and formats. Picard is implemented using the HTSJDK
+#    Java library HTSJDK, supporting accessing of common file formats, such as SAM
+#    and VCF, used for high-throughput sequencing data. http://broadinstitute.github.io/picard/command-line-overview.html#BuildBamIndex
+#
+#    '
+#  doap:homepage: http://broadinstitute.github.io/picard/
+#  doap:repository:
+#  - class: doap:GitRepository
+#    doap:location: https://github.com/broadinstitute/picard.git
+#  doap:release:
+#  - class: doap:Version
+#    doap:revision: '1.141'
+#  doap:license: MIT, Apache2
+#  doap:category: commandline tool
+#  doap:programming-language: JAVA
+#  doap:developer:
+#  - class: foaf:Organization
+#    foaf:name: Broad Institute
+#doap:name: picard-MarkDuplicates.cwl
+#dcat:downloadURL: https://github.com/common-workflow-language/workflows/blob/master/tools/picard-MarkDuplicates.cwl
+#dct:creator:
+#- class: foaf:Organization
+#  foaf:name: UNIVERSITY OF MELBOURNE
+#  foaf:member:
+#  - class: foaf:Person
+#    id: farahk@student.unimelb.edu.au
+#    foaf:mbox: mailto:farahk@student.unimelb.edu.au
+#  - class: foaf:Person
+#    id: skanwal@student.unimelb.edu.au
+#    foaf:mbox: mailto:skanwal@student.unimelb.edu.au
+#doap:maintainer:
+#- class: foaf:Organization
+#  foaf:name: THE UNIVERSITY OF MELBOURNE
+#  foaf:member:
+#  - class: foaf:Person
+#    id: farahk@student.unimelb.edu.au
+#    foaf:name: Farah Zaib Khan
+#    foaf:mbox: mailto:farahk@student.unimelb.edu.au
+#  - class: foaf:Person
+#    id: skanwal@student.unimelb.edu.au
+#    foaf:name: Sehrish Kanwal
+#    foaf:mbox: mailto:skanwal@student.unimelb.edu.au
 requirements:
 - $import: envvar-global.yml
 - $import: picard-docker.yml
@@ -82,7 +82,7 @@ inputs:
     doc: Value of PN tag of PG record to be created. Default value MarkDuplicates.
       This option can be set to 'null' to clear the default value
   inputFileName_markDups:
-    type: File[]?
+    type: File[]
     inputBinding:
       position: 4
       prefix: INPUT=
@@ -97,7 +97,7 @@ inputs:
     doc: Value of VN tag of PG record to be created. If not specified, the version
       will be detected automatically. Default value null
   readSorted:
-    type: boolean?
+    type: string?
     inputBinding:
       position: 22
       prefix: ASSUME_SORTED=
@@ -191,7 +191,7 @@ inputs:
     doc: Value of CL tag of PG record to be created. If not supplied the command line
       will be detected automatically. Default value null
   removeDuplicates:
-    type: boolean?
+    type: string?
     inputBinding:
       position: 7
       prefix: REMOVE_DUPLICATES=
@@ -230,6 +230,10 @@ outputs:
     type: File
     outputBinding:
       glob: $(inputs.outputFileName_markDups)
+  markDups_output_index:
+    type: File
+    outputBinding:
+      glob: $("*.bai")
 
 baseCommand: [java]
 arguments:
@@ -238,7 +242,7 @@ arguments:
   prefix: -jar
 - valueFrom: MarkDuplicates
   position: 3
-doc: |
-  picard-BuildBamIndex.cwl is developed for CWL consortium
-    Examines aligned records in the supplied SAM or BAM file to locate duplicate molecules. All records are then written to the output file with the duplicate records flagged
 
+#doc: |
+#  picard-BuildBamIndex.cwl is developed for CWL consortium
+#    Examines aligned records in the supplied SAM or BAM file to locate duplicate molecules. All records are then written to the output file with the duplicate records flagged

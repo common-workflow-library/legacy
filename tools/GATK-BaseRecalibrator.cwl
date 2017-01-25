@@ -27,7 +27,7 @@ inputs:
     - .64.pac
     - .64.sa
     - .fai
-    - ^.dict     
+    - ^.dict
   binary_tag_name:
     type: string?
     inputBinding:
@@ -107,14 +107,15 @@ inputs:
     secondaryFiles:
     - ^.bai
     doc: bam file produced after indelRealigner
-  knownSites:
+  known:
     type:
-      - "null" 
+      - "null"
       - type: array
         items: File
         inputBinding:
           prefix: --knownSites
     inputBinding:
+      position: 28
     doc: 'Any number of VCF files representing known SNPs and/or indels. Could be
       e.g. dbSNP and/or official 1000 Genomes indel calls. SNPs in these files will
       be ignored unless the --mismatchFraction argument is used. optional parameter.'
@@ -170,12 +171,23 @@ inputs:
       prefix: --mismatches_default_quality
     doc: default quality for the base mismatches covariate
   covariate:
-    type: string?
+    type:
+      type: array
+      items: string
+      inputBinding:
+        prefix: --covariate
     inputBinding:
       position: 25
-      prefix: --covariate
     doc: One or more covariates to be used in the recalibration. Can be specified
       multiple times
+
+    threads:
+      type: int
+      default: 4
+      inputBinding:
+        prefix: -nct
+        position: 26
+
 outputs:
   output_baseRecalibrator:
     type: File
@@ -198,4 +210,3 @@ doc: |
   GATK-BaseRecalibrator.cwl is developed for CWL consortium
   It generate base recalibration table to compensate for systematic errors in basecalling confidences
     Usage: java -jar GenomeAnalysisTK.jar -T BaseRecalibrator -R reference.fasta -I my_reads.bam -knownSites latest_dbsnp.vcf -o recal_data.table.
-
