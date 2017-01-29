@@ -116,13 +116,13 @@ outputs:
     tranches_File:
       type: File
       outputBinding:
-        glob: vqsr_tranches.recal
+        glob: vqsr_tranches.indels.recal
       doc: the tranches File
 
     recal_File:
       type: File
       outputBinding:
-        glob: vqsr_recal.recal
+        glob: vqsr_recal.indels.recal
       doc: the recal File
 
    # vqsr_rscript:
@@ -172,15 +172,14 @@ arguments:
 #  position: 12
 #  prefix: -an
 
-- valueFrom: vqsr_tranches.out
+- valueFrom: vqsr_tranches.indels.recal
   position: 13
   prefix: -tranchesFile
-- valueFrom: vqsr_recal.out
+- valueFrom: vqsr_recal.indels.recal
   position: 14
   prefix: -recalFile
-#- valueFrom: vqsr_tranches.plots.R
+#- valueFrom: vqsr_tranches.indels.plots.R
 #  position: 15
 #  prefix: -rscriptFile
 
 baseCommand: [java]
-

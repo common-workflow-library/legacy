@@ -11,7 +11,7 @@ inputs:
   reference:
     type: File
     doc: reference human genome file
- 
+
   #known_ref_db:
   #  type: File[]?
   #  doc: array of known variant files for realign target creator
@@ -31,18 +31,18 @@ inputs:
   #dbsnp:
   #  type: File
   #  doc: vcf file containing SNP variations used for Haplotype caller
- 
+
   indel_mode:
     type: string
     default: 'INDEL'
-  
+
   snp_mode:
     type: string
     default: 'SNP'
 
   snpf_genome:
     type: string
-  
+
   snpf_nodownload:
     type: boolean
 
@@ -54,7 +54,7 @@ inputs:
 
   haplotest_vcf:
     type: File
-  
+
   resource_hapmap:
     type: File
 
@@ -69,7 +69,7 @@ outputs:
     type: File
     outputSource: vqsr_indels/recal_File
 
-  annotated_snps:
+  annotated_indels:
     type: File
     outputSource: snpeff_indels/annotated_vcf
 #
@@ -103,7 +103,7 @@ steps:
 #      resource_hapmap: resource_hapmap
 #
 #    out: [tranches_File, recal_File]
-#  
+#
   vqsr_indels:
     run: ../../tools/GATK-VariantRecalibrator-Indels.cwl
     in:
@@ -133,7 +133,7 @@ steps:
     in:
       mode: indel_mode
       #raw_vcf: HaplotypeCaller/output_HaplotypeCaller
-      raw_vcf: haplotest_vcf 
+      raw_vcf: haplotest_vcf
       reference: reference
       recal_file: vqsr_indels/recal_File
       tranches_file: vqsr_indels/tranches_File
@@ -156,4 +156,3 @@ steps:
       nodownload: snpf_nodownload
       data_dir: snpf_data_dir
     out: [ annotated_vcf ]
-

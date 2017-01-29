@@ -16,7 +16,7 @@ inputs:
       position: 12
       prefix: -nt
     doc: multithreading option
-  
+
   raw_vcf:
     type: File
     inputBinding:
@@ -82,7 +82,7 @@ outputs:
   vqsr_vcf:
     type: File
     outputBinding:
-      glob: vqsr.vcf
+      glob: *.vqsr.vcf
     doc: The output recalibration VCF file
 
 
@@ -97,8 +97,7 @@ arguments:
  - valueFrom: ApplyRecalibration
    position: 4
    prefix: -T
- - valueFrom: vqsr.vcf
+ - valueFrom: $(inputs.raw_vcf.path.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "") + "." + inputs.mode + ".vqsr.vcf")
    position: 9
    prefix: -o
 baseCommand: [java]
-

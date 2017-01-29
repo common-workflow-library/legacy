@@ -56,7 +56,7 @@ inputs:
       position: 7
       prefix: -R
     doc: reference genome
-  
+
   #resource_db:
   #  type:
   #    type: array
@@ -117,7 +117,7 @@ inputs:
     default: -Djava.io.tmpdir=/tmp
     inputBinding:
       position: 2
-  
+
   #mingauss:
   #  type: int
   #  default: 5000
@@ -129,13 +129,13 @@ outputs:
     tranches_File:
       type: File
       outputBinding:
-        glob: vqsr_tranches.recal
+        glob: vqsr_tranches.snps.recal
       doc: the tranches File
 
     recal_File:
       type: File
       outputBinding:
-        glob: vqsr_recal.recal
+        glob: vqsr_recal.snps.recal
       doc: the recal File
 
     #vqsr_rscript:
@@ -182,16 +182,14 @@ arguments:
   position: 13
   prefix: -an
 
-- valueFrom: vqsr_tranches.recal
+- valueFrom: vqsr_tranches.snps.recal
   position: 14
   prefix: -tranchesFile
-- valueFrom: vqsr_recal.recal
+- valueFrom: vqsr_recal.snps.recal
   position: 15
   prefix: -recalFile
-- valueFrom: vqsr_tranches.plots.R
+- valueFrom: vqsr_tranches.snps.plots.R
   position: 16
   prefix: -rscriptFile
 
 baseCommand: [java]
-
-
