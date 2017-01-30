@@ -47,14 +47,6 @@ inputs:
 outputs:
   recal_File:
     type: File
-    outputSource: vqsr_indels/recal_File
-
-  annotated_snps:
-    type: File
-    outputSource: snpeff_indels/annotated_vcf
-
-  recal_File:
-    type: File
     outputSource: vqsr_snps/recal_File
 
   annotated_snps:
