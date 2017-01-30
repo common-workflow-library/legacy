@@ -82,7 +82,7 @@ outputs:
   vqsr_vcf:
     type: File
     outputBinding:
-      glob: *.vqsr.vcf
+      glob: '*.vqsr.vcf'
     doc: The output recalibration VCF file
 
 
