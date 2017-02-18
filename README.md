@@ -13,11 +13,12 @@ this repository.
 Any contribution submitted for inclusion in this repository shall be under the
 terms and conditions of the Apache License version 2.0 (see LICENSE.txt).
 
-## Other CWL repositories
+## Other locations of tool and workflow descriptions in CWL format
 
 * https://github.com/Duke-GCB/GGR-cwl
 * https://github.com/jorvis/FALCON/tree/master/cwl/tools
 * https://github.com/h3abionet/h3abionet16S/tree/master/workflows
+* https://github.com/pitagora-galaxy/cwl
 * https://dockstore.org/
 
 ## Pull request
