@@ -9,11 +9,11 @@ inputs:
     type: File
     inputBinding:
       position: 1
-  outfile:
+  outfile_name:
     type: string?
 
 outputs:
-  outfile:
+  revcomp_dnafile:
     type: File
     outputSource: rename/outfile
 
@@ -21,31 +21,31 @@ steps:
   reverse:
     run: reverse.cwl
     in:
-      infile: infile
-    out: [outfile]
+      dnafile: infile
+    out: [rev_dnafile]
   complement:
     run: complement.cwl
     in:
-      infile: reverse/outfile
-    out: [outfile]
+      dnafile: reverse/rev_dnafile
+    out: [comp_dnafile]
   rename:
     run:
       class: ExpressionTool
       inputs:
         infile:
           type: File
-        outfile:
+        outfile_name:
           type: string?
       outputs:
         outfile: File
       expression: >
         ${
         var outfile = inputs.infile;
-        if (inputs.outfile) {
-          outfile.basename = inputs.outfile;
+        if (inputs.outfile_name) {
+          outfile.basename = inputs.outfile_name;
         }
-        return { outfile: outfile }; }
+        return { "outfile": outfile }; }
     in:
-      infile: complement/outfile
-      outfile: outfile
+      infile: complement/comp_dnafile
+      outfile_name: outfile_name
     out: [outfile]

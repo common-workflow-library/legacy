@@ -8,13 +8,13 @@ hints:
 baseCommand: complement.py
 
 inputs:
-  infile:
+  dnafile:
     type: File
     inputBinding:
       position: 1
 
-stdout: $(inputs.infile.nameroot)_complement$(inputs.infile.nameext)
+stdout: $(inputs.dnafile.nameroot)_complement$(inputs.dnafile.nameext)
 
 outputs:
-  outfile:
+  comp_dnafile:
     type: stdout

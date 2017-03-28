@@ -8,13 +8,13 @@ hints:
 baseCommand: reverse.py
 
 inputs:
-  infile:
+  dnafile:
     type: File
     inputBinding:
       position: 1
 
-stdout: $(inputs.infile.nameroot)_reversed$(inputs.infile.nameext)
+stdout: $(inputs.dnafile.nameroot)_reversed$(inputs.dnafile.nameext)
 
 outputs:
-  outfile:
+  rev_dnafile:
     type: stdout

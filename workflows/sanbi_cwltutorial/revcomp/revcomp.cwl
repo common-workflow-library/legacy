@@ -11,18 +11,18 @@ inputs:
       position: 1
 
 outputs:
-  outfile:
+  revcomp_dnafile:
     type: File
-    outputSource: complement/outfile
+    outputSource: complement/comp_dnafile
 
 steps:
   reverse:
     run: reverse.cwl
     in:
-      infile: infile
-    out: [outfile]
+      dnafile: infile
+    out: [rev_dnafile]
   complement:
     run: complement.cwl
     in:
-      infile: reverse/outfile
-    out: [outfile]
+      dnafile: reverse/rev_dnafile
+    out: [comp_dnafile]

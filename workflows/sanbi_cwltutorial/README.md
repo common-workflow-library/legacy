@@ -23,35 +23,32 @@ file from `reverse.cwl` is reproduced below:
     baseCommand: reverse.py
 
     inputs:
-      infile:
+      dnafile:
         type: File
         inputBinding:
           position: 1
 
-    stdout: $(inputs.infile.nameroot)\_reversed$(inputs.infile.nameext)
+    stdout: $(inputs.dnafile.nameroot)\_reversed$(inputs.dnafile.nameext)
 
     outputs:
-      outfile:
+      rev_dnafile:
         type: stdout
 
 For an introduction to the CWL, see the [User Guide](http://www.commonwl.org/v1.0/UserGuide.html).
 A few items bear mentioning, however: the Docker image for the tool is associated
 with the tool using a hint. I.e. this tool can either be run with or without
 (Docker) container support. The `baseCommand` refers to the command line
-tool (`reverse.py`) being run, and a single command line argument is specified.
-Given this command line, `reverse.py` writes output to `stdout`. This is captured
-and redirected to a file.
+tool (`reverse.py`) being run, and a single command line argument is specified. Given this command line, `reverse.py` writes output to `stdout`. This is captured and redirected to a file.
 
 Instead of giving a simple string as the output
 filename, parameters of the input are used as part of a filename pattern. In
-CWL, the `$()` refers to a variable lookup. The `infile` is a `File` type,
+CWL, the `$()` refers to a variable lookup. The `dnafile` is a `File` type,
 you can read about its attributes in the corresponding section of the
 [CWL specification](http://www.commonwl.org/v1.0/CommandLineTool.html#File).
 The effect of this pattern is that if the input is `dna.txt` the output
 will be `dna_reversed.txt`.
 
-Finally, a single output is captured from the tool, given the name `outfile` which
-is associated with the previously-captured `stdout`.
+Finally, a single output is captured from the tool, given the name `rev_dnafile` which is associated with the previously-captured `stdout`.
 
 This tool description allows the tool to be run, either by command line
 invocation of something like the `cwltool` script, or via other mechanisms
@@ -63,7 +60,6 @@ and the command line parameters and output files associated with a tool.
 
 The reverse and complement tools can be chained together using a workflow. This
 is what such a workflow could look like (`revcomp.cwl`):
-
 
     cwlVersion: v1.0
     class: Workflow
@@ -78,31 +74,23 @@ is what such a workflow could look like (`revcomp.cwl`):
           position: 1
 
     outputs:
-      outfile:
+      revcomp_dnafile:
         type: File
-        outputSource: complement/outfile
+        outputSource: complement/comp_dnafile
 
     steps:
       reverse:
         run: reverse.cwl
         in:
-          infile: infile
-        out: [outfile]
+          dnafile: infile
+        out: [rev_dnafile]
       complement:
         run: complement.cwl
         in:
-          infile: reverse/outfile
-        out: [outfile]
+          dnafile: reverse/rev_dnafile
+        out: [comp_dnafile]
 
-Note that this is `class: Workflow` instead of `class: CommandLineTool`. It has
-its own `inputs` and `outputs`, just like a command line tool. Instead of
-linking to a command (with `baseCommand`), a workflow has `steps`, which in this
-case each refer to a CWL command line tool description file. In each step the
-inputs provided and outputs used are mentioned using `in` and `out` respectively.
-The `infile` input from `inputs` is bound to the `infile` parameter of `reverse.cwl`.
-The `outfile` output of this tool is captured and then bound to the `infile`
-parameter of `complement.cwl`. Finally `outfile` from the complement step is
-bound (using `outputSource`) to the `outfile` output of the workflow as a whole.
+Note that this is `class: Workflow` instead of `class: CommandLineTool`. It has its own `inputs` and `outputs`, just like a command line tool. Instead of linking to a command (with `baseCommand`), a workflow has `steps`, which in this case each refer to a CWL command line tool description file. In each step the inputs provided and outputs used are mentioned using `in` and `out` respectively. The `infile` input from `inputs` is bound to the `dnafile` parameter of `reverse.cwl`. The `rev_dnafile` output of this tool is captured and then bound to the `dnafile` parameter of `complement.cwl`. Finally `comp_dnafile` from the complement step is bound (using `outputSource`) to the `revcomp_dnafile` output of the workflow as a whole.
 
 At this (workflow) level the implementation details of the steps are hidden.
 The workflow has no need to know about the structure of the command line or
@@ -112,8 +100,8 @@ One effect of how the steps are written is that the final output file will
 inherit patterns from each step. So `dna.txt` becomes `dna_reversed_complement.txt`.
 
 The final example `revcomp_with_rename.cwl` illustrates some of the more
-advanced features of CWL. Firstly this workflow takes an option string
-parameter (`outfile`) which is the name to give the output file of the workflow.
+advanced features of CWL. Firstly this workflow takes an optional string
+parameter (`outfile_name`) which is the name to give the output file of the workflow.
 This parameter is optional because its type is `string?`. Like in
 regular expressions, the `?` denotes that this paramter does not have to be
 provided. If the parameter is not provided, the output filename would be the same
@@ -130,32 +118,29 @@ to be specified and then a step of type `ExpressionTool`:
         inputs:
           infile:
             type: File
-          outfile:
+          outfile_name:
             type: string?
         outputs:
           outfile: File
         expression: >
           ${
           var outfile = inputs.infile;
-          if (inputs.outfile) {
-            outfile.basename = inputs.outfile;
+          if (inputs.outfile_name) {
+            outfile.basename = inputs.outfile_name;
           }
-          return { outfile: outfile }; }
+          return { "outfile": outfile }; }
       in:
-        infile: complement/outfile
-        outfile: outfile
+        infile: complement/comp_dnafile
+        outfile_name: outfile_name
       out: [outfile]
 
-This also has an optional `outfile` parameter. The Javascript tests if this is
+This also has an optional `outfile_name` parameter. The Javascript tests if this is
 set and if so, uses it to modify the `outfile.basename`, resulting in the
 output file having the name specified by the user. The Javascript expression
 returns a dictionary whose keys correspond to the names of outputs specified
 for the step.
 
-The `InlineJavascriptRequirement` requires the use of NodeJS (the `node`)
-command, either through having it installed as a packer or via the use
-of a Docker container that can run `node`. The Javascript code is sandboxed
-and cannot access anything outside of its limited execution context.
+When using `cwltool` the `InlineJavascriptRequirement` requires the use of NodeJS (the `node`) command, either through having it installed as a packer or via the use of a Docker container that can run `node`. The Javascript code is sandboxed and cannot access anything outside of its limited execution context.
 
 ### Conclusion
 
