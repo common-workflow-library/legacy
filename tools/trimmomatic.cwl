@@ -200,6 +200,7 @@ inputs:
       balance between preserving as much read length as possible vs. removal of incorrect
       bases. A low value of this parameter (<0.2) favours longer reads, while a high value
       (>0.8) favours read correctness.
+
   end_mode:
     type: string
     inputBinding:
@@ -248,6 +249,7 @@ outputs:
         }
 
 baseCommand: [ java, org.usadellab.trimmomatic.Trimmomatic ]
+
 arguments:
 - valueFrom: $(inputs.input_read1_fastq_file.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/,
     '') + '.trimmed.fastq')

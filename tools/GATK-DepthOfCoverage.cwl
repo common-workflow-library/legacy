@@ -66,32 +66,39 @@ requirements:
 - $import: envvar-global.yml
 - $import: GATK-docker.yml
 
-inputs:
+inputs: # position 0, for java args, 1 for the jar, 2 for the tool itself
 
   java_arg:
     type: string
-    default: mx4g
+    default: -Xmx4g
     inputBinding:
-      separate: false
-      prefix: -X
+      position: 0
 
+  GATKJar:
+    type: File
+    inputBinding:
+      position: 1
+      prefix: -jar
   threads:
     type: int
     default: 4
     inputBinding:
       prefix: -nt
+      position: 2
     doc: number of threads
 
   omitIntervalStatistics:
     type: boolean?
     inputBinding:
       prefix: --omitIntervalStatistics
+      position: 2
     doc: Do not calculate per-interval statistics
 
   omitDepthOutputAtEachBase:
     type: boolean?
     inputBinding:
       prefix: --omitDepthOutputAtEachBase
+      position: 2
     doc: Do not output depth of coverage at each base
 
   reference:
@@ -99,6 +106,7 @@ inputs:
     format: http://edamontology.org/format_1929  # FASTA
     inputBinding:
       prefix: -R
+      position: 2
     secondaryFiles:
     - .fai
     - ^.dict
@@ -108,6 +116,7 @@ inputs:
     format: http://edamontology.org/format_2572  # BAM
     inputBinding:
       prefix: -I
+      position: 2
     secondaryFiles:
     - ^.bai
     doc: bam file, make sure it was aligned to the reference files used
@@ -117,21 +126,21 @@ outputs:
     type: File[]
     outputBinding:
       glob: '*'
-
 arguments:
-- valueFrom: "sample"
+- valueFrom: sample
   prefix: -o
+  position: 2
 - valueFrom: $(runtime.tmpdir)
   separate: false
   prefix: -Djava.io.tmpdir=
-- valueFrom: /usr/local/bin/GenomeAnalysisTK.jar
-  prefix: -jar
+  position: 0
 - valueFrom: DepthOfCoverage
   prefix: -T
+  position: 2
 
 baseCommand: [java]
-
 doc: |
   GATK-DepthOfCoverage.cwl is developed for CWL consortium
   Assess sequence coverage by a wide array of metrics, partitioned by sample, read group, or library
     Usage: java -jar GenomeAnalysisTK.jar -T DepthOfCoverage -R reference.fasta -o file_name_base -I input_bams.list [-geneList refSeq.sorted.txt] [-pt readgroup] [-ct 4 -ct 6 -ct 10] [-L my_capture_genes.interval_list]
+
