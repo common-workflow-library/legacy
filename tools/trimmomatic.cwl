@@ -3,6 +3,11 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
+hints:
+- class: EnvVarRequirement
+  envDef:
+   CLASSPATH: /usr/share/java/trimmomatic.jar
+
 requirements:
 - $import: trimmomatic-docker.yml
 - class: InlineJavascriptRequirement
@@ -195,11 +200,7 @@ inputs:
       balance between preserving as much read length as possible vs. removal of incorrect
       bases. A low value of this parameter (<0.2) favours longer reads, while a high value
       (>0.8) favours read correctness.
-  trimmomatic_jar_path:
-    type: string
-    inputBinding:
-      position: 2
-      prefix: -jar
+
   end_mode:
     type: string
     inputBinding:
@@ -246,7 +247,9 @@ outputs:
             return inputs.input_read2_fastq_file.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '.unpaired.trimmed.fastq';
           return null;
         }
-baseCommand: java
+
+baseCommand: [ java, org.usadellab.trimmomatic.Trimmomatic ]
+
 arguments:
 - valueFrom: $(inputs.input_read1_fastq_file.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/,
     '') + '.trimmed.fastq')
