@@ -10,8 +10,7 @@ inputs:
  fastqs:
    type: File[]
    format: http://edamontology.org/format_1930 # FASTA
-   inputBinding:
-    position: 100
+   inputBinding: {}
 
  index:
    type: File
@@ -19,6 +18,7 @@ inputs:
      prefix: "--index"
 
 baseCommand: [ kallisto, quant ]
+
 arguments: [ "--output-dir", out ]
 
 outputs:

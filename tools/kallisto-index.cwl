@@ -10,17 +10,11 @@ inputs:
  fasta-files:
    type: File[]
    format: http://edamontology.org/format_1929 # FASTA
-   doc: 
-   inputBinding:
-    position: 100
-
- index_name:
-   type: string?
-   default: index.idx
-   inputBinding:
-     prefix: "--index"
+   inputBinding: {}
 
 baseCommand: [ kallisto, index ]
+
+arguments: [ --index, index.idx ]
 
 outputs:
  index:
