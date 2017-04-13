@@ -10,7 +10,7 @@ install:
   - pip install setuptools==18.5
   - pip install html5lib
   - pip install cwltool
-  - pip install cwl-runner
+  - pip install cwlref-runner
 
 services:
   - docker
