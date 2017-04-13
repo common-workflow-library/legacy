@@ -52,18 +52,6 @@ dct:creator:
     id: skanwal@student.unimelb.edu.au
     foaf:name: Sehrish Kanwal
     foaf:mbox: mailto:skanwal@student.unimelb.edu.au
-doap:maintainer:
-- class: foaf:Organization
-  foaf:name: THE UNIVERSITY OF MELBOURNE
-  foaf:member:
-  - class: foaf:Person
-    id: farahk@student.unimelb.edu.au
-    foaf:name: Farah Zaib Khan
-    foaf:mbox: mailto:farahk@student.unimelb.edu.au
-  - class: foaf:Person
-    id: skanwal@student.unimelb.edu.au
-    foaf:name: Sehrish Kanwal
-    foaf:mbox: mailto:skanwal@student.unimelb.edu.au
 requirements:
 - $import: envvar-global.yml
 - $import: picard-docker.yml
