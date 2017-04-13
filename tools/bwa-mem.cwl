@@ -34,6 +34,7 @@ inputs:
 
   threads:
     type: int?
+
     inputBinding:
       position: 1
       prefix: -t

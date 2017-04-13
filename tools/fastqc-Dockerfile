@@ -1,0 +1,10 @@
+# Dockerfile to build FASTQC container images
+#############################################
+
+FROM debian:testing
+
+RUN apt-get update && apt-get --yes upgrade && apt-get install --yes \
+  fastqc \
+  libfindbin-libs-perl
+
+CMD ["fastqc"]
