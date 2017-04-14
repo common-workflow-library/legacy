@@ -3,112 +3,81 @@
 # Author: Andrey.Kartashov@cchmc.org (http://orcid.org/0000-0001-9102-5681) / Dr. Barski Lab / Cincinnati Children’s Hospital Medical Center
 # Developed for CWL consortium http://commonwl.org/
 
-cwlVersion: 'cwl:draft-3'
-
+cwlVersion: v1.0
 class: CommandLineTool
 
 requirements:
-  - $import: envvar-global.yml
-  - $import: bcftools-docker.yml
-  - class: InlineJavascriptRequirement
-  - class: ShellCommandRequirement
+- $import: envvar-global.yml
+- $import: bcftools-docker.yml
+- class: InlineJavascriptRequirement
+- class: ShellCommandRequirement
 
 inputs:
-
-  - id: filename
-    type: string
-    description: |
-      write output to a file
-    inputBinding:
-      position: 1
-      prefix: '-o'
-
-  - id: vcf
+  vcf:
     type: File
     inputBinding:
       position: 2
     secondaryFiles:
-      - .tbi
+    - .tbi
 
-  - id: reference
+  reference:
     type: File
-    description: |
-      reference sequence in fasta format
     inputBinding:
       position: 1
-      prefix: '-f'
-
-  - id: haplotype
-    type:
-      - 'null'
-      - int
-    description: |
-      apply variants for the given haplotype <1|2>
+      prefix: -f
+    doc: reference sequence in fasta format
+  haplotype:
+    type: int?
     inputBinding:
       position: 1
-      prefix: '-H'
-
-  - id: iupac_codes
-    type:
-      - 'null'
-      - boolean
-    description: >
-      output variants in the form of IUPAC ambiguity codes
+      prefix: -H
+    doc: apply variants for the given haplotype <1|2>
+  mask:
+    type: File?
     inputBinding:
       position: 1
-      prefix: '-i'
-
-  - id: mask
-    type:
-      - 'null'
-      - File
-    description: |
-      replace regions with N
+      prefix: -m
+    doc: replace regions with N
+  filename:
+    type: string
     inputBinding:
       position: 1
-      prefix: '-m'
-
-  - id: chain
-    type:
-      - 'null'
-      - string
-    description: |
-      write a chain file for liftover
+      prefix: -o
+    doc: write output to a file
+  sample:
+    type: string?
     inputBinding:
       position: 1
-      prefix: '-c'
-
-  - id: sample
-    type:
-      - 'null'
-      - string
-    description: |
-      apply variants of the given sample
+      prefix: -s
+    doc: apply variants of the given sample
+  iupac_codes:
+    type: boolean?
     inputBinding:
       position: 1
-      prefix: '-s'
-
+      prefix: -i
+    doc: output variants in the form of IUPAC ambiguity codes
+  chain:
+    type: string?
+    inputBinding:
+      position: 1
+      prefix: -c
+    doc: write a chain file for liftover
 outputs:
-  - id: output
+  output:
     type: File
     outputBinding:
       glob: $(inputs.filename)
 
-  - id: liftover
+  liftover:
     type: File
     outputBinding:
       glob: $(inputs.chain)
 
-baseCommand:
-  - bcftools
-  - consensus
+baseCommand: bcftools, consensus
 
-arguments:
-  - valueFrom: "2>/dev/null"
-    position: 99
-    shellQuote: false
+stderr: ignore
 
-description: |
+doc: |
   About:   Create consensus sequence by applying VCF variants to a reference
            fasta file.
 

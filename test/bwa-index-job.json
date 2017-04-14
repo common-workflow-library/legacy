@@ -1,0 +1,9 @@
+{
+  "input":{
+    "path": "test-files/dm3_chr4.fa",
+    "class": "File"
+  },
+  "a": "bwtsw",
+  "b": 1024,
+  "_6": true
+}

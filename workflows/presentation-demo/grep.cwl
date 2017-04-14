@@ -1,19 +1,17 @@
 #!/usr/bin/env cwl-runner
 class: CommandLineTool
-cwlVersion: cwl:draft-3
+cwlVersion: v1.0
 
 inputs:
-  - id: pattern
+  pattern:
     type: string
     inputBinding: {position: 0}
-  - id: infile
+  infile:
     type: File
     inputBinding: {position: 1}
+
 outputs:
-  - id: outfile
-    type: File
-    outputBinding: {glob: "out.txt"}
+  outfile:
+    type: stdout
 
 baseCommand: grep
-
-stdout: out.txt

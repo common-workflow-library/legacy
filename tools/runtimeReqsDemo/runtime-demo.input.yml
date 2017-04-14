@@ -1,0 +1,9 @@
+#!/usr/bin/env cwl-runner
+
+cwl:tool: runtime-demo.cwl
+cwl:requirements:
+ - class: ResourceRequirement
+   coresMin: 4
+   ramMin: 4242
+   tmpdirMin: 100000000
+   outdirMin: 88888

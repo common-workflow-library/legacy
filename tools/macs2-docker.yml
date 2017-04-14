@@ -1,0 +1,4 @@
+class: DockerRequirement
+dockerPull: dukegcb/macs2
+dockerFile: >
+  $import: macs2-Dockerfile

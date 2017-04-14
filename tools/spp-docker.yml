@@ -1,0 +1,4 @@
+class: DockerRequirement
+dockerPull: dukegcb/spp
+dockerFile: >
+  $import: spp-Dockerfile
