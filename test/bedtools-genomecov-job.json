@@ -1,7 +1,8 @@
 {
     "input": {
         "class": "File",
-        "path": "test-files/SRR1031972.Aligned.sortedByCoord.out.bam"
+        "path": "test-files/SRR1031972.Aligned.sortedByCoord.out.bam",
+        "format": "http://edamontology.org/format_2572"
     },
     "genomeFile": {
         "class": "File",
