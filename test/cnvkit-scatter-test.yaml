@@ -1,0 +1,19 @@
+- args: [
+      "cnvkit.py",
+      "scatter",
+      "--chromosome", "chr1",
+      "--gene", "gen1, gen2",
+      "--min-variant-depth", "20",
+      "--output", "result.txt",
+      "--range-list", "chr -start-end",
+       "--sample-id", "data/access-5kb-mappable.hg19.bed",
+       "--segment", "segment.cns",
+      "--trend",
+       "--vcf", "data.vcf",
+       "--width", "1000000.0",
+       "--y-max", "4.04",
+       "--y-min", "3.04",
+  ]
+  job:  cnvkit-scatter-job.json
+  tool: ../tools/cnvkit-scatter.cwl
+  doc: General test of command line generation

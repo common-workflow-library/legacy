@@ -1,0 +1,14 @@
+- args: [
+      "cnvkit.py",
+      "target",
+      "--annotate",
+      "refFlat.txt",
+      "--avg-size", "33",
+       "--output", "results.json",
+       "--short-names",
+      "--split",
+      "*Tumor.bam"
+  ]
+  job:  cnvkit-target-job.json
+  tool: ../tools/cnvkit-target.cwl
+  doc: General test of command line generation

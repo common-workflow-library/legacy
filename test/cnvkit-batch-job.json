@@ -1,0 +1,16 @@
+{
+  "bam_files": [
+    "*Tumor.bam"
+  ],
+  "normal":[
+    "*Normal.bam"
+  ],
+  "targets": "my_baits.bed",
+  "split": true,
+  "annotate": "refFlat.txt",
+  "fasta": "hg19.fasta",
+  "access": "data/access-5kb-mappable.hg19.bed",
+  "output_dir": "results/",
+  "diagram": true,
+  "scatter": true
+}

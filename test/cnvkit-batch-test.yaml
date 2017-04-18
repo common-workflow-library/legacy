@@ -1,0 +1,18 @@
+- args: [
+      "cnvkit.py",
+      "batch",
+       "--access", "data/access-5kb-mappable.hg19.bed",
+      "--annotate", "refFlat.txt",
+       "--diagram",
+      "--fasta", "hg19.fasta",
+      "--normal", "*Normal.bam",
+       "--output-dir", "results/",
+      "--processes", "1",
+       "--scatter",
+      "--split",
+      "--targets", "my_baits.bed",
+      "*Tumor.bam",
+  ]
+  job:  cnvkit-batch-job.json
+  tool: ../tools/cnvkit-batch.cwl
+  doc: General test of command line generation

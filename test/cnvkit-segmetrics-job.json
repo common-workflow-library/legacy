@@ -1,0 +1,9 @@
+{
+  "cnarray": "*Tumor.bam",
+  "segments": "*Normal.cns",
+  "drop_low_coverage": true,
+  "output": "results/result.txt",
+  "stdev": true,
+  "mad": true,
+  "pi": true
+}

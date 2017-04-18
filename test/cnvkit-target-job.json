@@ -1,0 +1,8 @@
+{
+  "interval": "*Tumor.bam",
+  "annotate": "refFlat.txt",
+  "avg_size": 33,
+  "output": "results.json",
+  "short_names": true,
+  "split": true
+}

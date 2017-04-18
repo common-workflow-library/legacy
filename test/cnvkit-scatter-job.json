@@ -1,0 +1,13 @@
+{
+  "segment": "segment.cns",
+  "chromosome": "chr1",
+  "split": true,
+  "gene": "gen1, gen2",
+  "range_list": "chr -start-end",
+  "sample_id": "data/access-5kb-mappable.hg19.bed",
+  "vcf": "data.vcf",
+  "y_min": 3.04,
+  "y_max": 4.04,
+  "trend": true,
+  "output": "result.txt"
+}

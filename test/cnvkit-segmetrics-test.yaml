@@ -1,0 +1,16 @@
+- args: [
+      "cnvkit.py",
+      "segmetrics",
+      "--alpha", "0.05",
+      "--bootstrap", "100",
+       "--drop-low-coverage",
+       "--mad",
+       "--output", "results/result.txt",
+       "--pi",
+       "--segments", "*Normal.cns",
+      "--stdev",
+      "*Tumor.bam"
+  ]
+  job:  cnvkit-segmetrics-job.json
+  tool: ../tools/cnvkit-segmetrics.cwl
+  doc: General test of command line generation
