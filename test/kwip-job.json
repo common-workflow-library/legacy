@@ -1,0 +1,19 @@
+{
+    "hashes": [
+        {
+            "class": "File",
+            "path": "test-data/kwip/kwip-test-1.ct"
+        },
+        {
+            "class": "File",
+            "path": "test-data/kwip/kwip-test-2.ct"
+        },
+        {
+            "class": "File",
+            "path": "test-data/kwip/kwip-test-3.ct"
+        }
+    ],
+    "unweighted": false,
+    "distance": "kwip-test.dist",
+    "kernel": "kwip-test.kern"
+}
