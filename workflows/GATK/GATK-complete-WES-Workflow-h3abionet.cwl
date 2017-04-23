@@ -132,6 +132,30 @@ inputs:
     type: string?
     doc: name of the output report basename
 
+  snpf_genome:
+    type: string
+
+  snpf_nodownload:
+    type: boolean
+
+  snpf_data_dir:
+    type: Directory
+
+  resource_mills:
+    type: File
+
+  haplotest_vcf:
+    type: File
+
+  resource_hapmap:
+    type: File
+
+  resource_omni:
+    type: File
+
+  resource_dbsnp:
+    type: File
+
 outputs:
   bwamem_output:
     type: File
