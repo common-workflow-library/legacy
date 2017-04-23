@@ -224,9 +224,9 @@ outputs:
     type: File
     outputSource: SnpVQSR/annotated_snps
 
-  output_IndelFilter_recal_File:
-    type: File
-    outputSource: IndelFilter/recal_File
+#  output_IndelFilter_recal_File:
+#    type: File
+#    outputSource: IndelFilter/recal_File
 
   output_IndelFilter_annotated_indels:
     type: File
