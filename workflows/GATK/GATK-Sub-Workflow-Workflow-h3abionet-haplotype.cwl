@@ -179,7 +179,6 @@ outputs:
     type: File
     outputSource: IndelRealigner/output_indelRealigner
 
-
   outputfile_baseRecalibrator:
     type: File
     outputSource: BaseRecalibrator/output_baseRecalibrator
@@ -191,22 +190,6 @@ outputs:
   output_HaplotypeCaller:
     type: File
     outputSource: HaplotypeCaller/output_HaplotypeCaller
-
-  output_SnpVQSR_recal_File:
-    type: File
-    outputSource: SnpVQSR/recal_File
-
-  output_SnpVQSR_annotated_snps:
-    type: File
-    outputSource: SnpVQSR/annotated_snps
-
-  output_IndelFilter_recal_File:
-    type: File
-    outputSource: IndelFilter/recal_File
-
-  output_IndelFilter_annotated_indels:
-    type: File
-    outputSource: IndelFilter/annotated_indels
 
 steps:
 
@@ -333,31 +316,3 @@ steps:
       dbsnp: dbsnp
       threads: gatk_threads
     out: [ output_HaplotypeCaller ]
-
-  SnpVQSR:
-    run: GATK-Sub-Workflow-h3abionet-snp.cwl
-    in:
-      reference: reference
-      snpf_genome: snpf_genome
-      snpf_nodownload: snpf_nodownload
-      snpf_data_dir: snpf_data_dir
-      resource_mills: resource_mills
-      haplotest_vcf: HaplotypeCaller/outputFileName_HaplotypeCaller
-      resource_hapmap: resource_hapmap
-      resource_omni: resource_omni
-      resource_dbsnp: resource_dbsnp
-    out: [ recal_File, annotated_snps ]
-
-#  IndelFilter:
-#    run: GATK-Sub-Workflow-h3abionet-indel.cwl
-#    in:
-#      reference: reference
-#      snpf_genome: snpf_genome
-#      snpf_nodownload: snpf_nodownload
-#      snpf_data_dir: snpf_data_dir
-#      resource_mills: resource_mills
-#      haplotest_vcf: HaplotypeCaller/outputFileName_HaplotypeCaller
-#      resource_hapmap: resource_hapmap
-#      resource_omni: resource_omni
-#      resource_dbsnp: resource_dbsnp
-#    out: [ recal_File, annotated_indels ]
