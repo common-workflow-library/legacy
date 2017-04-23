@@ -175,7 +175,7 @@ outputs:
 #
   output_bamstat:
     type: File
-    outputSource: HaplotypeCaller/bamstats_report
+    outputSource: HaplotypeCaller/output_bamstat
 
 #  output_DepthOfCoverage:
 #    type:
