@@ -145,8 +145,8 @@ inputs:
   resource_mills:
     type: File
 
-  haplotest_vcf:
-    type: File
+  #haplotest_vcf:
+  #  type: File
 
   resource_hapmap:
     type: File
