@@ -157,22 +157,22 @@ inputs:
     type: File
 
 outputs:
-  bwamem_output:
-    type: File
-    outputSource: bwa-mem/output
+#  bwamem_output:
+#    type: File
+#    outputSource: bwa-mem/output
 
-  ReferenceSequenceDictionary:
-    type: File
-    outputSource: create-dict/output
+#  ReferenceSequenceDictionary:
+#    type: File
+#    outputSource: create-dict/output
 
-  samtoolsView_output:
-    type: File
-    outputSource: samtools-view/output
+#  samtoolsView_output:
+#    type: File
+#    outputSource: samtools-view/output
 
-  samtoolsSort_output:
-    type: File
-    outputSource: samtools-sort/sorted
-
+#  samtoolsSort_output:
+#    type: File
+#    outputSource: samtools-sort/sorted
+#
   output_bamstat:
     type: File
     outputSource: bamstat/bamstats_report
@@ -183,30 +183,30 @@ outputs:
 #      items: File
 #    outputSource: DepthOfCoverage/output_DepthOfCoverage
 
-  samtoolsIndex_output:
-    type: File
-    outputSource: samtools-index/index
+#  samtoolsIndex_output:
+#    type: File
+#    outputSource: samtools-index/index
 
-  MarkDuplicates_output:
-    type: File
-    outputSource: MarkDuplicates/markDups_output
+#  MarkDuplicates_output:
+#    type: File
+#    outputSource: MarkDuplicates/markDups_output
 
-  MarkDuplicates_output_index:
-    type: File
-    outputSource: MarkDuplicates/markDups_output_index
+#  MarkDuplicates_output_index:
+#    type: File
+#    outputSource: MarkDuplicates/markDups_output_index
 
-  output_realignTarget:
-    type: File
-    outputSource: RealignTarget/output_realignTarget
+#  output_realignTarget:
+#    type: File
+#    outputSource: RealignTarget/output_realignTarget
 
-  output_indelRealigner:
-    type: File
-    outputSource: IndelRealigner/output_indelRealigner
+#  output_indelRealigner:
+#    type: File
+#    outputSource: IndelRealigner/output_indelRealigner
 
 
-  outputfile_baseRecalibrator:
-    type: File
-    outputSource: BaseRecalibrator/output_baseRecalibrator
+#  outputfile_baseRecalibrator:
+#    type: File
+#    outputSource: BaseRecalibrator/output_baseRecalibrator
 
   output_printReads:
     type: File
