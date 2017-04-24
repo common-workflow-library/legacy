@@ -47,9 +47,6 @@ inputs:
     type: File
 
 outputs:
-  recal_File:
-    type: File
-    outputSource: vqsr_indels/recal_File
 
   annotated_indels:
     type: File

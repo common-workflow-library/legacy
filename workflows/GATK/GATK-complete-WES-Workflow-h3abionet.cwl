@@ -287,7 +287,7 @@ steps:
 
   # TODO: will need to implement some reasonable (and adjustable) filters
   IndelFilter:
-    run: GATK-Sub-Workflow-h3abionet-indel.cwl
+    run: GATK-Sub-Workflow-h3abionet-indel-no-vqsr.cwl
     in:
       reference: reference
       snpf_genome: snpf_genome
