@@ -136,7 +136,7 @@ inputs:
   filter_expression:
     type: string
     default: "QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0"
-    
+
   snpf_genome:
     type: string
 
@@ -149,9 +149,6 @@ inputs:
   resource_mills:
     type: File
 
-  #haplotest_vcf:
-  #  type: File
-
   resource_hapmap:
     type: File
 
@@ -162,56 +159,10 @@ inputs:
     type: File
 
 outputs:
-#  bwamem_output:
-#    type: File
-#    outputSource: bwa-mem/output
 
-#  ReferenceSequenceDictionary:
-#    type: File
-#    outputSource: create-dict/output
-
-#  samtoolsView_output:
-#    type: File
-#    outputSource: samtools-view/output
-
-#  samtoolsSort_output:
-#    type: File
-#    outputSource: samtools-sort/sorted
-#
   output_bamstat:
     type: File
     outputSource: HaplotypeCaller/output_bamstat
-
-#  output_DepthOfCoverage:
-#    type:
-#      type: array
-#      items: File
-#    outputSource: DepthOfCoverage/output_DepthOfCoverage
-
-#  samtoolsIndex_output:
-#    type: File
-#    outputSource: samtools-index/index
-
-#  MarkDuplicates_output:
-#    type: File
-#    outputSource: MarkDuplicates/markDups_output
-
-#  MarkDuplicates_output_index:
-#    type: File
-#    outputSource: MarkDuplicates/markDups_output_index
-
-#  output_realignTarget:
-#    type: File
-#    outputSource: RealignTarget/output_realignTarget
-
-#  output_indelRealigner:
-#    type: File
-#    outputSource: IndelRealigner/output_indelRealigner
-
-
-#  outputfile_baseRecalibrator:
-#    type: File
-#    outputSource: BaseRecalibrator/output_baseRecalibrator
 
   output_printReads:
     type: File
@@ -228,10 +179,6 @@ outputs:
   output_SnpVQSR_annotated_snps:
     type: File
     outputSource: SnpVQSR/annotated_snps
-
-#  output_IndelFilter_recal_File:
-#    type: File
-#    outputSource: IndelFilter/recal_File
 
   output_IndelFilter_annotated_indels:
     type: File
@@ -289,7 +236,6 @@ steps:
       resource_dbsnp: resource_dbsnp
     out: [ recal_File, annotated_snps ]
 
-  # TODO: will need to implement some reasonable (and adjustable) filters
   IndelFilter:
     run: GATK-Sub-Workflow-h3abionet-indel-no-vqsr.cwl
     in:
