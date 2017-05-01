@@ -1,51 +1,89 @@
 {
-    "reference": {
-     "class": "File",
-     "path": "genome.fa"
-    },
-    "uncompressed_reference": {
-       "class": "File",
-       "path": "genome.fa"
+   "bwa_read_group" : "@RG\tID:1\tPL:ILLUMINA\tPU:pu\tLB:group1\tSM:SAMPLEID",
+   "createIndex_MarkDuplicates" : "true",
+   "samtools-view-sambam" : "-Sb",
+   "outputFileName_MarkDuplicates" : "MarkDuplicates-2017-04-23.bam",
+   "snpf_nodownload" : true,
+   "output_RefDictionaryFile" : "genome.fa.dict",
+   "samtools-view-isbam" : true,
+   "reads" : [
+      {
+         "path" : "/mnt/fastq/NA12878.R1.fastq.gz",
+         "class" : "File"
+      },
+      {
+         "path" : "/mnt/fastq/NA12878.R2.fastq.gz",
+         "class" : "File"
+      }
+   ],
+   "known_variant_db" : [
+      {
+         "class" : "File",
+         "path" : "dbsnp_138.vcf"
+      },
+      {
+         "class" : "File",
+         "path" : "Mills_and_1000G_gold_st.vcf"
+      },
+      {
+         "path" : "1000G_phase1.indels.hg19.vcf",
+         "class" : "File"
+      }
+   ],
+   "gatk_threads" : 8,
+   "bwa_threads" : 16,
+   "bwa_output_name" : "bwa-mem-2017-04-23.sam",
+   "outputFileName_HaplotypeCaller" : "HaplotypeCaller-2017-04-23.vcf",
+   "samtools-index-bai" : true,
+   "output_samtools-view" : "samtools-view-2017-04-23.bam",
+   "outputFileName_PrintReads" : "PrintReads-2017-04-23.bam",
+   "resource_hapmap" : {
+      "class" : "File",
+      "path" : "hapmap_3.3.hg19.sites.vcf"
    },
-    "reads": [{"class": "File", "path": "/mnt/fastq/NA12878.R1.fastq.gz"}, {"class": "File", "path": "/mnt/fastq/NA12878.R2.fastq.gz"}],
-    "dbsnp": {
-        "class": "File",
-        "path": "dbsnp_138.vcf",
-    },
-    "known_variant_db": [{"class": "File", "path": "dbsnp_138.vcf"}, {"class": "File", "path": "Mills_and_1000G_gold_st.vcf"}, {"class": "File", "path": "1000G_phase1.indels.hg19.vcf"}  ],
-    "output_RefDictionaryFile": "genome.fa.dict",
-    "tmpdir": "./tmp",
-    "bwa_output_name": "bwa-mem-2017-04-23.sam",
-    "bwa_read_group": '@RG\tID:1\tPL:ILLUMINA\tPU:pu\tLB:group1\tSM:SAMPLEID',
-    "bwa_threads": 16,
-    "gatk_threads": 8,
-    "samtools_threads": 4,
-    "samtools-view-isbam":true,
-    "samtools-view-sambam": "-Sb",
-    "output_samtools-view": "samtools-view-2017-04-23.bam",
-    "output_samtools-sort": "samtools-sort-2017-04-23.bam",
-    "outputFileName_MarkDuplicates": "MarkDuplicates-2017-04-23.bam",
-    "metricsFile_MarkDuplicates": "metricsFile-markDups-2017-04-23.metrics",
-    "readSorted_MarkDuplicates": 'true',
-    "removeDuplicates_MarkDuplicates": 'true',
-    "createIndex_MarkDuplicates": 'true',
-    "samtools-index-bai": true,
-    "outputFileName_RealignTargetCreator": "RealignTargetCreator-2017-04-23.intervals",
-    "outputFileName_IndelRealigner": "IndelRealigner-2017-04-23.bam",
-    "outputFileName_BaseRecalibrator": "BaseRecalibrator-2017-04-23.table",
-    "covariate": [ "CycleCovariate", "ContextCovariate" ],
-    "outputFileName_PrintReads": "PrintReads-2017-04-23.bam",
-    "outputFileName_HaplotypeCaller": "HaplotypeCaller-2017-04-23.vcf",
-    "depth_omitIntervalStatistics" : true,
-    "depth_omitDepthOutputAtEachBase" : true,
-    "depth_outputfile_DepthOfCoverage": "sample_report",
-    "gatk_threads": 8,
-    "resource_hapmap": {"class": "File", "path": "hapmap_3.3.hg19.sites.vcf"},
-    "resource_omni": {"class": "File", "path": "1000G_omni2.5.hg19.sites.vcf"},
-    "resource_dbsnp": {"class": "File", "path": "dbsnp_138.hg19.vcf"},
-    "snpf_genome": "hg19",
-    "snpf_nodownload": true,
-    "snpf_data_dir": { "class": "Directory", "location": "/data_small/snpEff_hg19/data"},
-    "resource_mills": {"class": "File", "path": "1000G_phase1.snps.high_confidence.hg19.sites.vcf"},
-    "output_SnpVQSR_recal_File":
+   "resource_mills" : {
+      "path" : "1000G_phase1.snps.high_confidence.hg19.sites.vcf",
+      "class" : "File"
+   },
+   "covariate" : [
+      "CycleCovariate",
+      "ContextCovariate"
+   ],
+   "dbsnp" : {
+      "path" : "dbsnp_138.vcf",
+      "class" : "File"
+   },
+   "tmpdir" : "./tmp",
+   "readSorted_MarkDuplicates" : "true",
+   "metricsFile_MarkDuplicates" : "metricsFile-markDups-2017-04-23.metrics",
+   "output_samtools-sort" : "samtools-sort-2017-04-23.bam",
+   "uncompressed_reference" : {
+      "path" : "genome.fa",
+      "class" : "File"
+   },
+   "outputFileName_RealignTargetCreator" : "RealignTargetCreator-2017-04-23.intervals",
+   "reference" : {
+      "path" : "genome.fa",
+      "class" : "File"
+   },
+   "snpf_genome" : "hg19",
+   "snpf_data_dir" : {
+      "location" : "/data_small/snpEff_hg19/data",
+      "class" : "Directory"
+   },
+   "outputFileName_IndelRealigner" : "IndelRealigner-2017-04-23.bam",
+   "depth_omitDepthOutputAtEachBase" : true,
+   "resource_omni" : {
+      "class" : "File",
+      "path" : "1000G_omni2.5.hg19.sites.vcf"
+   },
+   "depth_omitIntervalStatistics" : true,
+   "depth_outputfile_DepthOfCoverage" : "sample_report",
+   "outputFileName_BaseRecalibrator" : "BaseRecalibrator-2017-04-23.table",
+   "resource_dbsnp" : {
+      "path" : "dbsnp_138.hg19.vcf",
+      "class" : "File"
+   },
+   "removeDuplicates_MarkDuplicates" : "true",
+   "samtools_threads" : 4
 }

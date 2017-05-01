@@ -10,7 +10,7 @@
    
     "dbsnp": {
         "class": "File",
-        "path": "dbsnp_138.vcf",
+        "path": "dbsnp_138.vcf"
     },
    "w_inputBam_HaplotypeCaller": {"class": "File", "path": "chr5.bam"},
    "gatk_threads": 8,
