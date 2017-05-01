@@ -1,5 +1,5 @@
 {
-   "bwa_read_group" : "@RG\tID:1\tPL:ILLUMINA\tPU:pu\tLB:group1\tSM:SAMPLEID",
+   "bwa_read_group" : '@RG\tID:1\tPL:ILLUMINA\tPU:pu\tLB:group1\tSM:SAMPLEID',
    "createIndex_MarkDuplicates" : "true",
    "samtools-view-sambam" : "-Sb",
    "outputFileName_MarkDuplicates" : "MarkDuplicates-2017-04-23.bam",

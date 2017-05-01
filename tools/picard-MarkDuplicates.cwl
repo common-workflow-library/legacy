@@ -240,7 +240,7 @@ arguments:
 - valueFrom: /usr/local/bin/picard.jar
   position: 2
   prefix: -jar
-- valueFrom: MarkDuplicates
+- valueFrom: MarkDuplicates  VALIDATION_STRINGENCY=SILENT 
   position: 3
 
 #doc: |
