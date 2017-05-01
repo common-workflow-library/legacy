@@ -50,7 +50,7 @@ inputs:
     inputBinding:
       prefix: -v
       position: 6
-    
+
   genome:
     type: string
     inputBinding:
@@ -58,12 +58,11 @@ inputs:
 
   variant_calling_file:
     type: File
-    format: "http://edamontology.org/format_3016"
     inputBinding:
       position: 8
 
 stdout: $(inputs.variant_calling_file.path.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '') + '.ann.vcf')
- 
+
 outputs:
   annotated_vcf:
     type: stdout
