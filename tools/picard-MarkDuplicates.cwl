@@ -240,8 +240,10 @@ arguments:
 - valueFrom: /usr/local/bin/picard.jar
   position: 2
   prefix: -jar
-- valueFrom: MarkDuplicates  VALIDATION_STRINGENCY=SILENT 
+- valueFrom: MarkDuplicates
   position: 3
+- valueFrom: VALIDATION_STRINGENCY=SILENT
+  position: 4
 
 #doc: |
 #  picard-BuildBamIndex.cwl is developed for CWL consortium
