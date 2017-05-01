@@ -133,6 +133,10 @@ inputs:
     type: string?
     doc: name of the output report basename
 
+  filter_expression:
+    type: string
+    default: "QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0"
+    
   snpf_genome:
     type: string
 
@@ -298,4 +302,5 @@ steps:
       resource_hapmap: resource_hapmap
       resource_omni: resource_omni
       resource_dbsnp: resource_dbsnp
+      filter_expression: filter_expression
     out: [ annotated_indels ]
