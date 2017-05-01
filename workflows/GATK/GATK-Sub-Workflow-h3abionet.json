@@ -25,5 +25,7 @@
 
    "resource_mills": {"class": "File", "path": "1000G_phase1.snps.high_confidence.hg19.sites.vcf"},
    
-   "haplotest_vcf": {"class": "File", "path": "HaplotypeCaller-2016-08-04.vcf"}
+   "haplotest_vcf": {"class": "File", "path": "HaplotypeCaller-2016-08-04.vcf"},
+
+   "filter_expression": "'QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0'"
 }
