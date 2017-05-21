@@ -1,8 +1,0 @@
-GATK is not licensed for redistribution, therefor users must provide the GATK
-jar as an input to any invocation of a GATK tool or a workflow that uses GATK.
-
-The input is named GATKJar. Example input:
-
-GATKJar:
-  class: File
-  path: /home/user/GenomeAnalysisTK.jar

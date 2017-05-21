@@ -1,2 +1,0 @@
-class: DockerRequirement
-dockerPull: openjdk:8

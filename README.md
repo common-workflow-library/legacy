@@ -19,6 +19,7 @@ terms and conditions of the Apache License version 2.0 (see LICENSE.txt).
 * https://github.com/jorvis/FALCON/tree/master/cwl/tools
 * https://github.com/h3abionet/h3abionet16S/tree/master/workflows
 * https://github.com/pitagora-galaxy/cwl
+* https://github.com/h3abionet/h3agatk
 * https://dockstore.org/
 
 ## Pull request

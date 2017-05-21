@@ -10,11 +10,6 @@ chmod 777 test-files/dm3
 for i in ../tools/*.cwl; do
  bn=`basename ${i} .cwl`
 
- if [[ ${i} == *"GATK"* ]];  # these are moving soon, skip them for no
- then
-     	 continue;
- fi
-
  echo "Testing: ${bn}"
 
  #if [ -f ${bn}-test.yaml ]; then
