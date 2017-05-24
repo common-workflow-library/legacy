@@ -17,19 +17,24 @@ inputs:
     doc: -k INT        minimum seed length [19]
   reference:
     type: File
+    secondaryFiles:
+      - .64.amb
+      - .64.ann
+      - .64.bwt
+      - .64.pac
+      - .64.sa
     inputBinding:
       position: 2
 
   output_filename: string
   reads:
-    type:
-      type: array
-      items: File
+    type: File[]
     inputBinding:
       position: 3
 
   threads:
     type: int?
+
     inputBinding:
       position: 1
       prefix: -t
