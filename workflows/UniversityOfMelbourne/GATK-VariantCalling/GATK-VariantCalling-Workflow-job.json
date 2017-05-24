@@ -1,0 +1,35 @@
+{  
+     "reference": {
+        "class": "File",
+        "path": "./outputFiles/hg19.fa"
+    },
+     "FwdReadFile": {
+        "class": "File",
+        "path": "../data/GATK-complete-workflow/Fastq-files/Codes/FQ_1.fastq"
+    }, 
+     "RevReadFile": {
+        "class": "File",
+        "path": "../data/GATK-complete-workflow/Fastq-files/Codes/FQ_2.fastq"
+    }, 
+
+    "dbsnp": {
+        "class": "File",
+        "path": "dbsnp_138.vcf", 
+    }, 
+    "known": [{"class": "File", "path": "dbsnp_138.vcf"}, {"class": "File", "path": "../data/GATK-complete-workflow/Ref_datasets/Mills_and_1000G_gold_st.vcf"}, {"class": "File", "path": "../data/GATK-complete-workflow/Ref_datasets/1000G_phase1.indels.hg19.vcf"}  ],
+    "outputfile_realignTarget": "realignTargetCreator_output-2015-12-18.intervals",
+    "outputFileName_markDups": "markDups-2015-12-18.bam",
+    "metricsFile": "metricsFile-markDups-2015-12-18", 
+    "readSorted": 'true',
+    "removeDuplicates": 'true',
+    "createIndex": 'true',
+    "tmpdir": "./tmpdir", 
+    "outputFileName_mergedSam": "mergedSam-2015-12-18.sam",
+    "outputFileName_sortSam": "sortedSam-2015-12-18.bam",
+    "output_name": "bwa-mem_Output-2015-12-18.sam",
+    "outputFileName": "hg19-2015-12-18.dict",
+    "outputfile_indelRealigner": "indelRealigner-2015-12-18.bam",
+    "outputfile_BaseRecalibrator": "baseRecalibrator-2015-12-18.table",
+    "outputfile_printReads": "printReads-2015-12-18.bam",
+    "outputfile_HaplotypeCaller": "haplotypeCaller-2015-12-18.vcf",
+}
