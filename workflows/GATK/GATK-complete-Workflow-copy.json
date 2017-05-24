@@ -1,0 +1,31 @@
+{  
+     "reference": {
+        "class": "File",
+        "path": "hg19.fasta"
+    }, 
+     "reads": [{"class": "File", "path": "FQ_1.fastq"}, {"class": "File", "path": "FQ_2.fastq"}  ],
+     
+    "dbsnp": {
+        "class": "File",
+        "path": "dbsnp_138.vcf", 
+    }, 
+    "known_variant_db": [{"class": "File", "path": "dbsnp_138.vcf"}, {"class": "File", "path": "Mills_and_1000G_gold_st.vcf"}, {"class": "File", "path": "1000G_phase1.indels.hg19.vcf"}  ],
+    "output_RefDictionaryFile": "hg19.dict",
+    "tmpdir": "./tmp",
+    "bwa_output_name": "bwa-mem-2016-08-04.sam",
+    "samtools-view-isbam":true,
+    "samtools-view-sambam": "-Sb",
+    "output_samtools-view": "samtools-view-2016-08-04.bam",
+    "output_samtools-sort": "samtools-sort-2016-08-04.bam",
+    "outputFileName_MarkDuplicates": "MarkDuplicates-2016-08-04.bam",
+    "metricsFile_MarkDuplicates": "metricsFile-markDups-2016-08-04.metrics", 
+    "readSorted_MarkDuplicates": 'true',
+    "removeDuplicates_MarkDuplicates": 'true',
+    "createIndex_MarkDuplicates": 'true',
+    "outputFileName_RealignTargetCreator": "RealignTargetCreator-2016-08-04.intervals",
+    "outputFileName_IndelRealigner": "IndelRealigner-2016-08-04.bam",
+    "outputFileName_BaseRecalibrator": "BaseRecalibrator-2016-08-04.table",
+    "covariate": [ "CycleCovariate", "ContextCovariate" ],
+    "outputFileName_PrintReads": "PrintReads-2016-08-04.bam",
+    "outputFileName_HaplotypeCaller": "HaplotypeCaller-2016-08-04.vcf",
+}
