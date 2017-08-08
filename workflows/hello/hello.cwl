@@ -13,7 +13,7 @@ outputs:
     type: File
 
 steps:
-  steptest:
+  step0:
     run:
       class: CommandLineTool
       inputs:
