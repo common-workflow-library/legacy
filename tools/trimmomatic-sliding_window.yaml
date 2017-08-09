@@ -1,0 +1,7 @@
+type: record
+name: slidingWindow
+fields:
+ - name: windowSize
+   type: int
+ - name: requiredQuality
+   type: int
