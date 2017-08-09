@@ -1,0 +1,41 @@
+type: record
+name: illuminaClipping
+fields:
+  - name: adapters
+    type: File
+    doc: |
+      FASTA file containing adapters, PCR sequences, etc. It is used to search
+      for and remove these sequences in the input FASTQ file(s)
+  - name: seedMismatches
+    type: int
+    doc: |
+      specifies the maximum mismatch count which will still allow a full match
+      to be performed
+  - name: palindromeClipThreshold
+    type: int
+    doc: |
+      specifies how accurate the match between the two 'adapter ligated' reads
+      must be for PE palindrome read alignment.
+  - name: simpleClipThreshold
+    type: int
+    doc: |
+      specifies how accurate the match between any adapter etc. sequence must
+      be against a read
+  - name: minAdapterLength
+    type: int?
+    doc: |
+      In addition to the alignment score, palindrome mode can verify that a
+      minimum length of adapter has been detected. If unspecified, this
+      defaults to 8 bases, for historical reasons. However, since palindrome
+      mode has a very low false positive rate, this can be safely reduced, even
+      down to 1, to allow shorter adapter fragments to be removed.
+  - name: keepBothReads
+    type: boolean
+    doc: |
+      After read-though has been detected by palindrome mode, and the adapter
+      sequence removed, the reverse read contains the same sequence information
+      as the forward read, albeit in reverse complement. For this reason, the
+      default behaviour is to entirely drop the reverse read. By specifying
+      "true" for this parameter, the reverse read will also be retained, which
+      may be useful e.g. if the downstream tools cannot handle a combination of
+      paired and unpaired reads.  

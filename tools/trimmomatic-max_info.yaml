@@ -1,0 +1,7 @@
+type: record
+name: maxinfo
+fields:
+  - name: targetLength
+    type: int
+  - name: strictness
+    type: int
