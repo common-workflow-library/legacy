@@ -6,8 +6,6 @@
 class: Workflow
 
 cwlVersion: v1.0
-requirements:
-- $import: ../../tools/envvar-global.yml
 
 inputs:
 - id: reference

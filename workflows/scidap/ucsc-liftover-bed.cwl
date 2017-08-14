@@ -2,8 +2,6 @@
 cwlVersion: v1.0
 
 class: Workflow
-requirements:
-- $import: ../../tools/envvar-global.yml
 
 inputs:
 - id: input

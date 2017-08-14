@@ -5,7 +5,6 @@ class: Workflow
 
 requirements:
 - class: SubworkflowFeatureRequirement
-- $import: ../../tools/envvar-global.yml
 
 inputs:
 - id: input

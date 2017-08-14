@@ -62,7 +62,6 @@ doap:maintainer:
     foaf:name: Andrey Kartashov
     foaf:mbox: mailto:Andrey.Kartashov@cchmc.org
 requirements:
-- $import: envvar-global.yml
 - $import: picard-docker.yml
 - class: InlineJavascriptRequirement
 
