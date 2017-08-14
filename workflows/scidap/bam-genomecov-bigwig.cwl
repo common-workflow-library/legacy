@@ -5,71 +5,69 @@
 
 class: Workflow
 
-cwlVersion: "cwl:draft-3"
-
-description:
-  creates genome coverage bigWig file from .bam file
-
+cwlVersion: v1.0
 requirements:
-  - $import: ../../tools/envvar-global.yml
+- $import: ../../tools/envvar-global.yml
 
 inputs:
-  - id: input
-    type: File
+- id: input
+  type: File
 
-  - id: genomeFile
-    type: File
+- id: genomeFile
+  type: File
 
-  - id: scale
-    type: float
+- id: scale
+  type: float
 
-  - id: pairchip
-    type: ["null",boolean]
+- id: pairchip
+  type: ['null', boolean]
 
-  - id: fragmentsize
-    type: ["null",int]
+- id: fragmentsize
+  type: ['null', int]
 
-  - id: strand
-    type: ["null",string]
+- id: strand
+  type: ['null', string]
 
-  - id: bigWig
-    type: string
+- id: bigWig
+  type: string
 
 outputs:
-  - id: outfile
-    type: File
-    source: "#bigwig/bigWigOut"
+- id: outfile
+  type: File
+  outputSource: '#bigwig/bigWigOut'
 
 steps:
-  - id: genomecov
-    run: ../../tools/bedtools-genomecov.cwl
-    inputs:
-      - {id: input, source: "#input"}
-      - {id: genomeFile, source: "#genomeFile"}
-      - {id: genomecoverageout, default: "genomecov.bed" }
-      - {id: dept, default: '-bg' }
-      - {id: split, default: true }
-      - {id: pairchip, source: "#pairchip" }
-      - {id: fragmentsize, source: "#fragmentsize" }
-      - {id: scale, source: "#scale" }
-      - {id: strand, source: "#strand" }
-    outputs:
-      - {id: genomecoverage}
+- id: genomecov
+  run: ../../tools/bedtools-genomecov.cwl
+  inputs:
+  - {id: input, source: '#input'}
+  - {id: genomeFile, source: '#genomeFile'}
+  - {id: genomecoverageout, default: genomecov.bed}
+  - {id: dept, default: -bg}
+  - {id: split, default: true}
+  - {id: pairchip, source: '#pairchip'}
+  - {id: fragmentsize, source: '#fragmentsize'}
+  - {id: scale, source: '#scale'}
+  - {id: strand, source: '#strand'}
+  outputs:
+  - {id: genomecoverage}
 
-  - id: sort
-    run: ../../tools/linux-sort.cwl
-    inputs:
-      - {id: input, source: "#genomecov/genomecoverage", linkMerge: merge_flattened }
-      - {id: key, default: ["1,1","2,2n"] }
-      - {id: output, default: tmp_sorted}
-    outputs:
-      - {id: sorted}
+- id: sort
+  run: ../../tools/linux-sort.cwl
+  inputs:
+  - {id: input, source: '#genomecov/genomecoverage', linkMerge: merge_flattened}
+  - {id: key, default: ['1,1', '2,2n']}
+  - {id: output, default: tmp_sorted}
+  outputs:
+  - {id: sorted}
 
-  - id: bigwig
-    run: ../../tools/ucsc-bedGraphToBigWig.cwl
-    inputs:
-      - {id: input, source: "#sort/sorted"}
-      - {id: genomeFile, source: "#genomeFile"}
-      - {id: bigWig, source: "#bigWig"}
-    outputs:
-      - {id: bigWigOut}
+- id: bigwig
+  run: ../../tools/ucsc-bedGraphToBigWig.cwl
+  inputs:
+  - {id: input, source: '#sort/sorted'}
+  - {id: genomeFile, source: '#genomeFile'}
+  - {id: bigWig, source: '#bigWig'}
+  outputs:
+  - {id: bigWigOut}
+doc: creates genome coverage bigWig file from .bam file
+

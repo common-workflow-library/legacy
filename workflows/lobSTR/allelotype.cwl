@@ -1,78 +1,78 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: "cwl:draft-3"
+cwlVersion: v1.0
 
 class: CommandLineTool
 
-description: Run lobSTR allelotype classifier.
-
 requirements:
- - class: InlineJavascriptRequirement
+- class: InlineJavascriptRequirement
 
 inputs:
-  - id: bam
+  noise_model:
+
     type: File
-    description: |
-      BAM file to analyze. Should have a unique read group and be sorted and indexed.
     inputBinding:
-      prefix: "--bam"
+      prefix: --noise_model
+      valueFrom: |
+        ${ return {"path": self.path.match(/(.*)\.stepmodel/)[1], "class": "File"}; }
     secondaryFiles:
-      - ".bai"
+    - ^.stuttermodel
 
-  - id: output_prefix
-    type: string
-    description: "Prefix for output files. will output prefix.vcf and prefix.genotypes.tab"
-    inputBinding:
-      prefix: "--out"
-
-  - id: noise_model
-    type: File
-    description: |
+    doc: |
       File to read noise model parameters from (.stepmodel)
-    inputBinding:
-      prefix: "--noise_model"
-      valueFrom: |
-          ${ return {"path": self.path.match(/(.*)\.stepmodel/)[1], "class": "File"}; }
-    secondaryFiles:
-      - "^.stuttermodel"
-
-  - id: strinfo
+  bam:
     type: File
-    description: |
+    inputBinding:
+      prefix: --bam
+    secondaryFiles:
+    - .bai
+
+    doc: |
+      BAM file to analyze. Should have a unique read group and be sorted and indexed.
+  reference:
+
+    type: File
+    inputBinding:
+      prefix: --index-prefix
+      valueFrom: |
+        ${ return {"path": self.path.match(/(.*)ref\.fasta/)[1], "class": "File"}; }
+
+    secondaryFiles:
+    - .amb
+    - .ann
+    - .bwt
+    - .pac
+    - .rbwt
+    - .rpac
+    - .rsa
+    - ${return self.location.replace(/(.*)ref\.fasta/, "$1chromsizes.tab")}
+    - ${return self.location.replace(/(.*)ref\.fasta/, "$1mergedref.bed")}
+    - ${return self.location.replace(/(.*)ref\.fasta/, "$1ref_map.tab")}
+
+    doc: lobSTR's bwa reference files
+  strinfo:
+    type: File
+    inputBinding:
+      prefix: --strinfo
+    doc: |
       File containing statistics for each STR.
+  output_prefix:
+    type: string
     inputBinding:
-      prefix: "--strinfo"
-
-  - id: reference
-    type: File
-    description: "lobSTR's bwa reference files"
-    inputBinding:
-      prefix: "--index-prefix"
-      valueFrom: |
-          ${ return {"path": self.path.match(/(.*)ref\.fasta/)[1], "class": "File"}; }
-
-    secondaryFiles:
-      - ".amb"
-      - ".ann"
-      - ".bwt"
-      - ".pac"
-      - ".rbwt"
-      - ".rpac"
-      - ".rsa"
-      - ${return self.path.replace(/(.*)ref\.fasta/, "$1chromsizes.tab")}
-      - ${return self.path.replace(/(.*)ref\.fasta/, "$1mergedref.bed")}
-      - ${return self.path.replace(/(.*)ref\.fasta/, "$1ref_map.tab")}
-
+      prefix: --out
+    doc: Prefix for output files. will output prefix.vcf and prefix.genotypes.tab
 outputs:
-  - id: vcf
-    type: File
-    outputBinding:
-      glob: $(inputs['output_prefix'] + '.vcf')
-  - id: "#vcf_stats"
+  vcf_stats:
     type: File
     outputBinding:
       glob: $(inputs['output_prefix'] + '.allelotype.stats')
 
-baseCommand: ["allelotype", "--command", "classify"]
+  vcf:
+    type: File
+    outputBinding:
+      glob: $(inputs['output_prefix'] + '.vcf')
+baseCommand: [allelotype, --command, classify]
 
 arguments:
-  - "--noweb"
+- --noweb
+doc: Run lobSTR allelotype classifier.
+

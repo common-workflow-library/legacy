@@ -4,68 +4,37 @@
 # Partially Auto generated with clihp (https://github.com/portah/clihp, developed by Andrey.Kartashov@cchmc.org)
 # Developed for GGR project (https://github.com/Duke-GCB/GGR-cwl)
 
-cwlVersion: 'cwl:draft-3'
+cwlVersion: v1.0
 class: CommandLineTool
 
 requirements:
-  - $import: deeptools-docker.yml
-  - class: InlineJavascriptRequirement
+- $import: deeptools-docker.yml
+- class: InlineJavascriptRequirement
 
 inputs:
-  - id: bam
-    type: File
-    description: "BAM file to process "
-    secondaryFiles: $(self.path + '.bai')
+  verbose:
+    type: boolean?
     inputBinding:
       position: 1
-      prefix: "--bam"
-#-------------------------------------
-#--- Output formatting arguments -----
-#-------------------------------------
-  - id: outFileName
-    type:
-      - 'null'
-      - string
-    description: |
-      FILENAME
-      Output file name. (default: input BAM filename with bigwig [*.bw] or bedgraph [*.bdg] extension.)
-  - id: output_suffix
-    type:
-      - 'null'
-      - string
-    description: "Suffix used for output file (input BAM filename + suffix)"
-  - id: outFileFormat
-    type: string
-    default: 'bigwig'
-    description: |
-      {bigwig,bedgraph}, -of {bigwig,bedgraph}
-      Output file type. Either "bigwig" or "bedgraph".
-      (default: bigwig)
+      prefix: --verbose
+    doc: |
+      --verbose
+      Set to see processing messages. (default: False)
+  binSize:
+    type: int?
     inputBinding:
       position: 1
-      prefix: '--outFileFormat'
-#---------------------------------
-#-----  Processing arguments -----
-#---------------------------------
-  - id: scaleFactor
-    type:
-      - 'null'
-      - float
-    description: |
-      SCALEFACTOR
-      Indicate a number that you would like to use. When
-      used in combination with --normalizeTo1x or
-      --normalizeUsingRPKM, the computed scaling factor will
-      be multiplied by the given scale factor. (default:
-      1.0)
+      prefix: --binSize
+    doc: |
+      INT bp
+      Size of the bins, in bases, for the output of the
+      bigwig/bedgraph file. (default: 50)
+  MNase:
+    type: boolean?
     inputBinding:
       position: 1
-      prefix: '--scaleFactor'
-  - id: MNase
-    type:
-      - 'null'
-      - boolean
-    description: |
+      prefix: --MNase
+    doc: |
       Determine nucleosome positions from MNase-seq data.
       Only 3 nucleotides at the center of each fragment are
       counted. The fragment ends are defined by the two mate
@@ -73,100 +42,215 @@ inputs:
       considered to avoid dinucleosomes or other
       artifacts.*NOTE*: Requires paired-end data. A bin size
       of 1 is recommended. (default: False)
+  ignoreDuplicates:
+    type: boolean?
     inputBinding:
       position: 1
-      prefix: '--MNase'
-  - id: filterRNAstrand
-    type:
-      - 'null'
-      - string
-    description: |
+      prefix: --ignoreDuplicates
+    doc: |
+      If set, reads that have the same orientation and start
+      position will be considered only once. If reads are
+      paired, the mate's position also has to coincide to
+      ignore a read. (default: False)
+  numberOfProcessors:
+    type: int?
+    inputBinding:
+      position: 1
+      prefix: --numberOfProcessors
+    doc: |
+      INT
+      Number of processors to use. Type "max/2" to use half
+      the maximum number of processors or "max" to use all
+      available processors. (default: max/2)
+  ignoreForNormalization:
+    type: string?
+    inputBinding:
+      position: 1
+      prefix: --ignoreForNormalization
+    doc: |
+      --ignoreForNormalization chrX chrM. (default: None)
+      A list of space-delimited chromosome names containing
+      those chromosomes that should be excluded for
+      computing the normalization. This is useful when
+      considering samples with unequal coverage across
+      chromosomes, like male samples. An usage examples is
+  outFileName:
+#-------------------------------------
+#--- Output formatting arguments -----
+#-------------------------------------
+    type: string?
+    doc: |
+      FILENAME
+      Output file name. (default: input BAM filename with bigwig [*.bw] or bedgraph [*.bdg] extension.)
+  smoothLength:
+    type: int?
+    inputBinding:
+      position: 1
+      prefix: --smoothLength
+    doc: |
+      INT bp
+      The smooth length defines a window, larger than the
+      binSize, to average the number of reads. For example,
+      if the --binSize is set to 20 and the --smoothLength
+      is set to 60, then, for each bin, the average of the
+      bin and its left and right neighbors is considered.
+      Any value smaller than --binSize will be ignored and
+      no smoothing will be applied. (default: None)
+      Read processing options:
+  version:
+    type: boolean?
+    inputBinding:
+      position: 1
+      prefix: --version
+    doc: show program's version number and exit
+  extendReads:
+#-----------------------------------------
+#------- Read processing options ---------
+#-----------------------------------------
+    type: int?
+    inputBinding:
+      position: 1
+      prefix: --extendReads
+    doc: |
+      INT bp
+      This parameter allows the extension of reads to
+      fragment size. If set, each read is extended, without
+      exception. *NOTE*: This feature is generally NOT
+      recommended for spliced-read data, such as RNA-seq, as
+      it would extend reads over skipped regions. *Single-
+      end*: Requires a user specified value for the final
+      fragment length. Reads that already exceed this
+      fragment length will not be extended. *Paired-end*:
+      Reads with mates are always extended to match the
+      fragment size defined by the two read mates. Unmated
+      reads, mate reads that map too far apart (>4x fragment
+      length) or even map to different chromosomes are
+      treated like single-end reads. The input of a fragment
+      length value is optional. If no value is specified, it
+      is estimated from the data (mean of the fragment size
+      of all mate reads). (default: False)
+  centerReads:
+    type: boolean?
+    inputBinding:
+      position: 1
+      prefix: --centerReads
+    doc: |
+      By adding this option, reads are centered with respect
+      to the fragment length. For paired-end data, the read
+      is centered at the fragment length defined by the two
+      ends of the fragment. For single-end data, the given
+      fragment length is used. This option is useful to get
+      a sharper signal around enriched regions. (default:
+      False)
+  samFlagExclude:
+    type: int?
+    inputBinding:
+      position: 1
+      prefix: --samFlagExclude
+    doc: |
+      INT
+      Exclude reads based on the SAM flag. For example, to
+      get only reads that map to the forward strand, use
+      --samFlagExclude 16, where 16 is the SAM flag for
+      reads that map to the reverse strand. (default: None)
+  samFlagInclude:
+    type: int?
+    inputBinding:
+      position: 1
+      prefix: --samFlagInclude
+    doc: |
+      INT
+      Include reads based on the SAM flag. For example, to
+      get only reads that are the first mate, use a flag of
+      64. This is useful to count properly paired reads only
+      once, as otherwise the second mate will be also
+      considered for the coverage. (default: None)
+  filterRNAstrand:
+    type: string?
+    inputBinding:
+      position: 1
+      prefix: --filterRNAstrand
+    doc: |
       {forward,reverse}
       Selects RNA-seq reads (single-end or paired-end) in
       the given strand. (default: None)
+  scaleFactor:
+#---------------------------------
+#-----  Processing arguments -----
+#---------------------------------
+    type: float?
     inputBinding:
       position: 1
-      prefix: '--filterRNAstrand'
-  - id: version
-    type:
-      - 'null'
-      - boolean
-    description: "show program's version number and exit"
+      prefix: --scaleFactor
+    doc: |
+      SCALEFACTOR
+      Indicate a number that you would like to use. When
+      used in combination with --normalizeTo1x or
+      --normalizeUsingRPKM, the computed scaling factor will
+      be multiplied by the given scale factor. (default:
+      1.0)
+  skipNonCoveredRegions:
+    type: string?
     inputBinding:
       position: 1
-      prefix: '--version'
-  - id: binSize
-    type:
-      - 'null'
-      - int
-    description: |
-      INT bp
-      Size of the bins, in bases, for the output of the
-      bigwig/bedgraph file. (default: 50)
+      prefix: --skipNonCoveredRegions
+    doc: |
+      --skipNonCoveredRegions, --skipNAs
+      This parameter determines if non-covered regions
+      (regions without overlapping reads) in a BAM file
+      should be skipped. The default is to treat those
+      regions as having a value of zero. The decision to
+      skip non-covered regions depends on the interpretation
+      of the data. Non-covered regions may represent, for
+      example, repetitive regions that should be skipped.
+      (default: False)
+  outFileFormat:
+    type: string
+    default: bigwig
     inputBinding:
       position: 1
-      prefix: '--binSize'
-  - id: region
-    type:
-      - 'null'
-      - string
-    description: |
+      prefix: --outFileFormat
+    doc: |
+      {bigwig,bedgraph}, -of {bigwig,bedgraph}
+      Output file type. Either "bigwig" or "bedgraph".
+      (default: bigwig)
+  output_suffix:
+    type: string?
+    doc: Suffix used for output file (input BAM filename + suffix)
+  region:
+    type: string?
+    inputBinding:
+      position: 1
+      prefix: --region
+    doc: |
       CHR:START:END
       Region of the genome to limit the operation to - this
       is useful when testing parameters to reduce the
       computing time. The format is chr:start:end, for
       example --region chr10 or --region
       chr10:456700:891000. (default: None)
+  normalizeUsingRPKM:
+    type: boolean?
     inputBinding:
       position: 1
-      prefix: '--region'
-  - id: blackListFileName
-    type:
-      - 'null'
-      - File
-    description: |
-      BED file
-      A BED file containing regions that should be excluded
-      from all analyses. Currently this works by rejecting
-      genomic chunks that happen to overlap an entry.
-      Consequently, for BAM files, if a read partially
-      overlaps a blacklisted region or a fragment spans over
-      it, then the read/fragment might still be considered.
-      (default: None)
-    inputBinding:
-      position: 1
-      prefix: '--blackListFileName'
-  - id: numberOfProcessors
-    type:
-      - 'null'
-      - int
-    description: |
-      INT
-      Number of processors to use. Type "max/2" to use half
-      the maximum number of processors or "max" to use all
-      available processors. (default: max/2)
-    inputBinding:
-      position: 1
-      prefix: '--numberOfProcessors'
-  - id: verbose
-    type:
-      - 'null'
-      - boolean
-    description: |
-      --verbose
-      Set to see processing messages. (default: False)
-
-    inputBinding:
-      position: 1
-      prefix: '--verbose'
+      prefix: --normalizeUsingRPKM
+    doc: |
+      Use Reads Per Kilobase per Million reads to normalize
+      the number of reads per bin. The formula is: RPKM (per
+      bin) = number of reads per bin / ( number of mapped
+      reads (in millions) * bin length (kb) ). Each read is
+      considered independently,if you want to only count
+      either of the mate pairs inpaired-end data, use the
+      --samFlag option. (default: False)
+  normalizeTo1x:
 #-----------------------------------------
 #-- Read coverage normalization options --
 #-----------------------------------------
-  - id: normalizeTo1x
-    type:
-      - 'null'
-      - string
-    description: |
+    type: string?
+    inputBinding:
+      position: 1
+      prefix: --normalizeTo1x
+    doc: |
       EFFECTIVE GENOME SIZE LENGTH
       Report read coverage normalized to 1x sequencing depth
       (also known as Reads Per Genomic Content (RPGC)).
@@ -188,192 +272,55 @@ inputs:
       ://www.nature.com/nbt/journal/v27/n1/fig_tab/nbt.1518_
       T1.html for several effective genome sizes. (default:
       None)
+  blackListFileName:
+    type: File?
     inputBinding:
       position: 1
-      prefix: '--normalizeTo1x'
-  - id: normalizeUsingRPKM
-    type:
-      - 'null'
-      - boolean
-    description: |
-      Use Reads Per Kilobase per Million reads to normalize
-      the number of reads per bin. The formula is: RPKM (per
-      bin) = number of reads per bin / ( number of mapped
-      reads (in millions) * bin length (kb) ). Each read is
-      considered independently,if you want to only count
-      either of the mate pairs inpaired-end data, use the
-      --samFlag option. (default: False)
+      prefix: --blackListFileName
+    doc: |
+      BED file
+      A BED file containing regions that should be excluded
+      from all analyses. Currently this works by rejecting
+      genomic chunks that happen to overlap an entry.
+      Consequently, for BAM files, if a read partially
+      overlaps a blacklisted region or a fragment spans over
+      it, then the read/fragment might still be considered.
+      (default: None)
+  bam:
+    type: File
+    secondaryFiles: $(self.path + '.bai')
     inputBinding:
       position: 1
-      prefix: '--normalizeUsingRPKM'
-  - id: ignoreForNormalization
-    type:
-      - 'null'
-      - string
-    description: |
-      --ignoreForNormalization chrX chrM. (default: None)
-      A list of space-delimited chromosome names containing
-      those chromosomes that should be excluded for
-      computing the normalization. This is useful when
-      considering samples with unequal coverage across
-      chromosomes, like male samples. An usage examples is
+      prefix: --bam
+    doc: 'BAM file to process '
+  minMappingQuality:
+    type: int?
     inputBinding:
       position: 1
-      prefix: '--ignoreForNormalization'
-  - id: skipNonCoveredRegions
-    type:
-      - 'null'
-      - string
-    description: |
-      --skipNonCoveredRegions, --skipNAs
-      This parameter determines if non-covered regions
-      (regions without overlapping reads) in a BAM file
-      should be skipped. The default is to treat those
-      regions as having a value of zero. The decision to
-      skip non-covered regions depends on the interpretation
-      of the data. Non-covered regions may represent, for
-      example, repetitive regions that should be skipped.
-      (default: False)
-    inputBinding:
-      position: 1
-      prefix: '--skipNonCoveredRegions'
-  - id: smoothLength
-    type:
-      - 'null'
-      - int
-    description: |
-      INT bp
-      The smooth length defines a window, larger than the
-      binSize, to average the number of reads. For example,
-      if the --binSize is set to 20 and the --smoothLength
-      is set to 60, then, for each bin, the average of the
-      bin and its left and right neighbors is considered.
-      Any value smaller than --binSize will be ignored and
-      no smoothing will be applied. (default: None)
-      Read processing options:
-    inputBinding:
-      position: 1
-      prefix: '--smoothLength'
-#-----------------------------------------
-#------- Read processing options ---------
-#-----------------------------------------
-  - id: extendReads
-    type:
-      - 'null'
-      - int
-    description: |
-      INT bp
-      This parameter allows the extension of reads to
-      fragment size. If set, each read is extended, without
-      exception. *NOTE*: This feature is generally NOT
-      recommended for spliced-read data, such as RNA-seq, as
-      it would extend reads over skipped regions. *Single-
-      end*: Requires a user specified value for the final
-      fragment length. Reads that already exceed this
-      fragment length will not be extended. *Paired-end*:
-      Reads with mates are always extended to match the
-      fragment size defined by the two read mates. Unmated
-      reads, mate reads that map too far apart (>4x fragment
-      length) or even map to different chromosomes are
-      treated like single-end reads. The input of a fragment
-      length value is optional. If no value is specified, it
-      is estimated from the data (mean of the fragment size
-      of all mate reads). (default: False)
-    inputBinding:
-      position: 1
-      prefix: '--extendReads'
-  - id: ignoreDuplicates
-    type:
-      - 'null'
-      - boolean
-    description: |
-      If set, reads that have the same orientation and start
-      position will be considered only once. If reads are
-      paired, the mate's position also has to coincide to
-      ignore a read. (default: False)
-    inputBinding:
-      position: 1
-      prefix: '--ignoreDuplicates'
-  - id: minMappingQuality
-    type:
-      - 'null'
-      - int
-    description: |
+      prefix: --minMappingQuality
+    doc: |
       INT
       If set, only reads that have a mapping quality score
       of at least this are considered. (default: None)
-    inputBinding:
-      position: 1
-      prefix: '--minMappingQuality'
-  - id: centerReads
-    type:
-      - 'null'
-      - boolean
-    description: |
-      By adding this option, reads are centered with respect
-      to the fragment length. For paired-end data, the read
-      is centered at the fragment length defined by the two
-      ends of the fragment. For single-end data, the given
-      fragment length is used. This option is useful to get
-      a sharper signal around enriched regions. (default:
-      False)
-    inputBinding:
-      position: 1
-      prefix: '--centerReads'
-  - id: samFlagInclude
-    type:
-      - 'null'
-      - int
-    description: |
-      INT
-      Include reads based on the SAM flag. For example, to
-      get only reads that are the first mate, use a flag of
-      64. This is useful to count properly paired reads only
-      once, as otherwise the second mate will be also
-      considered for the coverage. (default: None)
-    inputBinding:
-      position: 1
-      prefix: '--samFlagInclude'
-  - id: samFlagExclude
-    type:
-      - 'null'
-      - int
-    description: |
-      INT
-      Exclude reads based on the SAM flag. For example, to
-      get only reads that map to the forward strand, use
-      --samFlagExclude 16, where 16 is the SAM flag for
-      reads that map to the reverse strand. (default: None)
-    inputBinding:
-      position: 1
-      prefix: '--samFlagExclude'
 outputs:
-  - id: output_bam_coverage
+  output_bam_coverage:
     type: File
     outputBinding:
-      glob: ${
-              if (inputs.outFileName)
-                return inputs.outFileName;
-              if (inputs.output_suffix)
-                return inputs.bam.path.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "") + inputs.output_suffix;
-              if (inputs.outFileFormat == "bedgraph")
-                return inputs.bam.path.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "") + ".bdg";
-              return inputs.bam.path.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "") + ".bw";
-            }
+      glob: ${ if (inputs.outFileName) return inputs.outFileName; if (inputs.output_suffix)
+        return inputs.bam.path.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "") +
+        inputs.output_suffix; if (inputs.outFileFormat == "bedgraph") return inputs.bam.path.replace(/^.*[\\\/]/,
+        "").replace(/\.[^/.]+$/, "") + ".bdg"; return inputs.bam.path.replace(/^.*[\\\/]/,
+        "").replace(/\.[^/.]+$/, "") + ".bw"; }
 baseCommand: bamCoverage
 arguments:
-  - valueFrom: ${
-                  if (inputs.outFileName)
-                    return inputs.outFileName;
-                  if (inputs.output_suffix)
-                    return inputs.bam.path.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "") + inputs.output_suffix;
-                  if (inputs.outFileFormat == "bedgraph")
-                    return inputs.bam.path.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "") + ".bdg";
-                  return inputs.bam.path.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "") + ".bw";
-                }
-    prefix: '--outFileName'
-    position: 3
-description: |
+- valueFrom: ${ if (inputs.outFileName) return inputs.outFileName; if (inputs.output_suffix)
+    return inputs.bam.path.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "") + inputs.output_suffix;
+    if (inputs.outFileFormat == "bedgraph") return inputs.bam.path.replace(/^.*[\\\/]/,
+    "").replace(/\.[^/.]+$/, "") + ".bdg"; return inputs.bam.path.replace(/^.*[\\\/]/,
+    "").replace(/\.[^/.]+$/, "") + ".bw"; }
+  prefix: --outFileName
+  position: 3
+doc: |
   usage: An example usage is:$ bamCoverage -b reads.bam -o coverage.bw
 
 

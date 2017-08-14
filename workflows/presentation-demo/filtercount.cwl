@@ -1,39 +1,33 @@
 #!/usr/bin/env cwl-runner
 class: Workflow
-cwlVersion: "cwl:draft-3"
+cwlVersion: v1.0
 
 requirements:
-  - class: ScatterFeatureRequirement
-  - class: DockerRequirement
-    dockerPull: "debian:8"
+  ScatterFeatureRequirement: {}
+  DockerRequirement: 
+    dockerPull: debian:8
 
 inputs:
-  - id: pattern
-    type: string
-  - id: infile
-    type: {type: array, items: File}
+  pattern: string
+  texts: File[]
 
 outputs:
-  - id: outfile
+  outfile:
     type: File
-    source: "#wc/outfile"
+    outputSource: count_matches/counts
 
 steps:
-  - id: grep
+  search_texts:
     run: grep.cwl
-    scatter: "#grep/infile"
     inputs:
-      - id: pattern
-        source: "#pattern"
-      - id: infile
-        source: "#infile"
-    outputs:
-      - id: outfile
+      pattern: pattern
+      file_to_search: texts
+    scatter: file_to_search
+    outputs: [ results ]
 
-  - id: wc
+  count_matches:
     run: wc.cwl
     inputs:
-      - id: infile
-        source: "#grep/outfile"
-    outputs:
-      - id: outfile
+      files: search_texts/results
+    outputs: [ counts ]
+

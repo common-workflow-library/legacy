@@ -1,57 +1,57 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: "cwl:draft-3"
+cwlVersion: v1.0
 
 class: CommandLineTool
 
-description: "Invoke 'samtools sort' (samtools 1.19)"
 
 inputs:
-  - id: compression_level
-    type: ["null", int]
-    description: |
+  output_name:
+    type: string
+    inputBinding:
+      position: 2
+
+    doc: Desired output filename.
+  compression_level:
+    type: int?
+    inputBinding:
+      prefix: -l
+    doc: |
       Set the desired compression level for the final output file, ranging from
       0 (uncompressed) or 1 (fastest but minimal compression) to 9 (best
       compression but slowest to write), similarly to gzip(1)'s compression
       level setting.
 
       If -l is not used, the default compression level will apply.
-    inputBinding:
-      prefix: "-l"
-
-  - id: memory
-    type: ["null", int]
-    description: |
-      Approximately the maximum required memory per thread, specified  in
-      bytes.
-    inputBinding:
-      prefix: "-m"
-
-  - id: sort_by_name
-    type: ["null", boolean]
-    description: "Sort by read names (i.e., the QNAME field) rather than by chromosomal coordinates."
-    inputBinding:
-      prefix: -n
-
-  - id: output_name
-    type: string
-    description: "Desired output filename."
-    inputBinding:
-      position: 2
-
-  - id: input
+  input:
     type: File
-    description:
-      Input bam file.
     inputBinding:
       position: 1
 
+    doc: Input bam file.
+  sort_by_name:
+
+    type: boolean?
+    inputBinding:
+      prefix: -n
+
+    doc: Sort by read names (i.e., the QNAME field) rather than by chromosomal coordinates.
+  memory:
+
+    type: int?
+    inputBinding:
+      prefix: -m
+    doc: |
+      Approximately the maximum required memory per thread, specified  in
+      bytes.
 outputs:
-  - id: output_file
+  output_file:
     type: File
     outputBinding:
       glob: $(inputs['output_name'])
 
-baseCommand: ["samtools", "sort"]
+baseCommand: [samtools, sort]
 
 arguments:
-  - "-f"
+- -f
+doc: Invoke 'samtools sort' (samtools 1.19)
+
