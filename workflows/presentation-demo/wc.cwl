@@ -3,13 +3,12 @@ class: CommandLineTool
 cwlVersion: v1.0
 
 inputs:
-  infiles:
+  files:
     type: File[]
     inputBinding: {position: 1}
-
-outputs:
-  outfile:
-    type: stdout
+    streamable: true
 
 baseCommand: [wc, -l]
 
+outputs:
+  counts: stdout

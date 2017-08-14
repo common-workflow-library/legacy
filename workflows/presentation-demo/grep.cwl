@@ -6,12 +6,11 @@ inputs:
   pattern:
     type: string
     inputBinding: {position: 0}
-  infile:
+  file_to_searc:
     type: File
     inputBinding: {position: 1}
 
 outputs:
-  outfile:
-    type: stdout
+  results: stdout
 
 baseCommand: grep

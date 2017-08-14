@@ -47,7 +47,6 @@ doap:maintainer:
     foaf:name: Andrey Kartashov
     foaf:mbox: mailto:Andrey.Kartashov@cchmc.org
 requirements:
-- $import: envvar-global.yml
 - $import: linux-sort-docker.yml
 - class: InlineJavascriptRequirement
 

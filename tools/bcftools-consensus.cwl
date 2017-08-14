@@ -7,7 +7,6 @@ cwlVersion: v1.0
 class: CommandLineTool
 
 requirements:
-- $import: envvar-global.yml
 - $import: bcftools-docker.yml
 - class: InlineJavascriptRequirement
 - class: ShellCommandRequirement

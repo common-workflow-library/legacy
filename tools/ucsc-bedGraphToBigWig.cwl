@@ -5,7 +5,6 @@ class: CommandLineTool
 
 requirements:
 - class: InlineJavascriptRequirement
-- $import: envvar-global.yml
 - $import: ucsc-userapps-docker.yml
 
 inputs:

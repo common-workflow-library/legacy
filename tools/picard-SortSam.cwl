@@ -53,7 +53,6 @@ dct:creator:
     foaf:name: Sehrish Kanwal
     foaf:mbox: mailto:skanwal@student.unimelb.edu.au
 requirements:
-- $import: envvar-global.yml
 - $import: picard-docker.yml
 - class: InlineJavascriptRequirement
 

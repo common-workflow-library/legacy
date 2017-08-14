@@ -51,7 +51,6 @@ dct:creator:
     id: skanwal@student.unimelb.edu.au
     foaf:mbox: mailto:skanwal@student.unimelb.edu.au
 requirements:
-- $import: envvar-global.yml
 - $import: picard-docker.yml
 - class: InlineJavascriptRequirement
 
