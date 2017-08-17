@@ -17,19 +17,24 @@ inputs:
       position: 2
       valueFrom: $(self.basename)
     label: Input bam file.
+  interval:
+    type: int?
+    inputBinding:
+      position: 1
+      prefix: -m
+    doc: |
+      Set minimum interval size for CSI indices to 2^INT [14]
 
-baseCommand: [samtools, index, -b]
+baseCommand: [samtools, index, -c]
 
 outputs:
   alignments_with_index:
     type: File
-    secondaryFiles: .bai
+    secondaryFiles: cai
     outputBinding:
       glob: $(inputs.alignments.basename)
 
-
     doc: The index file
-
 
 $namespaces:
   s: http://schema.org/
@@ -40,7 +45,7 @@ $schemas:
 s:mainEntity:
   $import: samtools-metadata.yaml
 
-s:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/samtools-index.cwl
+s:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/samtools-index-cai.cwl
 s:codeRepository: https://github.com/common-workflow-language/workflows
 s:license: http://www.apache.org/licenses/LICENSE-2.0
 
