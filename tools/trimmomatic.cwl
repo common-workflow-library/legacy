@@ -124,7 +124,7 @@ inputs:
         ${ if ( self ) {
              return "ILLUMINACLIP:" + inputs.illuminaClip.adapters.path + ":"
                + self.seedMismatches + ":" + self.palindromeClipThreshold + ":"
-               + self.simpleClipThreshold + ":" self.minAdapterLength + ":"
+               + self.simpleClipThreshold + ":" + self.minAdapterLength + ":"
                + self.keepBothReads;
            } else {
              return self;
