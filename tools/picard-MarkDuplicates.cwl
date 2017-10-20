@@ -84,13 +84,23 @@ inputs:
     doc: Value of VN tag of PG record to be created. If not specified, the version
       will be detected automatically. Default value null
   readSorted:
-    type: boolean?
+    type: string?
     inputBinding:
       position: 22
       prefix: ASSUME_SORTED=
     doc: If true, assume that the input file is coordinate sorted even if the header
       says otherwise. Default value false. This option can be set to 'null' to clear
       the default value. Possible values {true, false}
+  validationStringency:
+    type: string?
+    inputBinding:
+      position: 23
+      prefix: VALIDATION_STRINGENCY=
+    doc: Validation stringency for all SAM files read by this program. Setting stringency
+      to SILENT can improve performance when processing a BAM file in which variable-length
+      data (read, qualities, tags) do not otherwise need to be decoded. Default value STRICT.
+      This option can be set to 'null' to clear the default value.
+      Possible values {STRICT, LENIENT, SILENT}
   readOneBarcodeTag:
     type: string?
     inputBinding:
@@ -178,7 +188,7 @@ inputs:
     doc: Value of CL tag of PG record to be created. If not supplied the command line
       will be detected automatically. Default value null
   removeDuplicates:
-    type: boolean?
+    type: string?
     inputBinding:
       position: 7
       prefix: REMOVE_DUPLICATES=
