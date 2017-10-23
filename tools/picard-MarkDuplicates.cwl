@@ -53,6 +53,9 @@ dct:creator:
 requirements:
 - $import: picard-docker.yml
 - class: InlineJavascriptRequirement
+- class: SchemaDefRequirement
+  types:
+    - $import: picard-validation-stringency.yml
 
 inputs:
   comment:
@@ -92,7 +95,7 @@ inputs:
       says otherwise. Default value false. This option can be set to 'null' to clear
       the default value. Possible values {true, false}
   validationStringency:
-    type: string?
+    type: picard-validation-stringency.yml#VALIDATION_STRINGENCY?
     inputBinding:
       position: 23
       prefix: VALIDATION_STRINGENCY=
