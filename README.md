@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/common-workflow-language/workflows.svg?branch=master)](https://travis-ci.org/common-workflow-language/workflows)
 
 
-"CWL Tools & Workflows" is the community's best practices for CWL tool and
+"CWL Tools & Workflows" is a community repository CWL tool and
 workflow descriptions. 
 
 To submit a new workflow or tool description please make a pull request against
