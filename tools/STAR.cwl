@@ -5,7 +5,14 @@ class: CommandLineTool
 
 requirements:
 - class: InlineJavascriptRequirement
-
+- class: ShellCommandRequirement
+- class: InitialWorkDirRequirement
+  listing:
+    - writable: true
+      entry: |
+        ${
+           return {"class": "Directory", "basename": "generatedGenomeDir", "listing": []}
+         }
 hints:
 - class: DockerRequirement
     #dockerImageId: scidap/star:v2.5.0b #not yet ready
@@ -41,6 +48,7 @@ inputs:
     inputBinding:
       position: 1
       prefix: --outSAMattributes
+      shellQuote: false
     doc: |
       Standard
       string: a string of desired SAM attributes, in the order desired for the output SAM
@@ -343,9 +351,9 @@ inputs:
     inputBinding:
       valueFrom: |
         ${
-              if (inputs.runMode != "genomeGenerate")
-                return inputs.genomeDir.path.split('/').slice(0,-1).join('/');
-              return inputs.genomeDir;
+            if (inputs.runMode == "genomeGenerate")
+              return "generatedGenomeDir";
+            return self;
         }
       position: 1
       prefix: --genomeDir
@@ -440,7 +448,7 @@ inputs:
       None        ... not used
       intronMotif ... strand derived from the intron motif. Reads with inconsistent and/or non-canonical introns are filtered out.
   alignMatesGapMax:
-    type: boolean?
+    type: int?
     inputBinding:
       position: 1
       prefix: --alignMatesGapMax
@@ -531,7 +539,7 @@ inputs:
       int: number of reads to process for the 1st step. Use very large number (or
       default -1) to map all reads in the first step.
   outSJfilterIntronMaxVsReadN:
-    type: boolean?
+    type: int[]?
     inputBinding:
       position: 1
       prefix: --outSJfilterIntronMaxVsReadN
@@ -566,7 +574,7 @@ inputs:
       0
       int>=0: minimum total (summed) score of the chimeric segments
   outSJfilterOverhangMin:
-    type: boolean?
+    type: int[]?
     inputBinding:
       position: 1
       prefix: --outSJfilterOverhangMin
@@ -594,7 +602,7 @@ inputs:
       string(s): character(s) separating the part of the read names that will be
       trimmed in output (read name after space is always trimmed)
   scoreGapGCAG:
-    type: boolean?
+    type: int?
     inputBinding:
       position: 1
       prefix: --scoreGapGCAG
@@ -602,7 +610,7 @@ inputs:
       -4
       GC/AG and CT/GC junction penalty (in addition to scoreGap)
   scoreInsBase:
-    type: boolean?
+    type: int?
     inputBinding:
       position: 1
       prefix: --scoreInsBase
@@ -660,7 +668,7 @@ inputs:
       Basic ... only small junction / transcript files
       All   ... all files including big Genome, SA and SAindex - this will create a complete genome directory
   sjdbFileChrStartEnd:
-    type: string?
+    type: File[]?
     inputBinding:
       position: 1
       prefix: --sjdbFileChrStartEnd
@@ -685,6 +693,7 @@ inputs:
       position: 1
       itemSeparator: ' '
       prefix: --readFilesIn
+      shellQuote: false
     doc: |
       string(s): paths to files that contain input read1 (and, if needed,  read2)
   genomeSAsparseD:
@@ -696,7 +705,7 @@ inputs:
       int>0: suffux array sparsity, i.e. distance between indices: use bigger
       numbers to decrease needed RAM at the cost of mapping speed reduction
   scoreDelOpen:
-    type: boolean?
+    type: int?
     inputBinding:
       position: 1
       prefix: --scoreDelOpen
@@ -781,7 +790,7 @@ inputs:
       Standard ... first word (until space) from the FASTx read ID line, removing /1,/2 from the end
       Number   ... read number (index) in the FASTx file
   scoreDelBase:
-    type: boolean?
+    type: int?
     inputBinding:
       position: 1
       prefix: --scoreDelBase
@@ -967,7 +976,7 @@ inputs:
       string: path to the shell binary, preferrably bash, e.g. /bin/bash.
       - ... the default shell is executed, typically /bin/sh. This was reported to fail on some Ubuntu systems - then you need to specify path to bash.
   outSJfilterCountUniqueMin:
-    type: boolean?
+    type: int[]?
     inputBinding:
       position: 1
       prefix: --outSJfilterCountUniqueMin
@@ -1016,7 +1025,7 @@ inputs:
       Normal  ... standard filtering using only current alignment
       BySJout ... keep only those reads that contain junctions that passed filtering into SJ.out.tab
   alignIntronMin:
-    type: boolean?
+    type: int?
     inputBinding:
       position: 1
       prefix: --alignIntronMin
@@ -1038,7 +1047,7 @@ inputs:
 
       '
   alignIntronMax:
-    type: boolean?
+    type: int?
     inputBinding:
       position: 1
       prefix: --alignIntronMax
@@ -1153,7 +1162,7 @@ inputs:
       -
       string: path to the file with @CO (comment) lines of the SAM header
   outFilterMismatchNoverReadLmax:
-    type: int?
+    type: float?
     inputBinding:
       position: 1
       prefix: --outFilterMismatchNoverReadLmax
@@ -1304,34 +1313,14 @@ inputs:
       int>0: minimum mapped length for a read mate that is spliced
 outputs:
   indices:
-    type: File?
+    type: Directory?
     outputBinding:
       glob: |
         ${
           if (inputs.runMode != "genomeGenerate")
             return [];
-          return inputs.genomeDir+"/Genome";
+          return "generatedGenomeDir";
         }
-    secondaryFiles: |
-      ${
-        var p=inputs.genomeDir;
-        return [
-          {"path": p+"/SA", "class":"File"},
-          {"path": p+"/SAindex", "class":"File"},
-          {"path": p+"/chrNameLength.txt", "class":"File"},
-          {"path": p+"/chrLength.txt", "class":"File"},
-          {"path": p+"/chrStart.txt", "class":"File"},
-          {"path": p+"/geneInfo.tab", "class":"File"},
-          {"path": p+"/sjdbList.fromGTF.out.tab", "class":"File"},
-          {"path": p+"/chrName.txt", "class":"File"},
-          {"path": p+"/exonGeTrInfo.tab", "class":"File"},
-          {"path": p+"/genomeParameters.txt", "class":"File"},
-          {"path": p+"/sjdbList.out.tab", "class":"File"},
-          {"path": p+"/exonInfo.tab", "class":"File"},
-          {"path": p+"/sjdbInfo.txt", "class":"File"},
-          {"path": p+"/transcriptInfo.tab", "class":"File"}
-        ];
-      }
 
   aligned:
     type: File?
@@ -1362,7 +1351,7 @@ outputs:
       }
 
   mappingstats:
-    type: string?
+    type: File?
     outputBinding:
       loadContents: true
       glob: |
@@ -1373,14 +1362,25 @@ outputs:
           var p = inputs.outFileNamePrefix?inputs.outFileNamePrefix:"";
           return p+"Log.final.out";
         }
-      outputEval: |
-        ${
-          if (inputs.runMode == "genomeGenerate")
-            return "";
 
-          var s = self[0].contents.replace(/[ ]+.*?:\n|[ ]{2,}|\n$/g,"").
-              split(/\n{1,2}/g).map(function(v){var s=v.split(/\|\t/g); var o={}; o[s[0]]=s[1]; return o;})
-          return JSON.stringify(s);
+  readspergene:
+    type: File?
+    outputBinding:
+      glob: |
+        ${
+          var p=inputs.outFileNamePrefix?inputs.outFileNamePrefix:"";
+          return p+"ReadsPerGene.out.tab";
+        }
+
+  transcriptomesam:
+    type: File?
+    outputBinding:
+      glob: |
+        ${
+          if (inputs.quantMode != "TranscriptomeSAM")
+            return null;
+          var p=inputs.outFileNamePrefix?inputs.outFileNamePrefix:"";
+          return p+"Aligned.toTranscriptome.out.bam";
         }
 
 baseCommand: [STAR]
