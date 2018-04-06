@@ -9,10 +9,8 @@ requirements:
 - class: InitialWorkDirRequirement
   listing:
     - writable: true
-      entry: |
-        ${
-           return {"class": "Directory", "basename": "generatedGenomeDir", "listing": []}
-         }
+      entryname: generated_STAR_genome_dir
+      entry: $(inputs.genomeDir)
 hints:
 - class: DockerRequirement
     #dockerImageId: scidap/star:v2.5.0b #not yet ready
@@ -352,7 +350,7 @@ inputs:
       valueFrom: |
         ${
             if (inputs.runMode == "genomeGenerate")
-              return "generatedGenomeDir";
+              return "generated_STAR_genome_dir";
             return self;
         }
       position: 1
@@ -1319,7 +1317,7 @@ outputs:
         ${
           if (inputs.runMode != "genomeGenerate")
             return [];
-          return "generatedGenomeDir";
+          return "generated_STAR_genome_dir";
         }
 
   aligned:
