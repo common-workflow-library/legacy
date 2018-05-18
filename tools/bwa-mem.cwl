@@ -16,6 +16,12 @@ inputs:
     doc: -k INT        minimum seed length [19]
   reference:
     type: File
+    secondaryFiles:
+        - .amb
+        - .ann
+        - .bwt
+        - .pac
+        - .sa
     inputBinding:
       position: 2
 
