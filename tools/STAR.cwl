@@ -1421,10 +1421,6 @@ s:mainEntity:
       s:name: Cold Spring Harbor Laboratory, Cold Spring Harbor, NY, USA
 s:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master/tools/STAR.cwl
 s:codeRepository: https://github.com/common-workflow-language/workflows
-s:isPartOf:
-  class: s:CreativeWork
-  s:name: Common Workflow Language
-  s:url: http://commonwl.org/
 
 s:author:
   class: s:Person

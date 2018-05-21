@@ -49,11 +49,6 @@ s:downloadUrl: https://github.com/common-workflow-language/workflows/blob/master
 s:codeRepository: https://github.com/common-workflow-language/workflows
 s:license: http://www.apache.org/licenses/LICENSE-2.0
 
-s:isPartOf:
-  class: s:CreativeWork
-  s:name: Common Workflow Language
-  s:url: http://commonwl.org/
-
 s:author:
   class: s:Person
   s:name: Andrey Kartashov
