@@ -45,9 +45,9 @@ inputs:
     - .rpac
     - .rsa
     - .sa
-    - ${return self.location.replace(/(.*)ref\.fasta/, "$1chromsizes.tab");}
-    - ${return self.location.replace(/(.*)ref\.fasta/, "$1mergedref.bed");}
-    - ${return self.location.replace(/(.*)ref\.fasta/, "$1ref_map.tab");}
+    - ${return self.basename.replace(/(.*)ref\.fasta/, "$1chromsizes.tab");}
+    - ${return self.basename.replace(/(.*)ref\.fasta/, "$1mergedref.bed");}
+    - ${return self.basename.replace(/(.*)ref\.fasta/, "$1ref_map.tab");}
 
     doc: lobSTR's bwa reference files
   strinfo:

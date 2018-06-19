@@ -4,8 +4,7 @@ requirements:
   InlineJavascriptRequirement: {}
 hints:
   DockerRequirement:
-    dockerLoad: https://workbench.qr1hi.arvadosapi.com/collections/download/qr1hi-4zz18-x2ae13tsx5jqg8d/1nduktd8dpvhdpgsva82lje0i710kgzb6rttks5jldx7s2y7k9/7e0c0ae3bf4e70442f9b8eee816ec23426d9e1169a2925316e5c932745e21613.tar
-    dockerImageId: 7e0c0ae3bf4e70442f9b8eee816ec23426d9e1169a2925316e5c932745e21613
+    dockerPull: rabix/lobstr
 inputs:
   p1:
     doc: list of files containing the first end of paired end reads in fasta or fastq
@@ -30,9 +29,9 @@ inputs:
       - .rpac
       - .rsa
       - .sa
-      - ${return self.location.replace(/(.*)ref\.fasta/, "$1chromsizes.tab");}
-      - ${return self.location.replace(/(.*)ref\.fasta/, "$1mergedref.bed");}
-      - ${return self.location.replace(/(.*)ref\.fasta/, "$1ref_map.tab");}
+      - ${return self.basename.replace(/(.*)ref\.fasta/, "$1chromsizes.tab");}
+      - ${return self.basename.replace(/(.*)ref\.fasta/, "$1mergedref.bed");}
+      - ${return self.basename.replace(/(.*)ref\.fasta/, "$1ref_map.tab");}
   rg-sample:
     doc: Use this in the read group SM tag
     type: string
