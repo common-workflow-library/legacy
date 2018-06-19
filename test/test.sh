@@ -8,12 +8,12 @@ mkdir -p test-files/dm3
 chmod 777 test-files/dm3
 
 for i in ../tools/*.cwl; do
- bn=`basename ${i} .cwl`
+ bn=$(basename ${i} .cwl)
 
  echo "Testing: ${bn}"
 
  #if [ -f ${bn}-test.yaml ]; then
-     cwltool ${i} --help
+     cwltool --validate ${i}
      #./cwltest.py --tool "cwltool" --conformance-test --test ${bn}-test.yaml --force-test-tool ${i}
  #else
  #   echo "fail"

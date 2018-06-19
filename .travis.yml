@@ -7,6 +7,7 @@ python:
 
 # command to install dependencies
 install:
+  - pip install -U pip setuptools
   - pip install html5lib
   - pip install cwltool
   - pip install cwlref-runner
