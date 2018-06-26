@@ -235,7 +235,7 @@ outputs:
     type: File?
     format: edam:format_1930  # fastq
     outputBinding:
-      glob: $(inputs.reads1.nameroot).unpaired.trimmed.fastq
+      glob: $(inputs.reads1.nameroot).trimmed.unpaired.fastq
 
   reads2_trimmed_paired:
     type: File?
@@ -255,7 +255,7 @@ outputs:
     outputBinding:
       glob: |
         ${ if (inputs.reads2 ) {
-             return inputs.reads2.nameroot + '.unpaired.trimmed.fastq';
+             return inputs.reads2.nameroot + '.trimmed.unpaired.fastq';
            } else {
              return null;
            }
