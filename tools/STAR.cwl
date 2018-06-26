@@ -1256,7 +1256,7 @@ inputs:
       int: -1 to 10  BAM compression level, -1=default compression (6?), 0=no
       compression, 10=maximum compression
   limitBAMsortRAM:
-    type: int?
+    type: long?
     inputBinding:
       position: 1
       prefix: --limitBAMsortRAM
@@ -1379,6 +1379,17 @@ outputs:
             return null;
           var p=inputs.outFileNamePrefix?inputs.outFileNamePrefix:"";
           return p+"Aligned.toTranscriptome.out.bam";
+        }
+
+  bamRemDups:
+    type: File?
+    outputBinding:
+      glob: |
+        ${
+          if (inputs.bamRemoveDuplicatesType != "UniqueIdentical")
+            return null;
+          var p=inputs.outFileNamePrefix?inputs.outFileNamePrefix:"";
+          return p+"Processed.out.bam";
         }
 
 baseCommand: [STAR]
