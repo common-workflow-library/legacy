@@ -121,15 +121,23 @@ inputs:
     type: trimmomatic-illumina_clipping.yaml#illuminaClipping?
     inputBinding:
       valueFrom: |
-        ${ if ( self ) {
-             return "ILLUMINACLIP:" + inputs.illuminaClip.adapters.path + ":"
-               + self.seedMismatches + ":" + self.palindromeClipThreshold + ":"
-               + self.simpleClipThreshold + ":" + self.minAdapterLength + ":"
-               + self.keepBothReads;
-           } else {
-             return self;
-           }
-         }
+        ${ if ( self ) { 
+            var i="ILLUMINACLIP:" + inputs.illuminaClip.adapters.path + ":"
+              + self.seedMismatches + ":" + self.palindromeClipThreshold + ":"
+              + self.simpleClipThreshold;
+            if ( self.minAdapterLength && !self.keepBothReads ) {
+              return i + ":" + self.minAdapterLength;
+            } else if ( self.minAdapterLength && self.keepBothReads ) {
+              return i + ":" + self.minAdapterLength + ":" + self.keepBothReads;
+            } else if ( self.keepBothReads && !self.minAdapterLength ) {
+              return i + ":8:" + self.keepBothReads;
+            } else {
+              return i;
+            }
+          } else {
+            return self;
+          }
+        }
       position: 11
     doc: Cut adapter and other illumina-specific sequences from the read.
 
@@ -235,7 +243,7 @@ outputs:
     type: File?
     format: edam:format_1930  # fastq
     outputBinding:
-      glob: $(inputs.reads1.nameroot).unpaired.trimmed.fastq
+      glob: $(inputs.reads1.nameroot).trimmed.unpaired.fastq
 
   reads2_trimmed_paired:
     type: File?
@@ -255,7 +263,7 @@ outputs:
     outputBinding:
       glob: |
         ${ if (inputs.reads2 ) {
-             return inputs.reads2.nameroot + '.unpaired.trimmed.fastq';
+             return inputs.reads2.nameroot + '.trimmed.unpaired.fastq';
            } else {
              return null;
            }

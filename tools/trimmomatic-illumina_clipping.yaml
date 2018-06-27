@@ -30,7 +30,7 @@ fields:
       mode has a very low false positive rate, this can be safely reduced, even
       down to 1, to allow shorter adapter fragments to be removed.
   - name: keepBothReads
-    type: boolean
+    type: boolean?
     doc: |
       After read-though has been detected by palindrome mode, and the adapter
       sequence removed, the reverse read contains the same sequence information
