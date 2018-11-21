@@ -6,35 +6,35 @@ class: Workflow
 inputs:
   p1:
     type: File[]?
-    description: list of files containing the first end of paired end reads in fasta or fastq format
+    label: list of files containing the first end of paired end reads in fasta or fastq format
 
   p2:
     type: File[]?
-    description: list of files containing the second end of paired end reads in fasta or fastq format
+    label: list of files containing the second end of paired end reads in fasta or fastq format
 
   output_prefix:
     type: string
-    description: prefix for output files. will output prefix.aligned.bam and prefix.aligned.stats
+    label: prefix for output files. will output prefix.aligned.bam and prefix.aligned.stats
 
   reference:
     type: File
-    description: "lobSTR's bwa reference files"
+    label: "lobSTR's bwa reference files"
 
   rg-sample:
     type: string
-    description: Use this in the read group SM tag
+    label: Use this in the read group SM tag
 
   rg-lib:
     type: string
-    description: Use this in the read group LB tag
+    label: Use this in the read group LB tag
 
   strinfo:
     type: File
-    description: File containing statistics for each STR.
+    label: File containing statistics for each STR.
 
   noise_model:
     type: File
-    description: File to read noise model parameters from (.stepmodel)
+    label: File to read noise model parameters from (.stepmodel)
     secondaryFiles:
       - "^.stuttermodel"
 
@@ -93,4 +93,3 @@ steps:
       noise_model: noise_model
       strinfo: strinfo
     out: [vcf, vcf_stats]
-
