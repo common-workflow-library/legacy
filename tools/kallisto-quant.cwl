@@ -25,5 +25,5 @@ outputs:
  quantification:
   type: File
   outputBinding:
-   glob: out/abundance.h5
+   glob: out/abundances.h5
    
