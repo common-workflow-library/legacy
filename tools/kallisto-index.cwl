@@ -20,5 +20,5 @@ outputs:
  index:
   type: File
   outputBinding:
-   glob: $(inputs.index_name)
+   glob: index.idx
    
