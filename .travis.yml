@@ -17,6 +17,9 @@ services:
 
 script:
   - test/test.sh
+branches:
+  only:
+    - master
 
 notifications:
   email: false
