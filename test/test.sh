@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
-set -e
 
 # run a conformance test for all files in the tools/
 o_pwd=$(pwd)
 cd test/
 mkdir -p test-files/dm3
 chmod 777 test-files/dm3
+FAIL=0
+TOTAL=0
 
 for i in ../tools/*.cwl; do
+ TOTAL=$((${TOTAL}+1))
  bn=$(basename ${i} .cwl)
 
  echo "Testing: ${bn}"
 
  #if [ -f ${bn}-test.yaml ]; then
      cwltool --validate ${i}
+     if [ $? -ne 0 ]; then
+         FAIL=$((${FAIL}+1))
+     fi
      #./cwltest.py --tool "cwltool" --conformance-test --test ${bn}-test.yaml --force-test-tool ${i}
  #else
  #   echo "fail"
@@ -39,3 +44,13 @@ done
 
 
 cd ${o_pwd}
+
+# output information
+echo "${FAIL} tests are failed. Total ${TOTAL} tests"
+if [ ${FAIL} -ne 0 ]; then
+  echo "Some tests failed. "
+  exit 1
+else
+  echo "All tests passed !!"
+  exit 0
+fi
