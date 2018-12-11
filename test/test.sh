@@ -48,9 +48,9 @@ cd ${o_pwd}
 # output information
 echo "${FAIL} tests are failed. Total ${TOTAL} tests"
 if [ ${FAIL} -ne 0 ]; then
-  echo -n "Some tests failed. "
+  echo "Some tests failed. "
   exit 1
 else
-  echo -n "All tests passed !!"
+  echo "All tests passed !!"
   exit 0
 fi
