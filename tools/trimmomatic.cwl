@@ -54,7 +54,7 @@ inputs:
     doc: |
       Removes the specified number of bases, regardless of quality, from the
       beginning of the read.
-      The numbser specified is the number of bases to keep, from the start of
+      The number specified is the number of bases to keep, from the start of
       the read.
 
   tophred33:
