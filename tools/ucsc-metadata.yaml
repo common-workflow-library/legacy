@@ -20,7 +20,7 @@ s:license:
 
 s:publication:
 - class: s:ScholarlyArticle
-  id: http://dx.doi.org/10.1093/bioinformatics/btq351
+  id: https://doi.org/10.1093/bioinformatics/btq351
   s:name: "(Kent et al., 2010) BigWig and BigBed: enabling browsing of large distributed datasets. Bioinformatics."
   s:url: http://www.ncbi.nlm.nih.gov/pubmed/20639541
 

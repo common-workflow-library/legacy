@@ -92,13 +92,13 @@ s:mainEntity:
   s:programmingLanguage: Python
   s:publication:
   - class: s:ScholarlyArticle
-    id: http://dx.doi.org/10.1016/j.cell.2013.03.035
+    id: https://doi.org/10.1016/j.cell.2013.03.035
     s:name: Warren A. Whyte, David A. Orlando, Denes Hnisz, Brian J. Abraham, Charles
       Y. Lin, Michael H. Kagey, Peter B. Rahl, Tong Ihn Lee and Richard A. Young Cell
     s:url: http://www.cell.com/abstract/S0092-8674(13)00392-9
 
   - class: s:ScholarlyArticle
-    id: http://dx.doi.org/10.1016/j.cell.2013.03.036
+    id: https://doi.org/10.1016/j.cell.2013.03.036
     s:name: Jakob Lovén, Heather A. Hoke, Charles Y. Lin, Ashley Lau, David A. Orlando,
       Christopher R. Vakoc, James E. Bradner, Tong Ihn Lee, and Richard A. Young Cell
     s:url: http://www.cell.com/abstract/S0092-8674(13)00393-0
