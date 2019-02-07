@@ -21,7 +21,7 @@ s:license: https://opensource.org/licenses/AFL-3.0
 s:programmingLanguage: "JAVA"
 
 s:publication:
-  - id: http://dx.doi.org/10.1093/bioinformatics/btt744
+  - id: https://doi.org/10.1093/bioinformatics/btt744
 
 s:author:
 - class: s:Person

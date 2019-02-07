@@ -513,7 +513,7 @@ schema:mainEntity:
   schema:programmingLanguage: C++
   schema:publication:
   - class: schema:ScholarlyArticle
-    id: http://dx.doi.org/10.1186/gb-2009-10-3-r25
+    id: https://doi.org/10.1186/gb-2009-10-3-r25
 
 schema:author:
   class: schema:Person

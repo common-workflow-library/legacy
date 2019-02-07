@@ -39,7 +39,7 @@ adms:includedAsset:
   foaf:publications:
   - id: urn:pmid:20110278
     foaf:title: 'Aaron R. Quinlan, Ira M. Hall (2010) BEDTools: a flexible suite of
-      utilities for comparing genomic features. Bioinformatics, 26(6) 841-842, http://dx.doi.org/10.1093/bioinformatics/btq033'
+      utilities for comparing genomic features. Bioinformatics, 26(6) 841-842, https://doi.org/10.1093/bioinformatics/btq033'
     foaf:homepage: http://bioinformatics.oxfordjournals.org/content/26/6/841
   doap:maintainer:
   - class: foaf:Person

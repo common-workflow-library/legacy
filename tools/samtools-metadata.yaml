@@ -22,15 +22,15 @@ s:programmingLanguage: "C, Perl"
 
 s:publication:
 - class: s:ScholarlyArticle
-  id: http://dx.doi.org/10.1093/bioinformatics/btr509
+  id: https://doi.org/10.1093/bioinformatics/btr509
   s:name: "(Li, 2011) A statistical framework for SNP calling, mutation discovery, association mapping and population genetical parameter estimation from sequencing data. Bioinformatics."
   s:url: http://www.ncbi.nlm.nih.gov/pubmed/21903627
 - class: s:ScholarlyArticle
-  id: http://dx.doi.org/10.1093/bioinformatics/btr076
+  id: https://doi.org/10.1093/bioinformatics/btr076
   s:name: "(Li, 2011) Improving SNP discovery by base alignment quality. Bioinformatics."
   s:url: http://www.ncbi.nlm.nih.gov/pubmed/21320865
 - class: s:ScholarlyArticle
-  id: http://dx.doi.org/10.1093/bioinformatics/btp352
+  id: https://doi.org/10.1093/bioinformatics/btp352
   s:name: "(Li et al., 2009) The Sequence Alignment/Map format and SAMtools. Bioinformatics."
   s:url: http://www.ncbi.nlm.nih.gov/pubmed/19505943
 
