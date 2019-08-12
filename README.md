@@ -1,3 +1,7 @@
+# Deprecated
+
+See https://github.com/common-workflow-library/bio-cwl-tools for the succesor
+
 # CWL Tools & Workflows
 
 
