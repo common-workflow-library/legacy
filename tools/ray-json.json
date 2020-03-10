@@ -1,0 +1,12 @@
+{
+  "kmer_length": 23,
+  "input_files": [
+    {
+        "class": "File",
+         "path": "../../ray/S2_1.fastq"
+    },
+    {
+        "class": "File",
+        "path": "../../ray/S2_2.fastq"
+    }]
+}
