@@ -1,0 +1,14 @@
+genome: hg19
+
+variant_calling_file:
+  class: File
+  path: "/data_small/small_vcf/NA12878.sorted.vcf"
+
+nodownload: true
+
+output_format: vcf
+
+data_dir:
+  class: Directory
+  location: "/data_small/snpEff_hg19/data"
+
