@@ -1,0 +1,11 @@
+#################################################################
+# Dockerfile
+#
+# Software:         subread
+# Provides:         asubread|subread-data
+# Base Image:       debian:sid
+#################################################################
+
+FROM debian:sid
+
+RUN apt-get update && apt install subread && apt install subread-data
